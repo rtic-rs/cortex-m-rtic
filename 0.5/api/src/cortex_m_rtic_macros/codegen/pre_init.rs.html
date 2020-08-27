@@ -165,7 +165,6 @@
 <span id="165">165</span>
 <span id="166">166</span>
 <span id="167">167</span>
-<span id="168">168</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -210,8 +209,7 @@
     <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">args</span>.<span class="ident">cores</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
         <span class="ident">stmts</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
             <span class="comment">// To set the variable in cortex_m so the peripherals cannot be taken multiple times</span>
-            <span class="kw">let</span> <span class="ident">peripherals</span> <span class="op">=</span> <span class="ident">cortex_m</span>::<span class="ident">Peripherals</span>::<span class="ident">steal</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span> <span class="op">=</span> <span class="ident">peripherals</span>.<span class="ident">into</span>();
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span> <span class="op">=</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span>::<span class="ident">steal</span>().<span class="ident">into</span>();
         ));
     } <span class="kw">else</span> {
         <span class="ident">stmts</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
