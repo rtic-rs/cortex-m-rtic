@@ -161,15 +161,6 @@
 <span id="161">161</span>
 <span id="162">162</span>
 <span id="163">163</span>
-<span id="164">164</span>
-<span id="165">165</span>
-<span id="166">166</span>
-<span id="167">167</span>
-<span id="168">168</span>
-<span id="169">169</span>
-<span id="170">170</span>
-<span id="171">171</span>
-<span id="172">172</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::{
     <span class="ident">cell</span>::<span class="ident">Cell</span>,
@@ -185,14 +176,12 @@
     <span class="ident">peripheral</span>::{<span class="ident">scb</span>::<span class="ident">SystemHandler</span>, <span class="ident">syst</span>::<span class="ident">SystClkSource</span>, <span class="ident">DWT</span>, <span class="ident">NVIC</span>},
     <span class="ident">Peripherals</span>,
 };
-<span class="kw">use</span> <span class="ident">heapless</span>::<span class="ident">spsc</span>::{<span class="ident">MultiCore</span>, <span class="ident">SingleCore</span>};
+<span class="kw">use</span> <span class="ident">heapless</span>::<span class="ident">spsc</span>::<span class="ident">SingleCore</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">heapless</span>::{<span class="ident">consts</span>, <span class="ident">i</span>::<span class="ident">Queue</span> <span class="kw">as</span> <span class="ident">iQueue</span>, <span class="ident">spsc</span>::<span class="ident">Queue</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">heapless</span>::{<span class="ident">i</span>::<span class="ident">BinaryHeap</span> <span class="kw">as</span> <span class="ident">iBinaryHeap</span>, <span class="ident">BinaryHeap</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;heterogeneous&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">microamp</span>::<span class="ident">shared</span>;
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MCFQ</span><span class="op">&lt;</span><span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Queue</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">N</span>, <span class="ident">u8</span>, <span class="ident">MultiCore</span><span class="op">&gt;</span>;
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MCRQ</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Queue</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">u8</span>), <span class="ident">N</span>, <span class="ident">u8</span>, <span class="ident">MultiCore</span><span class="op">&gt;</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SCFQ</span><span class="op">&lt;</span><span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Queue</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">N</span>, <span class="ident">u8</span>, <span class="ident">SingleCore</span><span class="op">&gt;</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SCRQ</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Queue</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">u8</span>), <span class="ident">N</span>, <span class="ident">u8</span>, <span class="ident">SingleCore</span><span class="op">&gt;</span>;
 
@@ -203,7 +192,7 @@
     <span class="ident">F</span>: <span class="ident">FnOnce</span>(),
 {
     <span class="kw">if</span> <span class="ident">priority</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
-        <span class="comment">// if the priority of this interrupt is `1` then BASEPRI can only be `0`</span>
+        <span class="comment">// If the priority of this interrupt is `1` then BASEPRI can only be `0`</span>
         <span class="ident">f</span>();
         <span class="kw">unsafe</span> { <span class="ident">basepri</span>::<span class="ident">write</span>(<span class="number">0</span>) }
     } <span class="kw">else</span> {
@@ -255,7 +244,7 @@
         }
     }
 
-    <span class="comment">// these two methods are used by `lock` (see below) but can&#39;t be used from the RTIC application</span>
+    <span class="comment">// These two methods are used by `lock` (see below) but can&#39;t be used from the RTIC application</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="ident">u8</span>) {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set</span>(<span class="ident">value</span>)
@@ -278,13 +267,6 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assert_sync</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>()
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Sync</span>,
-{
-}
-
-<span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assert_multicore</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>()
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="kw">super</span>::<span class="ident">MultiCore</span>,
 {
 }
 

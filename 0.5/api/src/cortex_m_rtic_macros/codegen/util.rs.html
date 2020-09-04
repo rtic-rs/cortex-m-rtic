@@ -245,90 +245,12 @@
 <span id="245">245</span>
 <span id="246">246</span>
 <span id="247">247</span>
-<span id="248">248</span>
-<span id="249">249</span>
-<span id="250">250</span>
-<span id="251">251</span>
-<span id="252">252</span>
-<span id="253">253</span>
-<span id="254">254</span>
-<span id="255">255</span>
-<span id="256">256</span>
-<span id="257">257</span>
-<span id="258">258</span>
-<span id="259">259</span>
-<span id="260">260</span>
-<span id="261">261</span>
-<span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
-<span id="286">286</span>
-<span id="287">287</span>
-<span id="288">288</span>
-<span id="289">289</span>
-<span id="290">290</span>
-<span id="291">291</span>
-<span id="292">292</span>
-<span id="293">293</span>
-<span id="294">294</span>
-<span id="295">295</span>
-<span id="296">296</span>
-<span id="297">297</span>
-<span id="298">298</span>
-<span id="299">299</span>
-<span id="300">300</span>
-<span id="301">301</span>
-<span id="302">302</span>
-<span id="303">303</span>
-<span id="304">304</span>
-<span id="305">305</span>
-<span id="306">306</span>
-<span id="307">307</span>
-<span id="308">308</span>
-<span id="309">309</span>
-<span id="310">310</span>
-<span id="311">311</span>
-<span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
-<span id="315">315</span>
-<span id="316">316</span>
-<span id="317">317</span>
-<span id="318">318</span>
-<span id="319">319</span>
-<span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicUsize</span>, <span class="ident">Ordering</span>};
 
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Span</span>, <span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
-<span class="kw">use</span> <span class="ident">rtic_syntax</span>::{<span class="ident">ast</span>::<span class="ident">App</span>, <span class="ident">Context</span>, <span class="ident">Core</span>};
+<span class="kw">use</span> <span class="ident">rtic_syntax</span>::{<span class="ident">ast</span>::<span class="ident">App</span>, <span class="ident">Context</span>};
 <span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">Attribute</span>, <span class="ident">Ident</span>, <span class="ident">LitInt</span>, <span class="ident">PatType</span>};
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">check</span>::<span class="ident">Extra</span>;
@@ -351,34 +273,15 @@
     <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">consts</span>::#<span class="ident">ident</span>)
 }
 
-<span class="doccomment">/// Generates a `#[cfg(core = &quot;0&quot;)]` attribute if we are in multi-core mode</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cfg_core</span>(<span class="ident">core</span>: <span class="ident">Core</span>, <span class="ident">cores</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">cores</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
-        <span class="prelude-val">None</span>
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;heterogeneous&quot;</span>) {
-        <span class="kw">let</span> <span class="ident">core</span> <span class="op">=</span> <span class="ident">core</span>.<span class="ident">to_string</span>();
-        <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">core</span> <span class="op">=</span> #<span class="ident">core</span>)]</span>))
-    } <span class="kw">else</span> {
-        <span class="prelude-val">None</span>
-    }
-}
-
 <span class="doccomment">/// Identifier for the free queue</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// There may be more than one free queue per task because we need one for each sender core so we</span>
-<span class="doccomment">/// include the sender (e.g. `S0`) in the name</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fq_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(
-        <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_S{}_FQ&quot;</span>, <span class="ident">task</span>.<span class="ident">to_string</span>(), <span class="ident">sender</span>),
-        <span class="ident">Span</span>::<span class="ident">call_site</span>(),
-    )
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fq_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_FQ&quot;</span>, <span class="ident">task</span>.<span class="ident">to_string</span>()), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates a `Mutex` implementation</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">impl_mutex</span>(
     <span class="ident">extra</span>: <span class="kw-2">&amp;</span><span class="ident">Extra</span>,
     <span class="ident">cfgs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Attribute</span>],
-    <span class="ident">cfg_core</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span>,
     <span class="ident">resources_prefix</span>: <span class="ident">bool</span>,
     <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>,
     <span class="ident">ty</span>: <span class="ident">TokenStream2</span>,
@@ -394,7 +297,6 @@
     <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">device</span>;
     <span class="macro">quote</span><span class="macro">!</span>(
         #(#<span class="ident">cfgs</span>)<span class="op">*</span>
-        #<span class="ident">cfg_core</span>
         <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">rtic</span>::<span class="ident">Mutex</span> <span class="kw">for</span> #<span class="ident">path</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
             <span class="kw">type</span> <span class="ident">T</span> <span class="op">=</span> #<span class="ident">ty</span>;
 
@@ -417,28 +319,19 @@
     )
 }
 
-<span class="doccomment">/// Generates an identifier for a cross-initialization barrier</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init_barrier</span>(<span class="ident">initializer</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;IB{}&quot;</span>, <span class="ident">initializer</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
-}
-
 <span class="doccomment">/// Generates an identifier for the `INPUTS` buffer (`spawn` &amp; `schedule` API)</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inputs_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_S{}_INPUTS&quot;</span>, <span class="ident">task</span>, <span class="ident">sender</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inputs_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_INPUTS&quot;</span>, <span class="ident">task</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for the `INSTANTS` buffer (`schedule` API)</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">instants_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_S{}_INSTANTS&quot;</span>, <span class="ident">task</span>, <span class="ident">sender</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">instants_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_INSTANTS&quot;</span>, <span class="ident">task</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interrupt_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>, <span class="ident">cores</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interrupt_ident</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">Span</span>::<span class="ident">call_site</span>();
-    <span class="kw">if</span> <span class="ident">cores</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
-        <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;Interrupt&quot;</span>, <span class="ident">span</span>)
-    } <span class="kw">else</span> {
-        <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Interrupt_{}&quot;</span>, <span class="ident">core</span>), <span class="ident">span</span>)
-    }
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;Interrupt&quot;</span>, <span class="ident">span</span>)
 }
 
 <span class="doccomment">/// Whether `name` is an exception with configurable priority</span>
@@ -467,31 +360,12 @@
     <span class="ident">INDEX</span>.<span class="ident">fetch_add</span>(<span class="number">1</span>, <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link_section</span>(<span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;homogeneous&quot;</span>) {
-        <span class="kw">let</span> <span class="ident">section</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;.{}_{}.rtic{}&quot;</span>, <span class="ident">section</span>, <span class="ident">core</span>, <span class="ident">link_section_index</span>());
-        <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="attribute">#[<span class="ident">link_section</span> <span class="op">=</span> #<span class="ident">section</span>]</span>))
-    } <span class="kw">else</span> {
-        <span class="prelude-val">None</span>
-    }
-}
-
 <span class="comment">// NOTE `None` means in shared memory</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link_section_uninit</span>(<span class="ident">core</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Core</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">section</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">core</span>) <span class="op">=</span> <span class="ident">core</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link_section_uninit</span>(<span class="ident">empty_expr</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">section</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">empty_expr</span> {
         <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">link_section_index</span>();
-
-        <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;homogeneous&quot;</span>) {
-            <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;.uninit_{}.rtic{}&quot;</span>, <span class="ident">core</span>, <span class="ident">index</span>)
-        } <span class="kw">else</span> {
-            <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;.uninit.rtic{}&quot;</span>, <span class="ident">index</span>)
-        }
+        <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;.uninit.rtic{}&quot;</span>, <span class="ident">index</span>)
     } <span class="kw">else</span> {
-        <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;heterogeneous&quot;</span>) {
-            <span class="comment">// `#[shared]` attribute sets the linker section</span>
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
-        }
-
         <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;.uninit.rtic{}&quot;</span>, <span class="ident">link_section_index</span>())
     };
 
@@ -501,19 +375,14 @@
 <span class="doccomment">/// Generates a pre-reexport identifier for the &quot;locals&quot; struct</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">locals_ident</span>(<span class="ident">ctxt</span>: <span class="ident">Context</span>, <span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ctxt</span> {
-        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">inits</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
-        <span class="ident">Context</span>::<span class="ident">Idle</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">idles</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">inits</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">name</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">Idle</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">idles</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">name</span>.<span class="ident">to_string</span>(),
         <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="ident">ident</span>) <span class="op">|</span> <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ident</span>.<span class="ident">to_string</span>(),
     };
 
     <span class="ident">s</span>.<span class="ident">push_str</span>(<span class="string">&quot;Locals&quot;</span>);
 
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">s</span>, <span class="ident">Span</span>::<span class="ident">call_site</span>())
-}
-
-<span class="doccomment">/// Generates an identifier for a rendezvous barrier</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rendezvous_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;RV{}&quot;</span>, <span class="ident">core</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="comment">// Regroups the inputs of a task</span>
@@ -568,8 +437,8 @@
 <span class="doccomment">/// Generates a pre-reexport identifier for the &quot;resources&quot; struct</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resources_ident</span>(<span class="ident">ctxt</span>: <span class="ident">Context</span>, <span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ctxt</span> {
-        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">inits</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
-        <span class="ident">Context</span>::<span class="ident">Idle</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">idles</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">inits</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">name</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">Idle</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">idles</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">name</span>.<span class="ident">to_string</span>(),
         <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="ident">ident</span>) <span class="op">|</span> <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ident</span>.<span class="ident">to_string</span>(),
     };
 
@@ -580,74 +449,49 @@
 
 <span class="doccomment">/// Generates an identifier for a ready queue</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Each core may have several task dispatchers, one for each priority level. Each task dispatcher</span>
-<span class="doccomment">/// in turn may use more than one ready queue because the queues are SPSC queues so one is needed</span>
-<span class="doccomment">/// per sender core.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rq_ident</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>, <span class="ident">priority</span>: <span class="ident">u8</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(
-        <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;R{}_P{}_S{}_RQ&quot;</span>, <span class="ident">receiver</span>, <span class="ident">priority</span>, <span class="ident">sender</span>),
-        <span class="ident">Span</span>::<span class="ident">call_site</span>(),
-    )
+<span class="doccomment">/// There may be several task dispatchers, one for each priority level.</span>
+<span class="doccomment">/// The ready queues are SPSC queues</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rq_ident</span>(<span class="ident">priority</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;P{}_RQ&quot;</span>, <span class="ident">priority</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for a &quot;schedule&quot; function</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// The methods of the `Schedule` structs invoke these functions. As one task may be `schedule`-ed</span>
-<span class="doccomment">/// by different cores we need one &quot;schedule&quot; function per possible task-sender pair</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(
-        <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;schedule_{}_S{}&quot;</span>, <span class="ident">name</span>.<span class="ident">to_string</span>(), <span class="ident">sender</span>),
-        <span class="ident">Span</span>::<span class="ident">call_site</span>(),
-    )
+<span class="doccomment">/// The methods of the `Schedule` structs invoke these functions.</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;schedule_{}&quot;</span>, <span class="ident">name</span>.<span class="ident">to_string</span>()), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for the `enum` of `schedule`-able tasks</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_t_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;T{}&quot;</span>, <span class="ident">core</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
-}
-
-<span class="doccomment">/// Generates an identifier for a cross-spawn barrier</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_barrier</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;SB{}&quot;</span>, <span class="ident">receiver</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_t_ident</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;T&quot;</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for a &quot;spawn&quot; function</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// The methods of the `Spawn` structs invoke these functions. As one task may be `spawn`-ed by</span>
-<span class="doccomment">/// different cores we need one &quot;spawn&quot; function per possible task-sender pair</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(
-        <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;spawn_{}_S{}&quot;</span>, <span class="ident">name</span>.<span class="ident">to_string</span>(), <span class="ident">sender</span>),
-        <span class="ident">Span</span>::<span class="ident">call_site</span>(),
-    )
+<span class="doccomment">/// The methods of the `Spawn` structs invoke these functions.</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;spawn_{}&quot;</span>, <span class="ident">name</span>.<span class="ident">to_string</span>()), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for the `enum` of `spawn`-able tasks</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This identifier needs the same structure as the `RQ` identifier because there&#39;s one ready queue</span>
 <span class="doccomment">/// for each of these `T` enums</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_t_ident</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>, <span class="ident">priority</span>: <span class="ident">u8</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(
-        <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;R{}_P{}_S{}_T&quot;</span>, <span class="ident">receiver</span>, <span class="ident">priority</span>, <span class="ident">sender</span>),
-        <span class="ident">Span</span>::<span class="ident">call_site</span>(),
-    )
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_t_ident</span>(<span class="ident">priority</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;P{}_T&quot;</span>, <span class="ident">priority</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suffixed</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">core</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suffixed</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">Span</span>::<span class="ident">call_site</span>();
-
-    <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;homogeneous&quot;</span>) {
-        <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_{}&quot;</span>, <span class="ident">name</span>, <span class="ident">core</span>), <span class="ident">span</span>)
-    } <span class="kw">else</span> {
-        <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="ident">name</span>, <span class="ident">span</span>)
-    }
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="ident">name</span>, <span class="ident">span</span>)
 }
 
 <span class="doccomment">/// Generates an identifier for a timer queue</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// At most there&#39;s one timer queue per core</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tq_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;TQ{}&quot;</span>, <span class="ident">core</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
+<span class="doccomment">/// At most there is one timer queue</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tq_ident</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;TQ&quot;</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "cortex_m_rtic_macros";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

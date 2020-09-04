@@ -163,17 +163,6 @@
 <span id="163">163</span>
 <span id="164">164</span>
 <span id="165">165</span>
-<span id="166">166</span>
-<span id="167">167</span>
-<span id="168">168</span>
-<span id="169">169</span>
-<span id="170">170</span>
-<span id="171">171</span>
-<span id="172">172</span>
-<span id="173">173</span>
-<span id="174">174</span>
-<span id="175">175</span>
-<span id="176">176</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Real-Time Interrupt-driven Concurrency (RTIC) framework for ARM Cortex-M microcontrollers</span>
 <span class="doccomment">//!</span>
@@ -205,13 +194,6 @@
 <span class="doccomment">//! release.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [SemVer]: https://semver.org/spec/v2.0.0.html</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Cargo features</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! - `heterogeneous`. This opt-in feature enables the *experimental* heterogeneous multi-core</span>
-<span class="doccomment">//! support. This feature depends on unstable feature and requires the use of the nightly channel.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! - `homogeneous`. This opt-in feature enables the *experimental* homogeneous multi-core support.</span>
 
 <span class="attribute">#![<span class="ident">deny</span>(<span class="ident">missing_docs</span>)]</span>
 <span class="attribute">#![<span class="ident">deny</span>(<span class="ident">rust_2018_compatibility</span>)]</span>
@@ -225,7 +207,6 @@
     <span class="ident">interrupt</span>::<span class="ident">Nr</span>,
     <span class="ident">peripheral</span>::{<span class="ident">CBP</span>, <span class="ident">CPUID</span>, <span class="ident">DCB</span>, <span class="ident">DWT</span>, <span class="ident">FPB</span>, <span class="ident">FPU</span>, <span class="ident">ITM</span>, <span class="ident">MPU</span>, <span class="ident">NVIC</span>, <span class="ident">SCB</span>, <span class="ident">TPIU</span>},
 };
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;heterogeneous&quot;</span>), <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;homogeneous&quot;</span>)))]</span>
 <span class="kw">use</span> <span class="ident">cortex_m_rt</span> <span class="kw">as</span> <span class="kw">_</span>; <span class="comment">// vector table</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_rtic_macros</span>::<span class="ident">app</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rtic_core</span>::{<span class="ident">Exclusive</span>, <span class="ident">Mutex</span>};
@@ -337,9 +318,6 @@
     <span class="doccomment">/// A `Self::Instant` that represents a count of *zero*</span>
     <span class="kw">fn</span> <span class="ident">zero</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Instant</span>;
 }
-
-<span class="doccomment">/// A marker trait that indicates that it is correct to use this type in multi-core context</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">MultiCore</span> {}
 
 <span class="doccomment">/// Sets the given `interrupt` as pending</span>
 <span class="doccomment">///</span>

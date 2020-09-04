@@ -188,7 +188,7 @@
                 <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">SYST</span><span class="op">&gt;</span>(()).<span class="ident">enable_interrupt</span>();
             }
 
-            <span class="comment">// set SysTick pending</span>
+            <span class="comment">// Set SysTick pending</span>
             <span class="ident">SCB</span>::<span class="ident">set_pendst</span>();
         }
 
@@ -227,13 +227,13 @@
                     };
                     <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">SYST</span><span class="op">&gt;</span>(()).<span class="ident">set_reload</span>(<span class="ident">dur</span>);
 
-                    <span class="comment">// start counting down from the new reload</span>
+                    <span class="comment">// Start counting down from the new reload</span>
                     <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">SYST</span><span class="op">&gt;</span>(()).<span class="ident">clear_current</span>();
 
                     <span class="prelude-val">None</span>
                 }
             } <span class="kw">else</span> {
-                <span class="comment">// the queue is empty</span>
+                <span class="comment">// The queue is empty</span>
                 <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">SYST</span><span class="op">&gt;</span>(()).<span class="ident">disable_interrupt</span>();
 
                 <span class="prelude-val">None</span>

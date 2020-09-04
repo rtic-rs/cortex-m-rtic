@@ -175,11 +175,6 @@
 <span id="175">175</span>
 <span id="176">176</span>
 <span id="177">177</span>
-<span id="178">178</span>
-<span id="179">179</span>
-<span id="180">180</span>
-<span id="181">181</span>
-<span id="182">182</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -197,8 +192,8 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
 
     <span class="kw">let</span> <span class="ident">resources</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ctxt</span> {
-        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">inits</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">args</span>.<span class="ident">resources</span>,
-        <span class="ident">Context</span>::<span class="ident">Idle</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">idles</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">args</span>.<span class="ident">resources</span>,
+        <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">inits</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">args</span>.<span class="ident">resources</span>,
+        <span class="ident">Context</span>::<span class="ident">Idle</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">idles</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">args</span>.<span class="ident">resources</span>,
         <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">hardware_tasks</span>[<span class="ident">name</span>].<span class="ident">args</span>.<span class="ident">resources</span>,
         <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">software_tasks</span>[<span class="ident">name</span>].<span class="ident">args</span>.<span class="ident">resources</span>,
     };
@@ -222,7 +217,7 @@
 
         <span class="kw">if</span> <span class="ident">ctxt</span>.<span class="ident">is_init</span>() {
             <span class="kw">if</span> <span class="op">!</span><span class="ident">analysis</span>.<span class="ident">ownerships</span>.<span class="ident">contains_key</span>(<span class="ident">name</span>) {
-                <span class="comment">// owned by `init`</span>
+                <span class="comment">// Owned by `init`</span>
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                     #(#<span class="ident">cfgs</span>)<span class="op">*</span>
                     <span class="kw">pub</span> #<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> #<span class="ident">mut_</span> #<span class="ident">ty</span>
@@ -233,7 +228,7 @@
                     #<span class="ident">name</span>: <span class="kw-2">&amp;</span>#<span class="ident">mut_</span> #<span class="ident">name</span>
                 ));
             } <span class="kw">else</span> {
-                <span class="comment">// owned by someone else</span>
+                <span class="comment">// Owned by someone else</span>
                 <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="lifetime">&#39;a</span>));
 
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
@@ -258,7 +253,7 @@
                         <span class="kw">pub</span> #<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> #<span class="ident">ty</span>
                     ));
                 } <span class="kw">else</span> {
-                    <span class="comment">// resource proxy</span>
+                    <span class="comment">// Resource proxy</span>
                     <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="lifetime">&#39;a</span>));
 
                     <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
@@ -319,7 +314,7 @@
     <span class="kw">if</span> <span class="ident">lt</span>.<span class="ident">is_some</span>() {
         <span class="kw-2">*</span><span class="ident">needs_lt</span> <span class="op">=</span> <span class="bool-val">true</span>;
 
-        <span class="comment">// the struct could end up empty due to `cfg`s leading to an error due to `&#39;a` being unused</span>
+        <span class="comment">// The struct could end up empty due to `cfg`s leading to an error due to `&#39;a` being unused</span>
         <span class="kw">if</span> <span class="ident">has_cfgs</span> {
             <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
@@ -330,13 +325,9 @@
         }
     }
 
-    <span class="kw">let</span> <span class="ident">core</span> <span class="op">=</span> <span class="ident">ctxt</span>.<span class="ident">core</span>(<span class="ident">app</span>);
-    <span class="kw">let</span> <span class="ident">cores</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">args</span>.<span class="ident">cores</span>;
-    <span class="kw">let</span> <span class="ident">cfg_core</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">cfg_core</span>(<span class="ident">core</span>, <span class="ident">cores</span>);
     <span class="kw">let</span> <span class="ident">doc</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Resources `{}` has access to&quot;</span>, <span class="ident">ctxt</span>.<span class="ident">ident</span>(<span class="ident">app</span>));
     <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">resources_ident</span>(<span class="ident">ctxt</span>, <span class="ident">app</span>);
     <span class="kw">let</span> <span class="ident">item</span> <span class="op">=</span> <span class="macro">quote</span><span class="macro">!</span>(
-        #<span class="ident">cfg_core</span>
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> #<span class="ident">doc</span>]</span>
         <span class="kw">pub</span> <span class="kw">struct</span> #<span class="ident">ident</span><span class="op">&lt;</span>#<span class="ident">lt</span><span class="op">&gt;</span> {
@@ -350,7 +341,6 @@
         <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">priority</span>: <span class="kw-2">&amp;</span>#<span class="ident">lt</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Priority</span>))
     };
     <span class="kw">let</span> <span class="ident">constructor</span> <span class="op">=</span> <span class="macro">quote</span><span class="macro">!</span>(
-        #<span class="ident">cfg_core</span>
         <span class="kw">impl</span><span class="op">&lt;</span>#<span class="ident">lt</span><span class="op">&gt;</span> #<span class="ident">ident</span><span class="op">&lt;</span>#<span class="ident">lt</span><span class="op">&gt;</span> {
             <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
             <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(#<span class="ident">arg</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {

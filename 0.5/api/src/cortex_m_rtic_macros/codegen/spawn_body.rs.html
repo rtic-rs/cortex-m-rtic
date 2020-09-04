@@ -74,12 +74,6 @@
 <span id="74">74</span>
 <span id="75">75</span>
 <span id="76">76</span>
-<span id="77">77</span>
-<span id="78">78</span>
-<span id="79">79</span>
-<span id="80">80</span>
-<span id="81">81</span>
-<span id="82">82</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -95,13 +89,11 @@
     <span class="ident">analysis</span>: <span class="kw-2">&amp;</span><span class="ident">Analysis</span>,
     <span class="ident">extra</span>: <span class="kw-2">&amp;</span><span class="ident">Extra</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream2</span> {
-    <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">spawner</span>.<span class="ident">core</span>(<span class="ident">app</span>);
     <span class="kw">let</span> <span class="ident">spawnee</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">software_tasks</span>[<span class="ident">name</span>];
     <span class="kw">let</span> <span class="ident">priority</span> <span class="op">=</span> <span class="ident">spawnee</span>.<span class="ident">args</span>.<span class="ident">priority</span>;
-    <span class="kw">let</span> <span class="ident">receiver</span> <span class="op">=</span> <span class="ident">spawnee</span>.<span class="ident">args</span>.<span class="ident">core</span>;
 
-    <span class="kw">let</span> <span class="ident">write_instant</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>(<span class="ident">receiver</span>) {
-        <span class="kw">let</span> <span class="ident">instants</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">instants_ident</span>(<span class="ident">name</span>, <span class="ident">sender</span>);
+    <span class="kw">let</span> <span class="ident">write_instant</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>() {
+        <span class="kw">let</span> <span class="ident">instants</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">instants_ident</span>(<span class="ident">name</span>);
 
         <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(
             #<span class="ident">instants</span>.<span class="ident">get_unchecked_mut</span>(<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">index</span>)).<span class="ident">as_mut_ptr</span>().<span class="ident">write</span>(<span class="ident">instant</span>);
@@ -110,9 +102,9 @@
         <span class="prelude-val">None</span>
     };
 
-    <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">spawn_t_ident</span>(<span class="ident">receiver</span>, <span class="ident">priority</span>, <span class="ident">sender</span>);
-    <span class="kw">let</span> <span class="ident">fq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">fq_ident</span>(<span class="ident">name</span>, <span class="ident">sender</span>);
-    <span class="kw">let</span> <span class="ident">rq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">rq_ident</span>(<span class="ident">receiver</span>, <span class="ident">priority</span>, <span class="ident">sender</span>);
+    <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">spawn_t_ident</span>(<span class="ident">priority</span>);
+    <span class="kw">let</span> <span class="ident">fq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">fq_ident</span>(<span class="ident">name</span>);
+    <span class="kw">let</span> <span class="ident">rq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">rq_ident</span>(<span class="ident">priority</span>);
     <span class="kw">let</span> (<span class="ident">dequeue</span>, <span class="ident">enqueue</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">spawner</span>.<span class="ident">is_init</span>() {
         (
             <span class="macro">quote</span><span class="macro">!</span>(#<span class="ident">fq</span>.<span class="ident">dequeue</span>()),
@@ -128,20 +120,16 @@
     };
 
     <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">device</span>;
-    <span class="kw">let</span> <span class="ident">enum_</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">interrupt_ident</span>(<span class="ident">receiver</span>, <span class="ident">app</span>.<span class="ident">args</span>.<span class="ident">cores</span>);
-    <span class="kw">let</span> <span class="ident">interrupt</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">analysis</span>.<span class="ident">interrupts</span>[<span class="kw-2">&amp;</span><span class="ident">receiver</span>][<span class="kw-2">&amp;</span><span class="ident">priority</span>];
-    <span class="kw">let</span> <span class="ident">pend</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">sender</span> <span class="op">!</span><span class="op">=</span> <span class="ident">receiver</span> {
-        <span class="macro">quote</span><span class="macro">!</span>(
-            #<span class="ident">device</span>::<span class="ident">xpend</span>(#<span class="ident">receiver</span>, #<span class="ident">device</span>::#<span class="ident">enum_</span>::#<span class="ident">interrupt</span>);
-        )
-    } <span class="kw">else</span> {
+    <span class="kw">let</span> <span class="ident">enum_</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">interrupt_ident</span>();
+    <span class="kw">let</span> <span class="ident">interrupt</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">analysis</span>.<span class="ident">interrupts</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">priority</span>);
+    <span class="kw">let</span> <span class="ident">pend</span> <span class="op">=</span> {
         <span class="macro">quote</span><span class="macro">!</span>(
             <span class="ident">rtic</span>::<span class="ident">pend</span>(#<span class="ident">device</span>::#<span class="ident">enum_</span>::#<span class="ident">interrupt</span>);
         )
     };
 
     <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">tupled</span>, <span class="kw">_</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">util</span>::<span class="ident">regroup_inputs</span>(<span class="kw-2">&amp;</span><span class="ident">spawnee</span>.<span class="ident">inputs</span>);
-    <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">inputs_ident</span>(<span class="ident">name</span>, <span class="ident">sender</span>);
+    <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">inputs_ident</span>(<span class="ident">name</span>);
     <span class="macro">quote</span><span class="macro">!</span>(
         <span class="kw">unsafe</span> {
             <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">Mutex</span> <span class="kw">as</span> <span class="kw">_</span>;
