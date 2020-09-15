@@ -372,7 +372,9 @@ const APP: () = {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {}
+        loop {
+            cortex_m::asm::nop();
+        }
     }
 };
 
@@ -450,7 +452,9 @@ const APP: () = {
         // error: no `resources` field in `idle::Context`
         // _cx.resources.shared += 1;
 
-        loop {}
+        loop {
+            cortex_m::asm::nop();
+        }
     }
 
     // `shared` can be accessed from this context
@@ -1178,7 +1182,9 @@ const APP: () = {
         let _: idle::Schedule = cx.schedule;
         let _: idle::Spawn = cx.spawn;
 
-        loop {}
+        loop {
+            cortex_m::asm::nop();
+        }
     }
 
     #[task(binds = UART0, resources = [shared], schedule = [foo], spawn = [foo])]
@@ -1601,7 +1607,9 @@ const APP: () = {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {}
+        loop {
+            cortex_m::asm::nop();
+        }
     }
 
     #[task(binds = UART0)]
