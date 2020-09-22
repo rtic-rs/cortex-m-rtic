@@ -247,6 +247,8 @@ then sends the microcontroller to sleep after running <code>init</code>.</p>
 <p>Like in <code>init</code>, <code>static mut</code> variables will be transformed into <code>&amp;'static mut</code>
 references that are safe to access.</p>
 <p>The example below shows that <code>idle</code> runs after <code>init</code>.</p>
+<p><strong>Note:</strong> The <code>loop {}</code> in idle cannot be empty as this will crash the microcontroller due to a bug
+in LLVM which miss-optimizes empty loops to a <code>UDF</code> instruction in release mode.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
