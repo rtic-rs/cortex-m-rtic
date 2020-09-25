@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/heapless-0.5.5/src/vec.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>vec.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../heapless/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/heapless-0.5.6/src/vec.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>vec.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../heapless/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1053,6 +1053,105 @@
 <span id="1053">1053</span>
 <span id="1054">1054</span>
 <span id="1055">1055</span>
+<span id="1056">1056</span>
+<span id="1057">1057</span>
+<span id="1058">1058</span>
+<span id="1059">1059</span>
+<span id="1060">1060</span>
+<span id="1061">1061</span>
+<span id="1062">1062</span>
+<span id="1063">1063</span>
+<span id="1064">1064</span>
+<span id="1065">1065</span>
+<span id="1066">1066</span>
+<span id="1067">1067</span>
+<span id="1068">1068</span>
+<span id="1069">1069</span>
+<span id="1070">1070</span>
+<span id="1071">1071</span>
+<span id="1072">1072</span>
+<span id="1073">1073</span>
+<span id="1074">1074</span>
+<span id="1075">1075</span>
+<span id="1076">1076</span>
+<span id="1077">1077</span>
+<span id="1078">1078</span>
+<span id="1079">1079</span>
+<span id="1080">1080</span>
+<span id="1081">1081</span>
+<span id="1082">1082</span>
+<span id="1083">1083</span>
+<span id="1084">1084</span>
+<span id="1085">1085</span>
+<span id="1086">1086</span>
+<span id="1087">1087</span>
+<span id="1088">1088</span>
+<span id="1089">1089</span>
+<span id="1090">1090</span>
+<span id="1091">1091</span>
+<span id="1092">1092</span>
+<span id="1093">1093</span>
+<span id="1094">1094</span>
+<span id="1095">1095</span>
+<span id="1096">1096</span>
+<span id="1097">1097</span>
+<span id="1098">1098</span>
+<span id="1099">1099</span>
+<span id="1100">1100</span>
+<span id="1101">1101</span>
+<span id="1102">1102</span>
+<span id="1103">1103</span>
+<span id="1104">1104</span>
+<span id="1105">1105</span>
+<span id="1106">1106</span>
+<span id="1107">1107</span>
+<span id="1108">1108</span>
+<span id="1109">1109</span>
+<span id="1110">1110</span>
+<span id="1111">1111</span>
+<span id="1112">1112</span>
+<span id="1113">1113</span>
+<span id="1114">1114</span>
+<span id="1115">1115</span>
+<span id="1116">1116</span>
+<span id="1117">1117</span>
+<span id="1118">1118</span>
+<span id="1119">1119</span>
+<span id="1120">1120</span>
+<span id="1121">1121</span>
+<span id="1122">1122</span>
+<span id="1123">1123</span>
+<span id="1124">1124</span>
+<span id="1125">1125</span>
+<span id="1126">1126</span>
+<span id="1127">1127</span>
+<span id="1128">1128</span>
+<span id="1129">1129</span>
+<span id="1130">1130</span>
+<span id="1131">1131</span>
+<span id="1132">1132</span>
+<span id="1133">1133</span>
+<span id="1134">1134</span>
+<span id="1135">1135</span>
+<span id="1136">1136</span>
+<span id="1137">1137</span>
+<span id="1138">1138</span>
+<span id="1139">1139</span>
+<span id="1140">1140</span>
+<span id="1141">1141</span>
+<span id="1142">1142</span>
+<span id="1143">1143</span>
+<span id="1144">1144</span>
+<span id="1145">1145</span>
+<span id="1146">1146</span>
+<span id="1147">1147</span>
+<span id="1148">1148</span>
+<span id="1149">1149</span>
+<span id="1150">1150</span>
+<span id="1151">1151</span>
+<span id="1152">1152</span>
+<span id="1153">1153</span>
+<span id="1154">1154</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">fmt</span>, <span class="ident">hash</span>, <span class="ident">iter</span>::<span class="ident">FromIterator</span>, <span class="ident">mem</span>::<span class="ident">MaybeUninit</span>, <span class="ident">ops</span>, <span class="ident">ptr</span>, <span class="ident">slice</span>};
 
@@ -1216,6 +1315,8 @@
 <span class="doccomment">/// }</span>
 <span class="doccomment">/// assert_eq!(vec, [7, 1, 2, 3]);</span>
 <span class="doccomment">/// ```</span>
+<span class="comment">// repr(transparent) is needed for [`String::as_mut_vec`]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>(<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">crate</span>::<span class="ident">i</span>::<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span><span class="op">&gt;</span>)
 <span class="kw">where</span>
     <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
@@ -1381,6 +1482,103 @@
         <span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Default</span>,
     {
         <span class="self">self</span>.<span class="ident">resize</span>(<span class="ident">new_len</span>, <span class="ident">T</span>::<span class="ident">default</span>())
+    }
+
+    <span class="doccomment">/// Forces the length of the vector to `new_len`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This is a low-level operation that maintains none of the normal</span>
+    <span class="doccomment">/// invariants of the type. Normally changing the length of a vector</span>
+    <span class="doccomment">/// is done using one of the safe operations instead, such as</span>
+    <span class="doccomment">/// [`truncate`], [`resize`], [`extend`], or [`clear`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`truncate`]: #method.truncate</span>
+    <span class="doccomment">/// [`resize`]: #method.resize</span>
+    <span class="doccomment">/// [`extend`]: https://doc.rust-lang.org/stable/core/iter/trait.Extend.html#tymethod.extend</span>
+    <span class="doccomment">/// [`clear`]: #method.clear</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Safety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// - `new_len` must be less than or equal to [`capacity()`].</span>
+    <span class="doccomment">/// - The elements at `old_len..new_len` must be initialized.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`capacity()`]: #method.capacity</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This method can be useful for situations in which the vector</span>
+    <span class="doccomment">/// is serving as a buffer for other code, particularly over FFI:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```no_run</span>
+    <span class="doccomment">/// # #![allow(dead_code)]</span>
+    <span class="doccomment">/// use heapless::Vec;</span>
+    <span class="doccomment">/// use heapless::consts::*;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # // This is just a minimal skeleton for the doc example;</span>
+    <span class="doccomment">/// # // don&#39;t use this as a starting point for a real library.</span>
+    <span class="doccomment">/// # pub struct StreamWrapper { strm: *mut core::ffi::c_void }</span>
+    <span class="doccomment">/// # const Z_OK: i32 = 0;</span>
+    <span class="doccomment">/// # extern &quot;C&quot; {</span>
+    <span class="doccomment">/// #     fn deflateGetDictionary(</span>
+    <span class="doccomment">/// #         strm: *mut core::ffi::c_void,</span>
+    <span class="doccomment">/// #         dictionary: *mut u8,</span>
+    <span class="doccomment">/// #         dictLength: *mut usize,</span>
+    <span class="doccomment">/// #     ) -&gt; i32;</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// # impl StreamWrapper {</span>
+    <span class="doccomment">/// pub fn get_dictionary(&amp;self) -&gt; Option&lt;Vec&lt;u8, U32768&gt;&gt; {</span>
+    <span class="doccomment">///     // Per the FFI method&#39;s docs, &quot;32768 bytes is always enough&quot;.</span>
+    <span class="doccomment">///     let mut dict = Vec::new();</span>
+    <span class="doccomment">///     let mut dict_length = 0;</span>
+    <span class="doccomment">///     // SAFETY: When `deflateGetDictionary` returns `Z_OK`, it holds that:</span>
+    <span class="doccomment">///     // 1. `dict_length` elements were initialized.</span>
+    <span class="doccomment">///     // 2. `dict_length` &lt;= the capacity (32_768)</span>
+    <span class="doccomment">///     // which makes `set_len` safe to call.</span>
+    <span class="doccomment">///     unsafe {</span>
+    <span class="doccomment">///         // Make the FFI call...</span>
+    <span class="doccomment">///         let r = deflateGetDictionary(self.strm, dict.as_mut_ptr(), &amp;mut dict_length);</span>
+    <span class="doccomment">///         if r == Z_OK {</span>
+    <span class="doccomment">///             // ...and update the length to what was initialized.</span>
+    <span class="doccomment">///             dict.set_len(dict_length);</span>
+    <span class="doccomment">///             Some(dict)</span>
+    <span class="doccomment">///         } else {</span>
+    <span class="doccomment">///             None</span>
+    <span class="doccomment">///         }</span>
+    <span class="doccomment">///     }</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// While the following example is sound, there is a memory leak since</span>
+    <span class="doccomment">/// the inner vectors were not freed prior to the `set_len` call:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use core::iter::FromIterator;</span>
+    <span class="doccomment">/// use heapless::Vec;</span>
+    <span class="doccomment">/// use heapless::consts::*;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut vec = Vec::&lt;Vec&lt;u8, U3&gt;, U3&gt;::from_iter(</span>
+    <span class="doccomment">///     [</span>
+    <span class="doccomment">///         Vec::from_iter([1, 0, 0].iter().cloned()),</span>
+    <span class="doccomment">///         Vec::from_iter([0, 1, 0].iter().cloned()),</span>
+    <span class="doccomment">///         Vec::from_iter([0, 0, 1].iter().cloned()),</span>
+    <span class="doccomment">///     ]</span>
+    <span class="doccomment">///     .iter()</span>
+    <span class="doccomment">///     .cloned()</span>
+    <span class="doccomment">/// );</span>
+    <span class="doccomment">/// // SAFETY:</span>
+    <span class="doccomment">/// // 1. `old_len..0` is empty so no elements need to be initialized.</span>
+    <span class="doccomment">/// // 2. `0 &lt;= capacity` always holds whatever `capacity` is.</span>
+    <span class="doccomment">/// unsafe {</span>
+    <span class="doccomment">///     vec.set_len(0);</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Normally, here, one would use [`clear`] instead to correctly drop</span>
+    <span class="doccomment">/// the contents and thus not leak memory.</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">set_len</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">new_len</span>: <span class="ident">usize</span>) {
+        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">new_len</span> <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">capacity</span>());
+
+        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span> <span class="op">=</span> <span class="ident">new_len</span>
     }
 
     <span class="doccomment">/// Removes an element from the vector and returns it.</span>
@@ -1782,8 +1980,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">as_slice</span>::<span class="ident">AsSlice</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">consts</span>::<span class="kw-2">*</span>, <span class="ident">Vec</span>};
+    <span class="kw">use</span> <span class="ident">as_slice</span>::<span class="ident">AsSlice</span>;
     <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>::<span class="ident">Write</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
