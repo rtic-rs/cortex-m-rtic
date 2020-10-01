@@ -161,6 +161,7 @@
 <span id="161">161</span>
 <span id="162">162</span>
 <span id="163">163</span>
+<span id="164">164</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::{
     <span class="ident">cell</span>::<span class="ident">Cell</span>,
@@ -168,6 +169,7 @@
 };
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">tq</span>::{<span class="ident">NotReady</span>, <span class="ident">TimerQueue</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">bare_metal</span>::<span class="ident">CriticalSection</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv7m</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m</span>::<span class="ident">register</span>::<span class="ident">basepri</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m</span>::{

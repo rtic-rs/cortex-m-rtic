@@ -322,6 +322,14 @@
 <span id="322">322</span>
 <span id="323">323</span>
 <span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -371,6 +379,14 @@
 
                 <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">device</span>: #<span class="ident">device</span>::<span class="ident">Peripherals</span>::<span class="ident">steal</span>()));
             }
+
+            <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="lifetime">&#39;a</span>));
+            <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
+                <span class="doccomment">/// Critical section token for init</span>
+                <span class="kw">pub</span> <span class="ident">cs</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">CriticalSection</span><span class="op">&lt;</span>#<span class="ident">lt</span><span class="op">&gt;</span>
+            ));
+
+            <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">cs</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">CriticalSection</span>::<span class="ident">new</span>()));
 
             <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>));
         }
