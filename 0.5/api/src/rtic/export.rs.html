@@ -160,8 +160,6 @@
 <span id="160">160</span>
 <span id="161">161</span>
 <span id="162">162</span>
-<span id="163">163</span>
-<span id="164">164</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::{
     <span class="ident">cell</span>::<span class="ident">Cell</span>,
@@ -181,8 +179,6 @@
 <span class="kw">use</span> <span class="ident">heapless</span>::<span class="ident">spsc</span>::<span class="ident">SingleCore</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">heapless</span>::{<span class="ident">consts</span>, <span class="ident">i</span>::<span class="ident">Queue</span> <span class="kw">as</span> <span class="ident">iQueue</span>, <span class="ident">spsc</span>::<span class="ident">Queue</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">heapless</span>::{<span class="ident">i</span>::<span class="ident">BinaryHeap</span> <span class="kw">as</span> <span class="ident">iBinaryHeap</span>, <span class="ident">BinaryHeap</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;heterogeneous&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">microamp</span>::<span class="ident">shared</span>;
 
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SCFQ</span><span class="op">&lt;</span><span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Queue</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">N</span>, <span class="ident">u8</span>, <span class="ident">SingleCore</span><span class="op">&gt;</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SCRQ</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Queue</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">u8</span>), <span class="ident">N</span>, <span class="ident">u8</span>, <span class="ident">SingleCore</span><span class="op">&gt;</span>;
