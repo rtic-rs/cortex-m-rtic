@@ -342,6 +342,7 @@ const APP: () = {
 process.</p>
 <pre><code class="language-console">$ cargo run --example init
 init
+
 </code></pre>
 <h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
 <p>A function marked with the <code>idle</code> attribute can optionally appear in the
@@ -398,6 +399,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example idle
 init
 idle
+
 </code></pre>
 <h2><a class="header" href="#hardware-tasks" id="hardware-tasks">Hardware tasks</a></h2>
 <p>To declare interrupt handlers the framework provides a <code>#[task]</code> attribute that
@@ -470,6 +472,7 @@ init
 UART0 called 1 time
 idle
 UART0 called 2 times
+
 </code></pre>
 <p>So far all the RTIC applications we have seen look no different than the
 applications one can write using only the <code>cortex-m-rt</code> crate. From this point
@@ -537,6 +540,7 @@ GPIOA - start
  GPIOC - end
  GPIOB
 GPIOA - end
+
 </code></pre>
 <p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
 is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of
@@ -630,6 +634,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example resource
 UART0: shared = 1
 UART1: shared = 2
+
 </code></pre>
 <p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
 so results in a compile error.</p>
@@ -727,6 +732,7 @@ B - shared = 1
 C
 D - shared = 2
 E
+
 </code></pre>
 <h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
 <p>Late resources are resources that are not given an initial value at compile time
@@ -799,6 +805,7 @@ const APP: () = {
 #}</code></pre></pre>
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
+
 </code></pre>
 <h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
 <p>By default the framework assumes that all tasks require exclusive access
@@ -863,6 +870,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example only-shared-access
 UART1(key = 0xdeadbeef)
 UART0(key = 0xdeadbeef)
+
 </code></pre>
 <h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
 <p>In addition to hardware tasks, which are invoked by the hardware in response to
@@ -946,6 +954,7 @@ foo - middle
 baz
 foo - end
 bar
+
 </code></pre>
 <h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
 <p>The other advantage of software tasks is that messages can be passed to these
@@ -1016,6 +1025,7 @@ baz(1, 2)
 foo
 bar(1)
 baz(2, 3)
+
 </code></pre>
 <h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
 <p>RTIC does <em>not</em> perform any form of heap-based memory allocation. The memory
@@ -1086,6 +1096,7 @@ foo(1)
 foo(2)
 foo(3)
 bar
+
 </code></pre>
 <h2><a class="header" href="#error-handling" id="error-handling">Error handling</a></h2>
 <p>The <code>spawn</code> API returns the <code>Err</code> variant when there's no space to send the
@@ -1703,6 +1714,7 @@ $ rm memory.x build.rs
 <pre><code class="language-console">$ # NOTE: I have uncommented the `runner` option in `.cargo/config`
 $ cargo run
 init
+
 </code></pre>
 <h1><a class="header" href="#tips--tricks" id="tips--tricks">Tips &amp; tricks</a></h1>
 <h2><a class="header" href="#generics" id="generics">Generics</a></h2>
@@ -1795,6 +1807,7 @@ UART0(STATE = 0)
 shared: 1 -&gt; 2
 UART1(STATE = 1)
 shared: 2 -&gt; 4
+
 </code></pre>
 <p>Using generics also lets you change the static priorities of tasks during
 development without having to rewrite a bunch code every time.</p>
@@ -1884,6 +1897,7 @@ const APP: () = {
 $ cargo run --example cfg
 foo has been called 1 time
 foo has been called 2 times
+
 </code></pre>
 <h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
 <p>The main goal of moving the specification of RTIC applications to attributes in
@@ -1950,6 +1964,7 @@ const APP: () = {
 <p>Running this program produces the expected output.</p>
 <pre><code class="language-console">$ cargo run --example ramfunc
 foo
+
 </code></pre>
 <p>One can look at the output of <code>cargo-nm</code> to confirm that <code>bar</code> ended in RAM
 (<code>0x2000_0000</code>), whereas <code>foo</code> ended in Flash (<code>0x0000_0000</code>).</p>
@@ -2047,6 +2062,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example pool
 bar(0x2000008c)
 foo(0x20000110)
+
 </code></pre>
 <h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
 <p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some

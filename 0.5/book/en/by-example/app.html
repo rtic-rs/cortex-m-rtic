@@ -234,6 +234,7 @@ const APP: () = {
 process.</p>
 <pre><code class="language-console">$ cargo run --example init
 init
+
 </code></pre>
 <h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
 <p>A function marked with the <code>idle</code> attribute can optionally appear in the
@@ -290,6 +291,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example idle
 init
 idle
+
 </code></pre>
 <h2><a class="header" href="#hardware-tasks" id="hardware-tasks">Hardware tasks</a></h2>
 <p>To declare interrupt handlers the framework provides a <code>#[task]</code> attribute that
@@ -362,6 +364,7 @@ init
 UART0 called 1 time
 idle
 UART0 called 2 times
+
 </code></pre>
 <p>So far all the RTIC applications we have seen look no different than the
 applications one can write using only the <code>cortex-m-rt</code> crate. From this point
@@ -429,6 +432,7 @@ GPIOA - start
  GPIOC - end
  GPIOB
 GPIOA - end
+
 </code></pre>
 <p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
 is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of

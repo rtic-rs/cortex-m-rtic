@@ -240,6 +240,7 @@ UART0(STATE = 0)
 shared: 1 -&gt; 2
 UART1(STATE = 1)
 shared: 2 -&gt; 4
+
 </code></pre>
 <p>Using generics also lets you change the static priorities of tasks during
 development without having to rewrite a bunch code every time.</p>
@@ -329,6 +330,7 @@ const APP: () = {
 $ cargo run --example cfg
 foo has been called 1 time
 foo has been called 2 times
+
 </code></pre>
 <h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
 <p>The main goal of moving the specification of RTIC applications to attributes in
@@ -395,6 +397,7 @@ const APP: () = {
 <p>Running this program produces the expected output.</p>
 <pre><code class="language-console">$ cargo run --example ramfunc
 foo
+
 </code></pre>
 <p>One can look at the output of <code>cargo-nm</code> to confirm that <code>bar</code> ended in RAM
 (<code>0x2000_0000</code>), whereas <code>foo</code> ended in Flash (<code>0x0000_0000</code>).</p>
@@ -492,6 +495,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example pool
 bar(0x2000008c)
 foo(0x20000110)
+
 </code></pre>
 <h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
 <p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some

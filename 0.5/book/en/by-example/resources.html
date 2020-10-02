@@ -231,6 +231,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example resource
 UART0: shared = 1
 UART1: shared = 2
+
 </code></pre>
 <p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
 so results in a compile error.</p>
@@ -328,6 +329,7 @@ B - shared = 1
 C
 D - shared = 2
 E
+
 </code></pre>
 <h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
 <p>Late resources are resources that are not given an initial value at compile time
@@ -400,6 +402,7 @@ const APP: () = {
 #}</code></pre></pre>
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
+
 </code></pre>
 <h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
 <p>By default the framework assumes that all tasks require exclusive access
@@ -464,6 +467,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example only-shared-access
 UART1(key = 0xdeadbeef)
 UART0(key = 0xdeadbeef)
+
 </code></pre>
 
                     </main>

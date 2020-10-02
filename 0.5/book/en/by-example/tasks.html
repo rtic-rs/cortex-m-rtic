@@ -231,6 +231,7 @@ foo - middle
 baz
 foo - end
 bar
+
 </code></pre>
 <h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
 <p>The other advantage of software tasks is that messages can be passed to these
@@ -301,6 +302,7 @@ baz(1, 2)
 foo
 bar(1)
 baz(2, 3)
+
 </code></pre>
 <h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
 <p>RTIC does <em>not</em> perform any form of heap-based memory allocation. The memory
@@ -371,6 +373,7 @@ foo(1)
 foo(2)
 foo(3)
 bar
+
 </code></pre>
 <h2><a class="header" href="#error-handling" id="error-handling">Error handling</a></h2>
 <p>The <code>spawn</code> API returns the <code>Err</code> variant when there's no space to send the
