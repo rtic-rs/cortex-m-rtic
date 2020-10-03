@@ -187,11 +187,12 @@ function marked with the <code>init</code> attribute. This function must have si
 required).</p>
 <p>This initialization function will be the first part of the application to run.
 The <code>init</code> function will run <em>with interrupts disabled</em> and has exclusive access
-to Cortex-M and, optionally, device specific peripherals through the <code>core</code> and
-<code>device</code> fields of <code>init::Context</code>.</p>
+to Cortex-M where the <code>bare_metal::CriticalSection</code> token is available as <code>cs</code>.
+And optionally, device specific peripherals through the <code>core</code> and <code>device</code> fields
+of <code>init::Context</code>.</p>
 <p><code>static mut</code> variables declared at the beginning of <code>init</code> will be transformed
 into <code>&amp;'static mut</code> references that are safe to access.</p>
-<p>The example below shows the types of the <code>core</code> and <code>device</code> fields and
+<p>The example below shows the types of the <code>core</code>, <code>device</code> and <code>cs</code> fields, and
 showcases safe access to a <code>static mut</code> variable. The <code>device</code> field is only
 available when the <code>peripherals</code> argument is set to <code>true</code> (it defaults to
 <code>false</code>).</p>
@@ -222,6 +223,10 @@ const APP: () = {
 
         // Safe access to local `static mut` variable
         let _x: &amp;'static mut u32 = X;
+
+        // Access to the critical section token,
+        // to indicate that this is a critical seciton
+        let _cs_token: bare_metal::CriticalSection = cx.cs;
 
         hprintln!(&quot;init&quot;).unwrap();
 
