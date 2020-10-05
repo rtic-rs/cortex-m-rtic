@@ -1,17 +1,28 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Атрибут app - Real Time For the Masses</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
@@ -19,8 +30,9 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -32,11 +44,11 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -60,8 +72,11 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -78,7 +93,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html" class="active"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../preface.html">Введение</a></li><li class="chapter-item expanded "><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM в примерах</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../by-example/app.html" class="active"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li class="chapter-item expanded "><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li class="chapter-item expanded "><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li class="chapter-item expanded "><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li class="chapter-item expanded "><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li class="chapter-item expanded "><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li class="chapter-item expanded "><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li class="chapter-item expanded "><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li class="chapter-item expanded "><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li class="chapter-item expanded "><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li class="chapter-item expanded "><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -87,37 +102,36 @@
 
             <div class="page">
                 
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                            
-                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            
-                        </div>
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                    <h1 class="menu-title">Real Time For the Masses</h1>
 
-                        <div class="right-buttons">
-                            <a href="../print.html" title="Print this book" aria-label="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                            
-                        </div>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -147,10 +161,10 @@
                     <main>
                         <h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
 <p>Это наименьшая возможная программа на RTFM:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/smallest.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/smallest.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -167,8 +181,8 @@ const APP: () = {
     #[init]
     fn init() {}
 };
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Все программы на RTFM используют атрибут <a href="../../api/cortex_m_rtfm_macros/attr.app.html"><code>app</code></a> (<code>#[app(..)]</code>). Этот атрибут
 нужно применять к <code>const</code>-элементам, содержащим элементы. Атрибут <code>app</code> имеет
 обязательный аргумент <code>device</code>, в качестве значения которому передается <em>путь</em>.
@@ -195,10 +209,10 @@ RTFM работать на стабильной сборке, мы исполь�
 в ссылки <code>&amp;'static mut</code> с безопасным доступом.</p>
 <p>Пример ниже показывает типы переменных <code>core</code> и <code>device</code> и
 демонстрирует безопасный доступ к переменной <code>static mut</code>.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/init.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/init.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -230,27 +244,33 @@ const APP: () = {
         debug::exit(debug::EXIT_SUCCESS);
     }
 };
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Запуск примера напечатает  <code>init</code> в консоли и завершит процесс QEMU.</p>
 <pre><code class="language-console">$ cargo run --example init
-init
-</code></pre>
-<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
-<p>Функция, помеченная атрибутом <code>idle</code> может присутствовать в псевдо-модуле
-опционально. Эта функция используется как специальная <em>задача ожидания</em> и должна иметь
-сигнатуру <code>[unsafe] fn() - &gt; !</code>.</p>
-<p>Когда она присутствует, рантайм запустит задачу <code>idle</code> после <code>init</code>. В отличие от
-<code>init</code>, <code>idle</code> запустится <em>с включенными прерываниями</em> и не может завершиться,
-поэтому будет работать бесконечно.</p>
-<p>Когда функция <code>idle</code> определена, рантайм устанавливает бит <a href="https://developer.arm.com/products/architecture/cpu-architecture/m-profile/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a>, после чего
-отправляет микроконтроллер в состояние сна после выполнения <code>init</code>.</p>
-<p>Как и в <code>init</code>, переменные <code>static mut</code>будут преобразованы в ссылки <code>&amp;'static mut</code>
-с безопасным доступом.</p>
-<p>В примере ниже показан запуск <code>idle</code> после <code>init</code>.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+init```
+
+## `idle`
+
+Функция, помеченная атрибутом `idle` может присутствовать в псевдо-модуле
+опционально. Эта функция используется как специальная *задача ожидания* и должна иметь
+сигнатуру `[unsafe] fn() - &gt; !`.
+
+Когда она присутствует, рантайм запустит задачу `idle` после `init`. В отличие от
+`init`, `idle` запустится *с включенными прерываниями* и не может завершиться,
+поэтому будет работать бесконечно.
+
+Когда функция `idle` определена, рантайм устанавливает бит [SLEEPONEXIT], после чего
+отправляет микроконтроллер в состояние сна после выполнения `init`.
+
+[SLEEPONEXIT]: https://developer.arm.com/products/architecture/cpu-architecture/m-profile/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit
+
+Как и в `init`, переменные `static mut`будут преобразованы в ссылки `&amp;'static mut`
+с безопасным доступом.
+
+В примере ниже показан запуск `idle` после `init`.
+
+``` rust
 //! examples/idle.rs
 
 #![deny(unsafe_code)]
@@ -284,20 +304,19 @@ const APP: () = {
         loop {}
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <pre><code class="language-console">$ cargo run --example idle
 init
-idle
-</code></pre>
-<h2><a class="header" href="#interrupt--exception" id="interrupt--exception"><code>interrupt</code> / <code>exception</code></a></h2>
-<p>Как Вы бы сделали с помощью библиотеки <code>cortex-m-rt</code>, Вы можете использовать атрибуты
-<code>interrupt</code> и <code>exception</code> внутри псевдо-модуля <code>app</code>, чтобы определить обработчики
+idle```
+
+## `interrupt` / `exception`
+
+Как Вы бы сделали с помощью библиотеки `cortex-m-rt`, Вы можете использовать атрибуты
+`interrupt` и `exception` внутри псевдо-модуля `app`, чтобы определить обработчики
 прерываний и исключений. В RTFM, мы называем обработчики прерываний и исключений
-<em>аппаратными</em> задачами.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+*аппаратными* задачами.
+
+``` rust
 //! examples/interrupt.rs
 
 #![deny(unsafe_code)]
@@ -350,17 +369,17 @@ const APP: () = {
         .unwrap();
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <pre><code class="language-console">$ cargo run --example interrupt
 init
 UART0 called 1 time
 idle
-UART0 called 2 times
+UART0 called 2 times```
+
+До сих пор программы RTFM, которые мы видели не отличались от программ, которые
+можно написать, используя только библиотеку `cortex-m-rt`. В следующем разделе
+мы начнем знакомиться с функционалом, присущим только RTFM.
 </code></pre>
-<p>До сих пор программы RTFM, которые мы видели не отличались от программ, которые
-можно написать, используя только библиотеку <code>cortex-m-rt</code>. В следующем разделе
-мы начнем знакомиться с функционалом, присущим только RTFM.</p>
 
                     </main>
 
@@ -385,13 +404,13 @@ UART0 called 2 times
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../by-example.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../by-example.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../by-example/resources.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../by-example/resources.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -401,6 +420,14 @@ UART0 called 2 times
 
         
 
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
         
 
         

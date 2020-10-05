@@ -1,17 +1,28 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Resources - Real Time For the Masses</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
@@ -19,8 +30,9 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -32,11 +44,11 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -60,8 +72,11 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -78,7 +93,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html" class="active"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Singletons</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Task dispatcher</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Timer queue</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../preface.html">Preface</a></li><li class="chapter-item expanded "><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li class="chapter-item expanded "><a href="../by-example/resources.html" class="active"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li class="chapter-item expanded "><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Tasks</a></li><li class="chapter-item expanded "><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li class="chapter-item expanded "><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Singletons</a></li><li class="chapter-item expanded "><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Types, Send and Sync</a></li><li class="chapter-item expanded "><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Starting a new project</a></li><li class="chapter-item expanded "><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Tips &amp; tricks</a></li></ol></li><li class="chapter-item expanded "><a href="../internals.html"><strong aria-hidden="true">2.</strong> Under the hood</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li class="chapter-item expanded "><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Task dispatcher</a></li><li class="chapter-item expanded "><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Timer queue</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -87,37 +102,36 @@
 
             <div class="page">
                 
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                            
-                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            
-                        </div>
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                    <h1 class="menu-title">Real Time For the Masses</h1>
 
-                        <div class="right-buttons">
-                            <a href="../print.html" title="Print this book" aria-label="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                            
-                        </div>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -161,10 +175,10 @@ resource in the <code>resources</code> argument of its attribute.</p>
 is required in this case because the two handlers run at the same priority and
 no preemption is possible. The <code>SHARED</code> resource can only be accessed by these
 two handlers.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/resource.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/resource.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -214,39 +228,48 @@ const APP: () = {
         hprintln!(&quot;UART1: SHARED = {}&quot;, resources.SHARED).unwrap();
     }
 };
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example resource
 UART0: SHARED = 1
-UART1: SHARED = 2
-</code></pre>
-<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
-<p>The priority of each handler can be declared in the <code>interrupt</code> and <code>exception</code>
+UART1: SHARED = 2```
+
+## Priorities
+
+The priority of each handler can be declared in the `interrupt` and `exception`
 attributes. It's not possible to set the priority in any other way because the
-runtime takes ownership of the <code>NVIC</code> peripheral; it's also not possible to
+runtime takes ownership of the `NVIC` peripheral; it's also not possible to
 change the priority of a handler / task at runtime. Thanks to this restriction
-the framework has knowledge about the <em>static</em> priorities of all interrupt and
-exception handlers.</p>
-<p>Interrupts and exceptions can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
-crate. The <code>idle</code> task has a priority of <code>0</code>, the lowest priority.</p>
-<p>Resources that are shared between handlers that run at different priorities
+the framework has knowledge about the *static* priorities of all interrupt and
+exception handlers.
+
+Interrupts and exceptions can have priorities in the range `1..=(1 &lt;&lt;
+NVIC_PRIO_BITS)` where `NVIC_PRIO_BITS` is a constant defined in the `device`
+crate. The `idle` task has a priority of `0`, the lowest priority.
+
+Resources that are shared between handlers that run at different priorities
 require critical sections for memory safety. The framework ensures that critical
-sections are used but <em>only where required</em>: for example, no critical section is
-required by the highest priority handler that has access to the resource.</p>
-<p>The critical section API provided by the RTFM framework (see <a href="../../api/rtfm/trait.Mutex.html"><code>Mutex</code></a>) is
+sections are used but *only where required*: for example, no critical section is
+required by the highest priority handler that has access to the resource.
+
+The critical section API provided by the RTFM framework (see [`Mutex`]) is
 based on dynamic priorities rather than on disabling interrupts. The consequence
-is that these critical sections will prevent <em>some</em> handlers, including all the
-ones that contend for the resource, from <em>starting</em> but will let higher priority
-handlers, that don't contend for the resource, run.</p>
-<p>In the example below we have three interrupt handlers with priorities ranging
+is that these critical sections will prevent *some* handlers, including all the
+ones that contend for the resource, from *starting* but will let higher priority
+handlers, that don't contend for the resource, run.
+
+[`Mutex`]: ../../api/rtfm/trait.Mutex.html
+
+In the example below we have three interrupt handlers with priorities ranging
 from one to three. The two handlers with the lower priorities contend for the
-<code>SHARED</code> resource. The lowest priority handler needs to <a href="../../api/rtfm/trait.Mutex.html#method.lock"><code>lock</code></a> the
-<code>SHARED</code> resource to access its data, whereas the mid priority handler can
+`SHARED` resource. The lowest priority handler needs to [`lock`] the
+`SHARED` resource to access its data, whereas the mid priority handler can
 directly access its data. The highest priority handler is free to preempt
-the critical section created by the lowest priority handler.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+the critical section created by the lowest priority handler.
+
+[`lock`]: ../../api/rtfm/trait.Mutex.html#method.lock
+
+``` rust
 //! examples/lock.rs
 
 #![deny(unsafe_code)]
@@ -308,39 +331,43 @@ const APP: () = {
         hprintln!(&quot;C&quot;).unwrap();
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <pre><code class="language-console">$ cargo run --example lock
 A
 B - SHARED = 1
 C
 D - SHARED = 2
-E
-</code></pre>
-<p>One more note about priorities: choosing a priority higher than what the device
-supports (that is <code>1 &lt;&lt; NVIC_PRIO_BITS</code>) will result in a compile error. Due to
+E```
+
+One more note about priorities: choosing a priority higher than what the device
+supports (that is `1 &lt;&lt; NVIC_PRIO_BITS`) will result in a compile error. Due to
 limitations in the language the error is currently far from helpful: it will say
 something along the lines of &quot;evaluation of constant value failed&quot; and the span
-of the error will <em>not</em> point out to the problematic interrupt value -- we are
-sorry about this!</p>
-<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
-<p>Unlike normal <code>static</code> variables, which need to be assigned an initial value
+of the error will *not* point out to the problematic interrupt value -- we are
+sorry about this!
+
+## Late resources
+
+Unlike normal `static` variables, which need to be assigned an initial value
 when declared, resources can be initialized at runtime. We refer to these
-runtime initialized resources as <em>late resources</em>. Late resources are useful for
-<em>moving</em> (as in transferring ownership) peripherals initialized in <code>init</code> into
-interrupt and exception handlers.</p>
-<p>Late resources are declared like normal resources but that are given an initial
-value of <code>()</code> (the unit value). <code>init</code> must return the initial values of all
-late resources packed in a <code>struct</code> of type <code>init::LateResources</code>.</p>
-<p>The example below uses late resources to stablish a lockless, one-way channel
-between the <code>UART0</code> interrupt handler and the <code>idle</code> function. A single producer
-single consumer <a href="../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into
-consumer and producer end points in <code>init</code> and then each end point is stored
-in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns
-the consumer resource.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+runtime initialized resources as *late resources*. Late resources are useful for
+*moving* (as in transferring ownership) peripherals initialized in `init` into
+interrupt and exception handlers.
+
+Late resources are declared like normal resources but that are given an initial
+value of `()` (the unit value). `init` must return the initial values of all
+late resources packed in a `struct` of type `init::LateResources`.
+
+The example below uses late resources to stablish a lockless, one-way channel
+between the `UART0` interrupt handler and the `idle` function. A single producer
+single consumer [`Queue`] is used as the channel. The queue is split into
+consumer and producer end points in `init` and then each end point is stored
+in a different resource; `UART0` owns the producer resource and `idle` owns
+the consumer resource.
+
+[`Queue`]: ../../api/heapless/spsc/struct.Queue.html
+
+``` rust
 //! examples/late.rs
 
 #![deny(unsafe_code)]
@@ -395,23 +422,23 @@ const APP: () = {
         resources.P.enqueue(42).unwrap();
     }
 };
-
-#}</code></pre></pre>
-<pre><code class="language-console">$ cargo run --example late
-received message: 42
 </code></pre>
-<h2><a class="header" href="#static-resources" id="static-resources"><code>static</code> resources</a></h2>
-<p><code>static</code> variables can also be used as resources. Tasks can only get <code>&amp;</code>
+<pre><code class="language-console">$ cargo run --example late
+received message: 42```
+
+## `static` resources
+
+`static` variables can also be used as resources. Tasks can only get `&amp;`
 (shared) references to these resources but locks are never required to access
-their data. You can think of <code>static</code> resources as plain <code>static</code> variables that
+their data. You can think of `static` resources as plain `static` variables that
 can be initialized at runtime and have better scoping rules: you can control
 which tasks can access the variable, instead of the variable being visible to
-all the functions in the scope it was declared in.</p>
-<p>In the example below a key is loaded (or created) at runtime and then used from
-two tasks that run at different priorities.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+all the functions in the scope it was declared in.
+
+In the example below a key is loaded (or created) at runtime and then used from
+two tasks that run at different priorities.
+
+``` rust
 //! examples/static.rs
 
 #![deny(unsafe_code)]
@@ -449,11 +476,10 @@ const APP: () = {
         hprintln!(&quot;UART1(KEY = {:#x})&quot;, resources.KEY).unwrap();
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <pre><code class="language-console">$ cargo run --example static
 UART1(KEY = 0xdeadbeef)
-UART0(KEY = 0xdeadbeef)
+UART0(KEY = 0xdeadbeef)```
 </code></pre>
 
                     </main>
@@ -479,13 +505,13 @@ UART0(KEY = 0xdeadbeef)
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../by-example/app.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../by-example/app.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../by-example/tasks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../by-example/tasks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -495,6 +521,14 @@ UART0(KEY = 0xdeadbeef)
 
         
 
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
         
 
         

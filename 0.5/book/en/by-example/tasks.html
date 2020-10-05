@@ -1,17 +1,28 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Software tasks - Real-Time Interrupt-driven Concurrency</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
@@ -19,8 +30,9 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -32,11 +44,11 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -60,8 +72,11 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -78,7 +93,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html" class="active"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="../internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../preface.html">Preface</a></li><li class="chapter-item expanded "><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li class="chapter-item expanded "><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li class="chapter-item expanded "><a href="../by-example/tasks.html" class="active"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li class="chapter-item expanded "><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li class="chapter-item expanded "><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li class="chapter-item expanded "><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li class="chapter-item expanded "><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li class="chapter-item expanded "><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li class="chapter-item expanded "><a href="../migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li class="chapter-item expanded "><a href="../internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li class="chapter-item expanded "><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li class="chapter-item expanded "><a href="../internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li class="chapter-item expanded "><a href="../internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li class="chapter-item expanded "><a href="../internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li class="chapter-item expanded "><a href="../internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li class="chapter-item expanded "><a href="../internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li class="chapter-item expanded "><a href="../internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li class="chapter-item expanded "><a href="../homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li class="chapter-item expanded "><a href="../heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -87,41 +102,40 @@
 
             <div class="page">
                 
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                            
-                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            
-                        </div>
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
 
-                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
+                    <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
-                        <div class="right-buttons">
-                            <a href="../print.html" title="Print this book" aria-label="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                            
-                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
-                                <i id="git-repository-button" class="fa fa-github"></i>
-                            </a>
-                            
-                        </div>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -165,10 +179,10 @@ the name of the task must appear in the <code>spawn</code> argument of the conte
 attribute (<code>init</code>, <code>idle</code>, <code>task</code>, etc.).</p>
 <p>The example below showcases three software tasks that run at 2 different
 priorities. The three software tasks are mapped to 2 interrupts handlers.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/task.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/task.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -223,23 +237,24 @@ const APP: () = {
         fn QEI0();
     }
 };
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example task
 foo - start
 foo - middle
 baz
 foo - end
-bar
-</code></pre>
-<h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
-<p>The other advantage of software tasks is that messages can be passed to these
+bar```
+
+## Message passing
+
+The other advantage of software tasks is that messages can be passed to these
 tasks when spawning them. The type of the message payload must be specified in
-the signature of the task handler.</p>
-<p>The example below showcases three tasks, two of them expect a message.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+the signature of the task handler.
+
+The example below showcases three tasks, two of them expect a message.
+
+``` rust
 //! examples/message.rs
 
 #![deny(unsafe_code)]
@@ -292,30 +307,30 @@ const APP: () = {
         fn SSI0();
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <pre><code class="language-console">$ cargo run --example message
 foo
 bar(0)
 baz(1, 2)
 foo
 bar(1)
-baz(2, 3)
-</code></pre>
-<h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
-<p>RTIC does <em>not</em> perform any form of heap-based memory allocation. The memory
+baz(2, 3)```
+
+## Capacity
+
+RTIC does *not* perform any form of heap-based memory allocation. The memory
 required to store messages is statically reserved. By default the framework
 minimizes the memory footprint of the application so each task has a message
 &quot;capacity&quot; of 1: meaning that at most one message can be posted to the task
 before it gets a chance to run. This default can be overridden for each task
-using the <code>capacity</code> argument. This argument takes a positive integer that
-indicates how many messages the task message buffer can hold.</p>
-<p>The example below sets the capacity of the software task <code>foo</code> to 4. If the
-capacity is not specified then the second <code>spawn.foo</code> call in <code>UART0</code> would
-fail (panic).</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+using the `capacity` argument. This argument takes a positive integer that
+indicates how many messages the task message buffer can hold.
+
+The example below sets the capacity of the software task `foo` to 4. If the
+capacity is not specified then the second `spawn.foo` call in `UART0` would
+fail (panic).
+
+``` rust
 //! examples/capacity.rs
 
 #![deny(unsafe_code)]
@@ -363,44 +378,40 @@ const APP: () = {
         fn SSI0();
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <pre><code class="language-console">$ cargo run --example capacity
 foo(0)
 foo(1)
 foo(2)
 foo(3)
-bar
-</code></pre>
-<h2><a class="header" href="#error-handling" id="error-handling">Error handling</a></h2>
-<p>The <code>spawn</code> API returns the <code>Err</code> variant when there's no space to send the
-message. In most scenarios spawning errors are handled in one of two ways:</p>
-<ul>
-<li>
-<p>Panicking, using <code>unwrap</code>, <code>expect</code>, etc. This approach is used to catch the
-programmer   error (i.e. bug) of selecting a capacity that was too small. When
-this panic is encountered during testing choosing a bigger capacity and
-recompiling the program may fix the issue but sometimes it's necessary to dig
-deeper and perform a timing analysis of the application to check if the
-platform can deal with peak payload or if the processor needs to be replaced
-with a faster one.</p>
-</li>
-<li>
-<p>Ignoring the result. In soft real-time and non real-time applications it may
-be OK to occasionally lose data or fail to respond to some events during event
-bursts. In those scenarios silently letting a <code>spawn</code> call fail may be
-acceptable.</p>
-</li>
-</ul>
-<p>It should be noted that retrying a <code>spawn</code> call is usually the wrong approach as
+bar```
+
+## Error handling
+
+The `spawn` API returns the `Err` variant when there's no space to send the
+message. In most scenarios spawning errors are handled in one of two ways:
+
+- Panicking, using `unwrap`, `expect`, etc. This approach is used to catch the
+  programmer   error (i.e. bug) of selecting a capacity that was too small. When
+  this panic is encountered during testing choosing a bigger capacity and
+  recompiling the program may fix the issue but sometimes it's necessary to dig
+  deeper and perform a timing analysis of the application to check if the
+  platform can deal with peak payload or if the processor needs to be replaced
+  with a faster one.
+
+- Ignoring the result. In soft real-time and non real-time applications it may
+  be OK to occasionally lose data or fail to respond to some events during event
+  bursts. In those scenarios silently letting a `spawn` call fail may be
+  acceptable.
+
+It should be noted that retrying a `spawn` call is usually the wrong approach as
 this operation will likely never succeed in practice. Because there are only
-context switches towards <em>higher</em> priority tasks retrying the <code>spawn</code> call of a
+context switches towards *higher* priority tasks retrying the `spawn` call of a
 lower priority task will never let the scheduler dispatch said task meaning that
 its message buffer will never be emptied. This situation is depicted in the
-following snippet:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+following snippet:
+
+``` rust
 #[rtic::app(..)]
 const APP: () = {
     #[init(spawn = [foo, bar])]
@@ -424,7 +435,7 @@ const APP: () = {
         // ..
     }
 };
-#}</code></pre></pre>
+</code></pre>
 
                     </main>
 
@@ -449,13 +460,13 @@ const APP: () = {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../by-example/resources.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../by-example/resources.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../by-example/timer-queue.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../by-example/timer-queue.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -465,6 +476,14 @@ const APP: () = {
 
         
 
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
         
 
         

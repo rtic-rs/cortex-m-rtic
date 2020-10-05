@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,13 +7,24 @@
         
         <meta name="robots" content="noindex" />
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
         <link rel="shortcut icon" href="favicon.png">
+        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
@@ -21,8 +32,9 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -34,11 +46,11 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -62,8 +74,11 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -80,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html"><strong aria-hidden="true">2.</strong> Migration Guides</a></li><li><ol class="section"><li><a href="migration/migration_v5.html"><strong aria-hidden="true">2.1.</strong> v0.5.x to v0.6.x</a></li><li><a href="migration/migration_v4.html"><strong aria-hidden="true">2.2.</strong> v0.4.x to v0.5.x</a></li><li><a href="migration/migration_rtic.html"><strong aria-hidden="true">2.3.</strong> RTFM to RTIC</a></li></ol></li><li><a href="internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="preface.html">Preface</a></li><li class="chapter-item expanded "><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li class="chapter-item expanded "><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li class="chapter-item expanded "><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li class="chapter-item expanded "><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li class="chapter-item expanded "><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li class="chapter-item expanded "><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li class="chapter-item expanded "><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li class="chapter-item expanded "><a href="migration.html"><strong aria-hidden="true">2.</strong> Migration Guides</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="migration/migration_v5.html"><strong aria-hidden="true">2.1.</strong> v0.5.x to v0.6.x</a></li><li class="chapter-item expanded "><a href="migration/migration_v4.html"><strong aria-hidden="true">2.2.</strong> v0.4.x to v0.5.x</a></li><li class="chapter-item expanded "><a href="migration/migration_rtic.html"><strong aria-hidden="true">2.3.</strong> RTFM to RTIC</a></li></ol></li><li class="chapter-item expanded "><a href="internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li class="chapter-item expanded "><a href="internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li class="chapter-item expanded "><a href="internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li class="chapter-item expanded "><a href="internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li class="chapter-item expanded "><a href="internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li class="chapter-item expanded "><a href="internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li class="chapter-item expanded "><a href="internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li class="chapter-item expanded "><a href="internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -89,41 +104,40 @@
 
             <div class="page">
                 
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                            
-                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            
-                        </div>
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
 
-                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
+                    <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
-                        <div class="right-buttons">
-                            <a href="print.html" title="Print this book" aria-label="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                            
-                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
-                                <i id="git-repository-button" class="fa fa-github"></i>
-                            </a>
-                            
-                        </div>
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -262,10 +276,10 @@ program. Check <a href="https://rust-embedded.github.io/book/intro/install.html"
 embedded development environment that includes QEMU.</p>
 <h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
 <p>This is the smallest possible RTIC application:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/smallest.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/smallest.rs
 
 #![no_main]
 #![no_std]
@@ -275,8 +289,8 @@ use rtic::app;
 
 #[app(device = lm3s6965)]
 mod app {}
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>All RTIC applications use the <a href="by-example/../../../api/cortex_m_rtic_macros/attr.app.html"><code>app</code></a> attribute (<code>#[app(..)]</code>). This attribute
 must be applied to a <code>mod</code>-item. The <code>app</code> attribute has
 a mandatory <code>device</code> argument that takes a <em>path</em> as a value. This path must
@@ -299,10 +313,10 @@ into <code>&amp;'static mut</code> references that are safe to access.</p>
 showcases safe access to a <code>static mut</code> variable. The <code>device</code> field is only
 available when the <code>peripherals</code> argument is set to <code>true</code> (it defaults to
 <code>false</code>).</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/init.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/init.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -338,13 +352,12 @@ mod app {
         init::LateResources {}
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Running the example will print <code>init</code> to the console and then exit the QEMU
 process.</p>
 <pre><code class="language-console">$ cargo run --example init
 init
-
 </code></pre>
 <h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
 <p>A function marked with the <code>idle</code> attribute can optionally appear in the
@@ -360,10 +373,10 @@ references that are safe to access.</p>
 <p>The example below shows that <code>idle</code> runs after <code>init</code>.</p>
 <p><strong>Note:</strong> The <code>loop {}</code> in idle cannot be empty as this will crash the microcontroller due to a bug
 in LLVM which miss-optimizes empty loops to a <code>UDF</code> instruction in release mode.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/idle.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/idle.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -398,12 +411,11 @@ mod app {
         }
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example idle
 init
 idle
-
 </code></pre>
 <h2><a class="header" href="#hardware-tasks" id="hardware-tasks">Hardware tasks</a></h2>
 <p>To declare interrupt handlers the framework provides a <code>#[task]</code> attribute that
@@ -414,10 +426,10 @@ framework these type of tasks are referred to as <em>hardware</em> tasks, becaus
 start executing in reaction to a hardware event.</p>
 <p>The example below demonstrates the use of the <code>#[task]</code> attribute to declare an
 interrupt handler. Like in the case of <code>#[init]</code> and <code>#[idle]</code> local <code>static mut</code> variables are safe to use within a hardware task.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/hardware.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/hardware.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -471,14 +483,13 @@ mod app {
         .unwrap();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example hardware
 init
 UART0 called 1 time
 idle
 UART0 called 2 times
-
 </code></pre>
 <p>So far all the RTIC applications we have seen look no different than the
 applications one can write using only the <code>cortex-m-rt</code> crate. From this point
@@ -498,10 +509,10 @@ lower priority one: the execution of the lower priority task is suspended and
 the higher priority task is executed to completion. Once the higher priority
 task has terminated the lower priority task is resumed.</p>
 <p>The following example showcases the priority based scheduling of tasks.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/preempt.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/preempt.rs
 
 #![no_main]
 #![no_std]
@@ -540,15 +551,14 @@ mod app {
         hprintln!(&quot; GPIOC - end&quot;).unwrap();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example preempt
 GPIOA - start
  GPIOC - start
  GPIOC - end
  GPIOB
 GPIOA - end
-
 </code></pre>
 <p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
 is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of
@@ -580,10 +590,10 @@ resources are made available to the context under the <code>resources</code> fie
 <code>Context</code> structure.</p>
 <p>The example application shown below contains two interrupt handlers that share
 access to a resource named <code>shared</code>.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/resource.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/resource.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -641,12 +651,11 @@ mod app {
         hprintln!(&quot;UART1: shared = {}&quot;, cx.resources.shared).unwrap();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example resource
 UART0: shared = 1
 UART1: shared = 2
-
 </code></pre>
 <p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
 so results in a compile error.</p>
@@ -671,10 +680,10 @@ from one to three. The two handlers with the lower priorities contend for the
 directly access its data. The highest priority handler, which cannot access
 the <code>shared</code> resource, is free to preempt the critical section created by the
 lowest priority handler.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/lock.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/lock.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -739,15 +748,14 @@ mod app {
         hprintln!(&quot;C&quot;).unwrap();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example lock
 A
 B - shared = 1
 C
 D - shared = 2
 E
-
 </code></pre>
 <h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
 <p>Late resources are resources that are not given an initial value at compile time
@@ -761,10 +769,10 @@ single consumer <a href="by-example/../../../api/heapless/spsc/struct.Queue.html
 consumer and producer end points in <code>init</code> and then each end point is stored
 in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns
 the consumer resource.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/late.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/late.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -821,11 +829,10 @@ mod app {
         c.resources.p.enqueue(42).unwrap();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
-
 </code></pre>
 <h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
 <p>By default the framework assumes that all tasks require exclusive access
@@ -844,10 +851,10 @@ tasks. Attempting to do so will result in a compile error.</p>
 <p>In the example below a key (e.g. a cryptographic key) is loaded (or created) at
 runtime and then used from two tasks that run at different priorities without
 any kind of lock.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/static.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/static.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -886,12 +893,11 @@ mod app {
         hprintln!(&quot;UART1(key = {:#x})&quot;, cx.resources.key).unwrap();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example only-shared-access
 UART1(key = 0xdeadbeef)
 UART0(key = 0xdeadbeef)
-
 </code></pre>
 <h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
 <p>In addition to hardware tasks, which are invoked by the hardware in response to
@@ -909,10 +915,10 @@ the name of the task must appear in the <code>spawn</code> argument of the conte
 attribute (<code>init</code>, <code>idle</code>, <code>task</code>, etc.).</p>
 <p>The example below showcases three software tasks that run at 2 different
 priorities. The three software tasks are mapped to 2 interrupts handlers.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/task.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/task.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -969,25 +975,24 @@ mod app {
         fn QEI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example task
 foo - start
 foo - middle
 baz
 foo - end
 bar
-
 </code></pre>
 <h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
 <p>The other advantage of software tasks is that messages can be passed to these
 tasks when spawning them. The type of the message payload must be specified in
 the signature of the task handler.</p>
 <p>The example below showcases three tasks, two of them expect a message.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/message.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/message.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1041,8 +1046,8 @@ mod app {
         fn SSI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example message
 foo
 bar(0)
@@ -1050,7 +1055,6 @@ baz(1, 2)
 foo
 bar(1)
 baz(2, 3)
-
 </code></pre>
 <h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
 <p>RTIC does <em>not</em> perform any form of heap-based memory allocation. The memory
@@ -1063,10 +1067,10 @@ indicates how many messages the task message buffer can hold.</p>
 <p>The example below sets the capacity of the software task <code>foo</code> to 4. If the
 capacity is not specified then the second <code>spawn.foo</code> call in <code>UART0</code> would
 fail (panic).</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/capacity.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/capacity.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1115,15 +1119,14 @@ mod app {
         fn SSI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example capacity
 foo(0)
 foo(1)
 foo(2)
 foo(3)
 bar
-
 </code></pre>
 <h2><a class="header" href="#error-handling" id="error-handling">Error handling</a></h2>
 <p>The <code>spawn</code> API returns the <code>Err</code> variant when there's no space to send the
@@ -1151,10 +1154,10 @@ context switches towards <em>higher</em> priority tasks retrying the <code>spawn
 lower priority task will never let the scheduler dispatch said task meaning that
 its message buffer will never be emptied. This situation is depicted in the
 following snippet:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(..)]
 mod app {
     #[init(spawn = [foo, bar])]
     fn init(cx: init::Context) {
@@ -1177,7 +1180,8 @@ mod app {
         // ..
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h1><a class="header" href="#timer-queue" id="timer-queue">Timer queue</a></h1>
 <p>In contrast with the <code>spawn</code> API, which immediately spawns a software task onto
 the scheduler, the <code>schedule</code> API can be used to schedule a task to run some
@@ -1216,10 +1220,10 @@ it was scheduled to run first.</p>
 abstraction will <strong>not</strong> properly work on QEMU because the Cortex-M cycle
 counter functionality has not been implemented in <code>qemu-system-arm</code>.</p>
 </blockquote>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/schedule.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/schedule.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1274,8 +1278,8 @@ mod app {
         fn SSI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Running the program on real hardware produces the following output in the
 console:</p>
 <pre><code class="language-text">init @ Instant(0)
@@ -1291,10 +1295,10 @@ latter structure contains all the fields of the former minus the <code>SYST</cod
 <p>Software tasks have access to the <code>Instant</code> at which they were scheduled to run
 through the <code>scheduled</code> variable. This information and the <code>schedule</code> API can be
 used to implement periodic tasks as shown in the example below.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/periodic.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/periodic.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1335,8 +1339,8 @@ mod app {
         fn SSI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>This is the output produced by the example. Note that there is zero drift /
 jitter even though <code>schedule.foo</code> was invoked at the <em>end</em> of <code>foo</code>. Using
 <code>Instant::now</code> instead of <code>scheduled</code> would have resulted in drift / jitter.</p>
@@ -1361,10 +1365,10 @@ and the baseline of <code>init</code> is the system start time or time zero
 (<code>Instant::zero()</code>). <code>idle</code> doesn't really have a baseline but tasks spawned
 from it will use <code>Instant::now()</code> as their baseline time.</p>
 <p>The example below showcases the different meanings of the <em>baseline</em>.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/baseline.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/baseline.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1420,8 +1424,8 @@ mod app {
         fn SSI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Running the program on real hardware produces the following output in the console:</p>
 <pre><code class="language-text">init(baseline = Instant(0))
 foo(baseline = Instant(0))
@@ -1437,10 +1441,10 @@ can also generate documentation for you binary crate (<code>cargo doc --bin &lt;
 in the documentation you'll find <code>Context</code> structs (e.g. <code>init::Context</code> and
 <code>idle::Context</code>).</p>
 <p>The example below shows the different types generates by the <code>app</code> attribute.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/types.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/types.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1506,8 +1510,8 @@ mod app {
         fn SSI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#send" id="send"><code>Send</code></a></h2>
 <p><a href="https://doc.rust-lang.org/core/marker/trait.Send.html"><code>Send</code></a> is a marker trait for &quot;types that can be transferred across thread
 boundaries&quot;, according to its definition in <code>core</code>. In the context of RTIC the
@@ -1521,10 +1525,10 @@ you don't need to worry much about it. It's more important to know where you do
 run at the <em>same</em> priority. This occurs in two places: in message passing and in
 shared resources.</p>
 <p>The example below shows where a type that doesn't implement <code>Send</code> can be used.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! `examples/not-send.rs`
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! `examples/not-send.rs`
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1592,8 +1596,8 @@ mod app {
         fn QEI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>It's important to note that late initialization of resources is effectively a
 send operation where the initial value is sent from the background context,
 which has the lowest priority of <code>0</code>, to a task, which will run at a priority
@@ -1603,10 +1607,10 @@ priority of <code>0</code>.</p>
 <p>Sharing a resource with <code>init</code> can be used to implement late initialization, see
 example below. For that reason, resources shared with <code>init</code> must also implement
 the <code>Send</code> trait.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! `examples/shared-with-init.rs`
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! `examples/shared-with-init.rs`
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1651,8 +1655,8 @@ mod app {
         }
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
 <p>Similarly, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> is a marker trait for &quot;types for which it is safe to share
 references between threads&quot;, according to its definition in <code>core</code>. In the
@@ -1663,10 +1667,10 @@ or more, tasks that run at different priorities and may get a shared reference
 it's important to know where the <code>Sync</code> bound is not required: shared access
 (<code>&amp;-</code>) resources contended by tasks that run at the <em>same</em> priority.</p>
 <p>The example below shows where a type that doesn't implement <code>Sync</code> can be used.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! `examples/not-sync.rs`
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! `examples/not-sync.rs`
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1717,8 +1721,8 @@ mod app {
         fn SSI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h1><a class="header" href="#starting-a-new-project" id="starting-a-new-project">Starting a new project</a></h1>
 <p>Now that you have learned about the main features of the RTIC framework you can
 try it out on your hardware by following these instructions.</p>
@@ -1767,7 +1771,6 @@ $ rm memory.x build.rs
 <pre><code class="language-console">$ # NOTE: I have uncommented the `runner` option in `.cargo/config`
 $ cargo run
 init
-
 </code></pre>
 <h1><a class="header" href="#tips--tricks" id="tips--tricks">Tips &amp; tricks</a></h1>
 <h2><a class="header" href="#generics" id="generics">Generics</a></h2>
@@ -1783,10 +1786,10 @@ newtype which does implement the <code>Mutex</code> trait. With the help of this
 one can write a generic function that operates on generic resources and call it
 from different tasks to perform some operation on the same set of resources.
 Here's one such example:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/generics.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/generics.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1854,8 +1857,8 @@ fn advance(state: &amp;mut u32, mut shared: impl Mutex&lt;T = u32&gt;) {
 
     hprintln!(&quot;shared: {} -&gt; {}&quot;, old, new).unwrap();
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example generics
 UART1(STATE = 0)
 shared: 0 -&gt; 1
@@ -1863,7 +1866,6 @@ UART0(STATE = 0)
 shared: 1 -&gt; 2
 UART1(STATE = 1)
 shared: 2 -&gt; 4
-
 </code></pre>
 <p>Using generics also lets you change the static priorities of tasks during
 development without having to rewrite a bunch code every time.</p>
@@ -1874,10 +1876,10 @@ attributes is that the resource / task will <em>not</em> be available through th
 corresponding <code>Context</code> <code>struct</code> if the condition doesn't hold.</p>
 <p>The example below logs a message whenever the <code>foo</code> task is spawned, but only if
 the program has been compiled using the <code>dev</code> profile.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/cfg.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/cfg.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1949,14 +1951,13 @@ mod app {
         fn QEI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example cfg --release
 
 $ cargo run --example cfg
 foo has been called 1 time
 foo has been called 2 times
-
 </code></pre>
 <h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
 <p>The main goal of moving the specification of RTIC applications to attributes in
@@ -1974,10 +1975,10 @@ safe abstraction for it in <code>cortex-m-rt</code> v0.6.5 but there's an <a hre
 adding a <code>ramfunc</code> attribute in a future release.</p>
 </blockquote>
 <p>The example below shows how to place the higher priority task, <code>bar</code>, in RAM.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/ramfunc.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/ramfunc.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -2020,12 +2021,11 @@ mod app {
         fn UART1();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Running this program produces the expected output.</p>
 <pre><code class="language-console">$ cargo run --example ramfunc
 foo
-
 </code></pre>
 <p>One can look at the output of <code>cargo-nm</code> to confirm that <code>bar</code> ended in RAM
 (<code>0x2000_0000</code>), whereas <code>foo</code> ended in Flash (<code>0x0000_0000</code>).</p>
@@ -2046,10 +2046,10 @@ buffer.</p>
 <code>alloc::Rc</code>, etc.), which requires using the nightly channel as of Rust v1.37.0,
 or one can use a statically allocated memory pool like <a href="https://docs.rs/heapless/0.5.0/heapless/pool/index.html"><code>heapless::Pool</code></a>.</p>
 <p>Here's an example where <code>heapless::Pool</code> is used to &quot;box&quot; buffers of 128 bytes.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/pool.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/pool.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -2125,12 +2125,11 @@ mod app {
         fn QEI0();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example pool
 bar(0x2000008c)
 foo(0x20000110)
-
 </code></pre>
 <h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
 <p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some
@@ -2147,7 +2146,7 @@ $ rustfmt target/rtic-expansion.rs
 
 $ tail target/rtic-expansion.rs
 </code></pre>
-<pre><pre class="playpen"><code class="language-rust">#[doc = r&quot; Implementation details&quot;]
+<pre><pre class="playground"><code class="language-rust">#[doc = r&quot; Implementation details&quot;]
 mod app {
     #[doc = r&quot; Always include the device crate which contains the vector table&quot;]
     use lm3s6965 as _;
@@ -2172,10 +2171,10 @@ $ cargo expand --example smallest | tail
 <h2><a class="header" href="#resource-de-structure-ing" id="resource-de-structure-ing">Resource de-structure-ing</a></h2>
 <p>When having a task taking multiple resources it can help in readability to split
 up the resource struct. Here are two examples on how this can be done:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/destructure.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/destructure.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -2225,8 +2224,8 @@ mod app {
         hprintln!(&quot;UART0: a = {}, b = {}, c = {}&quot;, a, b, c).unwrap();
     }
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h1><a class="header" href="#migration-guides" id="migration-guides">Migration Guides</a></h1>
 <p>This section describes how to migrate between different version of RTIC.
 It also acts as a comparing reference between versions.</p>
@@ -2237,33 +2236,35 @@ It also acts as a comparing reference between versions.</p>
 <h3><a class="header" href="#module-instead-of-const" id="module-instead-of-const">Module instead of Const</a></h3>
 <p>With the support of attributes on modules the <code>const APP</code> workaround is not needed.</p>
 <p>Change</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(/* .. */)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */)]
 const APP: () = {
   [code here]
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>into</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(/* .. */)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */)]
 mod app {
   [code here]
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Now that a regular Rust module is used it means it is possible to have custom
 user code within that module.
 Additionally, it means that <code>use</code>-statements for resources etc may be required.</p>
 <h3><a class="header" href="#init-always-returns-late-resources" id="init-always-returns-late-resources">Init always returns late resources</a></h3>
 <p>In order to make the API more symmetric the #[init]-task always returns a late resource.</p>
 <p>From this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = lm3s6965)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
     fn init(_: init::Context) {
@@ -2271,12 +2272,13 @@ mod app {
     }
     [more code]
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>to this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = lm3s6965)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
@@ -2286,35 +2288,39 @@ mod app {
     }
     [more code]
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h3><a class="header" href="#resources-struct---resources" id="resources-struct---resources">Resources struct - #[resources]</a></h3>
 <p>Previously the RTIC resources had to be in in a struct named exactly &quot;Resources&quot;:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-struct Resources {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Resources {
     // Resources defined in here
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>With RTIC v0.6.0 the resources struct is annotated similarly like
 <code>#[task]</code>, <code>#[init]</code>, <code>#[idle]</code>: with an attribute <code>#[resources]</code></p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[resources]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[resources]
 struct Resources {
     // Resources defined in here
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>In fact, the name of the struct is now up to the developer:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[resources]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[resources]
 struct whateveryouwant {
     // Resources defined in here
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>would work equally well.</p>
 <h1><a class="header" href="#migrating-from-v04x-to-v050" id="migrating-from-v04x-to-v050">Migrating from v0.4.x to v0.5.0</a></h1>
 <p>This section covers how to upgrade an application written against RTIC v0.4.x to
@@ -2340,10 +2346,10 @@ magically injected into the scope of the function by version v0.4.x of the
 framework: <code>resources</code>, <code>spawn</code>, <code>schedule</code> -- these variables will become
 fields of the <code>Context</code> structure. Each function within the <code>#[rtic::app]</code> item
 gets a different <code>Context</code> type.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(/* .. */)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */)]
 const APP: () = {
     // change this
     #[task(resources = [x], spawn = [a], schedule = [b])]
@@ -2383,14 +2389,15 @@ const APP: () = {
 
     // ..
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h3><a class="header" href="#resources-1" id="resources-1">Resources</a></h3>
 <p>The syntax used to declare resources has been changed from <code>static mut</code>
 variables to a <code>struct Resources</code>.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(/* .. */)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */)]
 const APP: () = {
     // change this
     static mut X: u32 = 0;
@@ -2406,17 +2413,18 @@ const APP: () = {
 
     // ..
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h3><a class="header" href="#device-peripherals" id="device-peripherals">Device peripherals</a></h3>
 <p>If your application was accessing the device peripherals in <code>#[init]</code> through
 the <code>device</code> variable then you'll need to add <code>peripherals = true</code> to the
 <code>#[rtic::app]</code> attribute to continue to access the device peripherals through
 the <code>device</code> field of the <code>init::Context</code> structure.</p>
 <p>Change this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(/* .. */)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */)]
 const APP: () = {
     #[init]
     fn init() {
@@ -2425,12 +2433,13 @@ const APP: () = {
 
     // ..
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Into this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(/* .. */, peripherals = true)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */, peripherals = true)]
 //                    ^^^^^^^^^^^^^^^^^^
 const APP: () = {
     #[init]
@@ -2442,15 +2451,16 @@ const APP: () = {
 
     // ..
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h3><a class="header" href="#interrupt-and-exception" id="interrupt-and-exception"><code>#[interrupt]</code> and <code>#[exception]</code></a></h3>
 <p>The <code>#[interrupt]</code> and <code>#[exception]</code> attributes have been removed. To declare
 hardware tasks in v0.5.x use the <code>#[task]</code> attribute with the <code>binds</code> argument.</p>
 <p>Change this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(/* .. */)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */)]
 const APP: () = {
     // hardware tasks
     #[exception]
@@ -2465,12 +2475,13 @@ const APP: () = {
 
     // ..
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Into this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(/* .. */)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */)]
 const APP: () = {
     #[task(binds = SVCall)]
     //     ^^^^^^^^^^^^^^
@@ -2486,7 +2497,8 @@ const APP: () = {
 
     // ..
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h3><a class="header" href="#schedule" id="schedule"><code>schedule</code></a></h3>
 <p>The <code>timer-queue</code> feature has been removed. To use the <code>schedule</code> API one must
 first define the monotonic timer the runtime will use using the <code>monotonic</code>
@@ -2499,10 +2511,10 @@ devices. The removal of the <code>timer-queue</code> also brings back the <code>
 inside the core peripherals struct, this will need to be enabled by the application
 inside <code>init</code>.</p>
 <p>Change this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-use rtic::{Duration, Instant, U32Ext};
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rtic::{Duration, Instant, U32Ext};
 
 #[rtic::app(/* .. */)]
 const APP: () = {
@@ -2511,12 +2523,13 @@ const APP: () = {
         // ..
     }
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Into this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-use rtic::cyccnt::{Duration, Instant, U32Ext};
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rtic::cyccnt::{Duration, Instant, U32Ext};
 //        ^^^^^^^^
 
 #[rtic::app(/* .. */, monotonic = rtic::cyccnt::CYCCNT)]
@@ -2533,7 +2546,8 @@ const APP: () = {
         // ..
     }
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h1><a class="header" href="#migrating-from-rtfm-to-rtic" id="migrating-from-rtfm-to-rtic">Migrating from RTFM to RTIC</a></h1>
 <p>This section covers how to upgrade an application written against RTFM v0.5.x to
 the same version of RTIC. This applies since the renaming of the framework as per <a href="https://github.com/rtic-rs/rfcs/pull/33">RFC #33</a>.</p>
@@ -2552,10 +2566,10 @@ cortex-m-rtic = &quot;0.5.3&quot;
 <h2><a class="header" href="#code-changes" id="code-changes">Code changes</a></h2>
 <p>The only code change that needs to be made is that any reference to <code>rtfm</code> before now need to point
 to <code>rtic</code> as follows:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//
 // Change this
 //
 
@@ -2574,7 +2588,8 @@ const APP: () = {
     // ...
 
 };
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h1><a class="header" href="#under-the-hood" id="under-the-hood">Under the hood</a></h1>
 <p>This section describes the internals of the RTIC framework at a <em>high level</em>.
 Low level details like the parsing and code generation done by the procedural
@@ -2591,10 +2606,10 @@ compile time. However, this static configuration must be programmed into the
 relevant registers during the initialization of the application. The interrupt
 configuration is done before the <code>init</code> function runs.</p>
 <p>This example gives you an idea of the code that the RTIC framework runs:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = lm3s6965)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
     fn init(c: init::Context) {
@@ -2611,9 +2626,10 @@ mod app {
         // .. user code ..
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The framework generates an entry point that looks like this:</p>
-<pre><pre class="playpen"><code class="language-rust">// the real entry point of the program
+<pre><pre class="playground"><code class="language-rust">// the real entry point of the program
 #[no_mangle]
 unsafe fn main() -&gt; ! {
     // transforms a logical priority into a hardware / NVIC priority
@@ -2658,10 +2674,10 @@ reentered in one of two ways: in software or by hardware.</p>
 <p>To reenter a task handler in software its underlying interrupt handler must be
 invoked using FFI (see example below). FFI requires <code>unsafe</code> code so end users
 are discouraged from directly invoking an interrupt handler.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     #[init]
     fn init(c: init::Context) { .. }
@@ -2690,15 +2706,16 @@ mod app {
         unsafe { UART0() }
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The RTIC framework must generate the interrupt handler code that calls the user
 defined task handlers. We are careful in making these handlers impossible to
 call from user code.</p>
 <p>The above example expands into:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-fn foo(c: foo::Context) {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo(c: foo::Context) {
     // .. user code ..
 }
 
@@ -2719,7 +2736,8 @@ mod app {
         bar(..);
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#by-hardware" id="by-hardware">By hardware</a></h2>
 <p>A task handler can also be reentered without software intervention. This can
 occur if the same handler is assigned to two or more interrupts in the vector
@@ -2748,10 +2766,10 @@ unique reference (<code>&amp;mut-</code>) to the static variables or with a reso
 section on <a href="internals/critical-sections.html">critical sections</a>).</p>
 <p>The code below is an example of the kind of source level transformation that
 happens behind the scenes:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     static mut X: u64: 0;
     static mut Y: bool: 0;
@@ -2773,9 +2791,10 @@ mod app {
 
     // ..
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The framework produces codes like this:</p>
-<pre><pre class="playpen"><code class="language-rust">fn init(c: init::Context) {
+<pre><pre class="playground"><code class="language-rust">fn init(c: init::Context) {
     // .. user code ..
 }
 
@@ -2883,10 +2902,10 @@ before tasks are allowed to run, that is they must be initialized while
 interrupts are disabled.</p>
 <p>The example below shows the kind of code that the framework generates to
 initialize late resources.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     struct Resources {
         x: Thing,
@@ -2912,9 +2931,10 @@ mod app {
 
     // ..
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The code generated by the framework looks like this:</p>
-<pre><pre class="playpen"><code class="language-rust">fn init(c: init::Context) -&gt; init::LateResources {
+<pre><pre class="playground"><code class="language-rust">fn init(c: init::Context) -&gt; init::LateResources {
     // .. user code ..
 }
 
@@ -3009,10 +3029,10 @@ priority task. To enforce the use of a critical section on the lower priority
 task we give it a <em>resource proxy</em>, whereas we give a unique reference
 (<code>&amp;mut-</code>) to the higher priority task.</p>
 <p>The example below shows the different types handed out to each task:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mut app {
     struct Resources {
         #[init(0)]
@@ -3039,12 +3059,13 @@ mut app {
 
     // ..
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Now let's see how these types are created by the framework.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-fn foo(c: foo::Context) {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo(c: foo::Context) {
     // .. user code ..
 }
 
@@ -3111,7 +3132,8 @@ mod app {
         })
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#lock-1" id="lock-1"><code>lock</code></a></h2>
 <p>Let's now zoom into the critical section itself. In this example, we have to
 raise the dynamic priority to at least <code>2</code> to prevent a data race. On the
@@ -3126,21 +3148,22 @@ is <em>lower</em> than the priority level of current execution context, but note
 a lower hardware priority level means higher logical priority</li>
 </ul>
 <p>Thus the dynamic priority at any point in time can be computed as</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-dynamic_priority = max(hw2logical(BASEPRI), hw2logical(static_priority))
-#}</code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>dynamic_priority = max(hw2logical(BASEPRI), hw2logical(static_priority))
+<span class="boring">}
+</span></code></pre></pre>
 <p>Where <code>static_priority</code> is the priority programmed in the NVIC for the current
 interrupt, or a logical <code>0</code> when the current context is <code>idle</code>.</p>
 <p>In this particular example we could implement the critical section as follows:</p>
 <blockquote>
 <p><strong>NOTE:</strong> this is a simplified implementation</p>
 </blockquote>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-impl rtic::Mutex for resources::x {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl rtic::Mutex for resources::x {
     type T = u64;
 
     fn lock&lt;R, F&gt;(&amp;mut self, f: F) -&gt; R
@@ -3161,7 +3184,8 @@ impl rtic::Mutex for resources::x {
         }
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Here it's important to use the <code>&quot;memory&quot;</code> clobber in the <code>asm!</code> block. It
 prevents the compiler from reordering memory operations across it. This is
 important because accessing the variable <code>x</code> outside the critical section would
@@ -3170,10 +3194,10 @@ result in a data race.</p>
 calls to it. This is required for memory safety, as nested calls would produce
 multiple unique references (<code>&amp;mut-</code>) to <code>x</code> breaking Rust aliasing rules. See
 below:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[interrupt(binds = UART0, priority = 1, resources = [x])]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[interrupt(binds = UART0, priority = 1, resources = [x])]
 fn foo(c: foo::Context) {
     // resource proxy
     let mut res: resources::x = c.resources.x;
@@ -3185,7 +3209,8 @@ fn foo(c: foo::Context) {
         });
     });
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#nesting" id="nesting">Nesting</a></h2>
 <p>Nesting calls to <code>lock</code> on the <em>same</em> resource must be rejected by the compiler
 for memory safety but nesting <code>lock</code> calls on <em>different</em> resources is a valid
@@ -3197,10 +3222,10 @@ a stack variable and use that to decide whether to write to <code>BASEPRI</code>
 practice, the stack variable will be optimized away by the compiler but it still
 provides extra information to the compiler.</p>
 <p>Consider this program:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     struct Resources {
         #[init(0)]
@@ -3254,12 +3279,13 @@ mod app {
 
     // ..
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The code generated by the framework looks like this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-// omitted: user code
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// omitted: user code
 
 pub mod resources {
     pub struct x&lt;'a&gt; {
@@ -3345,13 +3371,14 @@ mod app {
 
     // repeat for resource `y`
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>At the end the compiler will optimize the function <code>foo</code> into something like
 this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-fn foo(c: foo::Context) {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo(c: foo::Context) {
     // NOTE: BASEPRI contains the value `0` (its reset value) at this point
 
     // raise dynamic priority to `3`
@@ -3391,7 +3418,8 @@ fn foo(c: foo::Context) {
     // NOTE: BASEPRI contains the value `224` at this point
     // the UART0 handler will restore the value to `0` before returning
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#the-basepri-invariant" id="the-basepri-invariant">The BASEPRI invariant</a></h2>
 <p>An invariant that the RTIC framework has to preserve is that the value of the
 BASEPRI at the start of an <em>interrupt</em> handler must be the same value it has
@@ -3400,10 +3428,10 @@ the interrupt handler but running an interrupt handler from start to finish
 should not result in an observable change of BASEPRI.</p>
 <p>This invariant needs to be preserved to avoid raising the dynamic priority of a
 handler through preemption. This is best observed in the following example:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     struct Resources {
         #[init(0)]
@@ -3459,13 +3487,14 @@ mod app {
     }
 
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>IMPORTANT: let's say we <em>forget</em> to roll back <code>BASEPRI</code> in <code>UART1</code> -- this would
 be a bug in the RTIC code generator.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-// code generated by RTIC
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// code generated by RTIC
 
 mod app {
     // ..
@@ -3488,7 +3517,8 @@ mod app {
         basepri::write(initial);
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The consequence is that <code>idle</code> will run at a dynamic priority of <code>2</code> and in fact
 the system will never again run at a dynamic priority lower than <code>2</code>. This
 doesn't compromise the memory safety of the program but affects task scheduling:
@@ -3516,10 +3546,10 @@ the task gets a unique reference (<code>&amp;mut-</code>) to the resource memory
 task gets a proxy -- this also applies to <code>idle</code>. <code>init</code> is special: it always
 gets a unique reference (<code>&amp;mut-</code>) to resources.</p>
 <p>An example to illustrate the ceiling analysis:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     struct Resources {
         // accessed by `foo` (prio = 1) and `bar` (prio = 2)
@@ -3573,7 +3603,8 @@ mod app {
 
     // ..
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h1><a class="header" href="#software-tasks-1" id="software-tasks-1">Software tasks</a></h1>
 <p>RTIC supports software tasks and hardware tasks. Each hardware task is bound to
 a different interrupt handler. On the other hand, several software tasks may be
@@ -3595,10 +3626,10 @@ is treated as a resource contended by the tasks that can <code>spawn</code> othe
 <h2><a class="header" href="#the-task-dispatcher" id="the-task-dispatcher">The task dispatcher</a></h2>
 <p>Let's first take a look the code generated by the framework to dispatch tasks.
 Consider this example:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     // ..
 
@@ -3623,13 +3654,14 @@ mod app {
         fn UART1();
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The framework produces the following task dispatcher which consists of an
 interrupt handler and a ready queue:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-fn bar(c: bar::Context) {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn bar(c: bar::Context) {
     // .. user code ..
 }
 
@@ -3682,16 +3714,17 @@ mod app {
         basepri::write(snapshot);
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#spawning-a-task" id="spawning-a-task">Spawning a task</a></h2>
 <p>The <code>spawn</code> API is exposed to the user as the methods of a <code>Spawn</code> struct.
 There's one <code>Spawn</code> struct per task.</p>
 <p>The <code>Spawn</code> code generated by the framework for the previous example looks like
 this:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-mod foo {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod foo {
     // ..
 
     pub struct Context&lt;'a&gt; {
@@ -3764,17 +3797,18 @@ mod app {
         }
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Using <code>bar_FQ</code> to limit the number of <code>bar</code> tasks that can be spawned may seem
 like an artificial limitation but it will make more sense when we talk about
 task capacities.</p>
 <h2><a class="header" href="#messages" id="messages">Messages</a></h2>
 <p>We have omitted how message passing actually works so let's revisit the <code>spawn</code>
 implementation but this time for task <code>baz</code> which receives a <code>u64</code> message.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-fn baz(c: baz::Context, input: u64) {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn baz(c: baz::Context, input: u64) {
     // .. user code ..
 }
 
@@ -3831,12 +3865,13 @@ mod app {
         }
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>And now let's look at the real implementation of the task dispatcher:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-mod app {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod app {
     // ..
 
     #[no_mangle]
@@ -3872,7 +3907,8 @@ mod app {
         basepri::write(snapshot);
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p><code>INPUTS</code> plus <code>FQ</code>, the free queue, is effectively a memory pool. However,
 instead of using the usual <em>free list</em> (linked list) to track empty slots
 in the <code>INPUTS</code> buffer we use a SPSC queue; this lets us reduce the number of
@@ -3912,10 +3948,10 @@ and included in the ceiling analysis. It's important to note that these are SPSC
 queues and that only one of the endpoints is behind a resource; the other
 endpoint is owned by a task dispatcher.</p>
 <p>Consider the following example:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     #[idle(spawn = [foo, bar])]
     fn idle(c: idle::Context) -&gt; ! {
@@ -3942,7 +3978,8 @@ mod app {
         // ..
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>This is how the ceiling analysis would go:</p>
 <ul>
 <li>
@@ -3967,10 +4004,10 @@ The timer is used to trigger an interrupt when the scheduled time of a task is
 up; at that point the task is removed from the timer queue and moved into the
 appropriate ready queue.</p>
 <p>Let's see how this in implemented in code. Consider the following program:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     // ..
 
@@ -3984,13 +4021,14 @@ mod app {
         fn UART0();
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#schedule-1" id="schedule-1"><code>schedule</code></a></h2>
 <p>Let's first look at the <code>schedule</code> API.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-mod foo {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod foo {
     pub struct Schedule&lt;'a&gt; {
         priority: &amp;'a Cell&lt;u8&gt;,
     }
@@ -4059,7 +4097,8 @@ mod app {
         }
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>This looks very similar to the <code>Spawn</code> implementation. In fact, the same
 <code>INPUTS</code> buffer and free queue (<code>FQ</code>) are shared between the <code>spawn</code> and
 <code>schedule</code> APIs. The main difference between the two is that <code>schedule</code> also
@@ -4074,10 +4113,10 @@ that have become ready from the timer queue into the right ready queue and
 setting up a timeout interrupt to fire when the scheduled time of the next task
 is up.</p>
 <p>Let's see the associated code.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-mod app {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod app {
     #[no_mangle]
     fn SysTick() {
         const PRIORITY: u8 = 1;
@@ -4101,7 +4140,8 @@ mod app {
         }
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>This looks similar to a task dispatcher except that instead of running the
 ready task this only places the task in the corresponding ready queue, that
 way it will run at the right priority.</p>
@@ -4158,10 +4198,10 @@ task and the <code>SysTick</code> handler. Also the <code>schedule</code> API co
 <code>spawn</code> API over the free queues. All this must be considered in the ceiling
 analysis.</p>
 <p>To illustrate, consider the following example:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-#[rtic::app(device = ..)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(device = ..)]
 mod app {
     #[task(priority = 3, spawn = [baz])]
     fn foo(c: foo::Context) {
@@ -4178,7 +4218,8 @@ mod app {
         // ..
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>The ceiling analysis would go like this:</p>
 <ul>
 <li>
@@ -4213,10 +4254,10 @@ track the baseline of tasks. As you saw in the <code>schedule</code> implementat
 an <code>INSTANTS</code> buffers used to store the time at which a task was scheduled to
 run; this <code>Instant</code> is read in the task dispatcher and passed to the user code
 as part of the task context.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-mod app {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod app {
     // ..
 
     #[no_mangle]
@@ -4250,15 +4291,16 @@ mod app {
         basepri::write(snapshot);
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Conversely, the <code>spawn</code> implementation needs to write a value to the <code>INSTANTS</code>
 buffer. The value to be written is stored in the <code>Spawn</code> struct and its either
 the <code>start</code> time of the hardware task or the <code>scheduled</code> time of the software
 task.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-mod foo {
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod foo {
     // ..
 
     pub struct Spawn&lt;'a&gt; {
@@ -4311,7 +4353,8 @@ mod app {
         }
     }
 }
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 
                     </main>
 
@@ -4336,6 +4379,14 @@ mod app {
 
         
 
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
         
 
         

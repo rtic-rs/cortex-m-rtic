@@ -1,17 +1,28 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Tips &amp; tricks - Real Time For the Masses</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
@@ -19,8 +30,9 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -32,11 +44,11 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -60,8 +72,11 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -78,7 +93,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Singletons</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html" class="active"><strong aria-hidden="true">1.8.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Task dispatcher</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Timer queue</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../preface.html">Preface</a></li><li class="chapter-item expanded "><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li class="chapter-item expanded "><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li class="chapter-item expanded "><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Tasks</a></li><li class="chapter-item expanded "><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li class="chapter-item expanded "><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Singletons</a></li><li class="chapter-item expanded "><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Types, Send and Sync</a></li><li class="chapter-item expanded "><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Starting a new project</a></li><li class="chapter-item expanded "><a href="../by-example/tips.html" class="active"><strong aria-hidden="true">1.8.</strong> Tips &amp; tricks</a></li></ol></li><li class="chapter-item expanded "><a href="../internals.html"><strong aria-hidden="true">2.</strong> Under the hood</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li class="chapter-item expanded "><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Task dispatcher</a></li><li class="chapter-item expanded "><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Timer queue</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -87,37 +102,36 @@
 
             <div class="page">
                 
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                            
-                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            
-                        </div>
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                    <h1 class="menu-title">Real Time For the Masses</h1>
 
-                        <div class="right-buttons">
-                            <a href="../print.html" title="Print this book" aria-label="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                            
-                        </div>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -151,10 +165,10 @@
 contexts, even on those where a critical section is not required to access the
 data. This lets you easily write generic code that operates on resources and can
 be called from different tasks. Here's one such example:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/generics.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/generics.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -216,30 +230,32 @@ fn advance(state: &amp;mut u32, mut shared: impl Mutex&lt;T = u32&gt;) {
 
     hprintln!(&quot;SHARED: {} -&gt; {}&quot;, old, new).unwrap();
 }
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example generics
 UART1(STATE = 0)
 SHARED: 0 -&gt; 1
 UART0(STATE = 0)
 SHARED: 1 -&gt; 2
 UART1(STATE = 1)
-SHARED: 2 -&gt; 4
-</code></pre>
-<p>This also lets you change the static priorities of tasks without having to
-rewrite code. If you consistently use <code>lock</code>s to access the data behind shared
+SHARED: 2 -&gt; 4```
+
+This also lets you change the static priorities of tasks without having to
+rewrite code. If you consistently use `lock`s to access the data behind shared
 resources then your code will continue to compile when you change the priority
-of tasks.</p>
-<h2><a class="header" href="#conditional-compilation" id="conditional-compilation">Conditional compilation</a></h2>
-<p>You can use conditional compilation (<code>#[cfg]</code>) on resources (<code>static [mut]</code>
-items) and tasks (<code>fn</code> items). The effect of using <code>#[cfg]</code> attributes is that
-the resource / task will <em>not</em> be injected into the prelude of tasks that use
-them (see <code>resources</code>, <code>spawn</code> and <code>schedule</code>) if the condition doesn't hold.</p>
-<p>The example below logs a message whenever the <code>foo</code> task is spawned, but only if
-the program has been compiled using the <code>dev</code> profile.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+of tasks.
+
+## Conditional compilation
+
+You can use conditional compilation (`#[cfg]`) on resources (`static [mut]`
+items) and tasks (`fn` items). The effect of using `#[cfg]` attributes is that
+the resource / task will *not* be injected into the prelude of tasks that use
+them (see `resources`, `spawn` and `schedule`) if the condition doesn't hold.
+
+The example below logs a message whenever the `foo` task is spawned, but only if
+the program has been compiled using the `dev` profile.
+
+``` rust
 //! examples/cfg.rs
 
 #![deny(unsafe_code)]
@@ -294,8 +310,7 @@ const APP: () = {
         fn UART1();
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
 <p>The main goal of moving the specification of RTFM applications to attributes in
 RTFM v0.4.x was to allow inter-operation with other attributes. For example, the
@@ -312,10 +327,10 @@ safe abstraction for it in <code>cortex-m-rt</code> v0.6.5 but there's an <a hre
 adding a <code>ramfunc</code> attribute in a future release.</p>
 </blockquote>
 <p>The example below shows how to place the higher priority task, <code>bar</code>, in RAM.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-//! examples/ramfunc.rs
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/ramfunc.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -358,33 +373,37 @@ const APP: () = {
         fn UART1();
     }
 };
-
-#}</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Running this program produces the expected output.</p>
 <pre><code class="language-console">$ cargo run --example ramfunc
-foo
-</code></pre>
-<p>One can look at the output of <code>cargo-nm</code> to confirm that <code>bar</code> ended in RAM
-(<code>0x2000_0000</code>), whereas <code>foo</code> ended in Flash (<code>0x0000_0000</code>).</p>
-<pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' foo::'
+foo```
+
+One can look at the output of `cargo-nm` to confirm that `bar` ended in RAM
+(`0x2000_0000`), whereas `foo` ended in Flash (`0x0000_0000`).
+
+``` console
+$ cargo nm --example ramfunc --release | grep ' foo::'
 20000100 B foo::FREE_QUEUE::ujkptet2nfdw5t20
 200000dc B foo::INPUTS::thvubs85b91dg365
-000002c6 T foo::sidaht420cg1mcm8
-</code></pre>
-<pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' bar::'
+000002c6 T foo::sidaht420cg1mcm8```
+
+``` console
+$ cargo nm --example ramfunc --release | grep ' bar::'
 20000100 B bar::FREE_QUEUE::lk14244m263eivix
 200000dc B bar::INPUTS::mi89534s44r1mnj1
-20000000 T bar::ns9009yhw2dc2y25
-</code></pre>
-<h2><a class="header" href="#binds" id="binds"><code>binds</code></a></h2>
-<p><strong>NOTE</strong>: Requires RTFM ~0.4.2</p>
-<p>You can give hardware tasks more task-like names using the <code>binds</code> argument: you
+20000000 T bar::ns9009yhw2dc2y25```
+
+## `binds`
+
+**NOTE**: Requires RTFM ~0.4.2
+
+You can give hardware tasks more task-like names using the `binds` argument: you
 name the function as you wish and specify the name of the interrupt / exception
-in the <code>binds</code> argument. Types like <code>Spawn</code> will be placed in a module named
-after the function, not the interrupt / exception. Example below:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+in the `binds` argument. Types like `Spawn` will be placed in a module named
+after the function, not the interrupt / exception. Example below:
+
+``` rust
 //! examples/binds.rs
 
 #![deny(unsafe_code)]
@@ -433,28 +452,31 @@ const APP: () = {
         .unwrap();
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <pre><code class="language-console">$ cargo run --example binds
 init
 foo called 1 time
 idle
-foo called 2 times
-</code></pre>
-<h2><a class="header" href="#indirection-for-faster-message-passing" id="indirection-for-faster-message-passing">Indirection for faster message passing</a></h2>
-<p>Message passing always involves copying the payload from the sender into a
+foo called 2 times```
+
+## Indirection for faster message passing
+
+Message passing always involves copying the payload from the sender into a
 static variable and then from the static variable into the receiver. Thus
-sending a large buffer, like a <code>[u8; 128]</code>, as a message involves two expensive
-<code>memcpy</code>s. To minimize the message passing overhead one can use indirection:
+sending a large buffer, like a `[u8; 128]`, as a message involves two expensive
+`memcpy`s. To minimize the message passing overhead one can use indirection:
 instead of sending the buffer by value, one can send an owning pointer into the
-buffer.</p>
-<p>One can use a global allocator to achieve indirection (<code>alloc::Box</code>,
-<code>alloc::Rc</code>, etc.), which requires using the nightly channel as of Rust v1.34.0,
-or one can use a statically allocated memory pool like <a href="https://docs.rs/heapless/0.4.3/heapless/pool/index.html"><code>heapless::Pool</code></a>.</p>
-<p>Here's an example where <code>heapless::Pool</code> is used to &quot;box&quot; buffers of 128 bytes.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
+buffer.
+
+One can use a global allocator to achieve indirection (`alloc::Box`,
+`alloc::Rc`, etc.), which requires using the nightly channel as of Rust v1.34.0,
+or one can use a statically allocated memory pool like [`heapless::Pool`].
+
+[`heapless::Pool`]: https://docs.rs/heapless/0.4.3/heapless/pool/index.html
+
+Here's an example where `heapless::Pool` is used to &quot;box&quot; buffers of 128 bytes.
+
+``` rust
 //! examples/pool.rs
 
 #![deny(unsafe_code)]
@@ -522,11 +544,10 @@ const APP: () = {
         fn UART1();
     }
 };
-
-#}</code></pre></pre>
+</code></pre>
 <pre><code class="language-console">$ cargo run --example binds
 bar(0x2000008c)
-foo(0x20000110)
+foo(0x20000110)```
 </code></pre>
 
                     </main>
@@ -552,13 +573,13 @@ foo(0x20000110)
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../by-example/new.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../by-example/new.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../internals.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../internals.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -568,6 +589,14 @@ foo(0x20000110)
 
         
 
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
         
 
         
