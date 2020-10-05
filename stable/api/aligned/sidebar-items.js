@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["Aligned","Changes the alignment of `value` to be at least `A` bytes"]],"struct":[["A16","16-byte alignment"],["A2","2-byte alignment"],["A4","4-byte alignment"],["A8","8-byte alignment"],["Aligned","A newtype with alignment of at least `A` bytes"]]});
