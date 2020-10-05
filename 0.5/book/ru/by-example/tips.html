@@ -349,9 +349,7 @@ const APP: () = {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     #[task(binds = UART0)]

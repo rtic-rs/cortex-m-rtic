@@ -216,10 +216,6 @@ const APP: () = {
         // Safe access to local `static mut` variable
         let _x: &amp;'static mut u32 = X;
 
-        // Access to the critical section token,
-        // to indicate that this is a critical seciton
-        let _cs_token: bare_metal::CriticalSection = cx.cs;
-
         hprintln!(&quot;init&quot;).unwrap();
 
         debug::exit(debug::EXIT_SUCCESS);
@@ -274,9 +270,7 @@ const APP: () = {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 };
 

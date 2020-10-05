@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["disable","Disables all interrupts"],["enable","Enables all the interrupts"],["free","Execute closure `f` in an interrupt-free context."]],"struct":[["CriticalSection","Critical section token"],["Mutex","A \"mutex\" based on critical sections"]],"trait":[["Nr","Interrupt number"]]});

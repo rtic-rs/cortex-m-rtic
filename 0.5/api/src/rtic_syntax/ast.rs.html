@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/git/checkouts/rtic-syntax-f90a7db46f83a69f/ba41837/src/ast.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ast.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rtic_syntax/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rtic-syntax-0.4.0/src/ast.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ast.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rtic_syntax/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -334,14 +334,42 @@
 <span id="334">334</span>
 <span id="335">335</span>
 <span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Abstract Syntax Tree</span>
 
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ops</span>::<span class="ident">Deref</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">BTreeMap</span>;
 
 <span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">Attribute</span>, <span class="ident">Expr</span>, <span class="ident">Ident</span>, <span class="ident">Pat</span>, <span class="ident">PatType</span>, <span class="ident">Path</span>, <span class="ident">Stmt</span>, <span class="ident">Type</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Map</span>, <span class="ident">Set</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Core</span>, <span class="ident">Map</span>, <span class="ident">Set</span>};
 
 <span class="doccomment">/// The `#[app]` attribute</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -352,10 +380,11 @@
     <span class="doccomment">/// The name of the `const` item on which the `#[app]` attribute has been placed</span>
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">Ident</span>,
 
-    <span class="doccomment">/// Vector containing the `#[init]` function</span>
+    <span class="comment">// NOTE one per core</span>
+    <span class="doccomment">/// Per-core `#[init]` functions</span>
     <span class="kw">pub</span> <span class="ident">inits</span>: <span class="ident">Inits</span>,
 
-    <span class="doccomment">/// Vector containing the `#[idle]` function</span>
+    <span class="doccomment">/// Per-core `#[idle]` functions</span>
     <span class="kw">pub</span> <span class="ident">idles</span>: <span class="ident">Idles</span>,
 
     <span class="doccomment">/// Late (runtime initialized) resources</span>
@@ -377,11 +406,14 @@
 }
 
 <span class="doccomment">/// Interrupts used to dispatch software tasks</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ExternInterrupts</span> <span class="op">=</span> <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">ExternInterrupt</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ExternInterrupts</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">ExternInterrupt</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// The arguments of the `#[app]` attribute</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AppArgs</span> {
+    <span class="doccomment">/// The number of cores the application will use</span>
+    <span class="kw">pub</span> <span class="ident">cores</span>: <span class="ident">u8</span>,
+
     <span class="doccomment">/// Custom arguments</span>
     <span class="kw">pub</span> <span class="ident">custom</span>: <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">CustomArg</span><span class="op">&gt;</span>,
 }
@@ -399,11 +431,10 @@
     <span class="ident">Path</span>(<span class="ident">Path</span>),
 }
 
-<span class="doccomment">/// `init` function</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Inits</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Init</span><span class="op">&gt;</span>;
-
-<span class="doccomment">/// `idle` function</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Idles</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Idle</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Per-core `init` functions</span>
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Inits</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Init</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Per-core `idle` functions</span>
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Idles</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Idle</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// The `init`-ialization function</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -434,7 +465,10 @@
 <span class="doccomment">/// `init` context metadata</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">InitArgs</span> {
-    <span class="doccomment">/// Late resources that will be initialized</span>
+    <span class="doccomment">/// Which core this context belongs to?</span>
+    <span class="kw">pub</span> <span class="ident">core</span>: <span class="ident">u8</span>,
+
+    <span class="doccomment">/// Late resources that will be initialized by this core</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// NOTE do not use this field for codegen; use `Analysis.late_resources` instead</span>
     <span class="kw">pub</span> <span class="ident">late</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
@@ -478,6 +512,9 @@
 <span class="doccomment">/// `idle` context metadata</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IdleArgs</span> {
+    <span class="doccomment">/// Which core this context belongs to?</span>
+    <span class="kw">pub</span> <span class="ident">core</span>: <span class="ident">u8</span>,
+
     <span class="doccomment">/// Resources that can be accessed from this context</span>
     <span class="kw">pub</span> <span class="ident">resources</span>: <span class="ident">Resources</span>,
 
@@ -515,6 +552,11 @@
     <span class="doccomment">/// Attributes that will apply to this resource</span>
     <span class="kw">pub</span> <span class="ident">attrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>,
 
+    <span class="doccomment">/// Whether this contains the `#[shared]` attribute or not</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// NOTE: Always `false` in single core mode</span>
+    <span class="kw">pub</span> <span class="ident">shared</span>: <span class="ident">bool</span>,
+
     <span class="doccomment">/// The type of this resource</span>
     <span class="kw">pub</span> <span class="ident">ty</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span>,
 
@@ -548,6 +590,9 @@
 <span class="doccomment">/// Software task metadata</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SoftwareTaskArgs</span> {
+    <span class="doccomment">/// The core this task will run on</span>
+    <span class="kw">pub</span> <span class="ident">core</span>: <span class="ident">u8</span>,
+
     <span class="doccomment">/// The task capacity: the maximum number of pending messages that can be queued</span>
     <span class="kw">pub</span> <span class="ident">capacity</span>: <span class="ident">u8</span>,
 
@@ -569,6 +614,7 @@
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SoftwareTaskArgs</span> {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
+            <span class="ident">core</span>: <span class="number">0</span>,
             <span class="ident">capacity</span>: <span class="number">1</span>,
             <span class="ident">priority</span>: <span class="number">1</span>,
             <span class="ident">resources</span>: <span class="ident">Resources</span>::<span class="ident">new</span>(),
@@ -602,6 +648,9 @@
 <span class="doccomment">/// Hardware task metadata</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">HardwareTaskArgs</span> {
+    <span class="doccomment">/// The core on which this task will be executed</span>
+    <span class="kw">pub</span> <span class="ident">core</span>: <span class="ident">u8</span>,
+
     <span class="doccomment">/// The interrupt or exception that this task is bound to</span>
     <span class="kw">pub</span> <span class="ident">binds</span>: <span class="ident">Ident</span>,
 
@@ -638,6 +687,11 @@
     <span class="doccomment">/// `#[cfg]` attributes like `#[cfg(debug_assertions)]`</span>
     <span class="kw">pub</span> <span class="ident">cfgs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>,
 
+    <span class="doccomment">/// Whether this contains the `#[shared]` attribute or not</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// NOTE: Always `false` in single core mode</span>
+    <span class="kw">pub</span> <span class="ident">shared</span>: <span class="ident">bool</span>,
+
     <span class="doccomment">/// Type</span>
     <span class="kw">pub</span> <span class="ident">ty</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span>,
 
@@ -650,10 +704,10 @@
 <span class="doccomment">/// Resource access</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Access</span> {
-    <span class="doccomment">/// `[x]`, a mutable resource</span>
+    <span class="doccomment">/// `[x]`</span>
     <span class="ident">Exclusive</span>,
 
-    <span class="doccomment">/// `[&amp;x]`, a static non-mutable resource</span>
+    <span class="doccomment">/// `[&amp;x]`</span>
     <span class="ident">Shared</span>,
 }
 

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["CriticalSection","Critical section token"],["Mutex","A \"mutex\" based on critical sections"],["Peripheral","A peripheral"]],"trait":[["Nr","Interrupt number"]]});

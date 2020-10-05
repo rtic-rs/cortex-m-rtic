@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Exclusive","Newtype over `&'a mut T` that implements the `Mutex` trait"]],"trait":[["Mutex","Memory safe access to shared resources"]]});

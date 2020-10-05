@@ -197,9 +197,7 @@ const APP: () = {
         // error: no `resources` field in `idle::Context`
         // _cx.resources.shared += 1;
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     // `shared` can be accessed from this context

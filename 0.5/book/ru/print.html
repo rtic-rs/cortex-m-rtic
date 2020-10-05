@@ -318,10 +318,6 @@ const APP: () = {
         // Safe access to local `static mut` variable
         let _x: &amp;'static mut u32 = X;
 
-        // Access to the critical section token,
-        // to indicate that this is a critical seciton
-        let _cs_token: bare_metal::CriticalSection = cx.cs;
-
         hprintln!(&quot;init&quot;).unwrap();
 
         debug::exit(debug::EXIT_SUCCESS);
@@ -376,9 +372,7 @@ const APP: () = {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 };
 
@@ -456,9 +450,7 @@ const APP: () = {
         // error: no `resources` field in `idle::Context`
         // _cx.resources.shared += 1;
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     // `shared` can be accessed from this context
@@ -1186,9 +1178,7 @@ const APP: () = {
         let _: idle::Schedule = cx.schedule;
         let _: idle::Spawn = cx.spawn;
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     #[task(binds = UART0, resources = [shared], schedule = [foo], spawn = [foo])]
@@ -1611,9 +1601,7 @@ const APP: () = {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     #[task(binds = UART0)]

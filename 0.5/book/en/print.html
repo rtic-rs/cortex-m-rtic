@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li></ol>
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -295,12 +295,11 @@ function marked with the <code>init</code> attribute. This function must have si
 required).</p>
 <p>This initialization function will be the first part of the application to run.
 The <code>init</code> function will run <em>with interrupts disabled</em> and has exclusive access
-to Cortex-M where the <code>bare_metal::CriticalSection</code> token is available as <code>cs</code>.
-And optionally, device specific peripherals through the <code>core</code> and <code>device</code> fields
-of <code>init::Context</code>.</p>
+to Cortex-M and, optionally, device specific peripherals through the <code>core</code> and
+<code>device</code> fields of <code>init::Context</code>.</p>
 <p><code>static mut</code> variables declared at the beginning of <code>init</code> will be transformed
 into <code>&amp;'static mut</code> references that are safe to access.</p>
-<p>The example below shows the types of the <code>core</code>, <code>device</code> and <code>cs</code> fields, and
+<p>The example below shows the types of the <code>core</code> and <code>device</code> fields and
 showcases safe access to a <code>static mut</code> variable. The <code>device</code> field is only
 available when the <code>peripherals</code> argument is set to <code>true</code> (it defaults to
 <code>false</code>).</p>
@@ -332,10 +331,6 @@ const APP: () = {
         // Safe access to local `static mut` variable
         let _x: &amp;'static mut u32 = X;
 
-        // Access to the critical section token,
-        // to indicate that this is a critical seciton
-        let _cs_token: bare_metal::CriticalSection = cx.cs;
-
         hprintln!(&quot;init&quot;).unwrap();
 
         debug::exit(debug::EXIT_SUCCESS);
@@ -347,7 +342,6 @@ const APP: () = {
 process.</p>
 <pre><code class="language-console">$ cargo run --example init
 init
-
 </code></pre>
 <h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
 <p>A function marked with the <code>idle</code> attribute can optionally appear in the
@@ -361,8 +355,6 @@ then sends the microcontroller to sleep after running <code>init</code>.</p>
 <p>Like in <code>init</code>, <code>static mut</code> variables will be transformed into <code>&amp;'static mut</code>
 references that are safe to access.</p>
 <p>The example below shows that <code>idle</code> runs after <code>init</code>.</p>
-<p><strong>Note:</strong> The <code>loop {}</code> in idle cannot be empty as this will crash the microcontroller due to a bug
-in LLVM which miss-optimizes empty loops to a <code>UDF</code> instruction in release mode.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -394,9 +386,7 @@ const APP: () = {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 };
 
@@ -404,7 +394,6 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example idle
 init
 idle
-
 </code></pre>
 <h2><a class="header" href="#hardware-tasks" id="hardware-tasks">Hardware tasks</a></h2>
 <p>To declare interrupt handlers the framework provides a <code>#[task]</code> attribute that
@@ -450,9 +439,7 @@ const APP: () = {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     #[task(binds = UART0)]
@@ -477,7 +464,6 @@ init
 UART0 called 1 time
 idle
 UART0 called 2 times
-
 </code></pre>
 <p>So far all the RTIC applications we have seen look no different than the
 applications one can write using only the <code>cortex-m-rt</code> crate. From this point
@@ -545,7 +531,6 @@ GPIOA - start
  GPIOC - end
  GPIOB
 GPIOA - end
-
 </code></pre>
 <p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
 is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of
@@ -612,9 +597,7 @@ const APP: () = {
         // error: no `resources` field in `idle::Context`
         // _cx.resources.shared += 1;
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     // `shared` can be accessed from this context
@@ -639,7 +622,6 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example resource
 UART0: shared = 1
 UART1: shared = 2
-
 </code></pre>
 <p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
 so results in a compile error.</p>
@@ -737,7 +719,6 @@ B - shared = 1
 C
 D - shared = 2
 E
-
 </code></pre>
 <h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
 <p>Late resources are resources that are not given an initial value at compile time
@@ -810,7 +791,6 @@ const APP: () = {
 #}</code></pre></pre>
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
-
 </code></pre>
 <h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
 <p>By default the framework assumes that all tasks require exclusive access
@@ -875,7 +855,6 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example only-shared-access
 UART1(key = 0xdeadbeef)
 UART0(key = 0xdeadbeef)
-
 </code></pre>
 <h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
 <p>In addition to hardware tasks, which are invoked by the hardware in response to
@@ -959,7 +938,6 @@ foo - middle
 baz
 foo - end
 bar
-
 </code></pre>
 <h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
 <p>The other advantage of software tasks is that messages can be passed to these
@@ -1030,7 +1008,6 @@ baz(1, 2)
 foo
 bar(1)
 baz(2, 3)
-
 </code></pre>
 <h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
 <p>RTIC does <em>not</em> perform any form of heap-based memory allocation. The memory
@@ -1101,7 +1078,6 @@ foo(1)
 foo(2)
 foo(3)
 bar
-
 </code></pre>
 <h2><a class="header" href="#error-handling" id="error-handling">Error handling</a></h2>
 <p>The <code>spawn</code> API returns the <code>Err</code> variant when there's no space to send the
@@ -1445,9 +1421,7 @@ const APP: () = {
         let _: idle::Schedule = cx.schedule;
         let _: idle::Spawn = cx.spawn;
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     #[task(binds = UART0, resources = [shared], schedule = [foo], spawn = [foo])]
@@ -1719,7 +1693,6 @@ $ rm memory.x build.rs
 <pre><code class="language-console">$ # NOTE: I have uncommented the `runner` option in `.cargo/config`
 $ cargo run
 init
-
 </code></pre>
 <h1><a class="header" href="#tips--tricks" id="tips--tricks">Tips &amp; tricks</a></h1>
 <h2><a class="header" href="#generics" id="generics">Generics</a></h2>
@@ -1812,7 +1785,6 @@ UART0(STATE = 0)
 shared: 1 -&gt; 2
 UART1(STATE = 1)
 shared: 2 -&gt; 4
-
 </code></pre>
 <p>Using generics also lets you change the static priorities of tasks during
 development without having to rewrite a bunch code every time.</p>
@@ -1856,9 +1828,7 @@ const APP: () = {
     fn idle(_: idle::Context) -&gt; ! {
         debug::exit(debug::EXIT_SUCCESS);
 
-        loop {
-            cortex_m::asm::nop();
-        }
+        loop {}
     }
 
     #[task(capacity = 2, resources = [count], spawn = [log])]
@@ -1902,7 +1872,6 @@ const APP: () = {
 $ cargo run --example cfg
 foo has been called 1 time
 foo has been called 2 times
-
 </code></pre>
 <h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
 <p>The main goal of moving the specification of RTIC applications to attributes in
@@ -1969,7 +1938,6 @@ const APP: () = {
 <p>Running this program produces the expected output.</p>
 <pre><code class="language-console">$ cargo run --example ramfunc
 foo
-
 </code></pre>
 <p>One can look at the output of <code>cargo-nm</code> to confirm that <code>bar</code> ended in RAM
 (<code>0x2000_0000</code>), whereas <code>foo</code> ended in Flash (<code>0x0000_0000</code>).</p>
@@ -2067,7 +2035,6 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example pool
 bar(0x2000008c)
 foo(0x20000110)
-
 </code></pre>
 <h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
 <p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some
@@ -4157,6 +4124,14 @@ const APP: () = {
     }
 };
 #}</code></pre></pre>
+<h1><a class="header" href="#homogeneous-multi-core-support" id="homogeneous-multi-core-support">Homogeneous multi-core support</a></h1>
+<p>This section covers the <em>experimental</em> homogeneous multi-core support provided
+by RTIC behind the <code>homogeneous</code> Cargo feature.</p>
+<p><strong>Content coming soon</strong></p>
+<h1><a class="header" href="#heterogeneous-multi-core-support" id="heterogeneous-multi-core-support">Heterogeneous multi-core support</a></h1>
+<p>This section covers the <em>experimental</em> heterogeneous multi-core support provided
+by RTIC behind the <code>heterogeneous</code> Cargo feature.</p>
+<p><strong>Content coming soon</strong></p>
 
                     </main>
 

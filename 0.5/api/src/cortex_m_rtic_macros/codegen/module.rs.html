@@ -326,10 +326,6 @@
 <span id="326">326</span>
 <span id="327">327</span>
 <span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -344,11 +340,12 @@
 
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">ctxt</span>.<span class="ident">ident</span>(<span class="ident">app</span>);
 
+    <span class="kw">let</span> <span class="ident">core</span> <span class="op">=</span> <span class="ident">ctxt</span>.<span class="ident">core</span>(<span class="ident">app</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">needs_instant</span> <span class="op">=</span> <span class="bool-val">false</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
     <span class="kw">match</span> <span class="ident">ctxt</span> {
-        <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>() {
+        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>(<span class="ident">core</span>) {
                 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>();
 
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
@@ -369,7 +366,7 @@
                 ));
             }
 
-            <span class="kw">if</span> <span class="ident">extra</span>.<span class="ident">peripherals</span> {
+            <span class="kw">if</span> <span class="ident">extra</span>.<span class="ident">peripherals</span> <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">core</span>) {
                 <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">device</span>;
 
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
@@ -380,21 +377,13 @@
                 <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">device</span>: #<span class="ident">device</span>::<span class="ident">Peripherals</span>::<span class="ident">steal</span>()));
             }
 
-            <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="lifetime">&#39;a</span>));
-            <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-                <span class="doccomment">/// Critical section token for init</span>
-                <span class="kw">pub</span> <span class="ident">cs</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">CriticalSection</span><span class="op">&lt;</span>#<span class="ident">lt</span><span class="op">&gt;</span>
-            ));
-
-            <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">cs</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">CriticalSection</span>::<span class="ident">new</span>()));
-
             <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>));
         }
 
-        <span class="ident">Context</span>::<span class="ident">Idle</span> <span class="op">=</span><span class="op">&gt;</span> {}
+        <span class="ident">Context</span>::<span class="ident">Idle</span>(..) <span class="op">=</span><span class="op">&gt;</span> {}
 
         <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(..) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>() {
+            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>(<span class="ident">core</span>) {
                 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>();
 
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
@@ -409,7 +398,7 @@
         }
 
         <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(..) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>() {
+            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>(<span class="ident">core</span>) {
                 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>();
 
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
@@ -545,7 +534,7 @@
 
                 <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">spawn</span>: <span class="ident">Spawn</span> { <span class="ident">priority</span> }));
             } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">instant_field</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>() {
+                <span class="kw">let</span> <span class="ident">instant_field</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>(<span class="ident">core</span>) {
                     <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>();
 
                     <span class="ident">needs_instant</span> <span class="op">=</span> <span class="bool-val">true</span>;
@@ -592,8 +581,8 @@
         }
     }
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span> <span class="ident">ctxt</span> {
-        <span class="kw">let</span> <span class="ident">init</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">inits</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>();
+    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=</span> <span class="ident">ctxt</span> {
+        <span class="kw">let</span> <span class="ident">init</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">inits</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>];
         <span class="kw">if</span> <span class="ident">init</span>.<span class="ident">returns_late_resources</span> {
             <span class="kw">let</span> <span class="ident">late_resources</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">late_resources_ident</span>(<span class="kw-2">&amp;</span><span class="ident">init</span>.<span class="ident">name</span>);
 
@@ -605,14 +594,14 @@
     }
 
     <span class="kw">let</span> <span class="ident">doc</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ctxt</span> {
-        <span class="ident">Context</span>::<span class="ident">Idle</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Idle loop&quot;</span>,
-        <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Initialization function&quot;</span>,
+        <span class="ident">Context</span>::<span class="ident">Idle</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Idle loop&quot;</span>,
+        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Initialization function&quot;</span>,
         <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Hardware task&quot;</span>,
         <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Software task&quot;</span>,
     };
 
     <span class="kw">let</span> <span class="ident">core</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ctxt</span>.<span class="ident">is_init</span>() {
-        <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>() {
+        <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>(<span class="ident">core</span>) {
             <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">Peripherals</span>,))
         } <span class="kw">else</span> {
             <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span>,))
@@ -652,9 +641,12 @@
     ));
 
     <span class="kw">if</span> <span class="op">!</span><span class="ident">items</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">let</span> <span class="ident">cfg_core</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">cfg_core</span>(<span class="ident">ctxt</span>.<span class="ident">core</span>(<span class="ident">app</span>), <span class="ident">app</span>.<span class="ident">args</span>.<span class="ident">cores</span>);
+
         <span class="macro">quote</span><span class="macro">!</span>(
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
             <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> #<span class="ident">doc</span>]</span>
+            #<span class="ident">cfg_core</span>
             <span class="kw">pub</span> <span class="kw">mod</span> #<span class="ident">name</span> {
                 #(#<span class="ident">items</span>)<span class="op">*</span>
             }
