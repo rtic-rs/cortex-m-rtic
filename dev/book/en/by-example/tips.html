@@ -187,9 +187,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
+
+        init::LateResources {}
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -277,9 +279,11 @@ mod app {
     }
 
     #[init(spawn = [foo])]
-    fn init(cx: init::Context) {
+    fn init(cx: init::Context) -&gt; init::LateResources {
         cx.spawn.foo().unwrap();
         cx.spawn.foo().unwrap();
+
+        init::LateResources {}
     }
 
     #[idle]
@@ -366,8 +370,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init(spawn = [bar])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.bar().unwrap();
+
+        init::LateResources {}
     }
 
     #[inline(never)]
@@ -450,13 +456,15 @@ mod app {
     use super::P;
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         static mut MEMORY: [u8; 512] = [0; 512];
 
         // Increase the capacity of the memory pool by ~4
         P::grow(MEMORY);
 
         rtic::pend(Interrupt::I2C0);
+
+        init::LateResources {}
     }
 
     #[task(binds = I2C0, priority = 2, spawn = [foo, bar])]
@@ -572,9 +580,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
+
+        init::LateResources {}
     }
 
     // Direct destructure

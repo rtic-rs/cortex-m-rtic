@@ -176,8 +176,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init(spawn = [foo])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.foo().unwrap();
+
+        init::LateResources {}
     }
 
     #[task(spawn = [bar, baz])]
@@ -248,8 +250,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init(spawn = [foo])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.foo(/* no message */).unwrap();
+
+        init::LateResources {}
     }
 
     #[task(spawn = [bar])]
@@ -323,8 +327,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
+
+        init::LateResources {}
     }
 
     #[task(binds = UART0, spawn = [foo, bar])]

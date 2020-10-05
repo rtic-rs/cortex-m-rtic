@@ -315,7 +315,7 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965, peripherals = true)]
 mod app {
     #[init]
-    fn init(cx: init::Context) {
+    fn init(cx: init::Context) -&gt; init::LateResources {
         static mut X: u32 = 0;
 
         // Cortex-M peripherals
@@ -334,6 +334,8 @@ mod app {
         hprintln!(&quot;init&quot;).unwrap();
 
         debug::exit(debug::EXIT_SUCCESS);
+
+        init::LateResources {}
     }
 }
 
@@ -374,8 +376,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         hprintln!(&quot;init&quot;).unwrap();
+
+        init::LateResources {}
     }
 
     #[idle]
@@ -427,12 +431,14 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         // Pends the UART0 interrupt but its handler won't run until *after*
         // `init` returns because interrupts are disabled
         rtic::pend(Interrupt::UART0); // equivalent to NVIC::pend
 
         hprintln!(&quot;init&quot;).unwrap();
+
+        init::LateResources {}
     }
 
     #[idle]
@@ -508,8 +514,10 @@ use rtic::app;
 #[app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::GPIOA);
+
+        init::LateResources {}
     }
 
     #[task(binds = GPIOA, priority = 1)]
@@ -596,9 +604,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
+
+        init::LateResources {}
     }
 
     // `shared` cannot be accessed from this context
@@ -684,8 +694,10 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::GPIOA);
+
+        init::LateResources {}
     }
 
     // when omitted priority is assumed to be `1`
@@ -913,8 +925,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init(spawn = [foo])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.foo().unwrap();
+
+        init::LateResources {}
     }
 
     #[task(spawn = [bar, baz])]
@@ -986,8 +1000,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init(spawn = [foo])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.foo(/* no message */).unwrap();
+
+        init::LateResources {}
     }
 
     #[task(spawn = [bar])]
@@ -1064,8 +1080,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
+
+        init::LateResources {}
     }
 
     #[task(binds = UART0, spawn = [foo, bar])]
@@ -1217,7 +1235,7 @@ use rtic::cyccnt::{Instant, U32Ext as _};
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
     #[init(schedule = [foo, bar])]
-    fn init(mut cx: init::Context) {
+    fn init(mut cx: init::Context) -&gt; init::LateResources {
         // Initialize (enable) the monotonic timer (CYCCNT)
         cx.core.DCB.enable_trace();
         // required on Cortex-M7 devices that software lock the DWT (e.g. STM32F7)
@@ -1235,6 +1253,8 @@ mod app {
 
         // Schedule `bar` to run 4e6 cycles in the future
         cx.schedule.bar(now + 4_000_000.cycles()).unwrap();
+
+        init::LateResources {}
     }
 
     #[task]
@@ -1292,10 +1312,12 @@ const PERIOD: u32 = 8_000_000;
 mod app {
 
     #[init(schedule = [foo])]
-    fn init(cx: init::Context) {
+    fn init(cx: init::Context) -&gt; init::LateResources {
         // omitted: initialization of `CYCCNT`
 
         cx.schedule.foo(cx.start + PERIOD.cycles()).unwrap();
+
+        init::LateResources {}
     }
 
     #[task(schedule = [foo])]
@@ -1357,13 +1379,15 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
     #[init(spawn = [foo])]
-    fn init(cx: init::Context) {
+    fn init(cx: init::Context) -&gt; init::LateResources {
         // omitted: initialization of `CYCCNT`
 
         hprintln!(&quot;init(baseline = {:?})&quot;, cx.start).unwrap();
 
         // `foo` inherits the baseline of `init`: `Instant(0)`
         cx.spawn.foo().unwrap();
+
+        init::LateResources {}
     }
 
     #[task(schedule = [foo])]
@@ -1436,7 +1460,7 @@ mod app {
     }
 
     #[init(schedule = [foo], spawn = [foo])]
-    fn init(cx: init::Context) {
+    fn init(cx: init::Context) -&gt; init::LateResources {
         let _: cyccnt::Instant = cx.start;
         let _: rtic::Peripherals = cx.core;
         let _: lm3s6965::Peripherals = cx.device;
@@ -1444,6 +1468,8 @@ mod app {
         let _: init::Spawn = cx.spawn;
 
         debug::exit(debug::EXIT_SUCCESS);
+
+        init::LateResources {}
     }
 
     #[idle(schedule = [foo], spawn = [foo])]
@@ -1526,9 +1552,11 @@ mod app {
     }
 
     #[init(spawn = [baz, quux])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.baz().unwrap();
         c.spawn.quux().unwrap();
+
+        init::LateResources {}
     }
 
     #[task(spawn = [bar])]
@@ -1603,12 +1631,14 @@ mod app {
     }
 
     #[init(resources = [shared])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         // this `message` will be sent to task `UART0`
         let message = MustBeSend;
         *c.resources.shared = Some(message);
 
         rtic::pend(Interrupt::UART0);
+
+        init::LateResources {}
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -1664,8 +1694,10 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         debug::exit(debug::EXIT_SUCCESS);
+
+        init::LateResources {}
     }
 
     #[task(resources = [&amp;shared])]
@@ -1775,9 +1807,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
+
+        init::LateResources {}
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -1865,9 +1899,11 @@ mod app {
     }
 
     #[init(spawn = [foo])]
-    fn init(cx: init::Context) {
+    fn init(cx: init::Context) -&gt; init::LateResources {
         cx.spawn.foo().unwrap();
         cx.spawn.foo().unwrap();
+
+        init::LateResources {}
     }
 
     #[idle]
@@ -1954,8 +1990,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init(spawn = [bar])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.bar().unwrap();
+
+        init::LateResources {}
     }
 
     #[inline(never)]
@@ -2038,13 +2076,15 @@ mod app {
     use super::P;
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         static mut MEMORY: [u8; 512] = [0; 512];
 
         // Increase the capacity of the memory pool by ~4
         P::grow(MEMORY);
 
         rtic::pend(Interrupt::I2C0);
+
+        init::LateResources {}
     }
 
     #[task(binds = I2C0, priority = 2, spawn = [foo, bar])]
@@ -2160,9 +2200,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
+
+        init::LateResources {}
     }
 
     // Direct destructure

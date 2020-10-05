@@ -204,7 +204,7 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965, peripherals = true)]
 mod app {
     #[init]
-    fn init(cx: init::Context) {
+    fn init(cx: init::Context) -&gt; init::LateResources {
         static mut X: u32 = 0;
 
         // Cortex-M peripherals
@@ -223,6 +223,8 @@ mod app {
         hprintln!(&quot;init&quot;).unwrap();
 
         debug::exit(debug::EXIT_SUCCESS);
+
+        init::LateResources {}
     }
 }
 
@@ -263,8 +265,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         hprintln!(&quot;init&quot;).unwrap();
+
+        init::LateResources {}
     }
 
     #[idle]
@@ -316,12 +320,14 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         // Pends the UART0 interrupt but its handler won't run until *after*
         // `init` returns because interrupts are disabled
         rtic::pend(Interrupt::UART0); // equivalent to NVIC::pend
 
         hprintln!(&quot;init&quot;).unwrap();
+
+        init::LateResources {}
     }
 
     #[idle]
@@ -397,8 +403,10 @@ use rtic::app;
 #[app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::GPIOA);
+
+        init::LateResources {}
     }
 
     #[task(binds = GPIOA, priority = 1)]

@@ -178,7 +178,7 @@ mod app {
     }
 
     #[init(schedule = [foo], spawn = [foo])]
-    fn init(cx: init::Context) {
+    fn init(cx: init::Context) -&gt; init::LateResources {
         let _: cyccnt::Instant = cx.start;
         let _: rtic::Peripherals = cx.core;
         let _: lm3s6965::Peripherals = cx.device;
@@ -186,6 +186,8 @@ mod app {
         let _: init::Spawn = cx.spawn;
 
         debug::exit(debug::EXIT_SUCCESS);
+
+        init::LateResources {}
     }
 
     #[idle(schedule = [foo], spawn = [foo])]
@@ -267,9 +269,11 @@ mod app {
     }
 
     #[init(spawn = [baz, quux])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.baz().unwrap();
         c.spawn.quux().unwrap();
+
+        init::LateResources {}
     }
 
     #[task(spawn = [bar])]
@@ -348,8 +352,10 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         debug::exit(debug::EXIT_SUCCESS);
+
+        init::LateResources {}
     }
 
     #[task(resources = [&amp;shared])]

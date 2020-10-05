@@ -175,9 +175,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
+
+        init::LateResources {}
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -266,8 +268,10 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init(spawn = [bar])]
-    fn init(c: init::Context) {
+    fn init(c: init::Context) -&gt; init::LateResources {
         c.spawn.bar().unwrap();
+
+        init::LateResources {}
     }
 
     #[inline(never)]
@@ -336,10 +340,12 @@ use panic_semihosting as _;
 #[rtic::app(device = lm3s6965)]
 mod app {
     #[init]
-    fn init(_: init::Context) {
+    fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
 
         hprintln!(&quot;init&quot;).unwrap();
+
+        init::LateResources {}
     }
 
     #[idle]
