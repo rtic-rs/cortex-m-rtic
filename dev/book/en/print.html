@@ -576,7 +576,7 @@ limitations in the language, the error message is currently far from helpful: it
 will say something along the lines of &quot;evaluation of constant value failed&quot; and
 the span of the error will <em>not</em> point out to the problematic interrupt value --
 we are sorry about this!</p>
-<h2><a class="header" href="#resources" id="resources">Resources</a></h2>
+<h1><a class="header" href="#resources" id="resources">Resources</a></h1>
 <p>The framework provides an abstraction to share data between any of the contexts
 we saw in the previous section (task handlers, <code>init</code> and <code>idle</code>): resources.</p>
 <p>Resources are data visible only to functions declared within the <code>#[app]</code>
@@ -850,7 +850,9 @@ are required to access the resource even if the resource is contended by several
 tasks running at different priorities. The downside is that the task only gets a
 shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform
 on it, but where a shared reference is enough this approach reduces the number
-of required locks.</p>
+of required locks. In addition to simple immutable data, this shared access can
+be useful where the resource type safely implements interior mutability, with
+appropriate locking or atomic operations of its own.</p>
 <p>Note that in this release of RTIC it is not possible to request both exclusive
 access (<code>&amp;mut-</code>) and shared access (<code>&amp;-</code>) to the <em>same</em> resource from different
 tasks. Attempting to do so will result in a compile error.</p>
@@ -2237,9 +2239,9 @@ mod app {
 It also acts as a comparing reference between versions.</p>
 <h1><a class="header" href="#migrating-from-v05x-to-v060" id="migrating-from-v05x-to-v060">Migrating from v0.5.x to v0.6.0</a></h1>
 <p>This section describes how to upgrade from v0.5.x to v0.6.0 of the RTIC framework.</p>
-<h3><a class="header" href="#cargotoml---version-bump" id="cargotoml---version-bump"><code>Cargo.toml</code> - version bump</a></h3>
+<h2><a class="header" href="#cargotoml---version-bump" id="cargotoml---version-bump"><code>Cargo.toml</code> - version bump</a></h2>
 <p>Change the version of <code>cortex-m-rtic</code> to <code>&quot;0.6.0&quot;</code>.</p>
-<h3><a class="header" href="#module-instead-of-const" id="module-instead-of-const">Module instead of Const</a></h3>
+<h2><a class="header" href="#module-instead-of-const" id="module-instead-of-const">Module instead of Const</a></h2>
 <p>With the support of attributes on modules the <code>const APP</code> workaround is not needed.</p>
 <p>Change</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -2264,7 +2266,7 @@ mod app {
 <p>Now that a regular Rust module is used it means it is possible to have custom
 user code within that module.
 Additionally, it means that <code>use</code>-statements for resources etc may be required.</p>
-<h3><a class="header" href="#init-always-returns-late-resources" id="init-always-returns-late-resources">Init always returns late resources</a></h3>
+<h2><a class="header" href="#init-always-returns-late-resources" id="init-always-returns-late-resources">Init always returns late resources</a></h2>
 <p>In order to make the API more symmetric the #[init]-task always returns a late resource.</p>
 <p>From this:</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -2296,7 +2298,7 @@ mod app {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#resources-struct---resources" id="resources-struct---resources">Resources struct - #[resources]</a></h3>
+<h2><a class="header" href="#resources-struct---resources" id="resources-struct---resources">Resources struct - #[resources]</a></h2>
 <p>Previously the RTIC resources had to be in in a struct named exactly &quot;Resources&quot;:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -2331,7 +2333,7 @@ struct whateveryouwant {
 <h1><a class="header" href="#migrating-from-v04x-to-v050" id="migrating-from-v04x-to-v050">Migrating from v0.4.x to v0.5.0</a></h1>
 <p>This section covers how to upgrade an application written against RTIC v0.4.x to
 the version v0.5.0 of the framework.</p>
-<h3><a class="header" href="#cargotoml" id="cargotoml"><code>Cargo.toml</code></a></h3>
+<h2><a class="header" href="#cargotoml" id="cargotoml"><code>Cargo.toml</code></a></h2>
 <p>First, the version of the <code>cortex-m-rtic</code> dependency needs to be updated to
 <code>&quot;0.5.0&quot;</code>. The <code>timer-queue</code> feature needs to be removed.</p>
 <pre><code class="language-toml">[dependencies.cortex-m-rtic]
@@ -2345,7 +2347,7 @@ version = &quot;0.5.0&quot;
 features = [&quot;timer-queue&quot;]
 #           ^^^^^^^^^^^^^
 </code></pre>
-<h3><a class="header" href="#context-argument" id="context-argument"><code>Context</code> argument</a></h3>
+<h2><a class="header" href="#context-argument" id="context-argument"><code>Context</code> argument</a></h2>
 <p>All functions inside the <code>#[rtic::app]</code> item need to take as first argument a
 <code>Context</code> structure. This <code>Context</code> type will contain the variables that were
 magically injected into the scope of the function by version v0.4.x of the
@@ -2397,7 +2399,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#resources-1" id="resources-1">Resources</a></h3>
+<h2><a class="header" href="#resources-1" id="resources-1">Resources</a></h2>
 <p>The syntax used to declare resources has been changed from <code>static mut</code>
 variables to a <code>struct Resources</code>.</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -2421,7 +2423,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#device-peripherals" id="device-peripherals">Device peripherals</a></h3>
+<h2><a class="header" href="#device-peripherals" id="device-peripherals">Device peripherals</a></h2>
 <p>If your application was accessing the device peripherals in <code>#[init]</code> through
 the <code>device</code> variable then you'll need to add <code>peripherals = true</code> to the
 <code>#[rtic::app]</code> attribute to continue to access the device peripherals through
@@ -2459,7 +2461,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#interrupt-and-exception" id="interrupt-and-exception"><code>#[interrupt]</code> and <code>#[exception]</code></a></h3>
+<h2><a class="header" href="#interrupt-and-exception" id="interrupt-and-exception"><code>#[interrupt]</code> and <code>#[exception]</code></a></h2>
 <p>The <code>#[interrupt]</code> and <code>#[exception]</code> attributes have been removed. To declare
 hardware tasks in v0.5.x use the <code>#[task]</code> attribute with the <code>binds</code> argument.</p>
 <p>Change this:</p>
@@ -2505,8 +2507,9 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#schedule" id="schedule"><code>schedule</code></a></h3>
-<p>The <code>timer-queue</code> feature has been removed. To use the <code>schedule</code> API one must
+<h2><a class="header" href="#schedule" id="schedule"><code>schedule</code></a></h2>
+<p>The <code>schedule</code> API no longer requires the <code>timer-queue</code> cargo feature, which has
+been removed. To use the <code>schedule</code> API one must
 first define the monotonic timer the runtime will use using the <code>monotonic</code>
 argument of the <code>#[rtic::app]</code> attribute. To continue using the cycle counter
 (CYCCNT) as the monotonic timer, and match the behavior of version v0.4.x, add

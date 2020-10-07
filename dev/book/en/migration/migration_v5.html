@@ -165,9 +165,9 @@
                     <main>
                         <h1><a class="header" href="#migrating-from-v05x-to-v060" id="migrating-from-v05x-to-v060">Migrating from v0.5.x to v0.6.0</a></h1>
 <p>This section describes how to upgrade from v0.5.x to v0.6.0 of the RTIC framework.</p>
-<h3><a class="header" href="#cargotoml---version-bump" id="cargotoml---version-bump"><code>Cargo.toml</code> - version bump</a></h3>
+<h2><a class="header" href="#cargotoml---version-bump" id="cargotoml---version-bump"><code>Cargo.toml</code> - version bump</a></h2>
 <p>Change the version of <code>cortex-m-rtic</code> to <code>&quot;0.6.0&quot;</code>.</p>
-<h3><a class="header" href="#module-instead-of-const" id="module-instead-of-const">Module instead of Const</a></h3>
+<h2><a class="header" href="#module-instead-of-const" id="module-instead-of-const">Module instead of Const</a></h2>
 <p>With the support of attributes on modules the <code>const APP</code> workaround is not needed.</p>
 <p>Change</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -192,7 +192,7 @@ mod app {
 <p>Now that a regular Rust module is used it means it is possible to have custom
 user code within that module.
 Additionally, it means that <code>use</code>-statements for resources etc may be required.</p>
-<h3><a class="header" href="#init-always-returns-late-resources" id="init-always-returns-late-resources">Init always returns late resources</a></h3>
+<h2><a class="header" href="#init-always-returns-late-resources" id="init-always-returns-late-resources">Init always returns late resources</a></h2>
 <p>In order to make the API more symmetric the #[init]-task always returns a late resource.</p>
 <p>From this:</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -224,7 +224,7 @@ mod app {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#resources-struct---resources" id="resources-struct---resources">Resources struct - #[resources]</a></h3>
+<h2><a class="header" href="#resources-struct---resources" id="resources-struct---resources">Resources struct - #[resources]</a></h2>
 <p>Previously the RTIC resources had to be in in a struct named exactly &quot;Resources&quot;:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]

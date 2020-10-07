@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#resources" id="resources">Resources</a></h2>
+                        <h1><a class="header" href="#resources" id="resources">Resources</a></h1>
 <p>The framework provides an abstraction to share data between any of the contexts
 we saw in the previous section (task handlers, <code>init</code> and <code>idle</code>): resources.</p>
 <p>Resources are data visible only to functions declared within the <code>#[app]</code>
@@ -437,7 +437,9 @@ are required to access the resource even if the resource is contended by several
 tasks running at different priorities. The downside is that the task only gets a
 shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform
 on it, but where a shared reference is enough this approach reduces the number
-of required locks.</p>
+of required locks. In addition to simple immutable data, this shared access can
+be useful where the resource type safely implements interior mutability, with
+appropriate locking or atomic operations of its own.</p>
 <p>Note that in this release of RTIC it is not possible to request both exclusive
 access (<code>&amp;mut-</code>) and shared access (<code>&amp;-</code>) to the <em>same</em> resource from different
 tasks. Attempting to do so will result in a compile error.</p>
