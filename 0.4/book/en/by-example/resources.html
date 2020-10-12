@@ -232,45 +232,36 @@ const APP: () = {
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example resource
 UART0: SHARED = 1
-UART1: SHARED = 2```
-
-## Priorities
-
-The priority of each handler can be declared in the `interrupt` and `exception`
+UART1: SHARED = 2
+</code></pre>
+<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
+<p>The priority of each handler can be declared in the <code>interrupt</code> and <code>exception</code>
 attributes. It's not possible to set the priority in any other way because the
-runtime takes ownership of the `NVIC` peripheral; it's also not possible to
+runtime takes ownership of the <code>NVIC</code> peripheral; it's also not possible to
 change the priority of a handler / task at runtime. Thanks to this restriction
-the framework has knowledge about the *static* priorities of all interrupt and
-exception handlers.
-
-Interrupts and exceptions can have priorities in the range `1..=(1 &lt;&lt;
-NVIC_PRIO_BITS)` where `NVIC_PRIO_BITS` is a constant defined in the `device`
-crate. The `idle` task has a priority of `0`, the lowest priority.
-
-Resources that are shared between handlers that run at different priorities
+the framework has knowledge about the <em>static</em> priorities of all interrupt and
+exception handlers.</p>
+<p>Interrupts and exceptions can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
+crate. The <code>idle</code> task has a priority of <code>0</code>, the lowest priority.</p>
+<p>Resources that are shared between handlers that run at different priorities
 require critical sections for memory safety. The framework ensures that critical
-sections are used but *only where required*: for example, no critical section is
-required by the highest priority handler that has access to the resource.
-
-The critical section API provided by the RTFM framework (see [`Mutex`]) is
+sections are used but <em>only where required</em>: for example, no critical section is
+required by the highest priority handler that has access to the resource.</p>
+<p>The critical section API provided by the RTFM framework (see <a href="../../api/rtfm/trait.Mutex.html"><code>Mutex</code></a>) is
 based on dynamic priorities rather than on disabling interrupts. The consequence
-is that these critical sections will prevent *some* handlers, including all the
-ones that contend for the resource, from *starting* but will let higher priority
-handlers, that don't contend for the resource, run.
-
-[`Mutex`]: ../../api/rtfm/trait.Mutex.html
-
-In the example below we have three interrupt handlers with priorities ranging
+is that these critical sections will prevent <em>some</em> handlers, including all the
+ones that contend for the resource, from <em>starting</em> but will let higher priority
+handlers, that don't contend for the resource, run.</p>
+<p>In the example below we have three interrupt handlers with priorities ranging
 from one to three. The two handlers with the lower priorities contend for the
-`SHARED` resource. The lowest priority handler needs to [`lock`] the
-`SHARED` resource to access its data, whereas the mid priority handler can
+<code>SHARED</code> resource. The lowest priority handler needs to <a href="../../api/rtfm/trait.Mutex.html#method.lock"><code>lock</code></a> the
+<code>SHARED</code> resource to access its data, whereas the mid priority handler can
 directly access its data. The highest priority handler is free to preempt
-the critical section created by the lowest priority handler.
-
-[`lock`]: ../../api/rtfm/trait.Mutex.html#method.lock
-
-``` rust
-//! examples/lock.rs
+the critical section created by the lowest priority handler.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/lock.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -331,44 +322,40 @@ const APP: () = {
         hprintln!(&quot;C&quot;).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example lock
 A
 B - SHARED = 1
 C
 D - SHARED = 2
-E```
-
-One more note about priorities: choosing a priority higher than what the device
-supports (that is `1 &lt;&lt; NVIC_PRIO_BITS`) will result in a compile error. Due to
+E
+</code></pre>
+<p>One more note about priorities: choosing a priority higher than what the device
+supports (that is <code>1 &lt;&lt; NVIC_PRIO_BITS</code>) will result in a compile error. Due to
 limitations in the language the error is currently far from helpful: it will say
 something along the lines of &quot;evaluation of constant value failed&quot; and the span
-of the error will *not* point out to the problematic interrupt value -- we are
-sorry about this!
-
-## Late resources
-
-Unlike normal `static` variables, which need to be assigned an initial value
+of the error will <em>not</em> point out to the problematic interrupt value -- we are
+sorry about this!</p>
+<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<p>Unlike normal <code>static</code> variables, which need to be assigned an initial value
 when declared, resources can be initialized at runtime. We refer to these
-runtime initialized resources as *late resources*. Late resources are useful for
-*moving* (as in transferring ownership) peripherals initialized in `init` into
-interrupt and exception handlers.
-
-Late resources are declared like normal resources but that are given an initial
-value of `()` (the unit value). `init` must return the initial values of all
-late resources packed in a `struct` of type `init::LateResources`.
-
-The example below uses late resources to stablish a lockless, one-way channel
-between the `UART0` interrupt handler and the `idle` function. A single producer
-single consumer [`Queue`] is used as the channel. The queue is split into
-consumer and producer end points in `init` and then each end point is stored
-in a different resource; `UART0` owns the producer resource and `idle` owns
-the consumer resource.
-
-[`Queue`]: ../../api/heapless/spsc/struct.Queue.html
-
-``` rust
-//! examples/late.rs
+runtime initialized resources as <em>late resources</em>. Late resources are useful for
+<em>moving</em> (as in transferring ownership) peripherals initialized in <code>init</code> into
+interrupt and exception handlers.</p>
+<p>Late resources are declared like normal resources but that are given an initial
+value of <code>()</code> (the unit value). <code>init</code> must return the initial values of all
+late resources packed in a <code>struct</code> of type <code>init::LateResources</code>.</p>
+<p>The example below uses late resources to stablish a lockless, one-way channel
+between the <code>UART0</code> interrupt handler and the <code>idle</code> function. A single producer
+single consumer <a href="../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into
+consumer and producer end points in <code>init</code> and then each end point is stored
+in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns
+the consumer resource.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/late.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -422,24 +409,24 @@ const APP: () = {
         resources.P.enqueue(42).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example late
-received message: 42```
-
-## `static` resources
-
-`static` variables can also be used as resources. Tasks can only get `&amp;`
+received message: 42
+</code></pre>
+<h2><a class="header" href="#static-resources" id="static-resources"><code>static</code> resources</a></h2>
+<p><code>static</code> variables can also be used as resources. Tasks can only get <code>&amp;</code>
 (shared) references to these resources but locks are never required to access
-their data. You can think of `static` resources as plain `static` variables that
+their data. You can think of <code>static</code> resources as plain <code>static</code> variables that
 can be initialized at runtime and have better scoping rules: you can control
 which tasks can access the variable, instead of the variable being visible to
-all the functions in the scope it was declared in.
-
-In the example below a key is loaded (or created) at runtime and then used from
-two tasks that run at different priorities.
-
-``` rust
-//! examples/static.rs
+all the functions in the scope it was declared in.</p>
+<p>In the example below a key is loaded (or created) at runtime and then used from
+two tasks that run at different priorities.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/static.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -476,10 +463,11 @@ const APP: () = {
         hprintln!(&quot;UART1(KEY = {:#x})&quot;, resources.KEY).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example static
 UART1(KEY = 0xdeadbeef)
-UART0(KEY = 0xdeadbeef)```
+UART0(KEY = 0xdeadbeef)
 </code></pre>
 
                     </main>

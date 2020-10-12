@@ -242,44 +242,35 @@ const APP: () = {
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example resource
 UART0: shared = 1
-UART1: shared = 2```
-
-Note that the `shared` resource cannot be accessed from `idle`. Attempting to do
-so results in a compile error.
-
-## `lock`
-
-In the presence of preemption critical sections are required to mutate shared
+UART1: shared = 2
+</code></pre>
+<p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
+so results in a compile error.</p>
+<h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
+<p>In the presence of preemption critical sections are required to mutate shared
 data in a data race free manner. As the framework has complete knowledge over
 the priorities of tasks and which tasks can access which resources it enforces
-that critical sections are used where required for memory safety.
-
-Where a critical section is required the framework hands out a resource proxy
+that critical sections are used where required for memory safety.</p>
+<p>Where a critical section is required the framework hands out a resource proxy
 instead of a reference. This resource proxy is a structure that implements the
-[`Mutex`] trait. The only method on this trait, [`lock`], runs its closure
-argument in a critical section.
-
-[`Mutex`]: ../../../api/rtic/trait.Mutex.html
-[`lock`]: ../../../api/rtic/trait.Mutex.html#method.lock
-
-The critical section created by the `lock` API is based on dynamic priorities:
-it temporarily raises the dynamic priority of the context to a *ceiling*
+<a href="../../../api/rtic/trait.Mutex.html"><code>Mutex</code></a> trait. The only method on this trait, <a href="../../../api/rtic/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure
+argument in a critical section.</p>
+<p>The critical section created by the <code>lock</code> API is based on dynamic priorities:
+it temporarily raises the dynamic priority of the context to a <em>ceiling</em>
 priority that prevents other tasks from preempting the critical section. This
-synchronization protocol is known as the [Immediate Ceiling Priority Protocol
-(ICPP)][icpp].
-
-[icpp]: https://en.wikipedia.org/wiki/Priority_ceiling_protocol
-
-In the example below we have three interrupt handlers with priorities ranging
+synchronization protocol is known as the <a href="https://en.wikipedia.org/wiki/Priority_ceiling_protocol">Immediate Ceiling Priority Protocol
+(ICPP)</a>.</p>
+<p>In the example below we have three interrupt handlers with priorities ranging
 from one to three. The two handlers with the lower priorities contend for the
-`shared` resource. The lowest priority handler needs to `lock` the
-`shared` resource to access its data, whereas the mid priority handler can
+<code>shared</code> resource. The lowest priority handler needs to <code>lock</code> the
+<code>shared</code> resource to access its data, whereas the mid priority handler can
 directly access its data. The highest priority handler, which cannot access
-the `shared` resource, is free to preempt the critical section created by the
-lowest priority handler.
-
-``` rust
-//! examples/lock.rs
+the <code>shared</code> resource, is free to preempt the critical section created by the
+lowest priority handler.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/lock.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -341,34 +332,31 @@ const APP: () = {
         hprintln!(&quot;C&quot;).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example lock
 A
 B - shared = 1
 C
 D - shared = 2
-E```
-
-## Late resources
-
-Late resources are resources that are not given an initial value at compile time
-using the `#[init]` attribute but instead are initialized at runtime using the
-`init::LateResources` values returned by the `init` function.
-
-Late resources are useful for *moving* (as in transferring the ownership of)
-peripherals initialized in `init` into interrupt handlers.
-
-The example below uses late resources to establish a lockless, one-way channel
-between the `UART0` interrupt handler and the `idle` task. A single producer
-single consumer [`Queue`] is used as the channel. The queue is split into
-consumer and producer end points in `init` and then each end point is stored
-in a different resource; `UART0` owns the producer resource and `idle` owns
-the consumer resource.
-
-[`Queue`]: ../../../api/heapless/spsc/struct.Queue.html
-
-``` rust
-//! examples/late.rs
+E
+</code></pre>
+<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<p>Late resources are resources that are not given an initial value at compile time
+using the <code>#[init]</code> attribute but instead are initialized at runtime using the
+<code>init::LateResources</code> values returned by the <code>init</code> function.</p>
+<p>Late resources are useful for <em>moving</em> (as in transferring the ownership of)
+peripherals initialized in <code>init</code> into interrupt handlers.</p>
+<p>The example below uses late resources to establish a lockless, one-way channel
+between the <code>UART0</code> interrupt handler and the <code>idle</code> task. A single producer
+single consumer <a href="../../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into
+consumer and producer end points in <code>init</code> and then each end point is stored
+in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns
+the consumer resource.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/late.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -420,34 +408,32 @@ const APP: () = {
         c.resources.p.enqueue(42).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example late
-received message: 42```
-
-## Only shared access
-
-By default the framework assumes that all tasks require exclusive access
-(`&amp;mut-`) to resources but it is possible to specify that a task only requires
-shared access (`&amp;-`) to a resource using the `&amp;resource_name` syntax in the
-`resources` list.
-
-The advantage of specifying shared access (`&amp;-`) to a resource is that no locks
+received message: 42
+</code></pre>
+<h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
+<p>By default the framework assumes that all tasks require exclusive access
+(<code>&amp;mut-</code>) to resources but it is possible to specify that a task only requires
+shared access (<code>&amp;-</code>) to a resource using the <code>&amp;resource_name</code> syntax in the
+<code>resources</code> list.</p>
+<p>The advantage of specifying shared access (<code>&amp;-</code>) to a resource is that no locks
 are required to access the resource even if the resource is contended by several
 tasks running at different priorities. The downside is that the task only gets a
-shared reference (`&amp;-`) to the resource, limiting the operations it can perform
+shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform
 on it, but where a shared reference is enough this approach reduces the number
-of required locks.
-
-Note that in this release of RTIC it is not possible to request both exclusive
-access (`&amp;mut-`) and shared access (`&amp;-`) to the *same* resource from different
-tasks. Attempting to do so will result in a compile error.
-
-In the example below a key (e.g. a cryptographic key) is loaded (or created) at
+of required locks.</p>
+<p>Note that in this release of RTIC it is not possible to request both exclusive
+access (<code>&amp;mut-</code>) and shared access (<code>&amp;-</code>) to the <em>same</em> resource from different
+tasks. Attempting to do so will result in a compile error.</p>
+<p>In the example below a key (e.g. a cryptographic key) is loaded (or created) at
 runtime and then used from two tasks that run at different priorities without
-any kind of lock.
-
-``` rust
-//! examples/static.rs
+any kind of lock.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/static.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -485,10 +471,11 @@ const APP: () = {
         hprintln!(&quot;UART1(key = {:#x})&quot;, cx.resources.key).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example only-shared-access
 UART1(key = 0xdeadbeef)
-UART0(key = 0xdeadbeef)```
+UART0(key = 0xdeadbeef)
 </code></pre>
 
                     </main>

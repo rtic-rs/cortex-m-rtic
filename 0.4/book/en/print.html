@@ -359,30 +359,24 @@ const APP: () = {
 <p>Running the example will print <code>init</code> to the console and then exit the QEMU
 process.</p>
 <pre><code class="language-console">$ cargo run --example init
-init```
-
-## `idle`
-
-A function marked with the `idle` attribute can optionally appear in the
-pseudo-module. This function is used as the special *idle task* and must have
-signature `[unsafe] fn() - &gt; !`.
-
-When present, the runtime will execute the `idle` task after `init`. Unlike
-`init`, `idle` will run *with interrupts enabled* and it's not allowed to return
-so it runs forever.
-
-When no `idle` function is declared, the runtime sets the [SLEEPONEXIT] bit and
-then sends the microcontroller to sleep after running `init`.
-
-[SLEEPONEXIT]: https://developer.arm.com/products/architecture/cpu-architecture/m-profile/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit
-
-Like in `init`, `static mut` variables will be transformed into `&amp;'static mut`
-references that are safe to access.
-
-The example below shows that `idle` runs after `init`.
-
-``` rust
-//! examples/idle.rs
+init
+</code></pre>
+<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
+<p>A function marked with the <code>idle</code> attribute can optionally appear in the
+pseudo-module. This function is used as the special <em>idle task</em> and must have
+signature <code>[unsafe] fn() - &gt; !</code>.</p>
+<p>When present, the runtime will execute the <code>idle</code> task after <code>init</code>. Unlike
+<code>init</code>, <code>idle</code> will run <em>with interrupts enabled</em> and it's not allowed to return
+so it runs forever.</p>
+<p>When no <code>idle</code> function is declared, the runtime sets the <a href="https://developer.arm.com/products/architecture/cpu-architecture/m-profile/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a> bit and
+then sends the microcontroller to sleep after running <code>init</code>.</p>
+<p>Like in <code>init</code>, <code>static mut</code> variables will be transformed into <code>&amp;'static mut</code>
+references that are safe to access.</p>
+<p>The example below shows that <code>idle</code> runs after <code>init</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/idle.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -415,20 +409,21 @@ const APP: () = {
         loop {}
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example idle
 init
-idle```
-
-## `interrupt` / `exception`
-
-Just like you would do with the `cortex-m-rt` crate you can use the `interrupt`
-and `exception` attributes within the `app` pseudo-module to declare interrupt
+idle
+</code></pre>
+<h2><a class="header" href="#interrupt--exception" id="interrupt--exception"><code>interrupt</code> / <code>exception</code></a></h2>
+<p>Just like you would do with the <code>cortex-m-rt</code> crate you can use the <code>interrupt</code>
+and <code>exception</code> attributes within the <code>app</code> pseudo-module to declare interrupt
 and exception handlers. In RTFM, we refer to interrupt and exception handlers as
-*hardware* tasks.
-
-``` rust
-//! examples/interrupt.rs
+<em>hardware</em> tasks.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/interrupt.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -480,17 +475,17 @@ const APP: () = {
         .unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example interrupt
 init
 UART0 called 1 time
 idle
-UART0 called 2 times```
-
-So far all the RTFM applications we have seen look no different that the
-applications one can write using only the `cortex-m-rt` crate. In the next
-section we start introducing features unique to RTFM.
+UART0 called 2 times
 </code></pre>
+<p>So far all the RTFM applications we have seen look no different that the
+applications one can write using only the <code>cortex-m-rt</code> crate. In the next
+section we start introducing features unique to RTFM.</p>
 <h2><a class="header" href="#resources" id="resources">Resources</a></h2>
 <p>One of the limitations of the attributes provided by the <code>cortex-m-rt</code> crate is
 that sharing data (or peripherals) between interrupts, or between an interrupt
@@ -564,45 +559,36 @@ const APP: () = {
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example resource
 UART0: SHARED = 1
-UART1: SHARED = 2```
-
-## Priorities
-
-The priority of each handler can be declared in the `interrupt` and `exception`
+UART1: SHARED = 2
+</code></pre>
+<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
+<p>The priority of each handler can be declared in the <code>interrupt</code> and <code>exception</code>
 attributes. It's not possible to set the priority in any other way because the
-runtime takes ownership of the `NVIC` peripheral; it's also not possible to
+runtime takes ownership of the <code>NVIC</code> peripheral; it's also not possible to
 change the priority of a handler / task at runtime. Thanks to this restriction
-the framework has knowledge about the *static* priorities of all interrupt and
-exception handlers.
-
-Interrupts and exceptions can have priorities in the range `1..=(1 &lt;&lt;
-NVIC_PRIO_BITS)` where `NVIC_PRIO_BITS` is a constant defined in the `device`
-crate. The `idle` task has a priority of `0`, the lowest priority.
-
-Resources that are shared between handlers that run at different priorities
+the framework has knowledge about the <em>static</em> priorities of all interrupt and
+exception handlers.</p>
+<p>Interrupts and exceptions can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
+crate. The <code>idle</code> task has a priority of <code>0</code>, the lowest priority.</p>
+<p>Resources that are shared between handlers that run at different priorities
 require critical sections for memory safety. The framework ensures that critical
-sections are used but *only where required*: for example, no critical section is
-required by the highest priority handler that has access to the resource.
-
-The critical section API provided by the RTFM framework (see [`Mutex`]) is
+sections are used but <em>only where required</em>: for example, no critical section is
+required by the highest priority handler that has access to the resource.</p>
+<p>The critical section API provided by the RTFM framework (see <a href="by-example/../../api/rtfm/trait.Mutex.html"><code>Mutex</code></a>) is
 based on dynamic priorities rather than on disabling interrupts. The consequence
-is that these critical sections will prevent *some* handlers, including all the
-ones that contend for the resource, from *starting* but will let higher priority
-handlers, that don't contend for the resource, run.
-
-[`Mutex`]: ../../api/rtfm/trait.Mutex.html
-
-In the example below we have three interrupt handlers with priorities ranging
+is that these critical sections will prevent <em>some</em> handlers, including all the
+ones that contend for the resource, from <em>starting</em> but will let higher priority
+handlers, that don't contend for the resource, run.</p>
+<p>In the example below we have three interrupt handlers with priorities ranging
 from one to three. The two handlers with the lower priorities contend for the
-`SHARED` resource. The lowest priority handler needs to [`lock`] the
-`SHARED` resource to access its data, whereas the mid priority handler can
+<code>SHARED</code> resource. The lowest priority handler needs to <a href="by-example/../../api/rtfm/trait.Mutex.html#method.lock"><code>lock</code></a> the
+<code>SHARED</code> resource to access its data, whereas the mid priority handler can
 directly access its data. The highest priority handler is free to preempt
-the critical section created by the lowest priority handler.
-
-[`lock`]: ../../api/rtfm/trait.Mutex.html#method.lock
-
-``` rust
-//! examples/lock.rs
+the critical section created by the lowest priority handler.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/lock.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -663,44 +649,40 @@ const APP: () = {
         hprintln!(&quot;C&quot;).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example lock
 A
 B - SHARED = 1
 C
 D - SHARED = 2
-E```
-
-One more note about priorities: choosing a priority higher than what the device
-supports (that is `1 &lt;&lt; NVIC_PRIO_BITS`) will result in a compile error. Due to
+E
+</code></pre>
+<p>One more note about priorities: choosing a priority higher than what the device
+supports (that is <code>1 &lt;&lt; NVIC_PRIO_BITS</code>) will result in a compile error. Due to
 limitations in the language the error is currently far from helpful: it will say
 something along the lines of &quot;evaluation of constant value failed&quot; and the span
-of the error will *not* point out to the problematic interrupt value -- we are
-sorry about this!
-
-## Late resources
-
-Unlike normal `static` variables, which need to be assigned an initial value
+of the error will <em>not</em> point out to the problematic interrupt value -- we are
+sorry about this!</p>
+<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<p>Unlike normal <code>static</code> variables, which need to be assigned an initial value
 when declared, resources can be initialized at runtime. We refer to these
-runtime initialized resources as *late resources*. Late resources are useful for
-*moving* (as in transferring ownership) peripherals initialized in `init` into
-interrupt and exception handlers.
-
-Late resources are declared like normal resources but that are given an initial
-value of `()` (the unit value). `init` must return the initial values of all
-late resources packed in a `struct` of type `init::LateResources`.
-
-The example below uses late resources to stablish a lockless, one-way channel
-between the `UART0` interrupt handler and the `idle` function. A single producer
-single consumer [`Queue`] is used as the channel. The queue is split into
-consumer and producer end points in `init` and then each end point is stored
-in a different resource; `UART0` owns the producer resource and `idle` owns
-the consumer resource.
-
-[`Queue`]: ../../api/heapless/spsc/struct.Queue.html
-
-``` rust
-//! examples/late.rs
+runtime initialized resources as <em>late resources</em>. Late resources are useful for
+<em>moving</em> (as in transferring ownership) peripherals initialized in <code>init</code> into
+interrupt and exception handlers.</p>
+<p>Late resources are declared like normal resources but that are given an initial
+value of <code>()</code> (the unit value). <code>init</code> must return the initial values of all
+late resources packed in a <code>struct</code> of type <code>init::LateResources</code>.</p>
+<p>The example below uses late resources to stablish a lockless, one-way channel
+between the <code>UART0</code> interrupt handler and the <code>idle</code> function. A single producer
+single consumer <a href="by-example/../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into
+consumer and producer end points in <code>init</code> and then each end point is stored
+in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns
+the consumer resource.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/late.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -754,24 +736,24 @@ const APP: () = {
         resources.P.enqueue(42).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example late
-received message: 42```
-
-## `static` resources
-
-`static` variables can also be used as resources. Tasks can only get `&amp;`
+received message: 42
+</code></pre>
+<h2><a class="header" href="#static-resources" id="static-resources"><code>static</code> resources</a></h2>
+<p><code>static</code> variables can also be used as resources. Tasks can only get <code>&amp;</code>
 (shared) references to these resources but locks are never required to access
-their data. You can think of `static` resources as plain `static` variables that
+their data. You can think of <code>static</code> resources as plain <code>static</code> variables that
 can be initialized at runtime and have better scoping rules: you can control
 which tasks can access the variable, instead of the variable being visible to
-all the functions in the scope it was declared in.
-
-In the example below a key is loaded (or created) at runtime and then used from
-two tasks that run at different priorities.
-
-``` rust
-//! examples/static.rs
+all the functions in the scope it was declared in.</p>
+<p>In the example below a key is loaded (or created) at runtime and then used from
+two tasks that run at different priorities.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/static.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -808,10 +790,11 @@ const APP: () = {
         hprintln!(&quot;UART1(KEY = {:#x})&quot;, resources.KEY).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example static
 UART1(KEY = 0xdeadbeef)
-UART0(KEY = 0xdeadbeef)```
+UART0(KEY = 0xdeadbeef)
 </code></pre>
 <h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
 <p>RTFM treats interrupt and exception handlers as <em>hardware</em> tasks. Hardware tasks
@@ -887,18 +870,17 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example task
 foo
 baz
-bar```
-
-## Message passing
-
-The other advantage of software tasks is that messages can be passed to these
+bar
+</code></pre>
+<h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
+<p>The other advantage of software tasks is that messages can be passed to these
 tasks when spawning them. The type of the message payload must be specified in
-the signature of the task handler.
-
-The example below showcases three tasks, two of them expect a message.
-
-``` rust
-//! examples/message.rs
+the signature of the task handler.</p>
+<p>The example below showcases three tasks, two of them expect a message.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/message.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -949,29 +931,29 @@ const APP: () = {
         fn UART0();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example message
 foo
 bar(0)
 baz(1, 2)
 foo
 bar(1)
-baz(2, 3)```
-
-## Capacity
-
-Task dispatchers do *not* use any dynamic memory allocation. The memory required
+baz(2, 3)
+</code></pre>
+<h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
+<p>Task dispatchers do <em>not</em> use any dynamic memory allocation. The memory required
 to store messages is statically reserved. The framework will reserve enough
 space for every context to be able to spawn each task at most once. This is a
 sensible default but the &quot;inbox&quot; capacity of each task can be controlled using
-the `capacity` argument of the `task` attribute.
-
-The example below sets the capacity of the software task `foo` to 4. If the
-capacity is not specified then the second `spawn.foo` call in `UART0` would
-fail.
-
-``` rust
-//! examples/capacity.rs
+the <code>capacity</code> argument of the <code>task</code> attribute.</p>
+<p>The example below sets the capacity of the software task <code>foo</code> to 4. If the
+capacity is not specified then the second <code>spawn.foo</code> call in <code>UART0</code> would
+fail.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/capacity.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1018,13 +1000,14 @@ const APP: () = {
         fn UART1();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example capacity
 foo(0)
 foo(1)
 foo(2)
 foo(3)
-bar```
+bar
 </code></pre>
 <h1><a class="header" href="#timer-queue" id="timer-queue">Timer queue</a></h1>
 <p>When the <code>timer-queue</code> feature is enabled the RTFM framework includes a <em>global
@@ -1340,7 +1323,7 @@ const APP: () = {
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example singleton
 bar(2)
-foo(1)```
+foo(1)
 </code></pre>
 <h1><a class="header" href="#types-send-and-sync" id="types-send-and-sync">Types, Send and Sync</a></h1>
 <p>The <code>app</code> attribute injects a context, a collection of variables, into every
@@ -1642,7 +1625,7 @@ $ rm memory.x build.rs
 </ol>
 <pre><code class="language-console">$ # NOTE: I have uncommented the `runner` option in `.cargo/config`
 $ cargo run
-init```
+init
 </code></pre>
 <h1><a class="header" href="#tips--tricks" id="tips--tricks">Tips &amp; tricks</a></h1>
 <h2><a class="header" href="#generics" id="generics">Generics</a></h2>
@@ -1723,25 +1706,23 @@ SHARED: 0 -&gt; 1
 UART0(STATE = 0)
 SHARED: 1 -&gt; 2
 UART1(STATE = 1)
-SHARED: 2 -&gt; 4```
-
-This also lets you change the static priorities of tasks without having to
-rewrite code. If you consistently use `lock`s to access the data behind shared
+SHARED: 2 -&gt; 4
+</code></pre>
+<p>This also lets you change the static priorities of tasks without having to
+rewrite code. If you consistently use <code>lock</code>s to access the data behind shared
 resources then your code will continue to compile when you change the priority
-of tasks.
-
-## Conditional compilation
-
-You can use conditional compilation (`#[cfg]`) on resources (`static [mut]`
-items) and tasks (`fn` items). The effect of using `#[cfg]` attributes is that
-the resource / task will *not* be injected into the prelude of tasks that use
-them (see `resources`, `spawn` and `schedule`) if the condition doesn't hold.
-
-The example below logs a message whenever the `foo` task is spawned, but only if
-the program has been compiled using the `dev` profile.
-
-``` rust
-//! examples/cfg.rs
+of tasks.</p>
+<h2><a class="header" href="#conditional-compilation" id="conditional-compilation">Conditional compilation</a></h2>
+<p>You can use conditional compilation (<code>#[cfg]</code>) on resources (<code>static [mut]</code>
+items) and tasks (<code>fn</code> items). The effect of using <code>#[cfg]</code> attributes is that
+the resource / task will <em>not</em> be injected into the prelude of tasks that use
+them (see <code>resources</code>, <code>spawn</code> and <code>schedule</code>) if the condition doesn't hold.</p>
+<p>The example below logs a message whenever the <code>foo</code> task is spawned, but only if
+the program has been compiled using the <code>dev</code> profile.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/cfg.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1795,7 +1776,8 @@ const APP: () = {
         fn UART1();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
 <p>The main goal of moving the specification of RTFM applications to attributes in
 RTFM v0.4.x was to allow inter-operation with other attributes. For example, the
@@ -1862,34 +1844,30 @@ const APP: () = {
 </span></code></pre></pre>
 <p>Running this program produces the expected output.</p>
 <pre><code class="language-console">$ cargo run --example ramfunc
-foo```
-
-One can look at the output of `cargo-nm` to confirm that `bar` ended in RAM
-(`0x2000_0000`), whereas `foo` ended in Flash (`0x0000_0000`).
-
-``` console
-$ cargo nm --example ramfunc --release | grep ' foo::'
+foo
+</code></pre>
+<p>One can look at the output of <code>cargo-nm</code> to confirm that <code>bar</code> ended in RAM
+(<code>0x2000_0000</code>), whereas <code>foo</code> ended in Flash (<code>0x0000_0000</code>).</p>
+<pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' foo::'
 20000100 B foo::FREE_QUEUE::ujkptet2nfdw5t20
 200000dc B foo::INPUTS::thvubs85b91dg365
-000002c6 T foo::sidaht420cg1mcm8```
-
-``` console
-$ cargo nm --example ramfunc --release | grep ' bar::'
+000002c6 T foo::sidaht420cg1mcm8
+</code></pre>
+<pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' bar::'
 20000100 B bar::FREE_QUEUE::lk14244m263eivix
 200000dc B bar::INPUTS::mi89534s44r1mnj1
-20000000 T bar::ns9009yhw2dc2y25```
-
-## `binds`
-
-**NOTE**: Requires RTFM ~0.4.2
-
-You can give hardware tasks more task-like names using the `binds` argument: you
+20000000 T bar::ns9009yhw2dc2y25
+</code></pre>
+<h2><a class="header" href="#binds" id="binds"><code>binds</code></a></h2>
+<p><strong>NOTE</strong>: Requires RTFM ~0.4.2</p>
+<p>You can give hardware tasks more task-like names using the <code>binds</code> argument: you
 name the function as you wish and specify the name of the interrupt / exception
-in the `binds` argument. Types like `Spawn` will be placed in a module named
-after the function, not the interrupt / exception. Example below:
-
-``` rust
-//! examples/binds.rs
+in the <code>binds</code> argument. Types like <code>Spawn</code> will be placed in a module named
+after the function, not the interrupt / exception. Example below:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/binds.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1937,32 +1915,29 @@ const APP: () = {
         .unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example binds
 init
 foo called 1 time
 idle
-foo called 2 times```
-
-## Indirection for faster message passing
-
-Message passing always involves copying the payload from the sender into a
+foo called 2 times
+</code></pre>
+<h2><a class="header" href="#indirection-for-faster-message-passing" id="indirection-for-faster-message-passing">Indirection for faster message passing</a></h2>
+<p>Message passing always involves copying the payload from the sender into a
 static variable and then from the static variable into the receiver. Thus
-sending a large buffer, like a `[u8; 128]`, as a message involves two expensive
-`memcpy`s. To minimize the message passing overhead one can use indirection:
+sending a large buffer, like a <code>[u8; 128]</code>, as a message involves two expensive
+<code>memcpy</code>s. To minimize the message passing overhead one can use indirection:
 instead of sending the buffer by value, one can send an owning pointer into the
-buffer.
-
-One can use a global allocator to achieve indirection (`alloc::Box`,
-`alloc::Rc`, etc.), which requires using the nightly channel as of Rust v1.34.0,
-or one can use a statically allocated memory pool like [`heapless::Pool`].
-
-[`heapless::Pool`]: https://docs.rs/heapless/0.4.3/heapless/pool/index.html
-
-Here's an example where `heapless::Pool` is used to &quot;box&quot; buffers of 128 bytes.
-
-``` rust
-//! examples/pool.rs
+buffer.</p>
+<p>One can use a global allocator to achieve indirection (<code>alloc::Box</code>,
+<code>alloc::Rc</code>, etc.), which requires using the nightly channel as of Rust v1.34.0,
+or one can use a statically allocated memory pool like <a href="https://docs.rs/heapless/0.4.3/heapless/pool/index.html"><code>heapless::Pool</code></a>.</p>
+<p>Here's an example where <code>heapless::Pool</code> is used to &quot;box&quot; buffers of 128 bytes.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/pool.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -2029,10 +2004,11 @@ const APP: () = {
         fn UART1();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example binds
 bar(0x2000008c)
-foo(0x20000110)```
+foo(0x20000110)
 </code></pre>
 <h1><a class="header" href="#under-the-hood" id="under-the-hood">Under the hood</a></h1>
 <p>This section describes the internals of the RTFM framework at a <em>high level</em>.

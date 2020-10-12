@@ -346,7 +346,7 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
     <span class="kw">match</span> <span class="ident">ctxt</span> {
         <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>() {
+            <span class="kw">if</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>.<span class="ident">is_some</span>() {
                 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>();
 
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
@@ -608,7 +608,7 @@
     };
 
     <span class="kw">let</span> <span class="ident">core</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ctxt</span>.<span class="ident">is_init</span>() {
-        <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">uses_schedule</span>() {
+        <span class="kw">if</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>.<span class="ident">is_some</span>() {
             <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">Peripherals</span>,))
         } <span class="kw">else</span> {
             <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span>,))

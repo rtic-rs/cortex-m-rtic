@@ -252,30 +252,24 @@ const APP: () = {
 <p>Running the example will print <code>init</code> to the console and then exit the QEMU
 process.</p>
 <pre><code class="language-console">$ cargo run --example init
-init```
-
-## `idle`
-
-A function marked with the `idle` attribute can optionally appear in the
-pseudo-module. This function is used as the special *idle task* and must have
-signature `[unsafe] fn() - &gt; !`.
-
-When present, the runtime will execute the `idle` task after `init`. Unlike
-`init`, `idle` will run *with interrupts enabled* and it's not allowed to return
-so it runs forever.
-
-When no `idle` function is declared, the runtime sets the [SLEEPONEXIT] bit and
-then sends the microcontroller to sleep after running `init`.
-
-[SLEEPONEXIT]: https://developer.arm.com/products/architecture/cpu-architecture/m-profile/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit
-
-Like in `init`, `static mut` variables will be transformed into `&amp;'static mut`
-references that are safe to access.
-
-The example below shows that `idle` runs after `init`.
-
-``` rust
-//! examples/idle.rs
+init
+</code></pre>
+<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
+<p>A function marked with the <code>idle</code> attribute can optionally appear in the
+pseudo-module. This function is used as the special <em>idle task</em> and must have
+signature <code>[unsafe] fn() - &gt; !</code>.</p>
+<p>When present, the runtime will execute the <code>idle</code> task after <code>init</code>. Unlike
+<code>init</code>, <code>idle</code> will run <em>with interrupts enabled</em> and it's not allowed to return
+so it runs forever.</p>
+<p>When no <code>idle</code> function is declared, the runtime sets the <a href="https://developer.arm.com/products/architecture/cpu-architecture/m-profile/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a> bit and
+then sends the microcontroller to sleep after running <code>init</code>.</p>
+<p>Like in <code>init</code>, <code>static mut</code> variables will be transformed into <code>&amp;'static mut</code>
+references that are safe to access.</p>
+<p>The example below shows that <code>idle</code> runs after <code>init</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/idle.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -308,20 +302,21 @@ const APP: () = {
         loop {}
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example idle
 init
-idle```
-
-## `interrupt` / `exception`
-
-Just like you would do with the `cortex-m-rt` crate you can use the `interrupt`
-and `exception` attributes within the `app` pseudo-module to declare interrupt
+idle
+</code></pre>
+<h2><a class="header" href="#interrupt--exception" id="interrupt--exception"><code>interrupt</code> / <code>exception</code></a></h2>
+<p>Just like you would do with the <code>cortex-m-rt</code> crate you can use the <code>interrupt</code>
+and <code>exception</code> attributes within the <code>app</code> pseudo-module to declare interrupt
 and exception handlers. In RTFM, we refer to interrupt and exception handlers as
-*hardware* tasks.
-
-``` rust
-//! examples/interrupt.rs
+<em>hardware</em> tasks.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/interrupt.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -373,17 +368,17 @@ const APP: () = {
         .unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example interrupt
 init
 UART0 called 1 time
 idle
-UART0 called 2 times```
-
-So far all the RTFM applications we have seen look no different that the
-applications one can write using only the `cortex-m-rt` crate. In the next
-section we start introducing features unique to RTFM.
+UART0 called 2 times
 </code></pre>
+<p>So far all the RTFM applications we have seen look no different that the
+applications one can write using only the <code>cortex-m-rt</code> crate. In the next
+section we start introducing features unique to RTFM.</p>
 
                     </main>
 

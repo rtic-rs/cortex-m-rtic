@@ -358,30 +358,24 @@ const APP: () = {
 <p>Running the example will print <code>init</code> to the console and then exit the QEMU
 process.</p>
 <pre><code class="language-console">$ cargo run --example init
-init```
-
-## `idle`
-
-A function marked with the `idle` attribute can optionally appear in the
-pseudo-module. This function is used as the special *idle task* and must have
-signature `fn(idle::Context) - &gt; !`.
-
-When present, the runtime will execute the `idle` task after `init`. Unlike
-`init`, `idle` will run *with interrupts enabled* and it's not allowed to return
-so it must run forever.
-
-When no `idle` function is declared, the runtime sets the [SLEEPONEXIT] bit and
-then sends the microcontroller to sleep after running `init`.
-
-[SLEEPONEXIT]: https://developer.arm.com/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit
-
-Like in `init`, `static mut` variables will be transformed into `&amp;'static mut`
-references that are safe to access.
-
-The example below shows that `idle` runs after `init`.
-
-``` rust
-//! examples/idle.rs
+init
+</code></pre>
+<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
+<p>A function marked with the <code>idle</code> attribute can optionally appear in the
+pseudo-module. This function is used as the special <em>idle task</em> and must have
+signature <code>fn(idle::Context) - &gt; !</code>.</p>
+<p>When present, the runtime will execute the <code>idle</code> task after <code>init</code>. Unlike
+<code>init</code>, <code>idle</code> will run <em>with interrupts enabled</em> and it's not allowed to return
+so it must run forever.</p>
+<p>When no <code>idle</code> function is declared, the runtime sets the <a href="https://developer.arm.com/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a> bit and
+then sends the microcontroller to sleep after running <code>init</code>.</p>
+<p>Like in <code>init</code>, <code>static mut</code> variables will be transformed into <code>&amp;'static mut</code>
+references that are safe to access.</p>
+<p>The example below shows that <code>idle</code> runs after <code>init</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/idle.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -412,26 +406,25 @@ const APP: () = {
         loop {}
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example idle
 init
-idle```
-
-## Hardware tasks
-
-To declare interrupt handlers the framework provides a `#[task]` attribute that
-can be attached to functions. This attribute takes a `binds` argument whose
+idle
+</code></pre>
+<h2><a class="header" href="#hardware-tasks" id="hardware-tasks">Hardware tasks</a></h2>
+<p>To declare interrupt handlers the framework provides a <code>#[task]</code> attribute that
+can be attached to functions. This attribute takes a <code>binds</code> argument whose
 value is the name of the interrupt to which the handler will be bound to; the
 function adorned with this attribute becomes the interrupt handler. Within the
-framework these type of tasks are referred to as *hardware* tasks, because they
-start executing in reaction to a hardware event.
-
-The example below demonstrates the use of the `#[task]` attribute to declare an
-interrupt handler. Like in the case of `#[init]` and `#[idle]` local `static
-mut` variables are safe to use within a hardware task.
-
-``` rust
-//! examples/hardware.rs
+framework these type of tasks are referred to as <em>hardware</em> tasks, because they
+start executing in reaction to a hardware event.</p>
+<p>The example below demonstrates the use of the <code>#[task]</code> attribute to declare an
+interrupt handler. Like in the case of <code>#[init]</code> and <code>#[idle]</code> local <code>static mut</code> variables are safe to use within a hardware task.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/hardware.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -481,39 +474,36 @@ const APP: () = {
         .unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example hardware
 init
 UART0 called 1 time
 idle
-UART0 called 2 times```
-
-So far all the RTIC applications we have seen look no different than the
-applications one can write using only the `cortex-m-rt` crate. From this point
-we start introducing features unique to RTIC.
-
-## Priorities
-
-The static priority of each handler can be declared in the `task` attribute
-using the `priority` argument. Tasks can have priorities in the range `1..=(1 &lt;&lt;
-NVIC_PRIO_BITS)` where `NVIC_PRIO_BITS` is a constant defined in the `device`
-crate. When the `priority` argument is omitted, the priority is assumed to be
-`1`. The `idle` task has a non-configurable static priority of `0`, the lowest
-priority.
-
-When several tasks are ready to be executed the one with *highest* static
+UART0 called 2 times
+</code></pre>
+<p>So far all the RTIC applications we have seen look no different than the
+applications one can write using only the <code>cortex-m-rt</code> crate. From this point
+we start introducing features unique to RTIC.</p>
+<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
+<p>The static priority of each handler can be declared in the <code>task</code> attribute
+using the <code>priority</code> argument. Tasks can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
+crate. When the <code>priority</code> argument is omitted, the priority is assumed to be
+<code>1</code>. The <code>idle</code> task has a non-configurable static priority of <code>0</code>, the lowest
+priority.</p>
+<p>When several tasks are ready to be executed the one with <em>highest</em> static
 priority will be executed first. Task prioritization can be observed in the
 following scenario: an interrupt signal arrives during the execution of a low
 priority task; the signal puts the higher priority task in the pending state.
 The difference in priority results in the higher priority task preempting the
 lower priority one: the execution of the lower priority task is suspended and
 the higher priority task is executed to completion. Once the higher priority
-task has terminated the lower priority task is resumed.
-
-The following example showcases the priority based scheduling of tasks.
-
-``` rust
-//! examples/preempt.rs
+task has terminated the lower priority task is resumed.</p>
+<p>The following example showcases the priority based scheduling of tasks.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/preempt.rs
 
 #![no_main]
 #![no_std]
@@ -550,26 +540,25 @@ const APP: () = {
         hprintln!(&quot; GPIOC - end&quot;).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example preempt
 GPIOA - start
  GPIOC - start
  GPIOC - end
  GPIOB
-GPIOA - end```
-
-Note that the task `gpiob` does *not* preempt task `gpioc` because its priority
-is the *same* as `gpioc`'s. However, once `gpioc` terminates the execution of
-task, `gpiob` is prioritized over `gpioa` due to its higher priority. `gpioa`
-is resumed only after `gpiob` terminates.
-
-One more note about priorities: choosing a priority higher than what the device
-supports (that is `1 &lt;&lt; NVIC_PRIO_BITS`) will result in a compile error. Due to
+GPIOA - end
+</code></pre>
+<p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
+is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of
+task, <code>gpiob</code> is prioritized over <code>gpioa</code> due to its higher priority. <code>gpioa</code>
+is resumed only after <code>gpiob</code> terminates.</p>
+<p>One more note about priorities: choosing a priority higher than what the device
+supports (that is <code>1 &lt;&lt; NVIC_PRIO_BITS</code>) will result in a compile error. Due to
 limitations in the language, the error message is currently far from helpful: it
 will say something along the lines of &quot;evaluation of constant value failed&quot; and
-the span of the error will *not* point out to the problematic interrupt value --
-we are sorry about this!
-</code></pre>
+the span of the error will <em>not</em> point out to the problematic interrupt value --
+we are sorry about this!</p>
 <h2><a class="header" href="#resources" id="resources">Resources</a></h2>
 <p>The framework provides an abstraction to share data between any of the contexts
 we saw in the previous section (task handlers, <code>init</code> and <code>idle</code>): resources.</p>
@@ -649,44 +638,35 @@ const APP: () = {
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example resource
 UART0: shared = 1
-UART1: shared = 2```
-
-Note that the `shared` resource cannot be accessed from `idle`. Attempting to do
-so results in a compile error.
-
-## `lock`
-
-In the presence of preemption critical sections are required to mutate shared
+UART1: shared = 2
+</code></pre>
+<p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
+so results in a compile error.</p>
+<h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
+<p>In the presence of preemption critical sections are required to mutate shared
 data in a data race free manner. As the framework has complete knowledge over
 the priorities of tasks and which tasks can access which resources it enforces
-that critical sections are used where required for memory safety.
-
-Where a critical section is required the framework hands out a resource proxy
+that critical sections are used where required for memory safety.</p>
+<p>Where a critical section is required the framework hands out a resource proxy
 instead of a reference. This resource proxy is a structure that implements the
-[`Mutex`] trait. The only method on this trait, [`lock`], runs its closure
-argument in a critical section.
-
-[`Mutex`]: ../../../api/rtic/trait.Mutex.html
-[`lock`]: ../../../api/rtic/trait.Mutex.html#method.lock
-
-The critical section created by the `lock` API is based on dynamic priorities:
-it temporarily raises the dynamic priority of the context to a *ceiling*
+<a href="by-example/../../../api/rtic/trait.Mutex.html"><code>Mutex</code></a> trait. The only method on this trait, <a href="by-example/../../../api/rtic/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure
+argument in a critical section.</p>
+<p>The critical section created by the <code>lock</code> API is based on dynamic priorities:
+it temporarily raises the dynamic priority of the context to a <em>ceiling</em>
 priority that prevents other tasks from preempting the critical section. This
-synchronization protocol is known as the [Immediate Ceiling Priority Protocol
-(ICPP)][icpp].
-
-[icpp]: https://en.wikipedia.org/wiki/Priority_ceiling_protocol
-
-In the example below we have three interrupt handlers with priorities ranging
+synchronization protocol is known as the <a href="https://en.wikipedia.org/wiki/Priority_ceiling_protocol">Immediate Ceiling Priority Protocol
+(ICPP)</a>.</p>
+<p>In the example below we have three interrupt handlers with priorities ranging
 from one to three. The two handlers with the lower priorities contend for the
-`shared` resource. The lowest priority handler needs to `lock` the
-`shared` resource to access its data, whereas the mid priority handler can
+<code>shared</code> resource. The lowest priority handler needs to <code>lock</code> the
+<code>shared</code> resource to access its data, whereas the mid priority handler can
 directly access its data. The highest priority handler, which cannot access
-the `shared` resource, is free to preempt the critical section created by the
-lowest priority handler.
-
-``` rust
-//! examples/lock.rs
+the <code>shared</code> resource, is free to preempt the critical section created by the
+lowest priority handler.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/lock.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -748,34 +728,31 @@ const APP: () = {
         hprintln!(&quot;C&quot;).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example lock
 A
 B - shared = 1
 C
 D - shared = 2
-E```
-
-## Late resources
-
-Late resources are resources that are not given an initial value at compile time
-using the `#[init]` attribute but instead are initialized at runtime using the
-`init::LateResources` values returned by the `init` function.
-
-Late resources are useful for *moving* (as in transferring the ownership of)
-peripherals initialized in `init` into interrupt handlers.
-
-The example below uses late resources to establish a lockless, one-way channel
-between the `UART0` interrupt handler and the `idle` task. A single producer
-single consumer [`Queue`] is used as the channel. The queue is split into
-consumer and producer end points in `init` and then each end point is stored
-in a different resource; `UART0` owns the producer resource and `idle` owns
-the consumer resource.
-
-[`Queue`]: ../../../api/heapless/spsc/struct.Queue.html
-
-``` rust
-//! examples/late.rs
+E
+</code></pre>
+<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<p>Late resources are resources that are not given an initial value at compile time
+using the <code>#[init]</code> attribute but instead are initialized at runtime using the
+<code>init::LateResources</code> values returned by the <code>init</code> function.</p>
+<p>Late resources are useful for <em>moving</em> (as in transferring the ownership of)
+peripherals initialized in <code>init</code> into interrupt handlers.</p>
+<p>The example below uses late resources to establish a lockless, one-way channel
+between the <code>UART0</code> interrupt handler and the <code>idle</code> task. A single producer
+single consumer <a href="by-example/../../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into
+consumer and producer end points in <code>init</code> and then each end point is stored
+in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns
+the consumer resource.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/late.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -827,34 +804,32 @@ const APP: () = {
         c.resources.p.enqueue(42).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example late
-received message: 42```
-
-## Only shared access
-
-By default the framework assumes that all tasks require exclusive access
-(`&amp;mut-`) to resources but it is possible to specify that a task only requires
-shared access (`&amp;-`) to a resource using the `&amp;resource_name` syntax in the
-`resources` list.
-
-The advantage of specifying shared access (`&amp;-`) to a resource is that no locks
+received message: 42
+</code></pre>
+<h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
+<p>By default the framework assumes that all tasks require exclusive access
+(<code>&amp;mut-</code>) to resources but it is possible to specify that a task only requires
+shared access (<code>&amp;-</code>) to a resource using the <code>&amp;resource_name</code> syntax in the
+<code>resources</code> list.</p>
+<p>The advantage of specifying shared access (<code>&amp;-</code>) to a resource is that no locks
 are required to access the resource even if the resource is contended by several
 tasks running at different priorities. The downside is that the task only gets a
-shared reference (`&amp;-`) to the resource, limiting the operations it can perform
+shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform
 on it, but where a shared reference is enough this approach reduces the number
-of required locks.
-
-Note that in this release of RTIC it is not possible to request both exclusive
-access (`&amp;mut-`) and shared access (`&amp;-`) to the *same* resource from different
-tasks. Attempting to do so will result in a compile error.
-
-In the example below a key (e.g. a cryptographic key) is loaded (or created) at
+of required locks.</p>
+<p>Note that in this release of RTIC it is not possible to request both exclusive
+access (<code>&amp;mut-</code>) and shared access (<code>&amp;-</code>) to the <em>same</em> resource from different
+tasks. Attempting to do so will result in a compile error.</p>
+<p>In the example below a key (e.g. a cryptographic key) is loaded (or created) at
 runtime and then used from two tasks that run at different priorities without
-any kind of lock.
-
-``` rust
-//! examples/static.rs
+any kind of lock.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/static.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -892,10 +867,11 @@ const APP: () = {
         hprintln!(&quot;UART1(key = {:#x})&quot;, cx.resources.key).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example only-shared-access
 UART1(key = 0xdeadbeef)
-UART0(key = 0xdeadbeef)```
+UART0(key = 0xdeadbeef)
 </code></pre>
 <h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
 <p>In addition to hardware tasks, which are invoked by the hardware in response to
@@ -978,18 +954,17 @@ foo - start
 foo - middle
 baz
 foo - end
-bar```
-
-## Message passing
-
-The other advantage of software tasks is that messages can be passed to these
+bar
+</code></pre>
+<h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
+<p>The other advantage of software tasks is that messages can be passed to these
 tasks when spawning them. The type of the message payload must be specified in
-the signature of the task handler.
-
-The example below showcases three tasks, two of them expect a message.
-
-``` rust
-//! examples/message.rs
+the signature of the task handler.</p>
+<p>The example below showcases three tasks, two of them expect a message.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/message.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1041,31 +1016,31 @@ const APP: () = {
         fn SSI0();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example message
 foo
 bar(0)
 baz(1, 2)
 foo
 bar(1)
-baz(2, 3)```
-
-## Capacity
-
-RTIC does *not* perform any form of heap-based memory allocation. The memory
+baz(2, 3)
+</code></pre>
+<h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
+<p>RTIC does <em>not</em> perform any form of heap-based memory allocation. The memory
 required to store messages is statically reserved. By default the framework
 minimizes the memory footprint of the application so each task has a message
 &quot;capacity&quot; of 1: meaning that at most one message can be posted to the task
 before it gets a chance to run. This default can be overridden for each task
-using the `capacity` argument. This argument takes a positive integer that
-indicates how many messages the task message buffer can hold.
-
-The example below sets the capacity of the software task `foo` to 4. If the
-capacity is not specified then the second `spawn.foo` call in `UART0` would
-fail (panic).
-
-``` rust
-//! examples/capacity.rs
+using the <code>capacity</code> argument. This argument takes a positive integer that
+indicates how many messages the task message buffer can hold.</p>
+<p>The example below sets the capacity of the software task <code>foo</code> to 4. If the
+capacity is not specified then the second <code>spawn.foo</code> call in <code>UART0</code> would
+fail (panic).</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/capacity.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1112,41 +1087,45 @@ const APP: () = {
         fn SSI0();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example capacity
 foo(0)
 foo(1)
 foo(2)
 foo(3)
-bar```
-
-## Error handling
-
-The `spawn` API returns the `Err` variant when there's no space to send the
-message. In most scenarios spawning errors are handled in one of two ways:
-
-- Panicking, using `unwrap`, `expect`, etc. This approach is used to catch the
-  programmer   error (i.e. bug) of selecting a capacity that was too small. When
-  this panic is encountered during testing choosing a bigger capacity and
-  recompiling the program may fix the issue but sometimes it's necessary to dig
-  deeper and perform a timing analysis of the application to check if the
-  platform can deal with peak payload or if the processor needs to be replaced
-  with a faster one.
-
-- Ignoring the result. In soft real-time and non real-time applications it may
-  be OK to occasionally lose data or fail to respond to some events during event
-  bursts. In those scenarios silently letting a `spawn` call fail may be
-  acceptable.
-
-It should be noted that retrying a `spawn` call is usually the wrong approach as
+bar
+</code></pre>
+<h2><a class="header" href="#error-handling" id="error-handling">Error handling</a></h2>
+<p>The <code>spawn</code> API returns the <code>Err</code> variant when there's no space to send the
+message. In most scenarios spawning errors are handled in one of two ways:</p>
+<ul>
+<li>
+<p>Panicking, using <code>unwrap</code>, <code>expect</code>, etc. This approach is used to catch the
+programmer   error (i.e. bug) of selecting a capacity that was too small. When
+this panic is encountered during testing choosing a bigger capacity and
+recompiling the program may fix the issue but sometimes it's necessary to dig
+deeper and perform a timing analysis of the application to check if the
+platform can deal with peak payload or if the processor needs to be replaced
+with a faster one.</p>
+</li>
+<li>
+<p>Ignoring the result. In soft real-time and non real-time applications it may
+be OK to occasionally lose data or fail to respond to some events during event
+bursts. In those scenarios silently letting a <code>spawn</code> call fail may be
+acceptable.</p>
+</li>
+</ul>
+<p>It should be noted that retrying a <code>spawn</code> call is usually the wrong approach as
 this operation will likely never succeed in practice. Because there are only
-context switches towards *higher* priority tasks retrying the `spawn` call of a
+context switches towards <em>higher</em> priority tasks retrying the <code>spawn</code> call of a
 lower priority task will never let the scheduler dispatch said task meaning that
 its message buffer will never be emptied. This situation is depicted in the
-following snippet:
-
-``` rust
-#[rtic::app(..)]
+following snippet:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(..)]
 const APP: () = {
     #[init(spawn = [foo, bar])]
     fn init(cx: init::Context) {
@@ -1169,7 +1148,8 @@ const APP: () = {
         // ..
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h1><a class="header" href="#timer-queue" id="timer-queue">Timer queue</a></h1>
 <p>In contrast with the <code>spawn</code> API, which immediately spawns a software task onto
 the scheduler, the <code>schedule</code> API can be used to schedule a task to run some
@@ -1730,7 +1710,7 @@ $ rm memory.x build.rs
 </ol>
 <pre><code class="language-console">$ # NOTE: I have uncommented the `runner` option in `.cargo/config`
 $ cargo run
-init```
+init
 </code></pre>
 <h1><a class="header" href="#tips--tricks" id="tips--tricks">Tips &amp; tricks</a></h1>
 <h2><a class="header" href="#generics" id="generics">Generics</a></h2>
@@ -1822,23 +1802,21 @@ shared: 0 -&gt; 1
 UART0(STATE = 0)
 shared: 1 -&gt; 2
 UART1(STATE = 1)
-shared: 2 -&gt; 4```
-
-Using generics also lets you change the static priorities of tasks during
-development without having to rewrite a bunch code every time.
-
-## Conditional compilation
-
-You can use conditional compilation (`#[cfg]`) on resources (the fields of
-`struct Resources`) and tasks (the `fn` items). The effect of using `#[cfg]`
-attributes is that the resource / task will *not* be available through the
-corresponding `Context` `struct` if the condition doesn't hold.
-
-The example below logs a message whenever the `foo` task is spawned, but only if
-the program has been compiled using the `dev` profile.
-
-``` rust
-//! examples/cfg.rs
+shared: 2 -&gt; 4
+</code></pre>
+<p>Using generics also lets you change the static priorities of tasks during
+development without having to rewrite a bunch code every time.</p>
+<h2><a class="header" href="#conditional-compilation" id="conditional-compilation">Conditional compilation</a></h2>
+<p>You can use conditional compilation (<code>#[cfg]</code>) on resources (the fields of
+<code>struct Resources</code>) and tasks (the <code>fn</code> items). The effect of using <code>#[cfg]</code>
+attributes is that the resource / task will <em>not</em> be available through the
+corresponding <code>Context</code> <code>struct</code> if the condition doesn't hold.</p>
+<p>The example below logs a message whenever the <code>foo</code> task is spawned, but only if
+the program has been compiled using the <code>dev</code> profile.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/cfg.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1905,36 +1883,34 @@ const APP: () = {
         fn QEI0();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example cfg --release
 
 $ cargo run --example cfg
 foo has been called 1 time
-foo has been called 2 times```
-
-## Running tasks from RAM
-
-The main goal of moving the specification of RTIC applications to attributes in
+foo has been called 2 times
+</code></pre>
+<h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
+<p>The main goal of moving the specification of RTIC applications to attributes in
 RTIC v0.4.0 was to allow inter-operation with other attributes. For example, the
-`link_section` attribute can be applied to tasks to place them in RAM; this can
-improve performance in some cases.
-
-&gt; **IMPORTANT**: In general, the `link_section`, `export_name` and `no_mangle`
-&gt; attributes are very powerful but also easy to misuse. Incorrectly using any of
-&gt; these attributes can cause undefined behavior; you should always prefer to use
-&gt; safe, higher level attributes around them like `cortex-m-rt`'s `interrupt` and
-&gt; `exception` attributes.
-&gt;
-&gt; In the particular case of RAM functions there's no
-&gt; safe abstraction for it in `cortex-m-rt` v0.6.5 but there's an [RFC] for
-&gt; adding a `ramfunc` attribute in a future release.
-
-[RFC]: https://github.com/rust-embedded/cortex-m-rt/pull/100
-
-The example below shows how to place the higher priority task, `bar`, in RAM.
-
-``` rust
-//! examples/ramfunc.rs
+<code>link_section</code> attribute can be applied to tasks to place them in RAM; this can
+improve performance in some cases.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong>: In general, the <code>link_section</code>, <code>export_name</code> and <code>no_mangle</code>
+attributes are very powerful but also easy to misuse. Incorrectly using any of
+these attributes can cause undefined behavior; you should always prefer to use
+safe, higher level attributes around them like <code>cortex-m-rt</code>'s <code>interrupt</code> and
+<code>exception</code> attributes.</p>
+<p>In the particular case of RAM functions there's no
+safe abstraction for it in <code>cortex-m-rt</code> v0.6.5 but there's an <a href="https://github.com/rust-embedded/cortex-m-rt/pull/100">RFC</a> for
+adding a <code>ramfunc</code> attribute in a future release.</p>
+</blockquote>
+<p>The example below shows how to place the higher priority task, <code>bar</code>, in RAM.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/ramfunc.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -1975,16 +1951,15 @@ const APP: () = {
         fn UART1();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Running this program produces the expected output.</p>
 <pre><code class="language-console">$ cargo run --example ramfunc
-foo```
-
-One can look at the output of `cargo-nm` to confirm that `bar` ended in RAM
-(`0x2000_0000`), whereas `foo` ended in Flash (`0x0000_0000`).
-
-``` console
-$ cargo nm --example ramfunc --release | grep ' foo::'
+foo
+</code></pre>
+<p>One can look at the output of <code>cargo-nm</code> to confirm that <code>bar</code> ended in RAM
+(<code>0x2000_0000</code>), whereas <code>foo</code> ended in Flash (<code>0x0000_0000</code>).</p>
+<pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' foo::'
 00000162 t ramfunc::foo::h30e7789b08c08e19
 </code></pre>
 <pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' bar::'
@@ -2077,22 +2052,18 @@ const APP: () = {
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example pool
 bar(0x2000008c)
-foo(0x20000110)```
-
-## Inspecting the expanded code
-
-`#[rtic::app]` is a procedural macro that produces support code. If for some
+foo(0x20000110)
+</code></pre>
+<h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
+<p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some
 reason you need to inspect the code generated by this macro you have two
-options:
-
-You can inspect the file `rtic-expansion.rs` inside the `target` directory. This
-file contains the expansion of the `#[rtic::app]` item (not your whole program!)
-of the *last built* (via `cargo build` or `cargo check`) RTIC application. The
-expanded code is not pretty printed by default so you'll want to run `rustfmt`
-over it before you read it.
-
-``` console
-$ cargo build --example foo
+options:</p>
+<p>You can inspect the file <code>rtic-expansion.rs</code> inside the <code>target</code> directory. This
+file contains the expansion of the <code>#[rtic::app]</code> item (not your whole program!)
+of the <em>last built</em> (via <code>cargo build</code> or <code>cargo check</code>) RTIC application. The
+expanded code is not pretty printed by default so you'll want to run <code>rustfmt</code>
+over it before you read it.</p>
+<pre><code class="language-console">$ cargo build --example foo
 
 $ rustfmt target/rtic-expansion.rs
 
@@ -2474,7 +2445,7 @@ const APP: () = {
         // .. user code ..
     }
 
-    #[interrupt(binds = UART0, priority = 2)]
+    #[task(binds = UART0, priority = 2)]
     fn foo(c: foo::Context) {
         // .. user code ..
     }
@@ -2748,7 +2719,7 @@ const APP: () = {
     }
 };
 </code></pre></pre>
-<h1><a class="header" href="#late-resources" id="late-resources">Late resources</a></h1>
+<h1><a class="header" href="#late-resources-1" id="late-resources-1">Late resources</a></h1>
 <p>Some resources are initialized at runtime after the <code>init</code> function returns.
 It's important that these resources (static variables) are fully initialized
 before tasks are allowed to run, that is they must be initialized while
@@ -2987,7 +2958,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
+<h2><a class="header" href="#lock-1" id="lock-1"><code>lock</code></a></h2>
 <p>Let's now zoom into the critical section itself. In this example, we have to
 raise the dynamic priority to at least <code>2</code> to prevent a data race. On the
 Cortex-M architecture the dynamic priority can be changed by writing to the

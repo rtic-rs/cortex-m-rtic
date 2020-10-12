@@ -253,23 +253,21 @@ shared: 0 -&gt; 1
 UART0(STATE = 0)
 shared: 1 -&gt; 2
 UART1(STATE = 1)
-shared: 2 -&gt; 4```
-
-Using generics also lets you change the static priorities of tasks during
-development without having to rewrite a bunch code every time.
-
-## Conditional compilation
-
-You can use conditional compilation (`#[cfg]`) on resources (the fields of
-`struct Resources`) and tasks (the `fn` items). The effect of using `#[cfg]`
-attributes is that the resource / task will *not* be available through the
-corresponding `Context` `struct` if the condition doesn't hold.
-
-The example below logs a message whenever the `foo` task is spawned, but only if
-the program has been compiled using the `dev` profile.
-
-``` rust
-//! examples/cfg.rs
+shared: 2 -&gt; 4
+</code></pre>
+<p>Using generics also lets you change the static priorities of tasks during
+development without having to rewrite a bunch code every time.</p>
+<h2><a class="header" href="#conditional-compilation" id="conditional-compilation">Conditional compilation</a></h2>
+<p>You can use conditional compilation (<code>#[cfg]</code>) on resources (the fields of
+<code>struct Resources</code>) and tasks (the <code>fn</code> items). The effect of using <code>#[cfg]</code>
+attributes is that the resource / task will <em>not</em> be available through the
+corresponding <code>Context</code> <code>struct</code> if the condition doesn't hold.</p>
+<p>The example below logs a message whenever the <code>foo</code> task is spawned, but only if
+the program has been compiled using the <code>dev</code> profile.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/cfg.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -336,36 +334,34 @@ const APP: () = {
         fn QEI0();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example cfg --release
 
 $ cargo run --example cfg
 foo has been called 1 time
-foo has been called 2 times```
-
-## Running tasks from RAM
-
-The main goal of moving the specification of RTIC applications to attributes in
+foo has been called 2 times
+</code></pre>
+<h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
+<p>The main goal of moving the specification of RTIC applications to attributes in
 RTIC v0.4.0 was to allow inter-operation with other attributes. For example, the
-`link_section` attribute can be applied to tasks to place them in RAM; this can
-improve performance in some cases.
-
-&gt; **IMPORTANT**: In general, the `link_section`, `export_name` and `no_mangle`
-&gt; attributes are very powerful but also easy to misuse. Incorrectly using any of
-&gt; these attributes can cause undefined behavior; you should always prefer to use
-&gt; safe, higher level attributes around them like `cortex-m-rt`'s `interrupt` and
-&gt; `exception` attributes.
-&gt;
-&gt; In the particular case of RAM functions there's no
-&gt; safe abstraction for it in `cortex-m-rt` v0.6.5 but there's an [RFC] for
-&gt; adding a `ramfunc` attribute in a future release.
-
-[RFC]: https://github.com/rust-embedded/cortex-m-rt/pull/100
-
-The example below shows how to place the higher priority task, `bar`, in RAM.
-
-``` rust
-//! examples/ramfunc.rs
+<code>link_section</code> attribute can be applied to tasks to place them in RAM; this can
+improve performance in some cases.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong>: In general, the <code>link_section</code>, <code>export_name</code> and <code>no_mangle</code>
+attributes are very powerful but also easy to misuse. Incorrectly using any of
+these attributes can cause undefined behavior; you should always prefer to use
+safe, higher level attributes around them like <code>cortex-m-rt</code>'s <code>interrupt</code> and
+<code>exception</code> attributes.</p>
+<p>In the particular case of RAM functions there's no
+safe abstraction for it in <code>cortex-m-rt</code> v0.6.5 but there's an <a href="https://github.com/rust-embedded/cortex-m-rt/pull/100">RFC</a> for
+adding a <code>ramfunc</code> attribute in a future release.</p>
+</blockquote>
+<p>The example below shows how to place the higher priority task, <code>bar</code>, in RAM.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/ramfunc.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -406,16 +402,15 @@ const APP: () = {
         fn UART1();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>Running this program produces the expected output.</p>
 <pre><code class="language-console">$ cargo run --example ramfunc
-foo```
-
-One can look at the output of `cargo-nm` to confirm that `bar` ended in RAM
-(`0x2000_0000`), whereas `foo` ended in Flash (`0x0000_0000`).
-
-``` console
-$ cargo nm --example ramfunc --release | grep ' foo::'
+foo
+</code></pre>
+<p>One can look at the output of <code>cargo-nm</code> to confirm that <code>bar</code> ended in RAM
+(<code>0x2000_0000</code>), whereas <code>foo</code> ended in Flash (<code>0x0000_0000</code>).</p>
+<pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' foo::'
 00000162 t ramfunc::foo::h30e7789b08c08e19
 </code></pre>
 <pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' bar::'
@@ -508,22 +503,18 @@ const APP: () = {
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example pool
 bar(0x2000008c)
-foo(0x20000110)```
-
-## Inspecting the expanded code
-
-`#[rtic::app]` is a procedural macro that produces support code. If for some
+foo(0x20000110)
+</code></pre>
+<h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
+<p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some
 reason you need to inspect the code generated by this macro you have two
-options:
-
-You can inspect the file `rtic-expansion.rs` inside the `target` directory. This
-file contains the expansion of the `#[rtic::app]` item (not your whole program!)
-of the *last built* (via `cargo build` or `cargo check`) RTIC application. The
-expanded code is not pretty printed by default so you'll want to run `rustfmt`
-over it before you read it.
-
-``` console
-$ cargo build --example foo
+options:</p>
+<p>You can inspect the file <code>rtic-expansion.rs</code> inside the <code>target</code> directory. This
+file contains the expansion of the <code>#[rtic::app]</code> item (not your whole program!)
+of the <em>last built</em> (via <code>cargo build</code> or <code>cargo check</code>) RTIC application. The
+expanded code is not pretty printed by default so you'll want to run <code>rustfmt</code>
+over it before you read it.</p>
+<pre><code class="language-console">$ cargo build --example foo
 
 $ rustfmt target/rtic-expansion.rs
 

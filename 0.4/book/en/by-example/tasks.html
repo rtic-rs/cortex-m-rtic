@@ -233,18 +233,17 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example task
 foo
 baz
-bar```
-
-## Message passing
-
-The other advantage of software tasks is that messages can be passed to these
+bar
+</code></pre>
+<h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
+<p>The other advantage of software tasks is that messages can be passed to these
 tasks when spawning them. The type of the message payload must be specified in
-the signature of the task handler.
-
-The example below showcases three tasks, two of them expect a message.
-
-``` rust
-//! examples/message.rs
+the signature of the task handler.</p>
+<p>The example below showcases three tasks, two of them expect a message.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/message.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -295,29 +294,29 @@ const APP: () = {
         fn UART0();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example message
 foo
 bar(0)
 baz(1, 2)
 foo
 bar(1)
-baz(2, 3)```
-
-## Capacity
-
-Task dispatchers do *not* use any dynamic memory allocation. The memory required
+baz(2, 3)
+</code></pre>
+<h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
+<p>Task dispatchers do <em>not</em> use any dynamic memory allocation. The memory required
 to store messages is statically reserved. The framework will reserve enough
 space for every context to be able to spawn each task at most once. This is a
 sensible default but the &quot;inbox&quot; capacity of each task can be controlled using
-the `capacity` argument of the `task` attribute.
-
-The example below sets the capacity of the software task `foo` to 4. If the
-capacity is not specified then the second `spawn.foo` call in `UART0` would
-fail.
-
-``` rust
-//! examples/capacity.rs
+the <code>capacity</code> argument of the <code>task</code> attribute.</p>
+<p>The example below sets the capacity of the software task <code>foo</code> to 4. If the
+capacity is not specified then the second <code>spawn.foo</code> call in <code>UART0</code> would
+fail.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/capacity.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -364,13 +363,14 @@ const APP: () = {
         fn UART1();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example capacity
 foo(0)
 foo(1)
 foo(2)
 foo(3)
-bar```
+bar
 </code></pre>
 
                     </main>

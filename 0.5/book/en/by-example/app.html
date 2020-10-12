@@ -247,30 +247,24 @@ const APP: () = {
 <p>Running the example will print <code>init</code> to the console and then exit the QEMU
 process.</p>
 <pre><code class="language-console">$ cargo run --example init
-init```
-
-## `idle`
-
-A function marked with the `idle` attribute can optionally appear in the
-pseudo-module. This function is used as the special *idle task* and must have
-signature `fn(idle::Context) - &gt; !`.
-
-When present, the runtime will execute the `idle` task after `init`. Unlike
-`init`, `idle` will run *with interrupts enabled* and it's not allowed to return
-so it must run forever.
-
-When no `idle` function is declared, the runtime sets the [SLEEPONEXIT] bit and
-then sends the microcontroller to sleep after running `init`.
-
-[SLEEPONEXIT]: https://developer.arm.com/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit
-
-Like in `init`, `static mut` variables will be transformed into `&amp;'static mut`
-references that are safe to access.
-
-The example below shows that `idle` runs after `init`.
-
-``` rust
-//! examples/idle.rs
+init
+</code></pre>
+<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
+<p>A function marked with the <code>idle</code> attribute can optionally appear in the
+pseudo-module. This function is used as the special <em>idle task</em> and must have
+signature <code>fn(idle::Context) - &gt; !</code>.</p>
+<p>When present, the runtime will execute the <code>idle</code> task after <code>init</code>. Unlike
+<code>init</code>, <code>idle</code> will run <em>with interrupts enabled</em> and it's not allowed to return
+so it must run forever.</p>
+<p>When no <code>idle</code> function is declared, the runtime sets the <a href="https://developer.arm.com/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a> bit and
+then sends the microcontroller to sleep after running <code>init</code>.</p>
+<p>Like in <code>init</code>, <code>static mut</code> variables will be transformed into <code>&amp;'static mut</code>
+references that are safe to access.</p>
+<p>The example below shows that <code>idle</code> runs after <code>init</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/idle.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -301,26 +295,25 @@ const APP: () = {
         loop {}
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example idle
 init
-idle```
-
-## Hardware tasks
-
-To declare interrupt handlers the framework provides a `#[task]` attribute that
-can be attached to functions. This attribute takes a `binds` argument whose
+idle
+</code></pre>
+<h2><a class="header" href="#hardware-tasks" id="hardware-tasks">Hardware tasks</a></h2>
+<p>To declare interrupt handlers the framework provides a <code>#[task]</code> attribute that
+can be attached to functions. This attribute takes a <code>binds</code> argument whose
 value is the name of the interrupt to which the handler will be bound to; the
 function adorned with this attribute becomes the interrupt handler. Within the
-framework these type of tasks are referred to as *hardware* tasks, because they
-start executing in reaction to a hardware event.
-
-The example below demonstrates the use of the `#[task]` attribute to declare an
-interrupt handler. Like in the case of `#[init]` and `#[idle]` local `static
-mut` variables are safe to use within a hardware task.
-
-``` rust
-//! examples/hardware.rs
+framework these type of tasks are referred to as <em>hardware</em> tasks, because they
+start executing in reaction to a hardware event.</p>
+<p>The example below demonstrates the use of the <code>#[task]</code> attribute to declare an
+interrupt handler. Like in the case of <code>#[init]</code> and <code>#[idle]</code> local <code>static mut</code> variables are safe to use within a hardware task.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/hardware.rs
 
 #![deny(unsafe_code)]
 #![deny(warnings)]
@@ -370,39 +363,36 @@ const APP: () = {
         .unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example hardware
 init
 UART0 called 1 time
 idle
-UART0 called 2 times```
-
-So far all the RTIC applications we have seen look no different than the
-applications one can write using only the `cortex-m-rt` crate. From this point
-we start introducing features unique to RTIC.
-
-## Priorities
-
-The static priority of each handler can be declared in the `task` attribute
-using the `priority` argument. Tasks can have priorities in the range `1..=(1 &lt;&lt;
-NVIC_PRIO_BITS)` where `NVIC_PRIO_BITS` is a constant defined in the `device`
-crate. When the `priority` argument is omitted, the priority is assumed to be
-`1`. The `idle` task has a non-configurable static priority of `0`, the lowest
-priority.
-
-When several tasks are ready to be executed the one with *highest* static
+UART0 called 2 times
+</code></pre>
+<p>So far all the RTIC applications we have seen look no different than the
+applications one can write using only the <code>cortex-m-rt</code> crate. From this point
+we start introducing features unique to RTIC.</p>
+<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
+<p>The static priority of each handler can be declared in the <code>task</code> attribute
+using the <code>priority</code> argument. Tasks can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
+crate. When the <code>priority</code> argument is omitted, the priority is assumed to be
+<code>1</code>. The <code>idle</code> task has a non-configurable static priority of <code>0</code>, the lowest
+priority.</p>
+<p>When several tasks are ready to be executed the one with <em>highest</em> static
 priority will be executed first. Task prioritization can be observed in the
 following scenario: an interrupt signal arrives during the execution of a low
 priority task; the signal puts the higher priority task in the pending state.
 The difference in priority results in the higher priority task preempting the
 lower priority one: the execution of the lower priority task is suspended and
 the higher priority task is executed to completion. Once the higher priority
-task has terminated the lower priority task is resumed.
-
-The following example showcases the priority based scheduling of tasks.
-
-``` rust
-//! examples/preempt.rs
+task has terminated the lower priority task is resumed.</p>
+<p>The following example showcases the priority based scheduling of tasks.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/preempt.rs
 
 #![no_main]
 #![no_std]
@@ -439,26 +429,25 @@ const APP: () = {
         hprintln!(&quot; GPIOC - end&quot;).unwrap();
     }
 };
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example preempt
 GPIOA - start
  GPIOC - start
  GPIOC - end
  GPIOB
-GPIOA - end```
-
-Note that the task `gpiob` does *not* preempt task `gpioc` because its priority
-is the *same* as `gpioc`'s. However, once `gpioc` terminates the execution of
-task, `gpiob` is prioritized over `gpioa` due to its higher priority. `gpioa`
-is resumed only after `gpiob` terminates.
-
-One more note about priorities: choosing a priority higher than what the device
-supports (that is `1 &lt;&lt; NVIC_PRIO_BITS`) will result in a compile error. Due to
+GPIOA - end
+</code></pre>
+<p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
+is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of
+task, <code>gpiob</code> is prioritized over <code>gpioa</code> due to its higher priority. <code>gpioa</code>
+is resumed only after <code>gpiob</code> terminates.</p>
+<p>One more note about priorities: choosing a priority higher than what the device
+supports (that is <code>1 &lt;&lt; NVIC_PRIO_BITS</code>) will result in a compile error. Due to
 limitations in the language, the error message is currently far from helpful: it
 will say something along the lines of &quot;evaluation of constant value failed&quot; and
-the span of the error will *not* point out to the problematic interrupt value --
-we are sorry about this!
-</code></pre>
+the span of the error will <em>not</em> point out to the problematic interrupt value --
+we are sorry about this!</p>
 
                     </main>
 
