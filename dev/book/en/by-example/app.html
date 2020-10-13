@@ -181,11 +181,13 @@ mod app {}
 <span class="boring">}
 </span></code></pre></pre>
 <p>All RTIC applications use the <a href="../../../api/cortex_m_rtic_macros/attr.app.html"><code>app</code></a> attribute (<code>#[app(..)]</code>). This attribute
-must be applied to a <code>mod</code>-item. The <code>app</code> attribute has
-a mandatory <code>device</code> argument that takes a <em>path</em> as a value. This path must
-point to a <em>peripheral access crate</em> (PAC) generated using <a href="https://crates.io/crates/svd2rust"><code>svd2rust</code></a>
-<strong>v0.14.x</strong> or newer. The <code>app</code> attribute will expand into a suitable entry
-point so it's not required to use the <a href="../../../api/cortex_m_rt_macros/attr.entry.html"><code>cortex_m_rt::entry</code></a> attribute.</p>
+must be applied to a <code>mod</code>-item. The <code>app</code> attribute has a mandatory <code>device</code>
+argument that takes a <em>path</em> as a value. This must be a full path pointing to a
+<em>peripheral access crate</em> (PAC) generated using <a href="https://crates.io/crates/svd2rust"><code>svd2rust</code></a> <strong>v0.14.x</strong> or
+newer. More details can be found in the <a href="./new.html">Starting a new project</a>
+section.</p>
+<p>The <code>app</code> attribute will expand into a suitable entry point so it's not required
+to use the <a href="../../../api/cortex_m_rt_macros/attr.entry.html"><code>cortex_m_rt::entry</code></a> attribute.</p>
 <h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
 <p>Within the <code>app</code> module the attribute expects to find an initialization
 function marked with the <code>init</code> attribute. This function must have signature

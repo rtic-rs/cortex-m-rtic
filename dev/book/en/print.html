@@ -304,11 +304,13 @@ mod app {}
 <span class="boring">}
 </span></code></pre></pre>
 <p>All RTIC applications use the <a href="by-example/../../../api/cortex_m_rtic_macros/attr.app.html"><code>app</code></a> attribute (<code>#[app(..)]</code>). This attribute
-must be applied to a <code>mod</code>-item. The <code>app</code> attribute has
-a mandatory <code>device</code> argument that takes a <em>path</em> as a value. This path must
-point to a <em>peripheral access crate</em> (PAC) generated using <a href="https://crates.io/crates/svd2rust"><code>svd2rust</code></a>
-<strong>v0.14.x</strong> or newer. The <code>app</code> attribute will expand into a suitable entry
-point so it's not required to use the <a href="by-example/../../../api/cortex_m_rt_macros/attr.entry.html"><code>cortex_m_rt::entry</code></a> attribute.</p>
+must be applied to a <code>mod</code>-item. The <code>app</code> attribute has a mandatory <code>device</code>
+argument that takes a <em>path</em> as a value. This must be a full path pointing to a
+<em>peripheral access crate</em> (PAC) generated using <a href="https://crates.io/crates/svd2rust"><code>svd2rust</code></a> <strong>v0.14.x</strong> or
+newer. More details can be found in the <a href="by-example/./new.html">Starting a new project</a>
+section.</p>
+<p>The <code>app</code> attribute will expand into a suitable entry point so it's not required
+to use the <a href="by-example/../../../api/cortex_m_rt_macros/attr.entry.html"><code>cortex_m_rt::entry</code></a> attribute.</p>
 <h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
 <p>Within the <code>app</code> module the attribute expects to find an initialization
 function marked with the <code>init</code> attribute. This function must have signature
@@ -1776,7 +1778,24 @@ $ rm memory.x build.rs
     -L https://github.com/rtic-rs/cortex-m-rtic/raw/v0.5.3/examples/init.rs \
     &gt; src/main.rs
 </code></pre>
-<p>That example depends on the <code>panic-semihosting</code> crate:</p>
+<p>The <code>init</code> example uses the <code>lm3s6965</code> device. Remember to adjust the <code>device</code>
+argument in the app macro attribute to match the path of your PAC crate, if
+different, and add peripherals or other arguments if needed. Although aliases
+can be used, this needs to be a full path (from the crate root). For many
+devices, it is common for the HAL implementation crate (aliased as <code>hal</code>) or
+Board Support crate to re-export the PAC as <code>pac</code>, leading to a pattern similar
+to the below:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use abcd123_hal as hal;
+//...
+
+#[rtic::app(device = crate::hal::pac, peripherals = true, monotonic = rtic::cyccnt::CYCCNT)]
+mod app { /*...*/ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>init</code> example also depends on the <code>panic-semihosting</code> crate:</p>
 <pre><code class="language-console">$ cargo add panic-semihosting
 </code></pre>
 <ol start="5">
