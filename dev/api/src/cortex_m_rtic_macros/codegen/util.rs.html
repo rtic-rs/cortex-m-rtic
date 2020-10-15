@@ -331,7 +331,7 @@
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interrupt_ident</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">Span</span>::<span class="ident">call_site</span>();
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;Interrupt&quot;</span>, <span class="ident">span</span>)
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;interrupt&quot;</span>, <span class="ident">span</span>)
 }
 
 <span class="doccomment">/// Whether `name` is an exception with configurable priority</span>

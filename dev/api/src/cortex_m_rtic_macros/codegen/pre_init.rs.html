@@ -163,14 +163,14 @@
         <span class="kw">let</span> <span class="ident">interrupt</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">interrupt_ident</span>();
         <span class="ident">stmts</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
             <span class="ident">core</span>.<span class="ident">NVIC</span>.<span class="ident">set_priority</span>(
-                #<span class="ident">device</span>::#<span class="ident">interrupt</span>::#<span class="ident">name</span>,
+                <span class="ident">you_must_enable_the_rt_feature_for_the_pac_in_your_cargo_toml</span>::#<span class="ident">interrupt</span>::#<span class="ident">name</span>,
                 <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">logical2hw</span>(#<span class="ident">priority</span>, #<span class="ident">nvic_prio_bits</span>),
             );
         ));
 
         <span class="comment">// NOTE unmask the interrupt *after* setting its priority: changing the priority of a pended</span>
         <span class="comment">// interrupt is implementation defined</span>
-        <span class="ident">stmts</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">NVIC</span>::<span class="ident">unmask</span>(#<span class="ident">device</span>::#<span class="ident">interrupt</span>::#<span class="ident">name</span>);));
+        <span class="ident">stmts</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">NVIC</span>::<span class="ident">unmask</span>(<span class="ident">you_must_enable_the_rt_feature_for_the_pac_in_your_cargo_toml</span>::#<span class="ident">interrupt</span>::#<span class="ident">name</span>);));
     }
 
     <span class="comment">// Set exception priorities</span>
