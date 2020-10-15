@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rtic-syntax-0.4.0/src/analyze.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>analyze.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rtic_syntax/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rtic-syntax-0.4.0/src/analyze.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>analyze.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rtic_syntax/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -721,11 +722,11 @@
 
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ast</span>::<span class="ident">App</span>, <span class="ident">Core</span>, <span class="ident">Set</span>};
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">app</span>(<span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Analysis</span> {
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">app</span>(<span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-&gt;</span> <span class="ident">Analysis</span> {
     <span class="comment">// a. Which core initializes which resources</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">late_resources</span> <span class="op">=</span> <span class="ident">LateResources</span>::<span class="ident">new</span>();
     <span class="kw">if</span> <span class="op">!</span><span class="ident">app</span>.<span class="ident">late_resources</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">resources</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">late_resources</span>.<span class="ident">keys</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">resources</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">late_resources</span>.<span class="ident">keys</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rest</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">core</span>, <span class="ident">init</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">inits</span> {
             <span class="kw">if</span> <span class="ident">init</span>.<span class="ident">args</span>.<span class="ident">late</span>.<span class="ident">is_empty</span>() {
@@ -779,7 +780,7 @@
         <span class="comment">// (d)</span>
         <span class="kw">if</span> <span class="ident">access</span>.<span class="ident">is_shared</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">other_core</span>) <span class="op">=</span> <span class="ident">shared_accesses</span>.<span class="ident">get</span>(<span class="ident">name</span>) {
-                <span class="kw">if</span> <span class="ident">other_core</span> <span class="op">!</span><span class="op">=</span> <span class="ident">core</span> {
+                <span class="kw">if</span> <span class="ident">other_core</span> <span class="op">!=</span> <span class="ident">core</span> {
                     <span class="comment">// a resources accessed from different cores needs to be `Sync` regardless of</span>
                     <span class="comment">// priorities</span>
                     <span class="ident">sync_types</span>.<span class="ident">entry</span>(<span class="ident">core</span>).<span class="ident">or_default</span>().<span class="ident">insert</span>(<span class="ident">res</span>.<span class="ident">ty</span>.<span class="ident">clone</span>());
@@ -798,8 +799,8 @@
             <span class="kw">match</span> <span class="ident">loc</span> {
                 <span class="ident">Location</span>::<span class="ident">Owned</span> {
                     <span class="ident">core</span>: <span class="ident">other_core</span>, ..
-                } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">if</span> <span class="ident">core</span> <span class="op">!</span><span class="op">=</span> <span class="kw-2">*</span><span class="ident">other_core</span> {
+                } <span class="op">=&gt;</span> {
+                    <span class="kw">if</span> <span class="ident">core</span> <span class="op">!=</span> <span class="kw-2">*</span><span class="ident">other_core</span> {
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cores</span> <span class="op">=</span> <span class="ident">BTreeSet</span>::<span class="ident">new</span>();
                         <span class="ident">cores</span>.<span class="ident">insert</span>(<span class="ident">core</span>);
                         <span class="ident">cores</span>.<span class="ident">insert</span>(<span class="kw-2">*</span><span class="ident">other_core</span>);
@@ -807,7 +808,7 @@
                     }
                 }
 
-                <span class="ident">Location</span>::<span class="ident">Shared</span> { <span class="ident">cores</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Location</span>::<span class="ident">Shared</span> { <span class="ident">cores</span> } <span class="op">=&gt;</span> {
                     <span class="ident">cores</span>.<span class="ident">insert</span>(<span class="ident">core</span>);
                 }
             }
@@ -828,7 +829,7 @@
                     <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span>: <span class="ident">ceiling</span> }
                     <span class="op">|</span> <span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { <span class="ident">priority</span>: <span class="ident">ceiling</span> }
                     <span class="op">|</span> <span class="ident">Ownership</span>::<span class="ident">Contended</span> { <span class="ident">ceiling</span> }
-                        <span class="kw">if</span> <span class="ident">priority</span> <span class="op">!</span><span class="op">=</span> <span class="ident">ceiling</span> <span class="op">=</span><span class="op">&gt;</span>
+                        <span class="kw">if</span> <span class="ident">priority</span> <span class="op">!=</span> <span class="ident">ceiling</span> <span class="op">=&gt;</span>
                     {
                         <span class="kw-2">*</span><span class="ident">ownership</span> <span class="op">=</span> <span class="ident">Ownership</span>::<span class="ident">Contended</span> {
                             <span class="ident">ceiling</span>: <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">ceiling</span>, <span class="ident">priority</span>),
@@ -839,11 +840,11 @@
                         }
                     }
 
-                    <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span>: <span class="ident">ceil</span> } <span class="kw">if</span> <span class="ident">ceil</span> <span class="op">=</span><span class="op">=</span> <span class="ident">priority</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span>: <span class="ident">ceil</span> } <span class="kw">if</span> <span class="ident">ceil</span> <span class="op">==</span> <span class="ident">priority</span> <span class="op">=&gt;</span> {
                         <span class="kw-2">*</span><span class="ident">ownership</span> <span class="op">=</span> <span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { <span class="ident">priority</span> };
                     }
 
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {}
+                    <span class="kw">_</span> <span class="op">=&gt;</span> {}
                 }
             } <span class="kw">else</span> {
                 <span class="ident">ownerships</span>.<span class="ident">insert</span>(<span class="ident">name</span>.<span class="ident">clone</span>(), <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span> });
@@ -854,7 +855,7 @@
         <span class="comment">// like a receiver</span>
         <span class="kw">let</span> <span class="ident">receiver</span> <span class="op">=</span> <span class="ident">core</span>;
         <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">sender</span>, <span class="ident">resources</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">late_resources</span> {
-            <span class="kw">if</span> <span class="ident">sender</span> <span class="op">=</span><span class="op">=</span> <span class="ident">receiver</span> {
+            <span class="kw">if</span> <span class="ident">sender</span> <span class="op">==</span> <span class="ident">receiver</span> {
                 <span class="kw">continue</span>;
             }
 
@@ -874,7 +875,7 @@
         } <span class="op">=</span> <span class="ident">loc</span>
         {
             <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">initializer</span>, <span class="ident">resources</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">late_resources</span> {
-                <span class="kw">if</span> <span class="ident">resources</span>.<span class="ident">contains</span>(<span class="ident">name</span>) <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="kw-2">*</span><span class="ident">core</span> <span class="op">!</span><span class="op">=</span> <span class="ident">initializer</span> {
+                <span class="kw">if</span> <span class="ident">resources</span>.<span class="ident">contains</span>(<span class="ident">name</span>) <span class="op">&amp;&amp;</span> <span class="kw-2">*</span><span class="ident">core</span> <span class="op">!=</span> <span class="ident">initializer</span> {
                     <span class="kw-2">*</span><span class="ident">cross_initialized</span> <span class="op">=</span> <span class="bool-val">true</span>;
                 }
             }
@@ -890,18 +891,18 @@
             .<span class="ident">get</span>(<span class="ident">name</span>)
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">loc</span><span class="op">|</span> <span class="ident">loc</span>.<span class="ident">cross_initialized</span>())
             .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
-            <span class="op">|</span><span class="op">|</span> <span class="ident">ownerships</span>
+            <span class="op">||</span> <span class="ident">ownerships</span>
                 .<span class="ident">get</span>(<span class="ident">name</span>)
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ownership</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">ownership</span> <span class="op">!</span><span class="op">=</span> <span class="ident">owned_by_idle</span>)
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ownership</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">ownership</span> <span class="op">!=</span> <span class="ident">owned_by_idle</span>)
                 .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
         {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">loc</span>) <span class="op">=</span> <span class="ident">locations</span>.<span class="ident">get</span>(<span class="ident">name</span>) {
                 <span class="kw">match</span> <span class="ident">loc</span> {
-                    <span class="ident">Location</span>::<span class="ident">Owned</span> { <span class="ident">core</span>, .. } <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">Location</span>::<span class="ident">Owned</span> { <span class="ident">core</span>, .. } <span class="op">=&gt;</span> {
                         <span class="ident">send_types</span>.<span class="ident">entry</span>(<span class="kw-2">*</span><span class="ident">core</span>).<span class="ident">or_default</span>().<span class="ident">insert</span>(<span class="ident">res</span>.<span class="ident">ty</span>.<span class="ident">clone</span>());
                     }
 
-                    <span class="ident">Location</span>::<span class="ident">Shared</span> { <span class="ident">cores</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cores</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">core</span><span class="op">|</span> {
+                    <span class="ident">Location</span>::<span class="ident">Shared</span> { <span class="ident">cores</span> } <span class="op">=&gt;</span> <span class="ident">cores</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">core</span><span class="op">|</span> {
                         <span class="ident">send_types</span>.<span class="ident">entry</span>(<span class="ident">core</span>).<span class="ident">or_default</span>().<span class="ident">insert</span>(<span class="ident">res</span>.<span class="ident">ty</span>.<span class="ident">clone</span>());
                     }),
                 }
@@ -916,17 +917,17 @@
         .<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">init</span><span class="op">|</span> <span class="ident">init</span>.<span class="ident">args</span>.<span class="ident">resources</span>.<span class="ident">keys</span>())
     {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ownership</span>) <span class="op">=</span> <span class="ident">ownerships</span>.<span class="ident">get</span>(<span class="ident">name</span>) {
-            <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">ownership</span> <span class="op">!</span><span class="op">=</span> <span class="ident">owned_by_idle</span> {
+            <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">ownership</span> <span class="op">!=</span> <span class="ident">owned_by_idle</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">loc</span>) <span class="op">=</span> <span class="ident">locations</span>.<span class="ident">get</span>(<span class="ident">name</span>) {
                     <span class="kw">match</span> <span class="ident">loc</span> {
-                        <span class="ident">Location</span>::<span class="ident">Owned</span> { <span class="ident">core</span>, .. } <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="ident">Location</span>::<span class="ident">Owned</span> { <span class="ident">core</span>, .. } <span class="op">=&gt;</span> {
                             <span class="ident">send_types</span>
                                 .<span class="ident">entry</span>(<span class="kw-2">*</span><span class="ident">core</span>)
                                 .<span class="ident">or_default</span>()
                                 .<span class="ident">insert</span>(<span class="ident">app</span>.<span class="ident">resources</span>[<span class="ident">name</span>].<span class="ident">ty</span>.<span class="ident">clone</span>());
                         }
 
-                        <span class="ident">Location</span>::<span class="ident">Shared</span> { <span class="ident">cores</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cores</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">core</span><span class="op">|</span> {
+                        <span class="ident">Location</span>::<span class="ident">Shared</span> { <span class="ident">cores</span> } <span class="op">=&gt;</span> <span class="ident">cores</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">core</span><span class="op">|</span> {
                             <span class="ident">send_types</span>
                                 .<span class="ident">entry</span>(<span class="ident">core</span>)
                                 .<span class="ident">or_default</span>()
@@ -948,7 +949,7 @@
         <span class="kw">let</span> <span class="ident">tq</span> <span class="op">=</span> <span class="ident">timer_queues</span>.<span class="ident">entry</span>(<span class="ident">scheduler_core</span>).<span class="ident">or_default</span>();
         <span class="ident">tq</span>.<span class="ident">tasks</span>.<span class="ident">insert</span>(<span class="ident">name</span>.<span class="ident">clone</span>());
 
-        <span class="kw">if</span> <span class="ident">scheduler_core</span> <span class="op">=</span><span class="op">=</span> <span class="ident">schedulee_core</span> {
+        <span class="kw">if</span> <span class="ident">scheduler_core</span> <span class="op">==</span> <span class="ident">schedulee_core</span> {
             <span class="comment">// the handler priority must match the priority of the highest priority schedulee that&#39;s</span>
             <span class="comment">// dispatched in the same core</span>
             <span class="ident">tq</span>.<span class="ident">priority</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">tq</span>.<span class="ident">priority</span>, <span class="ident">schedulee_prio</span>);
@@ -961,14 +962,14 @@
                 .<span class="ident">hardware_tasks</span>
                 .<span class="ident">values</span>()
                 .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">task</span><span class="op">|</span> {
-                    <span class="kw">if</span> <span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">core</span> <span class="op">=</span><span class="op">=</span> <span class="ident">scheduler_core</span> {
+                    <span class="kw">if</span> <span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">core</span> <span class="op">==</span> <span class="ident">scheduler_core</span> {
                         <span class="prelude-val">Some</span>(<span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">priority</span>)
                     } <span class="kw">else</span> {
                         <span class="prelude-val">None</span>
                     }
                 })
                 .<span class="ident">chain</span>(<span class="ident">app</span>.<span class="ident">software_tasks</span>.<span class="ident">values</span>().<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">task</span><span class="op">|</span> {
-                    <span class="kw">if</span> <span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">core</span> <span class="op">=</span><span class="op">=</span> <span class="ident">scheduler_core</span> {
+                    <span class="kw">if</span> <span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">core</span> <span class="op">==</span> <span class="ident">scheduler_core</span> {
                         <span class="prelude-val">Some</span>(<span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">priority</span>)
                     } <span class="kw">else</span> {
                         <span class="prelude-val">None</span>
@@ -996,7 +997,7 @@
         <span class="kw">let</span> <span class="ident">spawnee_prio</span> <span class="op">=</span> <span class="ident">spawnee</span>.<span class="ident">args</span>.<span class="ident">priority</span>;
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">must_be_send</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">if</span> <span class="ident">spawner_core</span> <span class="op">!</span><span class="op">=</span> <span class="ident">spawnee_core</span> {
+        <span class="kw">if</span> <span class="ident">spawner_core</span> <span class="op">!=</span> <span class="ident">spawnee_core</span> {
             <span class="comment">// (i)</span>
             <span class="kw">let</span> <span class="ident">spawned_from_init</span> <span class="op">=</span> <span class="ident">spawner_prio</span>.<span class="ident">is_none</span>();
             <span class="ident">spawn_barriers</span>
@@ -1026,22 +1027,22 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">prio</span>) <span class="op">=</span> <span class="ident">spawner_prio</span> {
             <span class="comment">// (h) Spawners contend for the `channel`</span>
             <span class="kw">match</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> {
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">prio</span>),
-                <span class="prelude-val">Some</span>(<span class="ident">ceil</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">prio</span>, <span class="ident">ceil</span>)),
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">prio</span>),
+                <span class="prelude-val">Some</span>(<span class="ident">ceil</span>) <span class="op">=&gt;</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">prio</span>, <span class="ident">ceil</span>)),
             }
 
             <span class="comment">// (g) Spawners contend for the free queue</span>
             <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">fq</span> {
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">fq</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">prio</span>),
-                <span class="prelude-val">Some</span>(<span class="ident">ceil</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">fq</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">ceil</span>, <span class="ident">prio</span>)),
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw-2">*</span><span class="ident">fq</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">prio</span>),
+                <span class="prelude-val">Some</span>(<span class="ident">ceil</span>) <span class="op">=&gt;</span> <span class="kw-2">*</span><span class="ident">fq</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">ceil</span>, <span class="ident">prio</span>)),
             }
 
             <span class="comment">// (j) core-local messages that connect tasks running at different priorities need to be</span>
             <span class="comment">// `Send`</span>
-            <span class="kw">if</span> <span class="ident">spawner_core</span> <span class="op">=</span><span class="op">=</span> <span class="ident">spawnee_core</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">spawnee_prio</span> <span class="op">!</span><span class="op">=</span> <span class="ident">prio</span> {
+            <span class="kw">if</span> <span class="ident">spawner_core</span> <span class="op">==</span> <span class="ident">spawnee_core</span> <span class="op">&amp;&amp;</span> <span class="ident">spawnee_prio</span> <span class="op">!=</span> <span class="ident">prio</span> {
                 <span class="ident">must_be_send</span> <span class="op">=</span> <span class="bool-val">true</span>;
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">spawner_core</span> <span class="op">=</span><span class="op">=</span> <span class="ident">spawnee_core</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">spawner_core</span> <span class="op">==</span> <span class="ident">spawnee_core</span> {
             <span class="comment">// (g, h) spawns from `init` are excluded from the ceiling analysis</span>
             <span class="comment">// (j) but spawns from `init` must be `Send`</span>
             <span class="ident">must_be_send</span> <span class="op">=</span> <span class="bool-val">true</span>;
@@ -1075,7 +1076,7 @@
         <span class="kw">let</span> <span class="ident">schedulee_prio</span> <span class="op">=</span> <span class="ident">schedulee</span>.<span class="ident">args</span>.<span class="ident">priority</span>;
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">must_be_send</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">if</span> <span class="ident">scheduler_core</span> <span class="op">!</span><span class="op">=</span> <span class="ident">schedulee_core</span> {
+        <span class="kw">if</span> <span class="ident">scheduler_core</span> <span class="op">!=</span> <span class="ident">schedulee_core</span> {
             <span class="comment">// (n)</span>
             <span class="kw">match</span> <span class="ident">spawn_barriers</span>
                 .<span class="ident">entry</span>(<span class="ident">schedulee_core</span>)
@@ -1084,11 +1085,11 @@
             {
                 <span class="comment">// NOTE `schedule`s always send messages from the timer queue handler so they never</span>
                 <span class="comment">// send messages during `init`</span>
-                <span class="ident">Entry</span>::<span class="ident">Vacant</span>(<span class="ident">entry</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Entry</span>::<span class="ident">Vacant</span>(<span class="ident">entry</span>) <span class="op">=&gt;</span> {
                     <span class="ident">entry</span>.<span class="ident">insert</span>(<span class="bool-val">false</span>);
                 }
 
-                <span class="ident">Entry</span>::<span class="ident">Occupied</span>(..) <span class="op">=</span><span class="op">&gt;</span> {}
+                <span class="ident">Entry</span>::<span class="ident">Occupied</span>(..) <span class="op">=&gt;</span> {}
             }
 
             <span class="comment">// (o) messages that cross the core boundary need to be `Send`</span>
@@ -1114,15 +1115,15 @@
 
         <span class="comment">// (l) The timer queue handler contends for the `channel`</span>
         <span class="kw">match</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">tq</span>.<span class="ident">priority</span>),
-            <span class="prelude-val">Some</span>(<span class="ident">ceil</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">ceil</span>, <span class="ident">tq</span>.<span class="ident">priority</span>)),
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">tq</span>.<span class="ident">priority</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">ceil</span>) <span class="op">=&gt;</span> <span class="ident">channel</span>.<span class="ident">ceiling</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">ceil</span>, <span class="ident">tq</span>.<span class="ident">priority</span>)),
         }
 
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">prio</span>) <span class="op">=</span> <span class="ident">scheduler_prio</span> {
             <span class="comment">// (k) Schedulers contend for the free queue</span>
             <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">fq</span> {
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">fq</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">prio</span>),
-                <span class="prelude-val">Some</span>(<span class="ident">ceil</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">fq</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">ceil</span>, <span class="ident">prio</span>)),
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw-2">*</span><span class="ident">fq</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">prio</span>),
+                <span class="prelude-val">Some</span>(<span class="ident">ceil</span>) <span class="op">=&gt;</span> <span class="kw-2">*</span><span class="ident">fq</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">ceil</span>, <span class="ident">prio</span>)),
             }
 
             <span class="comment">// (m) Schedulers contend for the timer queue</span>
@@ -1130,10 +1131,10 @@
 
             <span class="comment">// (o) core-local messages that connect tasks running at different priorities need to be</span>
             <span class="comment">// `Send`</span>
-            <span class="kw">if</span> <span class="ident">scheduler_core</span> <span class="op">=</span><span class="op">=</span> <span class="ident">schedulee_core</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">schedulee_prio</span> <span class="op">!</span><span class="op">=</span> <span class="ident">prio</span> {
+            <span class="kw">if</span> <span class="ident">scheduler_core</span> <span class="op">==</span> <span class="ident">schedulee_core</span> <span class="op">&amp;&amp;</span> <span class="ident">schedulee_prio</span> <span class="op">!=</span> <span class="ident">prio</span> {
                 <span class="ident">must_be_send</span> <span class="op">=</span> <span class="bool-val">true</span>;
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">scheduler_core</span> <span class="op">=</span><span class="op">=</span> <span class="ident">schedulee_core</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">scheduler_core</span> <span class="op">==</span> <span class="ident">schedulee_core</span> {
             <span class="comment">// (k, m) schedules from `init` are excluded from the ceiling analysis</span>
             <span class="comment">// (o) but schedules from `init` must be `Send`</span>
             <span class="ident">must_be_send</span> <span class="op">=</span> <span class="bool-val">true</span>;
@@ -1269,13 +1270,13 @@
 
 <span class="doccomment">/// All cross-core channels, keyed by receiver core, then by dispatch priority and then by sender</span>
 <span class="doccomment">/// core</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Channels</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Receiver</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Priority</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Sender</span>, <span class="ident">Channel</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Channels</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Receiver</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Priority</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Sender</span>, <span class="ident">Channel</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// All free queues, keyed by task and then by sender</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FreeQueues</span> <span class="op">=</span> <span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">Task</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Sender</span>, <span class="ident">Ceiling</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FreeQueues</span> <span class="op">=</span> <span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">Task</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Sender</span>, <span class="ident">Ceiling</span><span class="op">&gt;&gt;</span>;
 
 <span class="doccomment">/// Late resources, keyed by the core that initializes them</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LateResources</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LateResources</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;&gt;</span>;
 
 <span class="doccomment">/// Location of all *used* resources</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Locations</span> <span class="op">=</span> <span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">Resource</span>, <span class="ident">Location</span><span class="op">&gt;</span>;
@@ -1284,18 +1285,18 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Ownerships</span> <span class="op">=</span> <span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">Resource</span>, <span class="ident">Ownership</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// These types must implement the `Send` trait</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SendTypes</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SendTypes</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// These types must implement the `Sync` trait</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SyncTypes</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SyncTypes</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// Cross-core initialization barriers</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">InitializationBarriers</span> <span class="op">=</span>
-    <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="comment">/* user */</span> <span class="ident">Receiver</span>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="comment">/* initializer */</span> <span class="ident">Sender</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="comment">/* user */</span> <span class="ident">Receiver</span>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="comment">/* initializer */</span> <span class="ident">Sender</span><span class="op">&gt;&gt;</span>;
 
 <span class="doccomment">/// Cross-core spawn barriers</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SpawnBarriers</span> <span class="op">=</span>
-    <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="comment">/* spawnee */</span> <span class="ident">Receiver</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="comment">/* spawner */</span> <span class="ident">Sender</span>, <span class="comment">/* before_init */</span> <span class="ident">bool</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="comment">/* spawnee */</span> <span class="ident">Receiver</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="comment">/* spawner */</span> <span class="ident">Sender</span>, <span class="comment">/* before_init */</span> <span class="ident">bool</span><span class="op">&gt;&gt;</span>;
 
 <span class="doccomment">/// Timer queues, keyed by core</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">TimerQueues</span> <span class="op">=</span> <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Core</span>, <span class="ident">TimerQueue</span><span class="op">&gt;</span>;
@@ -1317,7 +1318,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">TimerQueue</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">capacity</span>: <span class="number">0</span>,
             <span class="ident">ceiling</span>: <span class="number">1</span>,
@@ -1364,12 +1365,12 @@
 
 <span class="kw">impl</span> <span class="ident">Ownership</span> {
     <span class="doccomment">/// Whether this resource needs to a lock at this priority level</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">needs_lock</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">priority</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">needs_lock</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">priority</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Ownership</span>::<span class="ident">Owned</span> { .. } <span class="op">|</span> <span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">Ownership</span>::<span class="ident">Owned</span> { .. } <span class="op">|</span> <span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { .. } <span class="op">=&gt;</span> <span class="bool-val">false</span>,
 
-            <span class="ident">Ownership</span>::<span class="ident">Contended</span> { <span class="ident">ceiling</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">ceiling</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">priority</span>);
+            <span class="ident">Ownership</span>::<span class="ident">Contended</span> { <span class="ident">ceiling</span> } <span class="op">=&gt;</span> {
+                <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">ceiling</span> <span class="op">&gt;=</span> <span class="ident">priority</span>);
 
                 <span class="ident">priority</span> <span class="op">&lt;</span> <span class="kw-2">*</span><span class="ident">ceiling</span>
             }
@@ -1377,10 +1378,10 @@
     }
 
     <span class="doccomment">/// Whether this resource is exclusively owned</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Ownership</span>::<span class="ident">Owned</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">Ownership</span>::<span class="ident">Owned</span> { .. } <span class="op">=&gt;</span> <span class="bool-val">true</span>,
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
         }
     }
 }
@@ -1406,20 +1407,20 @@
 
 <span class="kw">impl</span> <span class="ident">Location</span> {
     <span class="doccomment">/// If resource is owned this returns the core on which is located</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">core</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">core</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Location</span>::<span class="ident">Owned</span> { <span class="ident">core</span>, .. } <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">core</span>),
+            <span class="ident">Location</span>::<span class="ident">Owned</span> { <span class="ident">core</span>, .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">core</span>),
 
-            <span class="ident">Location</span>::<span class="ident">Shared</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">Location</span>::<span class="ident">Shared</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cross_initialized</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">cross_initialized</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">Location</span>::<span class="ident">Owned</span> {
                 <span class="ident">cross_initialized</span>, ..
-            } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cross_initialized</span>,
-            <span class="ident">Location</span>::<span class="ident">Shared</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            } <span class="op">=&gt;</span> <span class="ident">cross_initialized</span>,
+            <span class="ident">Location</span>::<span class="ident">Shared</span> { .. } <span class="op">=&gt;</span> <span class="bool-val">false</span>,
         }
     }
 }

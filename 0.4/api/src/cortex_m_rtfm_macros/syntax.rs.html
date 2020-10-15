@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `macros/src/syntax.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>syntax.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../cortex_m_rtfm_macros/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `macros/src/syntax.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>syntax.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../cortex_m_rtfm_macros/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1415,7 +1416,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">AppArgs</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">device</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         <span class="kw">loop</span> {
             <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">is_empty</span>() {
@@ -1428,7 +1429,7 @@
 
             <span class="kw">let</span> <span class="ident">ident_s</span> <span class="op">=</span> <span class="ident">ident</span>.<span class="ident">to_string</span>();
             <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">ident_s</span> {
-                <span class="string">&quot;device&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&quot;device&quot;</span> <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="ident">device</span>.<span class="ident">is_some</span>() {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                             <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -1438,7 +1439,7 @@
 
                     <span class="ident">device</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>);
                 }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">_</span> <span class="op">=&gt;</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">ident</span>.<span class="ident">span</span>(),
                         <span class="string">&quot;expected `device`; other keys are not accepted&quot;</span>,
@@ -1475,8 +1476,8 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">Input</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">fn</span> <span class="ident">parse_items</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">parse_items</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;&gt;</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">items</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
 
             <span class="kw">while</span> <span class="op">!</span><span class="ident">input</span>.<span class="ident">is_empty</span>() {
@@ -1512,7 +1513,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">App</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">items</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span>, <span class="ident">args</span>: <span class="ident">AppArgs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">items</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span>, <span class="ident">args</span>: <span class="ident">AppArgs</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">idle</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exceptions</span> <span class="op">=</span> <span class="ident">BTreeMap</span>::<span class="ident">new</span>();
@@ -1523,7 +1524,7 @@
 
         <span class="kw">for</span> <span class="ident">item</span> <span class="kw">in</span> <span class="ident">items</span> {
             <span class="kw">match</span> <span class="ident">item</span> {
-                <span class="ident">Item</span>::<span class="ident">Fn</span>(<span class="kw-2">mut</span> <span class="ident">item</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Item</span>::<span class="ident">Fn</span>(<span class="kw-2">mut</span> <span class="ident">item</span>) <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">pos</span>) <span class="op">=</span> <span class="ident">item</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">attr</span><span class="op">|</span> <span class="ident">eq</span>(<span class="ident">attr</span>, <span class="string">&quot;idle&quot;</span>)) {
                         <span class="kw">if</span> <span class="ident">idle</span>.<span class="ident">is_some</span>() {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
@@ -1550,8 +1551,8 @@
                         <span class="ident">item</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">attr</span><span class="op">|</span> <span class="ident">eq</span>(<span class="ident">attr</span>, <span class="string">&quot;exception&quot;</span>))
                     {
                         <span class="kw">if</span> <span class="ident">exceptions</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
-                            <span class="op">|</span><span class="op">|</span> <span class="ident">interrupts</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
-                            <span class="op">|</span><span class="op">|</span> <span class="ident">tasks</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
+                            <span class="op">||</span> <span class="ident">interrupts</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
+                            <span class="op">||</span> <span class="ident">tasks</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
                         {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                                 <span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -1566,8 +1567,8 @@
                         <span class="ident">item</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">attr</span><span class="op">|</span> <span class="ident">eq</span>(<span class="ident">attr</span>, <span class="string">&quot;interrupt&quot;</span>))
                     {
                         <span class="kw">if</span> <span class="ident">exceptions</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
-                            <span class="op">|</span><span class="op">|</span> <span class="ident">interrupts</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
-                            <span class="op">|</span><span class="op">|</span> <span class="ident">tasks</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
+                            <span class="op">||</span> <span class="ident">interrupts</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
+                            <span class="op">||</span> <span class="ident">tasks</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
                         {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                                 <span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -1580,8 +1581,8 @@
                         <span class="ident">interrupts</span>.<span class="ident">insert</span>(<span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">clone</span>(), <span class="ident">Interrupt</span>::<span class="ident">check</span>(<span class="ident">args</span>, <span class="ident">item</span>)<span class="question-mark">?</span>);
                     } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">pos</span>) <span class="op">=</span> <span class="ident">item</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">attr</span><span class="op">|</span> <span class="ident">eq</span>(<span class="ident">attr</span>, <span class="string">&quot;task&quot;</span>)) {
                         <span class="kw">if</span> <span class="ident">exceptions</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
-                            <span class="op">|</span><span class="op">|</span> <span class="ident">interrupts</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
-                            <span class="op">|</span><span class="op">|</span> <span class="ident">tasks</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
+                            <span class="op">||</span> <span class="ident">interrupts</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
+                            <span class="op">||</span> <span class="ident">tasks</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>)
                         {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                                 <span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -1599,7 +1600,7 @@
                         ));
                     }
                 }
-                <span class="ident">Item</span>::<span class="ident">Static</span>(<span class="ident">item</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Item</span>::<span class="ident">Static</span>(<span class="ident">item</span>) <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="ident">resources</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>) {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                             <span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -1609,7 +1610,7 @@
 
                     <span class="ident">resources</span>.<span class="ident">insert</span>(<span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">clone</span>(), <span class="ident">Resource</span>::<span class="ident">check</span>(<span class="ident">item</span>)<span class="question-mark">?</span>);
                 }
-                <span class="ident">Item</span>::<span class="ident">ForeignMod</span>(<span class="ident">item</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Item</span>::<span class="ident">ForeignMod</span>(<span class="ident">item</span>) <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="ident">free_interrupts</span>.<span class="ident">is_some</span>() {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                             <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">extern_token</span>.<span class="ident">span</span>(),
@@ -1619,7 +1620,7 @@
 
                     <span class="ident">free_interrupts</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">FreeInterrupt</span>::<span class="ident">parse</span>(<span class="ident">item</span>)<span class="question-mark">?</span>);
                 }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">_</span> <span class="op">=&gt;</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">item</span>.<span class="ident">span</span>(),
                         <span class="string">&quot;this item must live outside the `#[app]` module&quot;</span>,
@@ -1631,14 +1632,14 @@
         <span class="prelude-val">Ok</span>(<span class="ident">App</span> {
             <span class="ident">args</span>,
             <span class="ident">idle</span>,
-            <span class="ident">init</span>: <span class="ident">init</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+            <span class="ident">init</span>: <span class="ident">init</span>.<span class="ident">ok_or_else</span>(<span class="op">||</span> {
                 <span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(<span class="ident">Span</span>::<span class="ident">call_site</span>(), <span class="string">&quot;`#[init]` function is missing&quot;</span>)
             })<span class="question-mark">?</span>,
             <span class="ident">exceptions</span>,
             <span class="ident">interrupts</span>,
             <span class="ident">resources</span>,
             <span class="ident">tasks</span>,
-            <span class="ident">free_interrupts</span>: <span class="ident">free_interrupts</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">FreeInterrupts</span>::<span class="ident">new</span>()),
+            <span class="ident">free_interrupts</span>: <span class="ident">free_interrupts</span>.<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">FreeInterrupts</span>::<span class="ident">new</span>()),
         })
     }
 
@@ -1646,13 +1647,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Each resource access include the priority it&#39;s accessed at (`u8`) and the name of the</span>
     <span class="doccomment">/// resource (`Ident`). A resource may appear more than once in this iterator</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resource_accesses</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">u8</span>, <span class="kw-2">&amp;</span><span class="ident">Ident</span>)<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resource_accesses</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">u8</span>, <span class="kw-2">&amp;</span><span class="ident">Ident</span>)<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">idle</span>
             .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;&gt;</span> {
                 <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">idle</span>.<span class="ident">args</span>.<span class="ident">resources</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">res</span><span class="op">|</span> (<span class="number">0</span>, <span class="ident">res</span>)))
             })
-            .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>()))
+            .<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>()))
             .<span class="ident">chain</span>(<span class="self">self</span>.<span class="ident">exceptions</span>.<span class="ident">values</span>().<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
                 <span class="ident">e</span>.<span class="ident">args</span>
                     .<span class="ident">resources</span>
@@ -1679,7 +1680,7 @@
     <span class="doccomment">/// task that&#39;s spawned. A task may appear more that once in this iterator.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// A priority of `None` means that this being called from `init`</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_calls</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">Ident</span>)<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_calls</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">Ident</span>)<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">init</span>
             .<span class="ident">args</span>
             .<span class="ident">spawn</span>
@@ -1688,10 +1689,10 @@
             .<span class="ident">chain</span>(
                 <span class="self">self</span>.<span class="ident">idle</span>
                     .<span class="ident">as_ref</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;&gt;</span> {
                         <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">idle</span>.<span class="ident">args</span>.<span class="ident">spawn</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> (<span class="prelude-val">Some</span>(<span class="number">0</span>), <span class="ident">s</span>)))
                     })
-                    .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>())),
+                    .<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>())),
             )
             .<span class="ident">chain</span>(
                 <span class="self">self</span>.<span class="ident">exceptions</span>
@@ -1715,7 +1716,7 @@
     <span class="doccomment">/// Each spawn call includes the priority of the task from which it&#39;s issued and the name of the</span>
     <span class="doccomment">/// task that&#39;s spawned. A task may appear more that once in this iterator.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_calls</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">Ident</span>)<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_calls</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">Ident</span>)<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">init</span>
             .<span class="ident">args</span>
             .<span class="ident">schedule</span>
@@ -1724,10 +1725,10 @@
             .<span class="ident">chain</span>(
                 <span class="self">self</span>.<span class="ident">idle</span>
                     .<span class="ident">as_ref</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;&gt;</span> {
                         <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">idle</span>.<span class="ident">args</span>.<span class="ident">schedule</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> (<span class="prelude-val">Some</span>(<span class="number">0</span>), <span class="ident">s</span>)))
                     })
-                    .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>())),
+                    .<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>())),
             )
             .<span class="ident">chain</span>(<span class="self">self</span>.<span class="ident">exceptions</span>.<span class="ident">values</span>().<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
                 <span class="ident">e</span>.<span class="ident">args</span>
@@ -1750,16 +1751,16 @@
     }
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_callers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">Ident</span>, <span class="kw-2">&amp;</span><span class="ident">Idents</span>)<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_callers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">Ident</span>, <span class="kw-2">&amp;</span><span class="ident">Idents</span>)<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">idle</span>
             .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;&gt;</span> {
                 <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">once</span>((
                     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;idle&quot;</span>, <span class="ident">Span</span>::<span class="ident">call_site</span>()),
                     <span class="kw-2">&amp;</span><span class="ident">idle</span>.<span class="ident">args</span>.<span class="ident">schedule</span>,
                 )))
             })
-            .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>()))
+            .<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>()))
             .<span class="ident">chain</span>(<span class="ident">iter</span>::<span class="ident">once</span>((
                 <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;init&quot;</span>, <span class="ident">Span</span>::<span class="ident">call_site</span>()),
                 <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">init</span>.<span class="ident">args</span>.<span class="ident">schedule</span>,
@@ -1781,16 +1782,16 @@
             )
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_callers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">Ident</span>, <span class="kw-2">&amp;</span><span class="ident">Idents</span>)<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_callers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">Ident</span>, <span class="kw-2">&amp;</span><span class="ident">Idents</span>)<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">idle</span>
             .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idle</span><span class="op">|</span> <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw">_</span><span class="op">&gt;&gt;</span> {
                 <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">once</span>((
                     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;idle&quot;</span>, <span class="ident">Span</span>::<span class="ident">call_site</span>()),
                     <span class="kw-2">&amp;</span><span class="ident">idle</span>.<span class="ident">args</span>.<span class="ident">spawn</span>,
                 )))
             })
-            .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>()))
+            .<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">iter</span>::<span class="ident">empty</span>()))
             .<span class="ident">chain</span>(<span class="ident">iter</span>::<span class="ident">once</span>((
                 <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;init&quot;</span>, <span class="ident">Span</span>::<span class="ident">call_site</span>()),
                 <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">init</span>.<span class="ident">args</span>.<span class="ident">spawn</span>,
@@ -1838,16 +1839,16 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">IdleArgs</span> <span class="op">=</span> <span class="ident">InitArgs</span>;
 
 <span class="kw">impl</span> <span class="ident">Idle</span> {
-    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">IdleArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">is_bottom</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
+    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">IdleArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">==</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">is_bottom</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
 
         <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">span</span>();
 
@@ -1877,7 +1878,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">InitArgs</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">InitArgs</span> {
             <span class="ident">resources</span>: <span class="ident">Idents</span>::<span class="ident">new</span>(),
             <span class="ident">schedule</span>: <span class="ident">Idents</span>::<span class="ident">new</span>(),
@@ -1887,7 +1888,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">InitArgs</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">InitArgs</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">InitArgs</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">is_empty</span>() {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">InitArgs</span>::<span class="ident">default</span>());
         }
@@ -1909,15 +1910,15 @@
 
             <span class="kw">let</span> <span class="ident">ident_s</span> <span class="op">=</span> <span class="ident">ident</span>.<span class="ident">to_string</span>();
             <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">ident_s</span> {
-                <span class="string">&quot;schedule&quot;</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;timer-queue&quot;</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&quot;schedule&quot;</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;timer-queue&quot;</span>)) <span class="op">=&gt;</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">ident</span>.<span class="ident">span</span>(),
                         <span class="string">&quot;The `schedule` API requires that the `timer-queue` feature is \
                          enabled in the `cortex-m-rtfm` crate&quot;</span>,
                     ));
                 }
-                <span class="string">&quot;resources&quot;</span> <span class="op">|</span> <span class="string">&quot;schedule&quot;</span> <span class="op">|</span> <span class="string">&quot;spawn&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {} <span class="comment">// OK</span>
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&quot;resources&quot;</span> <span class="op">|</span> <span class="string">&quot;schedule&quot;</span> <span class="op">|</span> <span class="string">&quot;spawn&quot;</span> <span class="op">=&gt;</span> {} <span class="comment">// OK</span>
+                <span class="kw">_</span> <span class="op">=&gt;</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">ident</span>.<span class="ident">span</span>(),
                         <span class="string">&quot;expected one of: resources, schedule or spawn&quot;</span>,
@@ -1942,7 +1943,7 @@
 
             <span class="kw">let</span> <span class="ident">ident_s</span> <span class="op">=</span> <span class="ident">ident</span>.<span class="ident">to_string</span>();
             <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">ident_s</span> {
-                <span class="string">&quot;resources&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&quot;resources&quot;</span> <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="ident">resources</span>.<span class="ident">is_some</span>() {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                             <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -1952,7 +1953,7 @@
 
                     <span class="ident">resources</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idents</span>);
                 }
-                <span class="string">&quot;schedule&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&quot;schedule&quot;</span> <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="ident">schedule</span>.<span class="ident">is_some</span>() {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                             <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -1962,7 +1963,7 @@
 
                     <span class="ident">schedule</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idents</span>);
                 }
-                <span class="string">&quot;spawn&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&quot;spawn&quot;</span> <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="ident">spawn</span>.<span class="ident">is_some</span>() {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                             <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -1972,7 +1973,7 @@
 
                     <span class="ident">spawn</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idents</span>);
                 }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+                <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
             }
 
             <span class="kw">if</span> <span class="ident">content</span>.<span class="ident">is_empty</span>() {
@@ -2010,21 +2011,21 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Init</span> {
-    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">InitArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>();
+    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">InitArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">==</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>();
 
         <span class="kw">let</span> <span class="ident">returns_late_resources</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span> {
-            <span class="ident">ReturnType</span>::<span class="ident">Default</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
-            <span class="ident">ReturnType</span>::<span class="ident">Type</span>(<span class="kw">_</span>, <span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ReturnType</span>::<span class="ident">Default</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">ReturnType</span>::<span class="ident">Type</span>(<span class="kw">_</span>, <span class="ident">ty</span>) <span class="op">=&gt;</span> {
                 <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">ty</span> {
-                    <span class="ident">Type</span>::<span class="ident">Tuple</span>(<span class="ident">t</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">Type</span>::<span class="ident">Tuple</span>(<span class="ident">t</span>) <span class="op">=&gt;</span> {
                         <span class="kw">if</span> <span class="ident">t</span>.<span class="ident">elems</span>.<span class="ident">is_empty</span>() {
                             <span class="comment">// -&gt; ()</span>
                             <span class="bool-val">true</span>
@@ -2035,18 +2036,18 @@
                         }
                     }
 
-                    <span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">p</span>) <span class="op">=&gt;</span> {
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">segments</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">iter</span>();
                         <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">qself</span>.<span class="ident">is_none</span>()
-                            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">leading_colon</span>.<span class="ident">is_none</span>()
-                            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">2</span>
-                            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">segments</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
-                                <span class="ident">s</span>.<span class="ident">arguments</span> <span class="op">=</span><span class="op">=</span> <span class="ident">PathArguments</span>::<span class="prelude-val">None</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">s</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;init&quot;</span>
-                            }) <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
-                            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">segments</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
-                                <span class="ident">s</span>.<span class="ident">arguments</span> <span class="op">=</span><span class="op">=</span> <span class="ident">PathArguments</span>::<span class="prelude-val">None</span>
-                                    <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">s</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;LateResources&quot;</span>
-                            }) <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
+                            <span class="op">&amp;&amp;</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">leading_colon</span>.<span class="ident">is_none</span>()
+                            <span class="op">&amp;&amp;</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">2</span>
+                            <span class="op">&amp;&amp;</span> <span class="ident">segments</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
+                                <span class="ident">s</span>.<span class="ident">arguments</span> <span class="op">==</span> <span class="ident">PathArguments</span>::<span class="prelude-val">None</span> <span class="op">&amp;&amp;</span> <span class="ident">s</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>() <span class="op">==</span> <span class="string">&quot;init&quot;</span>
+                            }) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
+                            <span class="op">&amp;&amp;</span> <span class="ident">segments</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
+                                <span class="ident">s</span>.<span class="ident">arguments</span> <span class="op">==</span> <span class="ident">PathArguments</span>::<span class="prelude-val">None</span>
+                                    <span class="op">&amp;&amp;</span> <span class="ident">s</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>() <span class="op">==</span> <span class="string">&quot;LateResources&quot;</span>
+                            }) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
                         {
                             <span class="comment">// -&gt; init::LateResources</span>
                             <span class="bool-val">true</span>
@@ -2057,7 +2058,7 @@
                         }
                     }
 
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">_</span> <span class="op">=&gt;</span> {
                         <span class="ident">valid_signature</span> <span class="op">=</span> <span class="bool-val">false</span>;
 
                         <span class="bool-val">false</span> <span class="comment">// don&#39;t care</span>
@@ -2105,7 +2106,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Args</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">Args</span> {
             <span class="ident">binds</span>: <span class="prelude-val">None</span>,
             <span class="ident">capacity</span>: <span class="prelude-val">None</span>,
@@ -2135,13 +2136,13 @@
 
 <span class="kw">impl</span> <span class="ident">ExceptionArgs</span> {
     <span class="doccomment">/// Returns the name of the exception / interrupt this handler binds to</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">binds</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Ident</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">binds</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">handler</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Ident</span> {
         <span class="self">self</span>.<span class="ident">binds</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap_or</span>(<span class="ident">handler</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">ExceptionArgs</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="ident">parse_args</span>(<span class="ident">input</span>, <span class="comment">/* binds */</span> <span class="bool-val">true</span>, <span class="comment">/* capacity */</span> <span class="bool-val">false</span>).<span class="ident">map</span>(
             <span class="op">|</span><span class="ident">Args</span> {
                  <span class="ident">binds</span>,
@@ -2164,16 +2165,16 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Exception</span> {
-    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">ExceptionArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">is_unit</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
+    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">ExceptionArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">==</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">is_unit</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
 
         <span class="kw">if</span> <span class="op">!</span><span class="ident">valid_signature</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
@@ -2185,8 +2186,8 @@
         <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">span</span>();
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">args</span>.<span class="ident">binds</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">ident</span>).<span class="ident">to_string</span>() {
             <span class="string">&quot;MemoryManagement&quot;</span> <span class="op">|</span> <span class="string">&quot;BusFault&quot;</span> <span class="op">|</span> <span class="string">&quot;UsageFault&quot;</span> <span class="op">|</span> <span class="string">&quot;SecureFault&quot;</span> <span class="op">|</span> <span class="string">&quot;SVCall&quot;</span>
-            <span class="op">|</span> <span class="string">&quot;DebugMonitor&quot;</span> <span class="op">|</span> <span class="string">&quot;PendSV&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {} <span class="comment">// OK</span>
-            <span class="string">&quot;SysTick&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="op">|</span> <span class="string">&quot;DebugMonitor&quot;</span> <span class="op">|</span> <span class="string">&quot;PendSV&quot;</span> <span class="op">=&gt;</span> {} <span class="comment">// OK</span>
+            <span class="string">&quot;SysTick&quot;</span> <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;timer-queue&quot;</span>) {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">span</span>,
@@ -2195,7 +2196,7 @@
                     ));
                 }
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                     <span class="ident">span</span>,
                     <span class="string">&quot;only exceptions with configurable priority can be used as hardware tasks&quot;</span>,
@@ -2226,16 +2227,16 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">InterruptArgs</span> <span class="op">=</span> <span class="ident">ExceptionArgs</span>;
 
 <span class="kw">impl</span> <span class="ident">Interrupt</span> {
-    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">InterruptArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">is_unit</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
+    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">InterruptArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">==</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">is_unit</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
 
         <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">span</span>();
 
@@ -2247,13 +2248,13 @@
         }
 
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>() {
-            <span class="string">&quot;init&quot;</span> <span class="op">|</span> <span class="string">&quot;idle&quot;</span> <span class="op">|</span> <span class="string">&quot;resources&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&quot;init&quot;</span> <span class="op">|</span> <span class="string">&quot;idle&quot;</span> <span class="op">|</span> <span class="string">&quot;resources&quot;</span> <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                     <span class="ident">span</span>,
                     <span class="string">&quot;`interrupt` handlers can NOT be named `idle`, `init` or `resources`&quot;</span>,
                 ));
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="kw">_</span> <span class="op">=&gt;</span> {}
         }
 
         <span class="kw">let</span> (<span class="ident">statics</span>, <span class="ident">stmts</span>) <span class="op">=</span> <span class="ident">extract_statics</span>(<span class="ident">item</span>.<span class="ident">block</span>.<span class="ident">stmts</span>);
@@ -2274,12 +2275,12 @@
     <span class="kw">pub</span> <span class="ident">attrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">mutability</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="macro">Token</span><span class="macro">!</span>[<span class="kw-2">mut</span>]<span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">ty</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">expr</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Expr</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">expr</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Expr</span><span class="op">&gt;&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Resource</span> {
-    <span class="kw">fn</span> <span class="ident">check</span>(<span class="kw-2">mut</span> <span class="ident">item</span>: <span class="ident">ItemStatic</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span> {
+    <span class="kw">fn</span> <span class="ident">check</span>(<span class="kw-2">mut</span> <span class="ident">item</span>: <span class="ident">ItemStatic</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">!=</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                 <span class="ident">item</span>.<span class="ident">span</span>(),
                 <span class="string">&quot;resources must have inherited / private visibility&quot;</span>,
@@ -2287,8 +2288,8 @@
         }
 
         <span class="kw">let</span> <span class="ident">uninitialized</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">item</span>.<span class="ident">expr</span> {
-            <span class="ident">Expr</span>::<span class="ident">Tuple</span>(<span class="kw-2">ref</span> <span class="ident">tuple</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">tuple</span>.<span class="ident">elems</span>.<span class="ident">is_empty</span>(),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">Expr</span>::<span class="ident">Tuple</span>(<span class="kw-2">ref</span> <span class="ident">tuple</span>) <span class="op">=&gt;</span> <span class="ident">tuple</span>.<span class="ident">elems</span>.<span class="ident">is_empty</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
         };
 
         <span class="kw">let</span> <span class="ident">pos</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">attr</span><span class="op">|</span> <span class="ident">eq</span>(<span class="ident">attr</span>, <span class="string">&quot;Singleton&quot;</span>));
@@ -2322,7 +2323,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">TaskArgs</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="ident">parse_args</span>(<span class="ident">input</span>, <span class="comment">/* binds */</span> <span class="bool-val">false</span>, <span class="comment">/* capacity */</span> <span class="bool-val">true</span>).<span class="ident">map</span>(
             <span class="op">|</span><span class="ident">Args</span> {
                  <span class="ident">capacity</span>,
@@ -2349,7 +2350,7 @@
     <span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
     <span class="ident">accepts_binds</span>: <span class="ident">bool</span>,
     <span class="ident">accepts_capacity</span>: <span class="ident">bool</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Args</span><span class="op">&gt;</span> {
+) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Args</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">is_empty</span>() {
         <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Args</span>::<span class="ident">default</span>());
     }
@@ -2374,7 +2375,7 @@
 
         <span class="kw">let</span> <span class="ident">ident_s</span> <span class="op">=</span> <span class="ident">ident</span>.<span class="ident">to_string</span>();
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">ident_s</span> {
-            <span class="string">&quot;binds&quot;</span> <span class="kw">if</span> <span class="ident">accepts_binds</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&quot;binds&quot;</span> <span class="kw">if</span> <span class="ident">accepts_binds</span> <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="ident">binds</span>.<span class="ident">is_some</span>() {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -2387,7 +2388,7 @@
 
                 <span class="ident">binds</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">ident</span>);
             }
-            <span class="string">&quot;capacity&quot;</span> <span class="kw">if</span> <span class="ident">accepts_capacity</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&quot;capacity&quot;</span> <span class="kw">if</span> <span class="ident">accepts_capacity</span> <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="ident">capacity</span>.<span class="ident">is_some</span>() {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -2398,7 +2399,7 @@
                 <span class="comment">// #lit</span>
                 <span class="kw">let</span> <span class="ident">lit</span>: <span class="ident">LitInt</span> <span class="op">=</span> <span class="ident">content</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
 
-                <span class="kw">if</span> <span class="ident">lit</span>.<span class="ident">suffix</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">IntSuffix</span>::<span class="prelude-val">None</span> {
+                <span class="kw">if</span> <span class="ident">lit</span>.<span class="ident">suffix</span>() <span class="op">!=</span> <span class="ident">IntSuffix</span>::<span class="prelude-val">None</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">lit</span>.<span class="ident">span</span>(),
                         <span class="string">&quot;this literal must be unsuffixed&quot;</span>,
@@ -2406,7 +2407,7 @@
                 }
 
                 <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">lit</span>.<span class="ident">value</span>();
-                <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="ident">u64</span>::<span class="ident">from</span>(<span class="ident">u8</span>::<span class="ident">MAX</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+                <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="ident">u64</span>::<span class="ident">from</span>(<span class="ident">u8</span>::<span class="ident">MAX</span>) <span class="op">||</span> <span class="ident">value</span> <span class="op">==</span> <span class="number">0</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">lit</span>.<span class="ident">span</span>(),
                         <span class="string">&quot;this literal must be in the range 1...255&quot;</span>,
@@ -2415,7 +2416,7 @@
 
                 <span class="ident">capacity</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u8</span>);
             }
-            <span class="string">&quot;priority&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&quot;priority&quot;</span> <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="ident">priority</span>.<span class="ident">is_some</span>() {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -2426,7 +2427,7 @@
                 <span class="comment">// #lit</span>
                 <span class="kw">let</span> <span class="ident">lit</span>: <span class="ident">LitInt</span> <span class="op">=</span> <span class="ident">content</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
 
-                <span class="kw">if</span> <span class="ident">lit</span>.<span class="ident">suffix</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">IntSuffix</span>::<span class="prelude-val">None</span> {
+                <span class="kw">if</span> <span class="ident">lit</span>.<span class="ident">suffix</span>() <span class="op">!=</span> <span class="ident">IntSuffix</span>::<span class="prelude-val">None</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">lit</span>.<span class="ident">span</span>(),
                         <span class="string">&quot;this literal must be unsuffixed&quot;</span>,
@@ -2434,7 +2435,7 @@
                 }
 
                 <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">lit</span>.<span class="ident">value</span>();
-                <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="ident">u64</span>::<span class="ident">from</span>(<span class="ident">u8</span>::<span class="ident">MAX</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+                <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="ident">u64</span>::<span class="ident">from</span>(<span class="ident">u8</span>::<span class="ident">MAX</span>) <span class="op">||</span> <span class="ident">value</span> <span class="op">==</span> <span class="number">0</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                         <span class="ident">lit</span>.<span class="ident">span</span>(),
                         <span class="string">&quot;this literal must be in the range 1...255&quot;</span>,
@@ -2443,14 +2444,14 @@
 
                 <span class="ident">priority</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u8</span>);
             }
-            <span class="string">&quot;schedule&quot;</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;timer-queue&quot;</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&quot;schedule&quot;</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;timer-queue&quot;</span>)) <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                     <span class="ident">ident</span>.<span class="ident">span</span>(),
                     <span class="string">&quot;The `schedule` API requires that the `timer-queue` feature is \
                      enabled in the `cortex-m-rtfm` crate&quot;</span>,
                 ));
             }
-            <span class="string">&quot;resources&quot;</span> <span class="op">|</span> <span class="string">&quot;schedule&quot;</span> <span class="op">|</span> <span class="string">&quot;spawn&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&quot;resources&quot;</span> <span class="op">|</span> <span class="string">&quot;schedule&quot;</span> <span class="op">|</span> <span class="string">&quot;spawn&quot;</span> <span class="op">=&gt;</span> {
                 <span class="comment">// .. [#(#idents)*]</span>
                 <span class="kw">let</span> <span class="ident">inner</span>;
                 <span class="macro">bracketed</span><span class="macro">!</span>(<span class="ident">inner</span> <span class="kw">in</span> <span class="ident">content</span>);
@@ -2467,7 +2468,7 @@
                 }
 
                 <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">ident_s</span> {
-                    <span class="string">&quot;resources&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="string">&quot;resources&quot;</span> <span class="op">=&gt;</span> {
                         <span class="kw">if</span> <span class="ident">resources</span>.<span class="ident">is_some</span>() {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                                 <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -2477,7 +2478,7 @@
 
                         <span class="ident">resources</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idents</span>);
                     }
-                    <span class="string">&quot;schedule&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="string">&quot;schedule&quot;</span> <span class="op">=&gt;</span> {
                         <span class="kw">if</span> <span class="ident">schedule</span>.<span class="ident">is_some</span>() {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                                 <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -2487,7 +2488,7 @@
 
                         <span class="ident">schedule</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idents</span>);
                     }
-                    <span class="string">&quot;spawn&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="string">&quot;spawn&quot;</span> <span class="op">=&gt;</span> {
                         <span class="kw">if</span> <span class="ident">spawn</span>.<span class="ident">is_some</span>() {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                                 <span class="ident">ident</span>.<span class="ident">span</span>(),
@@ -2497,10 +2498,10 @@
 
                         <span class="ident">spawn</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idents</span>);
                     }
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+                    <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
                 }
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                     <span class="ident">ident</span>.<span class="ident">span</span>(),
                     <span class="macro">format</span><span class="macro">!</span>(
@@ -2540,7 +2541,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Static</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">items</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ItemStatic</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Ident</span>, <span class="ident">Static</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">items</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ItemStatic</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Ident</span>, <span class="ident">Static</span><span class="op">&gt;&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">statics</span> <span class="op">=</span> <span class="ident">BTreeMap</span>::<span class="ident">new</span>();
 
         <span class="kw">for</span> <span class="ident">item</span> <span class="kw">in</span> <span class="ident">items</span> {
@@ -2579,15 +2580,15 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Task</span> {
-    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">TaskArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">is_unit</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
+    <span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">args</span>: <span class="ident">TaskArgs</span>, <span class="ident">item</span>: <span class="ident">ItemFn</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">vis</span> <span class="op">==</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">constness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">asyncness</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">abi</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">is_unit</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
 
         <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">span</span>();
 
@@ -2613,13 +2614,13 @@
         }
 
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">item</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>() {
-            <span class="string">&quot;init&quot;</span> <span class="op">|</span> <span class="string">&quot;idle&quot;</span> <span class="op">|</span> <span class="string">&quot;resources&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&quot;init&quot;</span> <span class="op">|</span> <span class="string">&quot;idle&quot;</span> <span class="op">|</span> <span class="string">&quot;resources&quot;</span> <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
                     <span class="ident">span</span>,
                     <span class="string">&quot;`task` handlers can NOT be named `idle`, `init` or `resources`&quot;</span>,
                 ));
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="kw">_</span> <span class="op">=&gt;</span> {}
         }
 
         <span class="kw">let</span> (<span class="ident">cfgs</span>, <span class="ident">attrs</span>) <span class="op">=</span> <span class="ident">extract_cfgs</span>(<span class="ident">item</span>.<span class="ident">attrs</span>);
@@ -2640,17 +2641,17 @@
 }
 
 <span class="kw">impl</span> <span class="ident">FreeInterrupt</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">mod_</span>: <span class="ident">ItemForeignMod</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FreeInterrupts</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">mod_</span>: <span class="ident">ItemForeignMod</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FreeInterrupts</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">free_interrupts</span> <span class="op">=</span> <span class="ident">FreeInterrupts</span>::<span class="ident">new</span>();
 
         <span class="kw">for</span> <span class="ident">item</span> <span class="kw">in</span> <span class="ident">mod_</span>.<span class="ident">items</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ForeignItem</span>::<span class="ident">Fn</span>(<span class="ident">f</span>) <span class="op">=</span> <span class="ident">item</span> {
-                <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">vis</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
-                    <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
-                    <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
-                    <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
-                    <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
-                    <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">is_unit</span>(<span class="kw-2">&amp;</span><span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
+                <span class="kw">let</span> <span class="ident">valid_signature</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">vis</span> <span class="op">==</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span>
+                    <span class="op">&amp;&amp;</span> <span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">is_empty</span>()
+                    <span class="op">&amp;&amp;</span> <span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">is_none</span>()
+                    <span class="op">&amp;&amp;</span> <span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">inputs</span>.<span class="ident">is_empty</span>()
+                    <span class="op">&amp;&amp;</span> <span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">variadic</span>.<span class="ident">is_none</span>()
+                    <span class="op">&amp;&amp;</span> <span class="ident">is_unit</span>(<span class="kw-2">&amp;</span><span class="ident">f</span>.<span class="ident">decl</span>.<span class="ident">output</span>);
 
                 <span class="kw">if</span> <span class="op">!</span><span class="ident">valid_signature</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
@@ -2679,15 +2680,15 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">eq</span>(<span class="ident">attr</span>: <span class="kw-2">&amp;</span><span class="ident">Attribute</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-    <span class="ident">attr</span>.<span class="ident">style</span> <span class="op">=</span><span class="op">=</span> <span class="ident">AttrStyle</span>::<span class="ident">Outer</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> {
+<span class="kw">fn</span> <span class="ident">eq</span>(<span class="ident">attr</span>: <span class="kw-2">&amp;</span><span class="ident">Attribute</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="ident">attr</span>.<span class="ident">style</span> <span class="op">==</span> <span class="ident">AttrStyle</span>::<span class="ident">Outer</span> <span class="op">&amp;&amp;</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> {
         <span class="kw">let</span> <span class="ident">pair</span> <span class="op">=</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">segment</span> <span class="op">=</span> <span class="ident">pair</span>.<span class="ident">value</span>();
-        <span class="ident">segment</span>.<span class="ident">arguments</span> <span class="op">=</span><span class="op">=</span> <span class="ident">PathArguments</span>::<span class="prelude-val">None</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">segment</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">name</span>
+        <span class="ident">segment</span>.<span class="ident">arguments</span> <span class="op">==</span> <span class="ident">PathArguments</span>::<span class="prelude-val">None</span> <span class="op">&amp;&amp;</span> <span class="ident">segment</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>() <span class="op">==</span> <span class="ident">name</span>
     }
 }
 
-<span class="kw">fn</span> <span class="ident">extract_cfgs</span>(<span class="ident">attrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>) {
+<span class="kw">fn</span> <span class="ident">extract_cfgs</span>(<span class="ident">attrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>) {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cfgs</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">not_cfgs</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
 
@@ -2703,14 +2704,14 @@
 }
 
 <span class="doccomment">/// Extracts `static mut` vars from the beginning of the given statements</span>
-<span class="kw">fn</span> <span class="ident">extract_statics</span>(<span class="ident">stmts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Stmt</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Statics</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Stmt</span><span class="op">&gt;</span>) {
+<span class="kw">fn</span> <span class="ident">extract_statics</span>(<span class="ident">stmts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Stmt</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="ident">Statics</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Stmt</span><span class="op">&gt;</span>) {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">istmts</span> <span class="op">=</span> <span class="ident">stmts</span>.<span class="ident">into_iter</span>();
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">statics</span> <span class="op">=</span> <span class="ident">Statics</span>::<span class="ident">new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stmts</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
     <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stmt</span>) <span class="op">=</span> <span class="ident">istmts</span>.<span class="ident">next</span>() {
         <span class="kw">match</span> <span class="ident">stmt</span> {
-            <span class="ident">Stmt</span>::<span class="ident">Item</span>(<span class="ident">Item</span>::<span class="ident">Static</span>(<span class="ident">var</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Stmt</span>::<span class="ident">Item</span>(<span class="ident">Item</span>::<span class="ident">Static</span>(<span class="ident">var</span>)) <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="ident">var</span>.<span class="ident">mutability</span>.<span class="ident">is_some</span>() {
                     <span class="ident">statics</span>.<span class="ident">push</span>(<span class="ident">var</span>);
                 } <span class="kw">else</span> {
@@ -2718,7 +2719,7 @@
                     <span class="kw">break</span>;
                 }
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> <span class="op">=&gt;</span> {
                 <span class="ident">stmts</span>.<span class="ident">push</span>(<span class="ident">stmt</span>);
                 <span class="kw">break</span>;
             }
@@ -2731,16 +2732,16 @@
 }
 
 <span class="comment">// TODO remove in v0.5.x</span>
-<span class="kw">fn</span> <span class="ident">extract_assignments</span>(<span class="ident">stmts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Stmt</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Stmt</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Assign</span><span class="op">&gt;</span>) {
+<span class="kw">fn</span> <span class="ident">extract_assignments</span>(<span class="ident">stmts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Stmt</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Stmt</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Assign</span><span class="op">&gt;</span>) {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">istmts</span> <span class="op">=</span> <span class="ident">stmts</span>.<span class="ident">into_iter</span>().<span class="ident">rev</span>();
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">assigns</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stmts</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
     <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stmt</span>) <span class="op">=</span> <span class="ident">istmts</span>.<span class="ident">next</span>() {
         <span class="kw">match</span> <span class="ident">stmt</span> {
-            <span class="ident">Stmt</span>::<span class="ident">Semi</span>(<span class="ident">Expr</span>::<span class="ident">Assign</span>(<span class="ident">assign</span>), <span class="ident">semi</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Stmt</span>::<span class="ident">Semi</span>(<span class="ident">Expr</span>::<span class="ident">Assign</span>(<span class="ident">assign</span>), <span class="ident">semi</span>) <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Expr</span>::<span class="ident">Path</span>(<span class="kw-2">ref</span> <span class="ident">expr</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="ident">assign</span>.<span class="ident">left</span> {
-                    <span class="kw">if</span> <span class="ident">expr</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+                    <span class="kw">if</span> <span class="ident">expr</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
                         <span class="ident">assigns</span>.<span class="ident">push</span>(<span class="ident">Assign</span> {
                             <span class="ident">attrs</span>: <span class="ident">assign</span>.<span class="ident">attrs</span>,
                             <span class="ident">left</span>: <span class="ident">expr</span>.<span class="ident">path</span>.<span class="ident">segments</span>[<span class="number">0</span>].<span class="ident">ident</span>.<span class="ident">clone</span>(),
@@ -2752,7 +2753,7 @@
 
                 <span class="ident">stmts</span>.<span class="ident">push</span>(<span class="ident">Stmt</span>::<span class="ident">Semi</span>(<span class="ident">Expr</span>::<span class="ident">Assign</span>(<span class="ident">assign</span>), <span class="ident">semi</span>));
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> <span class="op">=&gt;</span> {
                 <span class="ident">stmts</span>.<span class="ident">push</span>(<span class="ident">stmt</span>);
                 <span class="kw">break</span>;
             }
@@ -2764,7 +2765,7 @@
     (<span class="ident">stmts</span>.<span class="ident">into_iter</span>().<span class="ident">rev</span>().<span class="ident">collect</span>(), <span class="ident">assigns</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">is_bottom</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">ReturnType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">is_bottom</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">ReturnType</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ReturnType</span>::<span class="ident">Type</span>(<span class="kw">_</span>, <span class="ident">ty</span>) <span class="op">=</span> <span class="ident">ty</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Type</span>::<span class="ident">Never</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">ty</span> {
             <span class="bool-val">true</span>
@@ -2776,7 +2777,7 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">is_unit</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">ReturnType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">is_unit</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">ReturnType</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ReturnType</span>::<span class="ident">Type</span>(<span class="kw">_</span>, <span class="ident">ty</span>) <span class="op">=</span> <span class="ident">ty</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Type</span>::<span class="ident">Tuple</span>(<span class="kw-2">ref</span> <span class="ident">tuple</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">ty</span> {
             <span class="ident">tuple</span>.<span class="ident">elems</span>.<span class="ident">is_empty</span>()

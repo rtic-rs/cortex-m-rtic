@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `macros/src/codegen/util.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>util.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../cortex_m_rtic_macros/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `macros/src/codegen/util.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>util.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../cortex_m_rtic_macros/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -334,12 +335,12 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">check</span>::<span class="ident">Extra</span>;
 
 <span class="doccomment">/// Turns `capacity` into an unsuffixed integer literal</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capacity_literal</span>(<span class="ident">capacity</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">LitInt</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capacity_literal</span>(<span class="ident">capacity</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">LitInt</span> {
     <span class="ident">LitInt</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">capacity</span>.<span class="ident">to_string</span>(), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Turns `capacity` into a type-level (`typenum`) integer</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capacity_typenum</span>(<span class="ident">capacity</span>: <span class="ident">u8</span>, <span class="ident">round_up_to_power_of_two</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream2</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capacity_typenum</span>(<span class="ident">capacity</span>: <span class="ident">u8</span>, <span class="ident">round_up_to_power_of_two</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">TokenStream2</span> {
     <span class="kw">let</span> <span class="ident">capacity</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">round_up_to_power_of_two</span> {
         <span class="ident">capacity</span>.<span class="ident">checked_next_power_of_two</span>().<span class="ident">expect</span>(<span class="string">&quot;UNREACHABLE&quot;</span>)
     } <span class="kw">else</span> {
@@ -352,8 +353,8 @@
 }
 
 <span class="doccomment">/// Generates a `#[cfg(core = &quot;0&quot;)]` attribute if we are in multi-core mode</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cfg_core</span>(<span class="ident">core</span>: <span class="ident">Core</span>, <span class="ident">cores</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">cores</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cfg_core</span>(<span class="ident">core</span>: <span class="ident">Core</span>, <span class="ident">cores</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
+    <span class="kw">if</span> <span class="ident">cores</span> <span class="op">==</span> <span class="number">1</span> {
         <span class="prelude-val">None</span>
     } <span class="kw">else</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;heterogeneous&quot;</span>) {
         <span class="kw">let</span> <span class="ident">core</span> <span class="op">=</span> <span class="ident">core</span>.<span class="ident">to_string</span>();
@@ -367,7 +368,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// There may be more than one free queue per task because we need one for each sender core so we</span>
 <span class="doccomment">/// include the sender (e.g. `S0`) in the name</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fq_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fq_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(
         <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_S{}_FQ&quot;</span>, <span class="ident">task</span>.<span class="ident">to_string</span>(), <span class="ident">sender</span>),
         <span class="ident">Span</span>::<span class="ident">call_site</span>(),
@@ -384,7 +385,7 @@
     <span class="ident">ty</span>: <span class="ident">TokenStream2</span>,
     <span class="ident">ceiling</span>: <span class="ident">u8</span>,
     <span class="ident">ptr</span>: <span class="ident">TokenStream2</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream2</span> {
+) <span class="op">-&gt;</span> <span class="ident">TokenStream2</span> {
     <span class="kw">let</span> (<span class="ident">path</span>, <span class="ident">priority</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">resources_prefix</span> {
         (<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">resources</span>::#<span class="ident">name</span>), <span class="macro">quote</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">priority</span>()))
     } <span class="kw">else</span> {
@@ -399,7 +400,7 @@
             <span class="kw">type</span> <span class="ident">T</span> <span class="op">=</span> #<span class="ident">ty</span>;
 
             <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">lock</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> #<span class="ident">ty</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span> {
+            <span class="kw">fn</span> <span class="ident">lock</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> #<span class="ident">ty</span>) <span class="op">-&gt;</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="ident">R</span> {
                 <span class="doccomment">/// Priority ceiling</span>
                 <span class="kw">const</span> <span class="ident">CEILING</span>: <span class="ident">u8</span> <span class="op">=</span> #<span class="ident">ceiling</span>;
 
@@ -418,23 +419,23 @@
 }
 
 <span class="doccomment">/// Generates an identifier for a cross-initialization barrier</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init_barrier</span>(<span class="ident">initializer</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init_barrier</span>(<span class="ident">initializer</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;IB{}&quot;</span>, <span class="ident">initializer</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for the `INPUTS` buffer (`spawn` &amp; `schedule` API)</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inputs_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inputs_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_S{}_INPUTS&quot;</span>, <span class="ident">task</span>, <span class="ident">sender</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for the `INSTANTS` buffer (`schedule` API)</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">instants_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">instants_ident</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}_S{}_INSTANTS&quot;</span>, <span class="ident">task</span>, <span class="ident">sender</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interrupt_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>, <span class="ident">cores</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interrupt_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>, <span class="ident">cores</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">Span</span>::<span class="ident">call_site</span>();
-    <span class="kw">if</span> <span class="ident">cores</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+    <span class="kw">if</span> <span class="ident">cores</span> <span class="op">==</span> <span class="number">1</span> {
         <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;Interrupt&quot;</span>, <span class="ident">span</span>)
     } <span class="kw">else</span> {
         <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Interrupt_{}&quot;</span>, <span class="ident">core</span>), <span class="ident">span</span>)
@@ -442,32 +443,32 @@
 }
 
 <span class="doccomment">/// Whether `name` is an exception with configurable priority</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_exception</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_exception</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">to_string</span>();
 
     <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">s</span> {
         <span class="string">&quot;MemoryManagement&quot;</span> <span class="op">|</span> <span class="string">&quot;BusFault&quot;</span> <span class="op">|</span> <span class="string">&quot;UsageFault&quot;</span> <span class="op">|</span> <span class="string">&quot;SecureFault&quot;</span> <span class="op">|</span> <span class="string">&quot;SVCall&quot;</span>
-        <span class="op">|</span> <span class="string">&quot;DebugMonitor&quot;</span> <span class="op">|</span> <span class="string">&quot;PendSV&quot;</span> <span class="op">|</span> <span class="string">&quot;SysTick&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+        <span class="op">|</span> <span class="string">&quot;DebugMonitor&quot;</span> <span class="op">|</span> <span class="string">&quot;PendSV&quot;</span> <span class="op">|</span> <span class="string">&quot;SysTick&quot;</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
 
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
     }
 }
 
 <span class="doccomment">/// Generates a pre-reexport identifier for the &quot;late resources&quot; struct</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">late_resources_ident</span>(<span class="ident">init</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">late_resources_ident</span>(<span class="ident">init</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(
         <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}LateResources&quot;</span>, <span class="ident">init</span>.<span class="ident">to_string</span>()),
         <span class="ident">Span</span>::<span class="ident">call_site</span>(),
     )
 }
 
-<span class="kw">fn</span> <span class="ident">link_section_index</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+<span class="kw">fn</span> <span class="ident">link_section_index</span>() <span class="op">-&gt;</span> <span class="ident">usize</span> {
     <span class="kw">static</span> <span class="ident">INDEX</span>: <span class="ident">AtomicUsize</span> <span class="op">=</span> <span class="ident">AtomicUsize</span>::<span class="ident">new</span>(<span class="number">0</span>);
 
     <span class="ident">INDEX</span>.<span class="ident">fetch_add</span>(<span class="number">1</span>, <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link_section</span>(<span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link_section</span>(<span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;homogeneous&quot;</span>) {
         <span class="kw">let</span> <span class="ident">section</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;.{}_{}.rtic{}&quot;</span>, <span class="ident">section</span>, <span class="ident">core</span>, <span class="ident">link_section_index</span>());
         <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="attribute">#[<span class="ident">link_section</span> <span class="op">=</span> #<span class="ident">section</span>]</span>))
@@ -477,7 +478,7 @@
 }
 
 <span class="comment">// NOTE `None` means in shared memory</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link_section_uninit</span>(<span class="ident">core</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Core</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link_section_uninit</span>(<span class="ident">core</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Core</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">section</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">core</span>) <span class="op">=</span> <span class="ident">core</span> {
         <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">link_section_index</span>();
 
@@ -499,11 +500,11 @@
 }
 
 <span class="doccomment">/// Generates a pre-reexport identifier for the &quot;locals&quot; struct</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">locals_ident</span>(<span class="ident">ctxt</span>: <span class="ident">Context</span>, <span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">locals_ident</span>(<span class="ident">ctxt</span>: <span class="ident">Context</span>, <span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ctxt</span> {
-        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">inits</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
-        <span class="ident">Context</span>::<span class="ident">Idle</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">idles</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
-        <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="ident">ident</span>) <span class="op">|</span> <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ident</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=&gt;</span> <span class="ident">app</span>.<span class="ident">inits</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">Idle</span>(<span class="ident">core</span>) <span class="op">=&gt;</span> <span class="ident">app</span>.<span class="ident">idles</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="ident">ident</span>) <span class="op">|</span> <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="ident">ident</span>) <span class="op">=&gt;</span> <span class="ident">ident</span>.<span class="ident">to_string</span>(),
     };
 
     <span class="ident">s</span>.<span class="ident">push_str</span>(<span class="string">&quot;Locals&quot;</span>);
@@ -512,7 +513,7 @@
 }
 
 <span class="doccomment">/// Generates an identifier for a rendezvous barrier</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rendezvous_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rendezvous_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;RV{}&quot;</span>, <span class="ident">core</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
@@ -521,7 +522,7 @@
 <span class="comment">// `inputs` could be &amp;[`input: Foo`] OR &amp;[`mut x: i32`, `ref y: i64`]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">regroup_inputs</span>(
     <span class="ident">inputs</span>: <span class="kw-2">&amp;</span>[<span class="ident">PatType</span>],
-) <span class="op">-</span><span class="op">&gt;</span> (
+) <span class="op">-&gt;</span> (
     <span class="comment">// args e.g. &amp;[`_0`],  &amp;[`_0: i32`, `_1: i64`]</span>
     <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span>,
     <span class="comment">// tupled e.g. `_0`, `(_0, _1)`</span>
@@ -531,7 +532,7 @@
     <span class="comment">// ty e.g. `Foo`, `(i32, i64)`</span>
     <span class="ident">TokenStream2</span>,
 ) {
-    <span class="kw">if</span> <span class="ident">inputs</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+    <span class="kw">if</span> <span class="ident">inputs</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">inputs</span>[<span class="number">0</span>].<span class="ident">ty</span>;
 
         (
@@ -566,11 +567,11 @@
 }
 
 <span class="doccomment">/// Generates a pre-reexport identifier for the &quot;resources&quot; struct</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resources_ident</span>(<span class="ident">ctxt</span>: <span class="ident">Context</span>, <span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resources_ident</span>(<span class="ident">ctxt</span>: <span class="ident">Context</span>, <span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ctxt</span> {
-        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">inits</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
-        <span class="ident">Context</span>::<span class="ident">Idle</span>(<span class="ident">core</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">app</span>.<span class="ident">idles</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
-        <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="ident">ident</span>) <span class="op">|</span> <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ident</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">Init</span>(<span class="ident">core</span>) <span class="op">=&gt;</span> <span class="ident">app</span>.<span class="ident">inits</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">Idle</span>(<span class="ident">core</span>) <span class="op">=&gt;</span> <span class="ident">app</span>.<span class="ident">idles</span>[<span class="kw-2">&amp;</span><span class="ident">core</span>].<span class="ident">name</span>.<span class="ident">to_string</span>(),
+        <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="ident">ident</span>) <span class="op">|</span> <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="ident">ident</span>) <span class="op">=&gt;</span> <span class="ident">ident</span>.<span class="ident">to_string</span>(),
     };
 
     <span class="ident">s</span>.<span class="ident">push_str</span>(<span class="string">&quot;Resources&quot;</span>);
@@ -583,7 +584,7 @@
 <span class="doccomment">/// Each core may have several task dispatchers, one for each priority level. Each task dispatcher</span>
 <span class="doccomment">/// in turn may use more than one ready queue because the queues are SPSC queues so one is needed</span>
 <span class="doccomment">/// per sender core.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rq_ident</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>, <span class="ident">priority</span>: <span class="ident">u8</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rq_ident</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>, <span class="ident">priority</span>: <span class="ident">u8</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(
         <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;R{}_P{}_S{}_RQ&quot;</span>, <span class="ident">receiver</span>, <span class="ident">priority</span>, <span class="ident">sender</span>),
         <span class="ident">Span</span>::<span class="ident">call_site</span>(),
@@ -594,7 +595,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// The methods of the `Schedule` structs invoke these functions. As one task may be `schedule`-ed</span>
 <span class="doccomment">/// by different cores we need one &quot;schedule&quot; function per possible task-sender pair</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(
         <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;schedule_{}_S{}&quot;</span>, <span class="ident">name</span>.<span class="ident">to_string</span>(), <span class="ident">sender</span>),
         <span class="ident">Span</span>::<span class="ident">call_site</span>(),
@@ -602,12 +603,12 @@
 }
 
 <span class="doccomment">/// Generates an identifier for the `enum` of `schedule`-able tasks</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_t_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_t_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;T{}&quot;</span>, <span class="ident">core</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for a cross-spawn barrier</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_barrier</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_barrier</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;SB{}&quot;</span>, <span class="ident">receiver</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
@@ -615,7 +616,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// The methods of the `Spawn` structs invoke these functions. As one task may be `spawn`-ed by</span>
 <span class="doccomment">/// different cores we need one &quot;spawn&quot; function per possible task-sender pair</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(
         <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;spawn_{}_S{}&quot;</span>, <span class="ident">name</span>.<span class="ident">to_string</span>(), <span class="ident">sender</span>),
         <span class="ident">Span</span>::<span class="ident">call_site</span>(),
@@ -626,14 +627,14 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This identifier needs the same structure as the `RQ` identifier because there&#39;s one ready queue</span>
 <span class="doccomment">/// for each of these `T` enums</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_t_ident</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>, <span class="ident">priority</span>: <span class="ident">u8</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_t_ident</span>(<span class="ident">receiver</span>: <span class="ident">Core</span>, <span class="ident">priority</span>: <span class="ident">u8</span>, <span class="ident">sender</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(
         <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;R{}_P{}_S{}_T&quot;</span>, <span class="ident">receiver</span>, <span class="ident">priority</span>, <span class="ident">sender</span>),
         <span class="ident">Span</span>::<span class="ident">call_site</span>(),
     )
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suffixed</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">core</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suffixed</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">core</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">Span</span>::<span class="ident">call_site</span>();
 
     <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;homogeneous&quot;</span>) {
@@ -646,7 +647,7 @@
 <span class="doccomment">/// Generates an identifier for a timer queue</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// At most there&#39;s one timer queue per core</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tq_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tq_ident</span>(<span class="ident">core</span>: <span class="ident">Core</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;TQ{}&quot;</span>, <span class="ident">core</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 </pre></div>

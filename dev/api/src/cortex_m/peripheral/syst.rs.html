@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.3/src/peripheral/syst.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>syst.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../cortex_m/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.3/src/peripheral/syst.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>syst.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../cortex_m/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -216,13 +217,13 @@
 
 <span class="kw">const</span> <span class="ident">SYST_COUNTER_MASK</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00ff_ffff</span>;
 
-<span class="kw">const</span> <span class="ident">SYST_CSR_ENABLE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">0</span>;
-<span class="kw">const</span> <span class="ident">SYST_CSR_TICKINT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">1</span>;
-<span class="kw">const</span> <span class="ident">SYST_CSR_CLKSOURCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">2</span>;
-<span class="kw">const</span> <span class="ident">SYST_CSR_COUNTFLAG</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">16</span>;
+<span class="kw">const</span> <span class="ident">SYST_CSR_ENABLE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">0</span>;
+<span class="kw">const</span> <span class="ident">SYST_CSR_TICKINT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">1</span>;
+<span class="kw">const</span> <span class="ident">SYST_CSR_CLKSOURCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">2</span>;
+<span class="kw">const</span> <span class="ident">SYST_CSR_COUNTFLAG</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">16</span>;
 
-<span class="kw">const</span> <span class="ident">SYST_CALIB_SKEW</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">30</span>;
-<span class="kw">const</span> <span class="ident">SYST_CALIB_NOREF</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">31</span>;
+<span class="kw">const</span> <span class="ident">SYST_CALIB_SKEW</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">30</span>;
+<span class="kw">const</span> <span class="ident">SYST_CALIB_NOREF</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">31</span>;
 
 <span class="kw">impl</span> <span class="ident">SYST</span> {
     <span class="doccomment">/// Clears current value to 0</span>
@@ -273,9 +274,9 @@
     <span class="doccomment">/// *NOTE* This takes `&amp;mut self` because the read operation is side effectful and can clear the</span>
     <span class="doccomment">/// bit that indicates that the timer has wrapped (cf. `SYST.has_wrapped`)</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_clock_source</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SystClkSource</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_clock_source</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">SystClkSource</span> {
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CSR_CLKSOURCE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CSR_CLKSOURCE</span> <span class="op">!=</span> <span class="number">0</span> {
             <span class="ident">SystClkSource</span>::<span class="ident">Core</span>
         } <span class="kw">else</span> {
             <span class="ident">SystClkSource</span>::<span class="ident">External</span>
@@ -284,14 +285,14 @@
 
     <span class="doccomment">/// Gets current value</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_current</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_current</span>() <span class="op">-&gt;</span> <span class="ident">u32</span> {
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
         <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">cvr</span>.<span class="ident">read</span>() }
     }
 
     <span class="doccomment">/// Gets reload value</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_reload</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_reload</span>() <span class="op">-&gt;</span> <span class="ident">u32</span> {
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
         <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">rvr</span>.<span class="ident">read</span>() }
     }
@@ -302,16 +303,16 @@
     <span class="doccomment">/// Returns `0` if the value is not known (e.g. because the clock can</span>
     <span class="doccomment">/// change dynamically).</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_ticks_per_10ms</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_ticks_per_10ms</span>() <span class="op">-&gt;</span> <span class="ident">u32</span> {
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
         <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">calib</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_COUNTER_MASK</span> }
     }
 
     <span class="doccomment">/// Checks if an external reference clock is available</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_reference_clock</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_reference_clock</span>() <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
-        <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">calib</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CALIB_NOREF</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> }
+        <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">calib</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CALIB_NOREF</span> <span class="op">==</span> <span class="number">0</span> }
     }
 
     <span class="doccomment">/// Checks if the counter wrapped (underflowed) since the last check</span>
@@ -319,8 +320,8 @@
     <span class="doccomment">/// *NOTE* This takes `&amp;mut self` because the read operation is side effectful and will clear</span>
     <span class="doccomment">/// the bit of the read register.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_wrapped</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CSR_COUNTFLAG</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_wrapped</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CSR_COUNTFLAG</span> <span class="op">!=</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// Checks if counter is enabled</span>
@@ -328,8 +329,8 @@
     <span class="doccomment">/// *NOTE* This takes `&amp;mut self` because the read operation is side effectful and can clear the</span>
     <span class="doccomment">/// bit that indicates that the timer has wrapped (cf. `SYST.has_wrapped`)</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_counter_enabled</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CSR_ENABLE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_counter_enabled</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CSR_ENABLE</span> <span class="op">!=</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// Checks if SysTick interrupt is enabled</span>
@@ -337,8 +338,8 @@
     <span class="doccomment">/// *NOTE* This takes `&amp;mut self` because the read operation is side effectful and can clear the</span>
     <span class="doccomment">/// bit that indicates that the timer has wrapped (cf. `SYST.has_wrapped`)</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_interrupt_enabled</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CSR_TICKINT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_interrupt_enabled</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CSR_TICKINT</span> <span class="op">!=</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// Checks if the calibration value is precise</span>
@@ -347,17 +348,17 @@
     <span class="doccomment">/// `get_ticks_per_10ms()` may result in a period significantly deviating</span>
     <span class="doccomment">/// from 10 ms.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_precise</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_precise</span>() <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
-        <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">calib</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CALIB_SKEW</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> }
+        <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">calib</span>.<span class="ident">read</span>() <span class="op">&amp;</span> <span class="ident">SYST_CALIB_SKEW</span> <span class="op">==</span> <span class="number">0</span> }
     }
 
     <span class="doccomment">/// Sets clock source</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_clock_source</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">clk_source</span>: <span class="ident">SystClkSource</span>) {
         <span class="kw">match</span> <span class="ident">clk_source</span> {
-            <span class="ident">SystClkSource</span>::<span class="ident">External</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">modify</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="op">&amp;</span> <span class="op">!</span><span class="ident">SYST_CSR_CLKSOURCE</span>) },
-            <span class="ident">SystClkSource</span>::<span class="ident">Core</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">modify</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="op">|</span> <span class="ident">SYST_CSR_CLKSOURCE</span>) },
+            <span class="ident">SystClkSource</span>::<span class="ident">External</span> <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">modify</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="op">&amp;</span> <span class="op">!</span><span class="ident">SYST_CSR_CLKSOURCE</span>) },
+            <span class="ident">SystClkSource</span>::<span class="ident">Core</span> <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">csr</span>.<span class="ident">modify</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="op">|</span> <span class="ident">SYST_CSR_CLKSOURCE</span>) },
         }
     }
 

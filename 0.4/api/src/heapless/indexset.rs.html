@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/heapless-0.4.4/src/indexset.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>indexset.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../heapless/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/heapless-0.4.4/src/indexset.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>indexset.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../heapless/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -658,7 +659,7 @@
 <span class="kw">use</span> <span class="ident">indexmap</span>::{<span class="self">self</span>, <span class="ident">Bucket</span>, <span class="ident">IndexMap</span>, <span class="ident">Pos</span>};
 
 <span class="doccomment">/// An `IndexSet` using the default FNV hasher</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FnvIndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">BuildHasherDefault</span><span class="op">&lt;</span><span class="ident">FnvHasher</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FnvIndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">BuildHasherDefault</span><span class="op">&lt;</span><span class="ident">FnvHasher</span><span class="op">&gt;&gt;</span>;
 
 <span class="doccomment">/// Fixed capacity [`IndexSet`](https://docs.rs/indexmap/1/indexmap/set/struct.IndexSet.html)</span>
 <span class="doccomment">///</span>
@@ -696,19 +697,19 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">S</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="ident">map</span>: <span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">T</span>, (), <span class="ident">N</span>, <span class="ident">S</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">BuildHasherDefault</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">BuildHasherDefault</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
     <span class="ident">S</span>: <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Hasher</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">PowerOfTwo</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">PowerOfTwo</span>,
 {
     <span class="doccomment">/// Creates an empty `IndexSet`</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">IndexSet</span> {
             <span class="ident">map</span>: <span class="ident">IndexMap</span>::<span class="ident">new</span>(),
         }
@@ -719,7 +720,7 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
     <span class="ident">S</span>: <span class="ident">BuildHasher</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="doccomment">/// Returns the number of elements the set can hold</span>
     <span class="doccomment">///</span>
@@ -732,7 +733,7 @@
     <span class="doccomment">/// let set = FnvIndexSet::&lt;i32, U16&gt;::new();</span>
     <span class="doccomment">/// assert_eq!(set.capacity(), 16);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capacity</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capacity</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">capacity</span>()
     }
 
@@ -753,7 +754,7 @@
     <span class="doccomment">///     println!(&quot;{}&quot;, x);</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">Iter</span> {
             <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">iter</span>(),
         }
@@ -787,9 +788,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">difference</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>,
         <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Difference</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>
+    ) <span class="op">-&gt;</span> <span class="ident">Difference</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
         <span class="ident">S2</span>: <span class="ident">BuildHasher</span>,
     {
         <span class="ident">Difference</span> {
@@ -824,9 +825,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">symmetric_difference</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>,
         <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span>
+    ) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
         <span class="ident">S2</span>: <span class="ident">BuildHasher</span>,
     {
         <span class="self">self</span>.<span class="ident">difference</span>(<span class="ident">other</span>).<span class="ident">chain</span>(<span class="ident">other</span>.<span class="ident">difference</span>(<span class="self">self</span>))
@@ -855,9 +856,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersection</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>,
         <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Intersection</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>
+    ) <span class="op">-&gt;</span> <span class="ident">Intersection</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
         <span class="ident">S2</span>: <span class="ident">BuildHasher</span>,
     {
         <span class="ident">Intersection</span> {
@@ -889,9 +890,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">union</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>,
         <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span>
+    ) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
         <span class="ident">S2</span>: <span class="ident">BuildHasher</span>,
     {
         <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">chain</span>(<span class="ident">other</span>.<span class="ident">difference</span>(<span class="self">self</span>))
@@ -910,7 +911,7 @@
     <span class="doccomment">/// v.insert(1).unwrap();</span>
     <span class="doccomment">/// assert_eq!(v.len(), 1);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">len</span>()
     }
 
@@ -927,7 +928,7 @@
     <span class="doccomment">/// v.insert(1).unwrap();</span>
     <span class="doccomment">/// assert!(!v.is_empty());</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">is_empty</span>()
     }
 
@@ -963,7 +964,7 @@
     <span class="doccomment">/// assert_eq!(set.contains(&amp;1), true);</span>
     <span class="doccomment">/// assert_eq!(set.contains(&amp;4), false);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
         <span class="ident">Q</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
@@ -989,9 +990,9 @@
     <span class="doccomment">/// b.insert(1).unwrap();</span>
     <span class="doccomment">/// assert_eq!(a.is_disjoint(&amp;b), false);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_disjoint</span><span class="op">&lt;</span><span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_disjoint</span><span class="op">&lt;</span><span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>
     <span class="kw">where</span>
-        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
         <span class="ident">S2</span>: <span class="ident">BuildHasher</span>,
     {
         <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="op">!</span><span class="ident">other</span>.<span class="ident">contains</span>(<span class="ident">v</span>))
@@ -1015,9 +1016,9 @@
     <span class="doccomment">/// set.insert(4).unwrap();</span>
     <span class="doccomment">/// assert_eq!(set.is_subset(&amp;sup), false);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_subset</span><span class="op">&lt;</span><span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_subset</span><span class="op">&lt;</span><span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>
     <span class="kw">where</span>
-        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
         <span class="ident">S2</span>: <span class="ident">BuildHasher</span>,
     {
         <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">other</span>.<span class="ident">contains</span>(<span class="ident">v</span>))
@@ -1044,9 +1045,9 @@
     <span class="doccomment">/// set.insert(2).unwrap();</span>
     <span class="doccomment">/// assert_eq!(set.is_superset(&amp;sub), true);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_superset</span><span class="op">&lt;</span><span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_superset</span><span class="op">&lt;</span><span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>
     <span class="kw">where</span>
-        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
         <span class="ident">S2</span>: <span class="ident">BuildHasher</span>,
     {
         <span class="ident">other</span>.<span class="ident">is_subset</span>(<span class="self">self</span>)
@@ -1070,7 +1071,7 @@
     <span class="doccomment">/// assert_eq!(set.insert(2).unwrap(), false);</span>
     <span class="doccomment">/// assert_eq!(set.len(), 1);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">T</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">map</span>
             .<span class="ident">insert</span>(<span class="ident">value</span>, ())
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">old</span><span class="op">|</span> <span class="ident">old</span>.<span class="ident">is_none</span>())
@@ -1094,7 +1095,7 @@
     <span class="doccomment">/// assert_eq!(set.remove(&amp;2), true);</span>
     <span class="doccomment">/// assert_eq!(set.remove(&amp;2), false);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
         <span class="ident">Q</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
@@ -1107,9 +1108,9 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span> <span class="op">+</span> <span class="ident">Clone</span>,
     <span class="ident">S</span>: <span class="ident">Clone</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">map</span>: <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">clone</span>(),
         }
@@ -1120,9 +1121,9 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span> <span class="op">+</span> <span class="ident">fmt</span>::<span class="ident">Debug</span>,
     <span class="ident">S</span>: <span class="ident">BuildHasher</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_set</span>().<span class="ident">entries</span>(<span class="self">self</span>.<span class="ident">iter</span>()).<span class="ident">finish</span>()
     }
 }
@@ -1131,25 +1132,25 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
     <span class="ident">S</span>: <span class="ident">BuildHasher</span> <span class="op">+</span> <span class="ident">Default</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">IndexSet</span> {
             <span class="ident">map</span>: <span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>::<span class="ident">default</span>(),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N1</span>, <span class="ident">N2</span>, <span class="ident">S1</span>, <span class="ident">S2</span><span class="op">&gt;</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N1</span>, <span class="ident">S1</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N1</span>, <span class="ident">N2</span>, <span class="ident">S1</span>, <span class="ident">S2</span><span class="op">&gt;</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N1</span>, <span class="ident">S1</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
     <span class="ident">S1</span>: <span class="ident">BuildHasher</span>,
     <span class="ident">S2</span>: <span class="ident">BuildHasher</span>,
-    <span class="ident">N1</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N1</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">N2</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">len</span>() <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">is_subset</span>(<span class="ident">other</span>)
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N2</span>, <span class="ident">S2</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">other</span>.<span class="ident">len</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">is_subset</span>(<span class="ident">other</span>)
     }
 }
 
@@ -1157,7 +1158,7 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
     <span class="ident">S</span>: <span class="ident">BuildHasher</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="kw">fn</span> <span class="ident">extend</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">iterable</span>: <span class="ident">I</span>)
     <span class="kw">where</span>
@@ -1171,7 +1172,7 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span> <span class="op">+</span> <span class="ident">Copy</span>,
     <span class="ident">S</span>: <span class="ident">BuildHasher</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="kw">fn</span> <span class="ident">extend</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">iterable</span>: <span class="ident">I</span>)
     <span class="kw">where</span>
@@ -1185,9 +1186,9 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
     <span class="ident">S</span>: <span class="ident">BuildHasher</span> <span class="op">+</span> <span class="ident">Default</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-&gt;</span> <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
     {
@@ -1201,12 +1202,12 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
     <span class="ident">S</span>: <span class="ident">BuildHasher</span>,
-    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span>;
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
         <span class="self">self</span>.<span class="ident">iter</span>()
     }
 }
@@ -1224,7 +1225,7 @@
 {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">k</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">k</span>)
     }
 }
@@ -1233,7 +1234,7 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">clone</span>(),
         }
@@ -1244,7 +1245,7 @@
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">BuildHasher</span>,
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
-    <span class="ident">N</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="ident">iter</span>: <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>,
     <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">S</span><span class="op">&gt;</span>,
@@ -1254,11 +1255,11 @@
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">BuildHasher</span>,
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
-    <span class="ident">N</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
             <span class="kw">let</span> <span class="ident">elt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>()<span class="question-mark">?</span>;
             <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">other</span>.<span class="ident">contains</span>(<span class="ident">elt</span>) {
@@ -1272,7 +1273,7 @@
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">BuildHasher</span>,
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
-    <span class="ident">N</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="ident">iter</span>: <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>,
     <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">IndexSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>, <span class="ident">S</span><span class="op">&gt;</span>,
@@ -1282,11 +1283,11 @@
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">BuildHasher</span>,
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Hash</span>,
-    <span class="ident">N</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">Bucket</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pos</span><span class="op">&gt;&gt;</span>,
 {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
             <span class="kw">let</span> <span class="ident">elt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>()<span class="question-mark">?</span>;
             <span class="kw">if</span> <span class="self">self</span>.<span class="ident">other</span>.<span class="ident">contains</span>(<span class="ident">elt</span>) {

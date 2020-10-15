@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `macros/src/analyze.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>analyze.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../cortex_m_rtfm_macros/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `macros/src/analyze.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>analyze.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../cortex_m_rtfm_macros/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -280,10 +281,10 @@
     <span class="kw">pub</span> <span class="ident">dispatchers</span>: <span class="ident">Dispatchers</span>,
     <span class="comment">// Ceilings of free queues</span>
     <span class="kw">pub</span> <span class="ident">free_queues</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Ident</span>, <span class="ident">u8</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">resources_assert_send</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">resources_assert_send</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;&gt;</span>,
     <span class="kw">pub</span> <span class="ident">tasks_assert_send</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Types of RO resources that need to be Sync</span>
-    <span class="kw">pub</span> <span class="ident">assert_sync</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">assert_sync</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;&gt;</span>,
     <span class="comment">// Resource ownership</span>
     <span class="kw">pub</span> <span class="ident">ownerships</span>: <span class="ident">Ownerships</span>,
     <span class="comment">// Ceilings of ready queues</span>
@@ -300,21 +301,21 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Ownership</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">needs_lock</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">priority</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">needs_lock</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">priority</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Ownership</span>::<span class="ident">Owned</span> { .. } <span class="op">|</span> <span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
-            <span class="ident">Ownership</span>::<span class="ident">Shared</span> { <span class="ident">ceiling</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">ceiling</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">priority</span>);
+            <span class="ident">Ownership</span>::<span class="ident">Owned</span> { .. } <span class="op">|</span> <span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { .. } <span class="op">=&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">Ownership</span>::<span class="ident">Shared</span> { <span class="ident">ceiling</span> } <span class="op">=&gt;</span> {
+                <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">ceiling</span> <span class="op">&gt;=</span> <span class="ident">priority</span>);
 
                 <span class="ident">priority</span> <span class="op">&lt;</span> <span class="ident">ceiling</span>
             }
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Ownership</span>::<span class="ident">Owned</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">Ownership</span>::<span class="ident">Owned</span> { .. } <span class="op">=&gt;</span> <span class="bool-val">true</span>,
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
         }
     }
 }
@@ -334,7 +335,7 @@
 
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Capacities</span> <span class="op">=</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Ident</span>, <span class="ident">u8</span><span class="op">&gt;</span>;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">app</span>(<span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Analysis</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">app</span>(<span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="ident">App</span>) <span class="op">-&gt;</span> <span class="ident">Analysis</span> {
     <span class="comment">// Ceiling analysis of R/W resource and Sync analysis of RO resources</span>
     <span class="comment">// (Resource shared by tasks that run at different priorities need to be `Sync`)</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ownerships</span> <span class="op">=</span> <span class="ident">Ownerships</span>::<span class="ident">new</span>();
@@ -348,7 +349,7 @@
                 <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span>: <span class="ident">ceiling</span> }
                 <span class="op">|</span> <span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { <span class="ident">priority</span>: <span class="ident">ceiling</span> }
                 <span class="op">|</span> <span class="ident">Ownership</span>::<span class="ident">Shared</span> { <span class="ident">ceiling</span> }
-                    <span class="kw">if</span> <span class="ident">priority</span> <span class="op">!</span><span class="op">=</span> <span class="ident">ceiling</span> <span class="op">=</span><span class="op">&gt;</span>
+                    <span class="kw">if</span> <span class="ident">priority</span> <span class="op">!=</span> <span class="ident">ceiling</span> <span class="op">=&gt;</span>
                 {
                     <span class="kw-2">*</span><span class="ident">ownership</span> <span class="op">=</span> <span class="ident">Ownership</span>::<span class="ident">Shared</span> {
                         <span class="ident">ceiling</span>: <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">ceiling</span>, <span class="ident">priority</span>),
@@ -359,10 +360,10 @@
                         <span class="ident">assert_sync</span>.<span class="ident">insert</span>(<span class="ident">res</span>.<span class="ident">ty</span>.<span class="ident">clone</span>());
                     }
                 }
-                <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span>: <span class="ident">ceiling</span> } <span class="kw">if</span> <span class="ident">ceiling</span> <span class="op">=</span><span class="op">=</span> <span class="ident">priority</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span>: <span class="ident">ceiling</span> } <span class="kw">if</span> <span class="ident">ceiling</span> <span class="op">==</span> <span class="ident">priority</span> <span class="op">=&gt;</span> {
                     <span class="kw-2">*</span><span class="ident">ownership</span> <span class="op">=</span> <span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { <span class="ident">priority</span> };
                 }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {}
+                <span class="kw">_</span> <span class="op">=&gt;</span> {}
             }
 
             <span class="kw">continue</span>;
@@ -375,7 +376,7 @@
     <span class="comment">// We assume at most one message per `spawn` / `schedule`</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">capacities</span>: <span class="ident">Capacities</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">tasks</span>.<span class="ident">keys</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">task</span><span class="op">|</span> (<span class="ident">task</span>.<span class="ident">clone</span>(), <span class="number">0</span>)).<span class="ident">collect</span>();
     <span class="kw">for</span> (<span class="kw">_</span>, <span class="ident">task</span>) <span class="kw">in</span> <span class="ident">app</span>.<span class="ident">spawn_calls</span>().<span class="ident">chain</span>(<span class="ident">app</span>.<span class="ident">schedule_calls</span>()) {
-        <span class="kw-2">*</span><span class="ident">capacities</span>.<span class="ident">get_mut</span>(<span class="ident">task</span>).<span class="ident">expect</span>(<span class="string">&quot;BUG: capacities.get_mut&quot;</span>) <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw-2">*</span><span class="ident">capacities</span>.<span class="ident">get_mut</span>(<span class="ident">task</span>).<span class="ident">expect</span>(<span class="string">&quot;BUG: capacities.get_mut&quot;</span>) <span class="op">+=</span> <span class="number">1</span>;
     }
 
     <span class="comment">// Override computed capacities if user specified a capacity in `#[task]`</span>
@@ -392,7 +393,7 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tq_priority</span> <span class="op">=</span> <span class="number">1</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tq_tasks</span> <span class="op">=</span> <span class="ident">Idents</span>::<span class="ident">new</span>();
     <span class="kw">for</span> (<span class="kw">_</span>, <span class="ident">task</span>) <span class="kw">in</span> <span class="ident">app</span>.<span class="ident">schedule_calls</span>() {
-        <span class="ident">tq_capacity</span> <span class="op">+</span><span class="op">=</span> <span class="ident">capacities</span>[<span class="ident">task</span>];
+        <span class="ident">tq_capacity</span> <span class="op">+=</span> <span class="ident">capacities</span>[<span class="ident">task</span>];
         <span class="ident">tq_priority</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">tq_priority</span>, <span class="ident">app</span>.<span class="ident">tasks</span>[<span class="ident">task</span>].<span class="ident">args</span>.<span class="ident">priority</span>);
         <span class="ident">tq_tasks</span>.<span class="ident">insert</span>(<span class="ident">task</span>.<span class="ident">clone</span>());
     }
@@ -403,10 +404,10 @@
     <span class="comment">// dispatcher</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dispatchers</span> <span class="op">=</span> <span class="ident">Dispatchers</span>::<span class="ident">new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">free_interrupts</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">free_interrupts</span>.<span class="ident">iter</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tasks</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">tasks</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tasks</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">tasks</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
     <span class="ident">tasks</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">l</span>, <span class="ident">r</span><span class="op">|</span> <span class="ident">l</span>.<span class="number">1</span>.<span class="ident">args</span>.<span class="ident">priority</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>.<span class="number">1</span>.<span class="ident">args</span>.<span class="ident">priority</span>));
     <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">task</span>) <span class="kw">in</span> <span class="ident">tasks</span> {
-        <span class="kw">let</span> <span class="ident">dispatcher</span> <span class="op">=</span> <span class="ident">dispatchers</span>.<span class="ident">entry</span>(<span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">priority</span>).<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="ident">dispatcher</span> <span class="op">=</span> <span class="ident">dispatchers</span>.<span class="ident">entry</span>(<span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">priority</span>).<span class="ident">or_insert_with</span>(<span class="op">||</span> {
             <span class="kw">let</span> (<span class="ident">name</span>, <span class="ident">fi</span>) <span class="op">=</span> <span class="ident">free_interrupts</span>
                 .<span class="ident">next</span>()
                 .<span class="ident">expect</span>(<span class="string">&quot;BUG: not enough free_interrupts&quot;</span>);
@@ -419,7 +420,7 @@
             }
         });
 
-        <span class="ident">dispatcher</span>.<span class="ident">capacity</span> <span class="op">+</span><span class="op">=</span> <span class="ident">capacities</span>[<span class="ident">name</span>];
+        <span class="ident">dispatcher</span>.<span class="ident">capacity</span> <span class="op">+=</span> <span class="ident">capacities</span>[<span class="ident">name</span>];
         <span class="ident">dispatcher</span>.<span class="ident">tasks</span>.<span class="ident">push</span>(<span class="ident">name</span>.<span class="ident">clone</span>());
     }
 
@@ -432,9 +433,9 @@
     <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">res</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">resources</span> {
         <span class="kw">let</span> <span class="ident">owned_by_idle</span> <span class="op">=</span> <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span>: <span class="number">0</span> };
         <span class="kw">if</span> <span class="ident">res</span>.<span class="ident">expr</span>.<span class="ident">is_none</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">ownerships</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">ownerships</span>
                 .<span class="ident">get</span>(<span class="ident">name</span>)
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ship</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">ship</span> <span class="op">!</span><span class="op">=</span> <span class="ident">owned_by_idle</span>)
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ship</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">ship</span> <span class="op">!=</span> <span class="ident">owned_by_idle</span>)
                 .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
         {
             <span class="ident">resources_assert_send</span>.<span class="ident">insert</span>(<span class="ident">res</span>.<span class="ident">ty</span>.<span class="ident">clone</span>());
@@ -447,7 +448,7 @@
         <span class="kw">let</span> <span class="ident">owned_by_idle</span> <span class="op">=</span> <span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span>: <span class="number">0</span> };
         <span class="kw">if</span> <span class="ident">ownerships</span>
             .<span class="ident">get</span>(<span class="ident">name</span>)
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ship</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">ship</span> <span class="op">!</span><span class="op">=</span> <span class="ident">owned_by_idle</span>)
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ship</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">ship</span> <span class="op">!=</span> <span class="ident">owned_by_idle</span>)
             .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
         {
             <span class="ident">resources_assert_send</span>.<span class="ident">insert</span>(<span class="ident">app</span>.<span class="ident">resources</span>[<span class="ident">name</span>].<span class="ident">ty</span>.<span class="ident">clone</span>());
@@ -472,7 +473,7 @@
 
             <span class="comment">// Send is required when sending messages from a task whose priority doesn&#39;t match the</span>
             <span class="comment">// priority of the receiving task</span>
-            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">tasks</span>[<span class="ident">task</span>].<span class="ident">args</span>.<span class="ident">priority</span> <span class="op">!</span><span class="op">=</span> <span class="ident">priority</span> {
+            <span class="kw">if</span> <span class="ident">app</span>.<span class="ident">tasks</span>[<span class="ident">task</span>].<span class="ident">args</span>.<span class="ident">priority</span> <span class="op">!=</span> <span class="ident">priority</span> {
                 <span class="ident">tasks_assert_send</span>.<span class="ident">insert</span>(<span class="ident">task</span>.<span class="ident">clone</span>());
             }
         } <span class="kw">else</span> {

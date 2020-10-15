@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/typenum-1.12.0/src/bit.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>bit.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../typenum/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/typenum-1.12.0/src/bit.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>bit.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../typenum/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -333,7 +334,7 @@
 <span class="kw">impl</span> <span class="ident">B0</span> {
     <span class="doccomment">/// Instantiates a singleton representing this bit.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B0</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">B0</span> {
         <span class="ident">B0</span>
     }
 }
@@ -345,7 +346,7 @@
 <span class="kw">impl</span> <span class="ident">B1</span> {
     <span class="doccomment">/// Instantiates a singleton representing this bit.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B1</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">B1</span> {
         <span class="ident">B1</span>
     }
 }
@@ -355,11 +356,11 @@
     <span class="kw">const</span> <span class="ident">BOOL</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">false</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">to_u8</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">fn</span> <span class="ident">to_u8</span>() <span class="op">-&gt;</span> <span class="ident">u8</span> {
         <span class="number">0</span>
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">to_bool</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">to_bool</span>() <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="bool-val">false</span>
     }
 }
@@ -369,11 +370,11 @@
     <span class="kw">const</span> <span class="ident">BOOL</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">true</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">to_u8</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">fn</span> <span class="ident">to_u8</span>() <span class="op">-&gt;</span> <span class="ident">u8</span> {
         <span class="number">1</span>
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">to_bool</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">to_bool</span>() <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="bool-val">true</span>
     }
 }
@@ -385,7 +386,7 @@
 <span class="kw">impl</span> <span class="ident">Not</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">not</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">not</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -393,7 +394,7 @@
 <span class="kw">impl</span> <span class="ident">Not</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">not</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">not</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -402,7 +403,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Rhs</span>: <span class="ident">Bit</span><span class="op">&gt;</span> <span class="ident">BitAnd</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">Rhs</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -411,7 +412,7 @@
 <span class="kw">impl</span> <span class="ident">BitAnd</span><span class="op">&lt;</span><span class="ident">B0</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -420,7 +421,7 @@
 <span class="kw">impl</span> <span class="ident">BitAnd</span><span class="op">&lt;</span><span class="ident">B1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -429,7 +430,7 @@
 <span class="kw">impl</span> <span class="ident">BitOr</span><span class="op">&lt;</span><span class="ident">B0</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -438,7 +439,7 @@
 <span class="kw">impl</span> <span class="ident">BitOr</span><span class="op">&lt;</span><span class="ident">B1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -447,7 +448,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Rhs</span>: <span class="ident">Bit</span><span class="op">&gt;</span> <span class="ident">BitOr</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">Rhs</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -456,7 +457,7 @@
 <span class="kw">impl</span> <span class="ident">BitXor</span><span class="op">&lt;</span><span class="ident">B0</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -464,7 +465,7 @@
 <span class="kw">impl</span> <span class="ident">BitXor</span><span class="op">&lt;</span><span class="ident">B0</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -472,7 +473,7 @@
 <span class="kw">impl</span> <span class="ident">BitXor</span><span class="op">&lt;</span><span class="ident">B1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -480,7 +481,7 @@
 <span class="kw">impl</span> <span class="ident">BitXor</span><span class="op">&lt;</span><span class="ident">B1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -490,12 +491,12 @@
     <span class="comment">// macro for testing operation results. Uses `Same` to ensure the types are equal and</span>
     <span class="comment">// not just the values they evaluate to.</span>
     <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">test_bit_op</span> {
-        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span>:<span class="ident">ident</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Lhs</span>:<span class="ident">ident</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {{
-            <span class="kw">type</span> <span class="ident">Test</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Lhs</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> ::<span class="ident">Same</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span>:<span class="ident">ident</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Lhs</span>:<span class="ident">ident</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span>:<span class="ident">ident</span>) <span class="op">=&gt;</span> {{
+            <span class="kw">type</span> <span class="ident">Test</span> <span class="op">=</span> <span class="op">&lt;&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Lhs</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> ::<span class="ident">Same</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
             <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span> <span class="kw">as</span> <span class="ident">Bit</span><span class="op">&gt;</span>::<span class="ident">to_u8</span>(), <span class="op">&lt;</span><span class="ident">Test</span> <span class="kw">as</span> <span class="ident">Bit</span><span class="op">&gt;</span>::<span class="ident">to_u8</span>());
         }};
-        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Lhs</span>:<span class="ident">ident</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span>:<span class="ident">ident</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Rhs</span>:<span class="ident">ident</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {{
-            <span class="kw">type</span> <span class="ident">Test</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Lhs</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> ::<span class="ident">Same</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Lhs</span>:<span class="ident">ident</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span>:<span class="ident">ident</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Rhs</span>:<span class="ident">ident</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span>:<span class="ident">ident</span>) <span class="op">=&gt;</span> {{
+            <span class="kw">type</span> <span class="ident">Test</span> <span class="op">=</span> <span class="op">&lt;&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Lhs</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">op</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Rhs</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> ::<span class="ident">Same</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
             <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Answer</span> <span class="kw">as</span> <span class="ident">Bit</span><span class="op">&gt;</span>::<span class="ident">to_u8</span>(), <span class="op">&lt;</span><span class="ident">Test</span> <span class="kw">as</span> <span class="ident">Bit</span><span class="op">&gt;</span>::<span class="ident">to_u8</span>());
         }};
     }
@@ -526,7 +527,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Equal</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">compare</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">InternalMarker</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">compare</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">InternalMarker</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">Equal</span>
     }
 }
@@ -535,7 +536,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Less</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">compare</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">InternalMarker</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">compare</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">InternalMarker</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">Less</span>
     }
 }
@@ -544,7 +545,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Greater</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">compare</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">InternalMarker</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">compare</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">InternalMarker</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">Greater</span>
     }
 }
@@ -553,7 +554,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Equal</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">compare</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">InternalMarker</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">compare</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">InternalMarker</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">Equal</span>
     }
 }
@@ -562,28 +563,28 @@
 <span class="kw">impl</span> <span class="ident">Min</span><span class="op">&lt;</span><span class="ident">B0</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B0</span> {
+    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="ident">B0</span> {
         <span class="self">self</span>
     }
 }
 <span class="kw">impl</span> <span class="ident">Min</span><span class="op">&lt;</span><span class="ident">B1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B0</span> {
+    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="ident">B0</span> {
         <span class="self">self</span>
     }
 }
 <span class="kw">impl</span> <span class="ident">Min</span><span class="op">&lt;</span><span class="ident">B0</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B0</span> {
+    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="ident">B0</span> {
         <span class="ident">rhs</span>
     }
 }
 <span class="kw">impl</span> <span class="ident">Min</span><span class="op">&lt;</span><span class="ident">B1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B1</span> {
+    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="ident">B1</span> {
         <span class="self">self</span>
     }
 }
@@ -592,28 +593,28 @@
 <span class="kw">impl</span> <span class="ident">Max</span><span class="op">&lt;</span><span class="ident">B0</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B0</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B0</span> {
+    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="ident">B0</span> {
         <span class="self">self</span>
     }
 }
 <span class="kw">impl</span> <span class="ident">Max</span><span class="op">&lt;</span><span class="ident">B1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B0</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B1</span> {
+    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="ident">B1</span> {
         <span class="ident">rhs</span>
     }
 }
 <span class="kw">impl</span> <span class="ident">Max</span><span class="op">&lt;</span><span class="ident">B0</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B1</span> {
+    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B0</span>) <span class="op">-&gt;</span> <span class="ident">B1</span> {
         <span class="self">self</span>
     }
 }
 <span class="kw">impl</span> <span class="ident">Max</span><span class="op">&lt;</span><span class="ident">B1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">B1</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">B1</span>;
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B1</span> {
+    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B1</span>) <span class="op">-&gt;</span> <span class="ident">B1</span> {
         <span class="self">self</span>
     }
 }

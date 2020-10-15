@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/generic-array-0.14.4/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../generic_array/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/generic-array-0.14.4/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../generic_array/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -797,7 +798,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">U</span>: <span class="ident">Clone</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">GenericArrayImplEven</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArrayImplEven</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GenericArrayImplEven</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
         <span class="ident">GenericArrayImplEven</span> {
             <span class="ident">parent1</span>: <span class="self">self</span>.<span class="ident">parent1</span>.<span class="ident">clone</span>(),
             <span class="ident">parent2</span>: <span class="self">self</span>.<span class="ident">parent2</span>.<span class="ident">clone</span>(),
@@ -819,7 +820,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span>, <span class="ident">U</span>: <span class="ident">Clone</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">GenericArrayImplOdd</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArrayImplOdd</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GenericArrayImplOdd</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
         <span class="ident">GenericArrayImplOdd</span> {
             <span class="ident">parent1</span>: <span class="self">self</span>.<span class="ident">parent1</span>.<span class="ident">clone</span>(),
             <span class="ident">parent2</span>: <span class="self">self</span>.<span class="ident">parent2</span>.<span class="ident">clone</span>(),
@@ -830,12 +831,12 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span>, <span class="ident">U</span>: <span class="ident">Copy</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">GenericArrayImplOdd</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {}
 
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">B0</span><span class="op">&gt;</span> {
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">B0</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="kw">type</span> <span class="ident">ArrayType</span> <span class="op">=</span> <span class="ident">GenericArrayImplEven</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>::<span class="ident">ArrayType</span><span class="op">&gt;</span>;
 }
 
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">B1</span><span class="op">&gt;</span> {
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">B1</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="kw">type</span> <span class="ident">ArrayType</span> <span class="op">=</span> <span class="ident">GenericArrayImplOdd</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>::<span class="ident">ArrayType</span><span class="op">&gt;</span>;
 }
@@ -843,12 +844,12 @@
 <span class="doccomment">/// Struct representing a generic array - `GenericArray&lt;T, N&gt;` works like [T; N]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> {
     <span class="ident">data</span>: <span class="ident">U</span>::<span class="ident">ArrayType</span>,
 }
 
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {}
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Sync</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {}
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {}
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Sync</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {}
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -857,7 +858,7 @@
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> [<span class="ident">T</span>];
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
         <span class="kw">unsafe</span> { <span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">N</span>::<span class="ident">USIZE</span>) }
     }
 }
@@ -867,7 +868,7 @@
     <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
+    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
         <span class="kw">unsafe</span> { <span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">N</span>::<span class="ident">USIZE</span>) }
     }
 }
@@ -878,15 +879,15 @@
 <span class="doccomment">/// Incremenent the position while iterating to mark off created elements,</span>
 <span class="doccomment">/// which will be dropped if `into_inner` is not called.</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ArrayBuilder</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">array</span>: <span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ArrayBuilder</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> {
+    <span class="ident">array</span>: <span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;&gt;</span>,
     <span class="ident">position</span>: <span class="ident">usize</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ArrayBuilder</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">ArrayBuilder</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayBuilder</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">ArrayBuilder</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
         <span class="ident">ArrayBuilder</span> {
             <span class="ident">array</span>: <span class="ident">MaybeUninit</span>::<span class="ident">uninit</span>(),
             <span class="ident">position</span>: <span class="number">0</span>,
@@ -899,7 +900,7 @@
     <span class="doccomment">/// to mark how many elements have been created.</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">iter_position</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">slice</span>::<span class="ident">IterMut</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">usize</span>) {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">iter_position</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> (<span class="ident">slice</span>::<span class="ident">IterMut</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">usize</span>) {
         ((<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">array</span>.<span class="ident">as_mut_ptr</span>()).<span class="ident">iter_mut</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">position</span>)
     }
 
@@ -907,7 +908,7 @@
     <span class="doccomment">/// get the inner array.</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">array</span>);
 
         <span class="ident">mem</span>::<span class="ident">forget</span>(<span class="self">self</span>);
@@ -916,7 +917,7 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">ArrayBuilder</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">ArrayBuilder</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">needs_drop</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() {
             <span class="kw">unsafe</span> {
@@ -933,15 +934,15 @@
 <span class="doccomment">/// Increment the position while iterating and any leftover elements</span>
 <span class="doccomment">/// will be dropped if position does not go to N</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ArrayConsumer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">array</span>: <span class="ident">ManuallyDrop</span><span class="op">&lt;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ArrayConsumer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> {
+    <span class="ident">array</span>: <span class="ident">ManuallyDrop</span><span class="op">&lt;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;&gt;</span>,
     <span class="ident">position</span>: <span class="ident">usize</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ArrayConsumer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">ArrayConsumer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">array</span>: <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayConsumer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">array</span>: <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">ArrayConsumer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
         <span class="ident">ArrayConsumer</span> {
             <span class="ident">array</span>: <span class="ident">ManuallyDrop</span>::<span class="ident">new</span>(<span class="ident">array</span>),
             <span class="ident">position</span>: <span class="number">0</span>,
@@ -954,12 +955,12 @@
     <span class="doccomment">/// Increment the position as you iterate to mark off consumed elements</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">iter_position</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">slice</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">usize</span>) {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">iter_position</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> (<span class="ident">slice</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">usize</span>) {
         (<span class="self">self</span>.<span class="ident">array</span>.<span class="ident">iter</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">position</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">ArrayConsumer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">ArrayConsumer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">needs_drop</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() {
             <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">array</span>[<span class="self">self</span>.<span class="ident">position</span>..<span class="ident">N</span>::<span class="ident">USIZE</span>] {
@@ -978,7 +979,7 @@
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">slice</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>;
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span>;
 
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
         <span class="self">self</span>.<span class="ident">as_slice</span>().<span class="ident">iter</span>()
     }
 }
@@ -990,7 +991,7 @@
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">slice</span>::<span class="ident">IterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>;
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">T</span>;
 
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
         <span class="self">self</span>.<span class="ident">as_mut_slice</span>().<span class="ident">iter_mut</span>()
     }
 }
@@ -999,7 +1000,7 @@
 <span class="kw">where</span>
     <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
     {
@@ -1014,7 +1015,7 @@
                     .<span class="ident">for_each</span>(<span class="op">|</span>(<span class="ident">src</span>, <span class="ident">dst</span>)<span class="op">|</span> {
                         <span class="ident">ptr</span>::<span class="ident">write</span>(<span class="ident">dst</span>, <span class="ident">src</span>);
 
-                        <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+=</span> <span class="number">1</span>;
                     });
             }
 
@@ -1029,7 +1030,7 @@
 
 <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">never</span>)]</span>
 <span class="attribute">#[<span class="ident">cold</span>]</span>
-<span class="kw">fn</span> <span class="ident">from_iter_length_fail</span>(<span class="ident">length</span>: <span class="ident">usize</span>, <span class="ident">expected</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="op">!</span> {
+<span class="kw">fn</span> <span class="ident">from_iter_length_fail</span>(<span class="ident">length</span>: <span class="ident">usize</span>, <span class="ident">expected</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="op">!</span> {
     <span class="macro">panic</span><span class="macro">!</span>(
         <span class="string">&quot;GenericArray::from_iter received {} elements but expected {}&quot;</span>,
         <span class="ident">length</span>, <span class="ident">expected</span>
@@ -1044,9 +1045,9 @@
     <span class="kw">type</span> <span class="ident">Length</span> <span class="op">=</span> <span class="ident">N</span>;
     <span class="kw">type</span> <span class="ident">Sequence</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">generate</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">generate</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">T</span>,
     {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">destination</span> <span class="op">=</span> <span class="ident">ArrayBuilder</span>::<span class="ident">new</span>();
@@ -1057,7 +1058,7 @@
                 <span class="ident">destination_iter</span>.<span class="ident">enumerate</span>().<span class="ident">for_each</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">dst</span>)<span class="op">|</span> {
                     <span class="ident">ptr</span>::<span class="ident">write</span>(<span class="ident">dst</span>, <span class="ident">f</span>(<span class="ident">i</span>));
 
-                    <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                    <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+=</span> <span class="number">1</span>;
                 });
             }
 
@@ -1070,13 +1071,13 @@
         <span class="self">self</span>,
         <span class="ident">lhs</span>: <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="self">Self</span>::<span class="ident">Length</span><span class="op">&gt;</span>,
         <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="self">Self</span>::<span class="ident">Length</span><span class="op">&gt;</span>, <span class="ident">B</span>, <span class="ident">U</span><span class="op">&gt;</span>
+    ) <span class="op">-&gt;</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="self">Self</span>::<span class="ident">Length</span><span class="op">&gt;</span>, <span class="ident">B</span>, <span class="ident">U</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="self">Self</span>::<span class="ident">Length</span><span class="op">&gt;</span>:
             <span class="ident">GenericSequence</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Length</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Length</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">MappedGenericSequence</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">U</span><span class="op">&gt;</span>,
         <span class="self">Self</span>: <span class="ident">MappedGenericSequence</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
         <span class="self">Self</span>::<span class="ident">Length</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">B</span>, <span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">B</span>, <span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-&gt;</span> <span class="ident">U</span>,
     {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">left</span> <span class="op">=</span> <span class="ident">ArrayConsumer</span>::<span class="ident">new</span>(<span class="ident">lhs</span>);
@@ -1089,8 +1090,8 @@
                 <span class="kw">let</span> <span class="ident">left_value</span> <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="ident">l</span>);
                 <span class="kw">let</span> <span class="ident">right_value</span> <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="ident">r</span>);
 
-                <span class="kw-2">*</span><span class="ident">left_position</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="kw-2">*</span><span class="ident">right_position</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="kw-2">*</span><span class="ident">left_position</span> <span class="op">+=</span> <span class="number">1</span>;
+                <span class="kw-2">*</span><span class="ident">right_position</span> <span class="op">+=</span> <span class="number">1</span>;
 
                 <span class="ident">f</span>(<span class="ident">left_value</span>, <span class="ident">right_value</span>)
             }))
@@ -1098,12 +1099,12 @@
     }
 
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">inverted_zip2</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Lhs</span>, <span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">lhs</span>: <span class="ident">Lhs</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">B</span>, <span class="ident">U</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">inverted_zip2</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Lhs</span>, <span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">lhs</span>: <span class="ident">Lhs</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">B</span>, <span class="ident">U</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">Lhs</span>: <span class="ident">GenericSequence</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Length</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Length</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">MappedGenericSequence</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">U</span><span class="op">&gt;</span>,
         <span class="self">Self</span>: <span class="ident">MappedGenericSequence</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
         <span class="self">Self</span>::<span class="ident">Length</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">Lhs</span>::<span class="ident">Item</span>, <span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">Lhs</span>::<span class="ident">Item</span>, <span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-&gt;</span> <span class="ident">U</span>,
     {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">right</span> <span class="op">=</span> <span class="ident">ArrayConsumer</span>::<span class="ident">new</span>(<span class="self">self</span>);
@@ -1116,7 +1117,7 @@
                     .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">left_value</span>, <span class="ident">r</span>)<span class="op">|</span> {
                         <span class="kw">let</span> <span class="ident">right_value</span> <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="ident">r</span>);
 
-                        <span class="kw-2">*</span><span class="ident">right_position</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        <span class="kw-2">*</span><span class="ident">right_position</span> <span class="op">+=</span> <span class="number">1</span>;
 
                         <span class="ident">f</span>(<span class="ident">left_value</span>, <span class="ident">right_value</span>)
                     }),
@@ -1138,11 +1139,11 @@
     <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
     <span class="self">Self</span>: <span class="ident">GenericSequence</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span>, <span class="ident">Length</span> <span class="op">=</span> <span class="ident">N</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">map</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">map</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="self">Self</span>::<span class="ident">Length</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>,
         <span class="self">Self</span>: <span class="ident">MappedGenericSequence</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">U</span>,
     {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">source</span> <span class="op">=</span> <span class="ident">ArrayConsumer</span>::<span class="ident">new</span>(<span class="self">self</span>);
@@ -1152,7 +1153,7 @@
             <span class="ident">FromIterator</span>::<span class="ident">from_iter</span>(<span class="ident">array_iter</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">src</span><span class="op">|</span> {
                 <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="ident">src</span>);
 
-                <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+=</span> <span class="number">1</span>;
 
                 <span class="ident">f</span>(<span class="ident">value</span>)
             }))
@@ -1160,20 +1161,20 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">zip</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Rhs</span>, <span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">zip</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Rhs</span>, <span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="self">Self</span>: <span class="ident">MappedGenericSequence</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>,
-        <span class="ident">Rhs</span>: <span class="ident">MappedGenericSequence</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">U</span>, <span class="ident">Mapped</span> <span class="op">=</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">Rhs</span>: <span class="ident">MappedGenericSequence</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">U</span>, <span class="ident">Mapped</span> <span class="op">=</span> <span class="ident">MappedSequence</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;&gt;</span>,
         <span class="self">Self</span>::<span class="ident">Length</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>,
         <span class="ident">Rhs</span>: <span class="ident">GenericSequence</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Length</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">Length</span><span class="op">&gt;</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">T</span>, <span class="ident">Rhs</span>::<span class="ident">Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">T</span>, <span class="ident">Rhs</span>::<span class="ident">Item</span>) <span class="op">-&gt;</span> <span class="ident">U</span>,
     {
         <span class="ident">rhs</span>.<span class="ident">inverted_zip</span>(<span class="self">self</span>, <span class="ident">f</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">fold</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">init</span>: <span class="ident">U</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>
+    <span class="kw">fn</span> <span class="ident">fold</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">init</span>: <span class="ident">U</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">U</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">U</span>, <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">U</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">U</span>, <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">U</span>,
     {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">source</span> <span class="op">=</span> <span class="ident">ArrayConsumer</span>::<span class="ident">new</span>(<span class="self">self</span>);
@@ -1183,7 +1184,7 @@
             <span class="ident">array_iter</span>.<span class="ident">fold</span>(<span class="ident">init</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">src</span><span class="op">|</span> {
                 <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="ident">src</span>);
 
-                <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+=</span> <span class="number">1</span>;
 
                 <span class="ident">f</span>(<span class="ident">acc</span>, <span class="ident">value</span>)
             })
@@ -1197,13 +1198,13 @@
 {
     <span class="doccomment">/// Extracts a slice containing the entire array.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
         <span class="self">self</span>.<span class="ident">deref</span>()
     }
 
     <span class="doccomment">/// Extracts a mutable slice containing the entire array.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
         <span class="self">self</span>.<span class="ident">deref_mut</span>()
     }
 
@@ -1211,7 +1212,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Length of the slice must be equal to the length of the array.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
         <span class="ident">slice</span>.<span class="ident">into</span>()
     }
 
@@ -1219,29 +1220,29 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Length of the slice must be equal to the length of the array.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_mut_slice</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_mut_slice</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>]) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
         <span class="ident">slice</span>.<span class="ident">into</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Converts slice to a generic array reference with inferred length;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Length of the slice must be equal to the length of the array.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">slice</span>.<span class="ident">len</span>(), <span class="ident">N</span>::<span class="ident">USIZE</span>);
 
         <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="ident">slice</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>) }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Converts mutable slice to a mutable generic array reference</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Length of the slice must be equal to the length of the array.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>]) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">slice</span>.<span class="ident">len</span>(), <span class="ident">N</span>::<span class="ident">USIZE</span>);
 
         <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span>(<span class="ident">slice</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span>) }
@@ -1256,7 +1257,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Length of the slice must be equal to the length of the array</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clone_from_slice</span>(<span class="ident">list</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clone_from_slice</span>(<span class="ident">list</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-&gt;</span> <span class="ident">GenericArray</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">N</span><span class="op">&gt;</span> {
         <span class="self">Self</span>::<span class="ident">from_exact_iter</span>(<span class="ident">list</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>())
             .<span class="ident">expect</span>(<span class="string">&quot;Slice must be the same length as the array&quot;</span>)
     }
@@ -1269,7 +1270,7 @@
     <span class="doccomment">/// Creates a new `GenericArray` instance from an iterator with a specific size.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns `None` if the size is not equal to the number of elements in the `GenericArray`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_exact_iter</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_exact_iter</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
     {
@@ -1284,11 +1285,11 @@
                 <span class="ident">destination_iter</span>.<span class="ident">zip</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">iter</span>).<span class="ident">for_each</span>(<span class="op">|</span>(<span class="ident">dst</span>, <span class="ident">src</span>)<span class="op">|</span> {
                     <span class="ident">ptr</span>::<span class="ident">write</span>(<span class="ident">dst</span>, <span class="ident">src</span>);
 
-                    <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                    <span class="kw-2">*</span><span class="ident">position</span> <span class="op">+=</span> <span class="number">1</span>;
                 });
 
                 <span class="comment">// The iterator produced fewer than `N` elements.</span>
-                <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">position</span> <span class="op">!</span><span class="op">=</span> <span class="ident">N</span>::<span class="ident">USIZE</span> {
+                <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">position</span> <span class="op">!=</span> <span class="ident">N</span>::<span class="ident">USIZE</span> {
                     <span class="kw">return</span> <span class="prelude-val">None</span>;
                 }
 
@@ -1307,7 +1308,7 @@
 <span class="doccomment">/// when the compiler can&#39;t prove equal sizes.</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">transmute</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">B</span> {
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">transmute</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="ident">A</span>) <span class="op">-&gt;</span> <span class="ident">B</span> {
     <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ManuallyDrop</span>::<span class="ident">new</span>(<span class="ident">a</span>);
     ::<span class="ident">core</span>::<span class="ident">ptr</span>::<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">a</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">A</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">B</span>)
 }
@@ -1321,7 +1322,7 @@
     <span class="comment">// SIMD instructions instead of a niave loop.</span>
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">never</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">black_box</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">black_box</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span> {
         <span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">mem</span>, <span class="ident">ptr</span>};
 
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ptr</span>::<span class="ident">read_volatile</span>(<span class="kw-2">&amp;</span><span class="ident">val</span>) };

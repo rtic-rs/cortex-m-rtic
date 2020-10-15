@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rand-0.5.6/src/prng/hc128.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>hc128.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../rand/index.html'><div class='logo-container'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rand-0.5.6/src/prng/hc128.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>hc128.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../rand/index.html'><div class='logo-container'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -538,12 +539,12 @@
 
 <span class="kw">impl</span> <span class="ident">RngCore</span> <span class="kw">for</span> <span class="ident">Hc128Rng</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next_u32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">fn</span> <span class="ident">next_u32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next_u32</span>()
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next_u64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">fn</span> <span class="ident">next_u64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u64</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next_u64</span>()
     }
 
@@ -551,7 +552,7 @@
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">fill_bytes</span>(<span class="ident">dest</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">try_fill_bytes</span>(<span class="ident">dest</span>)
     }
 }
@@ -559,11 +560,11 @@
 <span class="kw">impl</span> <span class="ident">SeedableRng</span> <span class="kw">for</span> <span class="ident">Hc128Rng</span> {
     <span class="kw">type</span> <span class="ident">Seed</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Hc128Core</span> <span class="kw">as</span> <span class="ident">SeedableRng</span><span class="op">&gt;</span>::<span class="ident">Seed</span>;
 
-    <span class="kw">fn</span> <span class="ident">from_seed</span>(<span class="ident">seed</span>: <span class="self">Self</span>::<span class="ident">Seed</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from_seed</span>(<span class="ident">seed</span>: <span class="self">Self</span>::<span class="ident">Seed</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">Hc128Rng</span>(<span class="ident">BlockRng</span>::<span class="op">&lt;</span><span class="ident">Hc128Core</span><span class="op">&gt;</span>::<span class="ident">from_seed</span>(<span class="ident">seed</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">from_rng</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">RngCore</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_rng</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">RngCore</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="ident">BlockRng</span>::<span class="op">&lt;</span><span class="ident">Hc128Core</span><span class="op">&gt;</span>::<span class="ident">from_rng</span>(<span class="ident">rng</span>).<span class="ident">map</span>(<span class="ident">Hc128Rng</span>)
     }
 }
@@ -579,7 +580,7 @@
 
 <span class="comment">// Custom Debug implementation that does not expose the internal state</span>
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Hc128Core</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;Hc128Core {{}}&quot;</span>)
     }
 }
@@ -589,13 +590,13 @@
     <span class="kw">type</span> <span class="ident">Results</span> <span class="op">=</span> [<span class="ident">u32</span>; <span class="number">16</span>];
 
     <span class="kw">fn</span> <span class="ident">generate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">results</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Results</span>) {
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">%</span> <span class="number">16</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">%</span> <span class="number">16</span> <span class="op">==</span> <span class="number">0</span>);
 
         <span class="kw">let</span> <span class="ident">cc</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">%</span> <span class="number">512</span>;
         <span class="kw">let</span> <span class="ident">dd</span> <span class="op">=</span> (<span class="ident">cc</span> <span class="op">+</span> <span class="number">16</span>) <span class="op">%</span> <span class="number">512</span>;
         <span class="kw">let</span> <span class="ident">ee</span> <span class="op">=</span> <span class="ident">cc</span>.<span class="ident">wrapping_sub</span>(<span class="number">16</span>) <span class="op">%</span> <span class="number">512</span>;
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">&amp;</span> <span class="number">512</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">&amp;</span> <span class="number">512</span> <span class="op">==</span> <span class="number">0</span> {
             <span class="comment">// P block</span>
             <span class="ident">results</span>[<span class="number">0</span>]  <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_p</span>(<span class="ident">cc</span><span class="op">+</span><span class="number">0</span>,  <span class="ident">cc</span><span class="op">+</span><span class="number">1</span>,  <span class="ident">ee</span><span class="op">+</span><span class="number">13</span>, <span class="ident">ee</span><span class="op">+</span><span class="number">6</span>,  <span class="ident">ee</span><span class="op">+</span><span class="number">4</span>);
             <span class="ident">results</span>[<span class="number">1</span>]  <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_p</span>(<span class="ident">cc</span><span class="op">+</span><span class="number">1</span>,  <span class="ident">cc</span><span class="op">+</span><span class="number">2</span>,  <span class="ident">ee</span><span class="op">+</span><span class="number">14</span>, <span class="ident">ee</span><span class="op">+</span><span class="number">7</span>,  <span class="ident">ee</span><span class="op">+</span><span class="number">5</span>);
@@ -640,7 +641,7 @@
     <span class="comment">// One step of HC-128, update P and generate 32 bits keystream</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">step_p</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>, <span class="ident">i511</span>: <span class="ident">usize</span>, <span class="ident">i3</span>: <span class="ident">usize</span>, <span class="ident">i10</span>: <span class="ident">usize</span>, <span class="ident">i12</span>: <span class="ident">usize</span>)
-         <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>
+         <span class="op">-&gt;</span> <span class="ident">u32</span>
     {
         <span class="kw">let</span> (<span class="ident">p</span>, <span class="ident">q</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">t</span>.<span class="ident">split_at_mut</span>(<span class="number">512</span>);
         <span class="comment">// FIXME: it would be great if we the bounds checks here could be</span>
@@ -656,7 +657,7 @@
             <span class="kw">let</span> <span class="ident">temp3</span> <span class="op">=</span> {
                 <span class="comment">// The h1 function in HC-128</span>
                 <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">p</span>.<span class="ident">get_unchecked</span>(<span class="ident">i12</span>) <span class="kw">as</span> <span class="ident">u8</span>;
-                <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> (<span class="ident">p</span>.<span class="ident">get_unchecked</span>(<span class="ident">i12</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">16</span>) <span class="kw">as</span> <span class="ident">u8</span>;
+                <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> (<span class="ident">p</span>.<span class="ident">get_unchecked</span>(<span class="ident">i12</span>) <span class="op">&gt;&gt;</span> <span class="number">16</span>) <span class="kw">as</span> <span class="ident">u8</span>;
                 <span class="ident">q</span>[<span class="ident">a</span> <span class="kw">as</span> <span class="ident">usize</span>].<span class="ident">wrapping_add</span>(<span class="ident">q</span>[<span class="number">256</span> <span class="op">+</span> <span class="ident">c</span> <span class="kw">as</span> <span class="ident">usize</span>])
             };
             <span class="ident">temp3</span> <span class="op">^</span> <span class="ident">p</span>.<span class="ident">get_unchecked</span>(<span class="ident">i</span>)
@@ -668,7 +669,7 @@
     <span class="comment">// the left instead of to the right.</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">step_q</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>, <span class="ident">i511</span>: <span class="ident">usize</span>, <span class="ident">i3</span>: <span class="ident">usize</span>, <span class="ident">i10</span>: <span class="ident">usize</span>, <span class="ident">i12</span>: <span class="ident">usize</span>)
-         <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>
+         <span class="op">-&gt;</span> <span class="ident">u32</span>
     {
         <span class="kw">let</span> (<span class="ident">p</span>, <span class="ident">q</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">t</span>.<span class="ident">split_at_mut</span>(<span class="number">512</span>);
         <span class="kw">unsafe</span> {
@@ -681,7 +682,7 @@
             <span class="kw">let</span> <span class="ident">temp3</span> <span class="op">=</span> {
                 <span class="comment">// The h2 function in HC-128</span>
                 <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">q</span>.<span class="ident">get_unchecked</span>(<span class="ident">i12</span>) <span class="kw">as</span> <span class="ident">u8</span>;
-                <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> (<span class="ident">q</span>.<span class="ident">get_unchecked</span>(<span class="ident">i12</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">16</span>) <span class="kw">as</span> <span class="ident">u8</span>;
+                <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> (<span class="ident">q</span>.<span class="ident">get_unchecked</span>(<span class="ident">i12</span>) <span class="op">&gt;&gt;</span> <span class="number">16</span>) <span class="kw">as</span> <span class="ident">u8</span>;
                 <span class="ident">p</span>[<span class="ident">a</span> <span class="kw">as</span> <span class="ident">usize</span>].<span class="ident">wrapping_add</span>(<span class="ident">p</span>[<span class="number">256</span> <span class="op">+</span> <span class="ident">c</span> <span class="kw">as</span> <span class="ident">usize</span>])
             };
             <span class="ident">temp3</span> <span class="op">^</span> <span class="ident">q</span>.<span class="ident">get_unchecked</span>(<span class="ident">i</span>)
@@ -689,7 +690,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">sixteen_steps</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">%</span> <span class="number">16</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">%</span> <span class="number">16</span> <span class="op">==</span> <span class="number">0</span>);
 
         <span class="kw">let</span> <span class="ident">cc</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">%</span> <span class="number">512</span>;
         <span class="kw">let</span> <span class="ident">dd</span> <span class="op">=</span> (<span class="ident">cc</span> <span class="op">+</span> <span class="number">16</span>) <span class="op">%</span> <span class="number">512</span>;
@@ -732,21 +733,21 @@
             <span class="self">self</span>.<span class="ident">t</span>[<span class="ident">cc</span><span class="op">+</span><span class="number">512</span><span class="op">+</span><span class="number">14</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_q</span>(<span class="ident">cc</span><span class="op">+</span><span class="number">14</span>, <span class="ident">cc</span><span class="op">+</span><span class="number">15</span>, <span class="ident">cc</span><span class="op">+</span><span class="number">11</span>, <span class="ident">cc</span><span class="op">+</span><span class="number">4</span>,  <span class="ident">cc</span><span class="op">+</span><span class="number">2</span>);
             <span class="self">self</span>.<span class="ident">t</span>[<span class="ident">cc</span><span class="op">+</span><span class="number">512</span><span class="op">+</span><span class="number">15</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_q</span>(<span class="ident">cc</span><span class="op">+</span><span class="number">15</span>, <span class="ident">dd</span><span class="op">+</span><span class="number">0</span>,  <span class="ident">cc</span><span class="op">+</span><span class="number">12</span>, <span class="ident">cc</span><span class="op">+</span><span class="number">5</span>,  <span class="ident">cc</span><span class="op">+</span><span class="number">3</span>);
         }
-        <span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">+</span><span class="op">=</span> <span class="number">16</span>;
+        <span class="self">self</span>.<span class="ident">counter1024</span> <span class="op">+=</span> <span class="number">16</span>;
     }
 
     <span class="comment">// Initialize an HC-128 random number generator. The seed has to be</span>
     <span class="comment">// 256 bits in length (`[u32; 8]`), matching the 128 bit `key` followed by</span>
     <span class="comment">// 128 bit `iv` when HC-128 where to be used as a stream cipher.</span>
-    <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">seed</span>: [<span class="ident">u32</span>; <span class="ident">SEED_WORDS</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">seed</span>: [<span class="ident">u32</span>; <span class="ident">SEED_WORDS</span>]) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">f1</span>(<span class="ident">x</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
-            <span class="ident">x</span>.<span class="ident">rotate_right</span>(<span class="number">7</span>) <span class="op">^</span> <span class="ident">x</span>.<span class="ident">rotate_right</span>(<span class="number">18</span>) <span class="op">^</span> (<span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>)
+        <span class="kw">fn</span> <span class="ident">f1</span>(<span class="ident">x</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
+            <span class="ident">x</span>.<span class="ident">rotate_right</span>(<span class="number">7</span>) <span class="op">^</span> <span class="ident">x</span>.<span class="ident">rotate_right</span>(<span class="number">18</span>) <span class="op">^</span> (<span class="ident">x</span> <span class="op">&gt;&gt;</span> <span class="number">3</span>)
         }
 
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">f2</span>(<span class="ident">x</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
-            <span class="ident">x</span>.<span class="ident">rotate_right</span>(<span class="number">17</span>) <span class="op">^</span> <span class="ident">x</span>.<span class="ident">rotate_right</span>(<span class="number">19</span>) <span class="op">^</span> (<span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">10</span>)
+        <span class="kw">fn</span> <span class="ident">f2</span>(<span class="ident">x</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
+            <span class="ident">x</span>.<span class="ident">rotate_right</span>(<span class="number">17</span>) <span class="op">^</span> <span class="ident">x</span>.<span class="ident">rotate_right</span>(<span class="number">19</span>) <span class="op">^</span> (<span class="ident">x</span> <span class="op">&gt;&gt;</span> <span class="number">10</span>)
         }
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> [<span class="number">0u32</span>; <span class="number">1024</span>];
@@ -790,7 +791,7 @@
     <span class="doccomment">/// Create an HC-128 random number generator with a seed. The seed has to be</span>
     <span class="doccomment">/// 256 bits in length, matching the 128 bit `key` followed by 128 bit `iv`</span>
     <span class="doccomment">/// when HC-128 where to be used as a stream cipher.</span>
-    <span class="kw">fn</span> <span class="ident">from_seed</span>(<span class="ident">seed</span>: <span class="self">Self</span>::<span class="ident">Seed</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from_seed</span>(<span class="ident">seed</span>: <span class="self">Self</span>::<span class="ident">Seed</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">seed_u32</span> <span class="op">=</span> [<span class="number">0u32</span>; <span class="ident">SEED_WORDS</span>];
         <span class="ident">le</span>::<span class="ident">read_u32_into</span>(<span class="kw-2">&amp;</span><span class="ident">seed</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">seed_u32</span>);
         <span class="self">Self</span>::<span class="ident">init</span>(<span class="ident">seed_u32</span>)
@@ -906,7 +907,7 @@
         <span class="comment">// filling the remainder of the buffer.</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">16</span><span class="kw-2">*</span><span class="number">4</span><span class="kw-2">*</span><span class="number">2</span>];
         <span class="comment">// Consume a value so that we have a remainder.</span>
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rng</span>.<span class="ident">next_u64</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0x04b4930a518251a4</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rng</span>.<span class="ident">next_u64</span>() <span class="op">==</span> <span class="number">0x04b4930a518251a4</span>);
         <span class="ident">rng</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>);
 
         <span class="comment">// [u8; 128] doesn&#39;t implement PartialEq</span>

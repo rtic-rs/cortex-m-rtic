@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.3/src/asm.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>asm.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../cortex_m/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.3/src/asm.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>asm.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../cortex_m/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -403,10 +404,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bkpt</span>() {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;bkpt&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;bkpt&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__bkpt</span>();
             }
@@ -415,7 +416,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -430,7 +431,7 @@
     <span class="comment">// NOTE(divide by 4) is easier to compute than `/ 3` is it&#39;s just a shift (`&gt;&gt; 2`).</span>
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;1:
                   nop
                   subs $0, $$1
@@ -442,7 +443,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__delay</span>(<span class="ident">n</span>: <span class="ident">u32</span>);
             }
@@ -451,7 +452,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -460,10 +461,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nop</span>() {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;nop&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;nop&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__nop</span>();
             }
@@ -472,7 +473,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -481,16 +482,16 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Can be used as a stable alternative to `core::intrinsics::abort`.</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">udf</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="op">!</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">udf</span>() <span class="op">-&gt;</span> <span class="op">!</span> {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;udf&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>);
             <span class="ident">core</span>::<span class="ident">hint</span>::<span class="ident">unreachable_unchecked</span>();
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__udf</span>();
             }
@@ -501,7 +502,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -510,10 +511,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wfe</span>() {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;wfe&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;wfe&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__wfe</span>();
             }
@@ -522,7 +523,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -531,10 +532,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wfi</span>() {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;wfi&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;wfi&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__wfi</span>();
             }
@@ -543,7 +544,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -552,10 +553,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sev</span>() {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;sev&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;sev&quot;</span> :::: <span class="string">&quot;volatile&quot;</span>) },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__sev</span>();
             }
@@ -564,7 +565,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -576,10 +577,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">isb</span>() {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;isb 0xF&quot;</span> ::: <span class="string">&quot;memory&quot;</span> : <span class="string">&quot;volatile&quot;</span>) },
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;isb 0xF&quot;</span> ::: <span class="string">&quot;memory&quot;</span> : <span class="string">&quot;volatile&quot;</span>) },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__isb</span>();
             }
@@ -589,7 +590,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -604,10 +605,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dsb</span>() {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;dsb 0xF&quot;</span> ::: <span class="string">&quot;memory&quot;</span> : <span class="string">&quot;volatile&quot;</span>) },
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;dsb 0xF&quot;</span> ::: <span class="string">&quot;memory&quot;</span> : <span class="string">&quot;volatile&quot;</span>) },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__dsb</span>();
             }
@@ -617,7 +618,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -630,10 +631,10 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dmb</span>() {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;dmb 0xF&quot;</span> ::: <span class="string">&quot;memory&quot;</span> : <span class="string">&quot;volatile&quot;</span>) },
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;dmb 0xF&quot;</span> ::: <span class="string">&quot;memory&quot;</span> : <span class="string">&quot;volatile&quot;</span>) },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
                 <span class="kw">fn</span> <span class="ident">__dmb</span>();
             }
@@ -643,7 +644,7 @@
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -656,10 +657,10 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m</span>)]</span>
 <span class="comment">// The __tt function does not dereference the pointer received.</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">not_unsafe_ptr_arg_deref</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tt</span>(<span class="ident">addr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tt</span>(<span class="ident">addr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> {
+        () <span class="op">=&gt;</span> {
             <span class="kw">let</span> <span class="ident">tt_resp</span>: <span class="ident">u32</span>;
             <span class="kw">unsafe</span> {
                 <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;tt $0, $1&quot;</span> : <span class="string">&quot;=r&quot;</span>(<span class="ident">tt_resp</span>) : <span class="string">&quot;r&quot;</span>(<span class="ident">addr</span>) :: <span class="string">&quot;volatile&quot;</span>);
@@ -668,16 +669,16 @@
         }
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-                <span class="kw">fn</span> <span class="ident">__tt</span>(<span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
+                <span class="kw">fn</span> <span class="ident">__tt</span>(<span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span>;
             }
 
             <span class="ident">__tt</span>(<span class="ident">addr</span>)
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -691,10 +692,10 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m</span>)]</span>
 <span class="comment">// The __ttt function does not dereference the pointer received.</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">not_unsafe_ptr_arg_deref</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ttt</span>(<span class="ident">addr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ttt</span>(<span class="ident">addr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> {
+        () <span class="op">=&gt;</span> {
             <span class="kw">let</span> <span class="ident">tt_resp</span>: <span class="ident">u32</span>;
             <span class="kw">unsafe</span> {
                 <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;ttt $0, $1&quot;</span> : <span class="string">&quot;=r&quot;</span>(<span class="ident">tt_resp</span>) : <span class="string">&quot;r&quot;</span>(<span class="ident">addr</span>) :: <span class="string">&quot;volatile&quot;</span>);
@@ -703,16 +704,16 @@
         }
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-                <span class="kw">fn</span> <span class="ident">__ttt</span>(<span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
+                <span class="kw">fn</span> <span class="ident">__ttt</span>(<span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span>;
             }
 
             <span class="ident">__ttt</span>(<span class="ident">addr</span>)
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -727,10 +728,10 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m</span>)]</span>
 <span class="comment">// The __tta function does not dereference the pointer received.</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">not_unsafe_ptr_arg_deref</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tta</span>(<span class="ident">addr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tta</span>(<span class="ident">addr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> {
+        () <span class="op">=&gt;</span> {
             <span class="kw">let</span> <span class="ident">tt_resp</span>: <span class="ident">u32</span>;
             <span class="kw">unsafe</span> {
                 <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;tta $0, $1&quot;</span> : <span class="string">&quot;=r&quot;</span>(<span class="ident">tt_resp</span>) : <span class="string">&quot;r&quot;</span>(<span class="ident">addr</span>) :: <span class="string">&quot;volatile&quot;</span>);
@@ -739,16 +740,16 @@
         }
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-                <span class="kw">fn</span> <span class="ident">__tta</span>(<span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
+                <span class="kw">fn</span> <span class="ident">__tta</span>(<span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span>;
             }
 
             <span class="ident">__tta</span>(<span class="ident">addr</span>)
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 
@@ -763,10 +764,10 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m</span>)]</span>
 <span class="comment">// The __ttat function does not dereference the pointer received.</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">not_unsafe_ptr_arg_deref</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ttat</span>(<span class="ident">addr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ttat</span>(<span class="ident">addr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
     <span class="kw">match</span> () {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> {
+        () <span class="op">=&gt;</span> {
             <span class="kw">let</span> <span class="ident">tt_resp</span>: <span class="ident">u32</span>;
             <span class="kw">unsafe</span> {
                 <span class="macro">llvm_asm</span><span class="macro">!</span>(<span class="string">&quot;ttat $0, $1&quot;</span> : <span class="string">&quot;=r&quot;</span>(<span class="ident">tt_resp</span>) : <span class="string">&quot;r&quot;</span>(<span class="ident">addr</span>) :: <span class="string">&quot;volatile&quot;</span>);
@@ -775,16 +776,16 @@
         }
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">cortex_m</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;inline-asm&quot;</span>)))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> {
+        () <span class="op">=&gt;</span> <span class="kw">unsafe</span> {
             <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-                <span class="kw">fn</span> <span class="ident">__ttat</span>(<span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
+                <span class="kw">fn</span> <span class="ident">__ttat</span>(<span class="kw">_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span>;
             }
 
             <span class="ident">__ttat</span>(<span class="ident">addr</span>)
         },
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">cortex_m</span>))]</span>
-        () <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
+        () <span class="op">=&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 </pre></div>

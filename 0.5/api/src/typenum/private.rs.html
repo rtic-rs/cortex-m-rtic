@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/typenum-1.12.0/src/private.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>private.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../typenum/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/typenum-1.12.0/src/private.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>private.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../typenum/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -622,7 +623,7 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Trim</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">trim</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">trim</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">TrimOut</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Trim</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
 
@@ -632,7 +633,7 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TrimTrailingZeros</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">trim_trailing_zeros</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">trim_trailing_zeros</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">TrimTrailingZerosOut</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">TrimTrailingZeros</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
 
@@ -641,7 +642,7 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Invert</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">InvertOut</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
 
@@ -650,9 +651,9 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateInvertOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateInvertOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="doccomment">/// Terminating character for `InvertedUInt`s</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">InvertedUTerm</span>;
@@ -667,25 +668,25 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateAnd</span><span class="op">&lt;</span><span class="ident">Rhs</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_and</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_and</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateAndOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateAnd</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateAndOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateAnd</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="doccomment">/// Does the real xoring for `UInt`s; `Xor` just calls this and then `Trim`.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateXor</span><span class="op">&lt;</span><span class="ident">Rhs</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_xor</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_xor</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateXorOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateXor</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateXorOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateXor</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="doccomment">/// Does the real subtraction for `UInt`s; `Sub` just calls this and then `Trim`.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateSub</span><span class="op">&lt;</span><span class="ident">Rhs</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_sub</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_sub</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateSubOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateSub</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateSubOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateSub</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="doccomment">/// Used for addition of signed integers; `C = P.cmp(N)`</span>
 <span class="doccomment">/// Assumes `P = Self` is positive and `N` is negative</span>
@@ -693,46 +694,46 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateIntegerAdd</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">N</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_integer_add</span>(<span class="self">self</span>, <span class="ident">C</span>, <span class="ident">N</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_integer_add</span>(<span class="self">self</span>, <span class="ident">C</span>, <span class="ident">N</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateIntegerAddOut</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">C</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">PrivateIntegerAdd</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">N</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateIntegerAddOut</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">C</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">PrivateIntegerAdd</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">N</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivatePow</span><span class="op">&lt;</span><span class="ident">Y</span>, <span class="ident">N</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_pow</span>(<span class="self">self</span>, <span class="ident">Y</span>, <span class="ident">N</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_pow</span>(<span class="self">self</span>, <span class="ident">Y</span>, <span class="ident">N</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivatePowOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Y</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivatePow</span><span class="op">&lt;</span><span class="ident">Y</span>, <span class="ident">N</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivatePowOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Y</span>, <span class="ident">N</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivatePow</span><span class="op">&lt;</span><span class="ident">Y</span>, <span class="ident">N</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="doccomment">/// Performs `Shl` on `Lhs` so that `SizeOf(Lhs) = SizeOf(Rhs)`</span>
 <span class="doccomment">/// Fails if `SizeOf(Lhs) &gt; SizeOf(Rhs)`</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ShiftDiff</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ShiftDiffOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">ShiftDiff</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ShiftDiffOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">ShiftDiff</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="doccomment">/// Gives `SizeOf(Lhs) - SizeOf(Rhs)`</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitDiff</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BitDiffOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">BitDiff</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BitDiffOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">BitDiff</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="doccomment">/// Inverted unsigned numbers</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">InvertedUnsigned</span> {
-    <span class="kw">fn</span> <span class="ident">to_u64</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span>;
+    <span class="kw">fn</span> <span class="ident">to_u64</span>() <span class="op">-&gt;</span> <span class="ident">u64</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">InvertedUnsigned</span> <span class="kw">for</span> <span class="ident">InvertedUTerm</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">to_u64</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">fn</span> <span class="ident">to_u64</span>() <span class="op">-&gt;</span> <span class="ident">u64</span> {
         <span class="number">0</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">IU</span>: <span class="ident">InvertedUnsigned</span>, <span class="ident">B</span>: <span class="ident">Bit</span><span class="op">&gt;</span> <span class="ident">InvertedUnsigned</span> <span class="kw">for</span> <span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">IU</span>, <span class="ident">B</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">to_u64</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
-        <span class="ident">u64</span>::<span class="ident">from</span>(<span class="ident">B</span>::<span class="ident">to_u8</span>()) <span class="op">|</span> <span class="ident">IU</span>::<span class="ident">to_u64</span>() <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">1</span>
+    <span class="kw">fn</span> <span class="ident">to_u64</span>() <span class="op">-&gt;</span> <span class="ident">u64</span> {
+        <span class="ident">u64</span>::<span class="ident">from</span>(<span class="ident">B</span>::<span class="ident">to_u8</span>()) <span class="op">|</span> <span class="ident">IU</span>::<span class="ident">to_u64</span>() <span class="op">&lt;&lt;</span> <span class="number">1</span>
     }
 }
 
@@ -740,19 +741,19 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">InvertedUTerm</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">InvertedUTerm</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">U</span>: <span class="ident">Unsigned</span>, <span class="ident">B</span>: <span class="ident">Bit</span><span class="op">&gt;</span> <span class="ident">Invert</span> <span class="kw">for</span> <span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">B</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">U</span>: <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">InvertedUTerm</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">U</span>: <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">InvertedUTerm</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">PrivateInvertOut</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">InvertedUTerm</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">PrivateInvertOut</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">InvertedUTerm</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">msb</span>.<span class="ident">private_invert</span>(<span class="ident">InvertedUInt</span> {
             <span class="ident">msb</span>: <span class="ident">InvertedUTerm</span>,
             <span class="ident">lsb</span>: <span class="self">self</span>.<span class="ident">lsb</span>,
@@ -764,19 +765,19 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">IU</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">IU</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">IU</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">rhs</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">IU</span>: <span class="ident">InvertedUnsigned</span>, <span class="ident">U</span>: <span class="ident">Unsigned</span>, <span class="ident">B</span>: <span class="ident">Bit</span><span class="op">&gt;</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">IU</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">B</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">U</span>: <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">IU</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">U</span>: <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">IU</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">PrivateInvertOut</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">IU</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">PrivateInvertOut</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">IU</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">IU</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">IU</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">msb</span>.<span class="ident">private_invert</span>(<span class="ident">InvertedUInt</span> {
             <span class="ident">msb</span>: <span class="ident">rhs</span>,
             <span class="ident">lsb</span>: <span class="self">self</span>.<span class="ident">lsb</span>,
@@ -801,19 +802,19 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">UTerm</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">UTerm</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">IU</span>: <span class="ident">InvertedUnsigned</span>, <span class="ident">B</span>: <span class="ident">Bit</span><span class="op">&gt;</span> <span class="ident">Invert</span> <span class="kw">for</span> <span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">IU</span>, <span class="ident">B</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">IU</span>: <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">UTerm</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">IU</span>: <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">UTerm</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">IU</span> <span class="kw">as</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">UTerm</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">IU</span> <span class="kw">as</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">UTerm</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">invert</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">msb</span>.<span class="ident">private_invert</span>(<span class="ident">UInt</span> {
             <span class="ident">msb</span>: <span class="ident">UTerm</span>,
             <span class="ident">lsb</span>: <span class="self">self</span>.<span class="ident">lsb</span>,
@@ -825,19 +826,19 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">U</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">U</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">rhs</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">U</span>: <span class="ident">Unsigned</span>, <span class="ident">IU</span>: <span class="ident">InvertedUnsigned</span>, <span class="ident">B</span>: <span class="ident">Bit</span><span class="op">&gt;</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">InvertedUInt</span><span class="op">&lt;</span><span class="ident">IU</span>, <span class="ident">B</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">IU</span>: <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">IU</span>: <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span>,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">IU</span> <span class="kw">as</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">IU</span> <span class="kw">as</span> <span class="ident">PrivateInvert</span><span class="op">&lt;</span><span class="ident">UInt</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">private_invert</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">U</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">msb</span>.<span class="ident">private_invert</span>(<span class="ident">UInt</span> {
             <span class="ident">msb</span>: <span class="ident">rhs</span>,
             <span class="ident">lsb</span>: <span class="self">self</span>.<span class="ident">lsb</span>,
@@ -847,10 +848,10 @@
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">test_double_inversion</span>() {
-    <span class="kw">type</span> <span class="ident">Test4</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span>::<span class="ident">consts</span>::<span class="ident">U4</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
-    <span class="kw">type</span> <span class="ident">Test5</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span>::<span class="ident">consts</span>::<span class="ident">U5</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
-    <span class="kw">type</span> <span class="ident">Test12</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span>::<span class="ident">consts</span>::<span class="ident">U12</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
-    <span class="kw">type</span> <span class="ident">Test16</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span>::<span class="ident">consts</span>::<span class="ident">U16</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Test4</span> <span class="op">=</span> <span class="op">&lt;&lt;</span>::<span class="ident">consts</span>::<span class="ident">U4</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Test5</span> <span class="op">=</span> <span class="op">&lt;&lt;</span>::<span class="ident">consts</span>::<span class="ident">U5</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Test12</span> <span class="op">=</span> <span class="op">&lt;&lt;</span>::<span class="ident">consts</span>::<span class="ident">U12</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Test16</span> <span class="op">=</span> <span class="op">&lt;&lt;</span>::<span class="ident">consts</span>::<span class="ident">U16</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
 
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">4</span>, <span class="op">&lt;</span><span class="ident">Test4</span> <span class="kw">as</span> <span class="ident">Unsigned</span><span class="op">&gt;</span>::<span class="ident">to_u64</span>());
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">5</span>, <span class="op">&lt;</span><span class="ident">Test5</span> <span class="kw">as</span> <span class="ident">Unsigned</span><span class="op">&gt;</span>::<span class="ident">to_u64</span>());
@@ -862,7 +863,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">InvertedUTerm</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">trim_trailing_zeros</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">trim_trailing_zeros</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">InvertedUTerm</span>
     }
 }
@@ -871,7 +872,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">trim_trailing_zeros</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">trim_trailing_zeros</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>
     }
 }
@@ -883,7 +884,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">IU</span> <span class="kw">as</span> <span class="ident">TrimTrailingZeros</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">trim_trailing_zeros</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">trim_trailing_zeros</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">msb</span>.<span class="ident">trim_trailing_zeros</span>()
     }
 }
@@ -892,12 +893,12 @@
 <span class="kw">where</span>
     <span class="ident">U</span>: <span class="ident">Invert</span>,
     <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>: <span class="ident">TrimTrailingZeros</span>,
-    <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">TrimTrailingZeros</span><span class="op">&gt;</span>::<span class="ident">Output</span>: <span class="ident">Invert</span>,
+    <span class="op">&lt;&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">TrimTrailingZeros</span><span class="op">&gt;</span>::<span class="ident">Output</span>: <span class="ident">Invert</span>,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">TrimTrailingZeros</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;&lt;</span><span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">TrimTrailingZeros</span><span class="op">&gt;</span>::<span class="ident">Output</span> <span class="kw">as</span> <span class="ident">Invert</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">trim</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">trim</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">invert</span>().<span class="ident">trim_trailing_zeros</span>().<span class="ident">invert</span>()
     }
 }
@@ -907,72 +908,72 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateCmp</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">SoFar</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">Rhs</span>, <span class="ident">SoFar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">Rhs</span>, <span class="ident">SoFar</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateCmpOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span>, <span class="ident">SoFar</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateCmp</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">SoFar</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateCmpOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Rhs</span>, <span class="ident">SoFar</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateCmp</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">SoFar</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="comment">// Set Bit</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateSetBit</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">B</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_set_bit</span>(<span class="self">self</span>, <span class="ident">I</span>, <span class="ident">B</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_set_bit</span>(<span class="self">self</span>, <span class="ident">I</span>, <span class="ident">B</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateSetBitOut</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">I</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">N</span> <span class="kw">as</span> <span class="ident">PrivateSetBit</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateSetBitOut</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">I</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">N</span> <span class="kw">as</span> <span class="ident">PrivateSetBit</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">B</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="comment">// Div</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateDiv</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Quotient</span>;
     <span class="kw">type</span> <span class="ident">Remainder</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_div_quotient</span>(<span class="self">self</span>, <span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Quotient</span>;
+    <span class="kw">fn</span> <span class="ident">private_div_quotient</span>(<span class="self">self</span>, <span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Quotient</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_div_remainder</span>(<span class="self">self</span>, <span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Remainder</span>;
+    <span class="kw">fn</span> <span class="ident">private_div_remainder</span>(<span class="self">self</span>, <span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Remainder</span>;
 }
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateDivQuot</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span>() <span class="kw">as</span> <span class="ident">PrivateDiv</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Quotient</span>;
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateDivRem</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span>() <span class="kw">as</span> <span class="ident">PrivateDiv</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Remainder</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateDivQuot</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span>() <span class="kw">as</span> <span class="ident">PrivateDiv</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;&gt;</span>::<span class="ident">Quotient</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateDivRem</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span>() <span class="kw">as</span> <span class="ident">PrivateDiv</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span><span class="op">&gt;&gt;</span>::<span class="ident">Remainder</span>;
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateDivIf</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Quotient</span>;
     <span class="kw">type</span> <span class="ident">Remainder</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_div_if_quotient</span>(<span class="self">self</span>, <span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Quotient</span>;
+    <span class="kw">fn</span> <span class="ident">private_div_if_quotient</span>(<span class="self">self</span>, <span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Quotient</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_div_if_remainder</span>(<span class="self">self</span>, <span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Remainder</span>;
+    <span class="kw">fn</span> <span class="ident">private_div_if_remainder</span>(<span class="self">self</span>, <span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Remainder</span>;
 }
 
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateDivIfQuot</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span><span class="op">&gt;</span> <span class="op">=</span>
-    <span class="op">&lt;</span>() <span class="kw">as</span> <span class="ident">PrivateDivIf</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Quotient</span>;
+    <span class="op">&lt;</span>() <span class="kw">as</span> <span class="ident">PrivateDivIf</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span><span class="op">&gt;&gt;</span>::<span class="ident">Quotient</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateDivIfRem</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span><span class="op">&gt;</span> <span class="op">=</span>
-    <span class="op">&lt;</span>() <span class="kw">as</span> <span class="ident">PrivateDivIf</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Remainder</span>;
+    <span class="op">&lt;</span>() <span class="kw">as</span> <span class="ident">PrivateDivIf</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">D</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">I</span>, <span class="ident">RcmpD</span><span class="op">&gt;&gt;</span>::<span class="ident">Remainder</span>;
 
 <span class="comment">// Div for signed ints</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateDivInt</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">Divisor</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_div_int</span>(<span class="self">self</span>, <span class="ident">C</span>, <span class="ident">Divisor</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_div_int</span>(<span class="self">self</span>, <span class="ident">C</span>, <span class="ident">Divisor</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateDivIntOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">C</span>, <span class="ident">Divisor</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateDivInt</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">Divisor</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateDivIntOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">C</span>, <span class="ident">Divisor</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateDivInt</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">Divisor</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateRem</span><span class="op">&lt;</span><span class="ident">URem</span>, <span class="ident">Divisor</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">private_rem</span>(<span class="self">self</span>, <span class="ident">URem</span>, <span class="ident">Divisor</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_rem</span>(<span class="self">self</span>, <span class="ident">URem</span>, <span class="ident">Divisor</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateRemOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">URem</span>, <span class="ident">Divisor</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateRem</span><span class="op">&lt;</span><span class="ident">URem</span>, <span class="ident">Divisor</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateRemOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">URem</span>, <span class="ident">Divisor</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateRem</span><span class="op">&lt;</span><span class="ident">URem</span>, <span class="ident">Divisor</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="comment">// min max</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateMin</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">CmpResult</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
-    <span class="kw">fn</span> <span class="ident">private_min</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_min</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateMinOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">CmpResult</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateMin</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CmpResult</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateMinOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">CmpResult</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateMin</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CmpResult</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PrivateMax</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">CmpResult</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>;
-    <span class="kw">fn</span> <span class="ident">private_max</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">private_max</span>(<span class="self">self</span>, <span class="ident">Rhs</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateMaxOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">CmpResult</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateMax</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CmpResult</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PrivateMaxOut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">CmpResult</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">A</span> <span class="kw">as</span> <span class="ident">PrivateMax</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CmpResult</span><span class="op">&gt;&gt;</span>::<span class="ident">Output</span>;
 
 <span class="comment">// Comparisons</span>
 
@@ -981,14 +982,14 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IsLessPrivate</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Cmp</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>: <span class="ident">Bit</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_less_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">is_less_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="ident">IsLessPrivate</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Less</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">A</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_less_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_less_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -996,7 +997,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_less_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_less_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1004,7 +1005,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_less_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_less_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1012,14 +1013,14 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IsEqualPrivate</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Cmp</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>: <span class="ident">Bit</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_equal_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">is_equal_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="ident">IsEqualPrivate</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Less</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">A</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1027,7 +1028,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -1035,7 +1036,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1043,14 +1044,14 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IsGreaterPrivate</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Cmp</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>: <span class="ident">Bit</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_greater_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">is_greater_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="ident">IsGreaterPrivate</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Less</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">A</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_greater_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_greater_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1058,7 +1059,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_greater_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_greater_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1066,7 +1067,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_greater_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_greater_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -1074,14 +1075,14 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IsLessOrEqualPrivate</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Cmp</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>: <span class="ident">Bit</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_less_or_equal_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">is_less_or_equal_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="ident">IsLessOrEqualPrivate</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Less</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">A</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_less_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_less_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -1089,7 +1090,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_less_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_less_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -1097,7 +1098,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_less_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_less_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1105,14 +1106,14 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IsNotEqualPrivate</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Cmp</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>: <span class="ident">Bit</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_not_equal_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">is_not_equal_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="ident">IsNotEqualPrivate</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Less</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">A</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_not_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_not_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -1120,7 +1121,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_not_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_not_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1128,7 +1129,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_not_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_not_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -1136,14 +1137,14 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IsGreaterOrEqualPrivate</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Cmp</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span>: <span class="ident">Bit</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_greater_or_equal_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">is_greater_or_equal_private</span>(<span class="self">self</span>, <span class="ident">Rhs</span>, <span class="ident">Cmp</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="ident">IsGreaterOrEqualPrivate</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Less</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">A</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">False</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_greater_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_greater_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Less</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B0</span>
     }
 }
@@ -1151,7 +1152,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_greater_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_greater_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Equal</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }
@@ -1159,7 +1160,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">True</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_greater_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">is_greater_or_equal_private</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">B</span>, <span class="kw">_</span>: <span class="ident">Greater</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="ident">B1</span>
     }
 }

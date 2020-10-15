@@ -442,7 +442,65 @@ received message: 42```
 задачах, запущенных на разных приоритетах.
 
 ``` rust
-{{#include ../../../../examples/static.rs}}
+//! examples/static.rs
+
+#![deny(unsafe_code)]
+#![deny(warnings)]
+#![no_main]
+#![no_std]
+
+use cortex_m_semihosting::{debug, hprintln};
+use heapless::{
+    consts::*,
+    i,
+    spsc::{Consumer, Producer, Queue},
+};
+use lm3s6965::Interrupt;
+use panic_semihosting as _;
+
+#[rtic::app(device = lm3s6965)]
+mod app {
+
+    use crate::U4;
+    use crate::{Consumer, Producer};
+
+    // Late resources
+    #[resources]
+    struct Resources {
+        p: Producer&lt;'static, u32, U4&gt;,
+        c: Consumer&lt;'static, u32, U4&gt;,
+    }
+
+    #[init]
+    fn init(_: init::Context) -&gt; init::LateResources {
+        static mut Q: Queue&lt;u32, U4&gt; = Queue(i::Queue::new());
+
+        let (p, c) = Q.split();
+
+        // Initialization of late resources
+        init::LateResources { p, c }
+    }
+
+    #[idle(resources = [c])]
+    fn idle(c: idle::Context) -&gt; ! {
+        loop {
+            if let Some(byte) = c.resources.c.dequeue() {
+                hprintln!(&quot;received message: {}&quot;, byte).unwrap();
+
+                debug::exit(debug::EXIT_SUCCESS);
+            } else {
+                rtic::pend(Interrupt::UART0);
+            }
+        }
+    }
+
+    #[task(binds = UART0, resources = [p])]
+    fn uart0(c: uart0::Context) {
+        static mut KALLE: u32 = 0;
+        *KALLE += 1;
+        c.resources.p.enqueue(42).unwrap();
+    }
+}
 </code></pre>
 <pre><code class="language-console">$ cargo run --example static
 {{#include ../../../../ci/expected/static.run}}```
