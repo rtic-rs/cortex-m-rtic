@@ -232,20 +232,6 @@
 <span id="231">231</span>
 <span id="232">232</span>
 <span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
-<span id="241">241</span>
-<span id="242">242</span>
-<span id="243">243</span>
-<span id="244">244</span>
-<span id="245">245</span>
-<span id="246">246</span>
-<span id="247">247</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicUsize</span>, <span class="ident">Ordering</span>};
 
@@ -456,23 +442,9 @@
     <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;P{}_RQ&quot;</span>, <span class="ident">priority</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
-<span class="doccomment">/// Generates an identifier for a &quot;schedule&quot; function</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The methods of the `Schedule` structs invoke these functions.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;schedule_{}&quot;</span>, <span class="ident">name</span>.<span class="ident">to_string</span>()), <span class="ident">Span</span>::<span class="ident">call_site</span>())
-}
-
 <span class="doccomment">/// Generates an identifier for the `enum` of `schedule`-able tasks</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_t_ident</span>() <span class="op">-&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;T&quot;</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
-}
-
-<span class="doccomment">/// Generates an identifier for a &quot;spawn&quot; function</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The methods of the `Spawn` structs invoke these functions.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_ident</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
-    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;spawn_{}&quot;</span>, <span class="ident">name</span>.<span class="ident">to_string</span>()), <span class="ident">Span</span>::<span class="ident">call_site</span>())
+    <span class="ident">Ident</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;SCHED_T&quot;</span>), <span class="ident">Span</span>::<span class="ident">call_site</span>())
 }
 
 <span class="doccomment">/// Generates an identifier for the `enum` of `spawn`-able tasks</span>

@@ -154,14 +154,6 @@
 <span id="153">153</span>
 <span id="154">154</span>
 <span id="155">155</span>
-<span id="156">156</span>
-<span id="157">157</span>
-<span id="158">158</span>
-<span id="159">159</span>
-<span id="160">160</span>
-<span id="161">161</span>
-<span id="162">162</span>
-<span id="163">163</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashSet</span>;
 
@@ -184,35 +176,7 @@
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">app</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">App</span>, <span class="ident">analysis</span>: <span class="kw-2">&amp;</span><span class="ident">Analysis</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Extra</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span> {
-    <span class="comment">// Check that all exceptions are valid; only exceptions with configurable priorities are</span>
-    <span class="comment">// accepted</span>
-    <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">task</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">hardware_tasks</span> {
-        <span class="kw">let</span> <span class="ident">name_s</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">binds</span>.<span class="ident">to_string</span>();
-        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">name_s</span> {
-            <span class="string">&quot;SysTick&quot;</span> <span class="op">=&gt;</span> {
-                <span class="comment">// If the timer queue is used, then SysTick is unavailable</span>
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">analysis</span>.<span class="ident">timer_queues</span>.<span class="ident">is_empty</span>() {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
-                        <span class="ident">name</span>.<span class="ident">span</span>(),
-                        <span class="string">&quot;this exception can&#39;t be used because it&#39;s being used by the runtime&quot;</span>,
-                    ));
-                } <span class="kw">else</span> {
-                    <span class="comment">// OK</span>
-                }
-            }
-
-            <span class="string">&quot;NonMaskableInt&quot;</span> <span class="op">|</span> <span class="string">&quot;HardFault&quot;</span> <span class="op">=&gt;</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
-                    <span class="ident">name</span>.<span class="ident">span</span>(),
-                    <span class="string">&quot;only exceptions with configurable priority can be used as hardware tasks&quot;</span>,
-                ));
-            }
-
-            <span class="kw">_</span> <span class="op">=&gt;</span> {}
-        }
-    }
-
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">app</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">app</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">App</span>, <span class="ident">_analysis</span>: <span class="kw-2">&amp;</span><span class="ident">Analysis</span>) <span class="op">-&gt;</span> <span class="ident">parse</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Extra</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span> {
     <span class="comment">// Check that external (device-specific) interrupts are not named after known (Cortex-M)</span>
     <span class="comment">// exceptions</span>
     <span class="kw">for</span> <span class="ident">name</span> <span class="kw">in</span> <span class="ident">app</span>.<span class="ident">extern_interrupts</span>.<span class="ident">keys</span>() {
@@ -241,7 +205,6 @@
             <span class="ident">first</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>);
             <span class="prelude-val">Some</span>(<span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">priority</span>)
         })
-        .<span class="ident">chain</span>(<span class="ident">analysis</span>.<span class="ident">timer_queues</span>.<span class="ident">first</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">tq</span><span class="op">|</span> <span class="ident">tq</span>.<span class="ident">priority</span>))
         .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
 
     <span class="kw">let</span> <span class="ident">need</span> <span class="op">=</span> <span class="ident">priorities</span>.<span class="ident">len</span>();
@@ -306,11 +269,32 @@
         }
     }
 
-    <span class="kw">if</span> <span class="op">!</span><span class="kw-2">&amp;</span><span class="ident">analysis</span>.<span class="ident">timer_queues</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">monotonic</span>.<span class="ident">is_none</span>() {
-        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
-            <span class="ident">Span</span>::<span class="ident">call_site</span>(),
-            <span class="string">&quot;a `monotonic` timer must be specified to use the `schedule` API&quot;</span>,
-        ));
+    <span class="comment">// Check that all exceptions are valid; only exceptions with configurable priorities are</span>
+    <span class="comment">// accepted</span>
+    <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">task</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">hardware_tasks</span> {
+        <span class="kw">let</span> <span class="ident">name_s</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">args</span>.<span class="ident">binds</span>.<span class="ident">to_string</span>();
+        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">name_s</span> {
+            <span class="string">&quot;SysTick&quot;</span> <span class="op">=&gt;</span> {
+                <span class="comment">// If the timer queue is used, then SysTick is unavailable</span>
+                <span class="kw">if</span> <span class="ident">monotonic</span>.<span class="ident">is_some</span>() {
+                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
+                        <span class="ident">name</span>.<span class="ident">span</span>(),
+                        <span class="string">&quot;this exception can&#39;t be used because it&#39;s being used by the runtime&quot;</span>,
+                    ));
+                } <span class="kw">else</span> {
+                    <span class="comment">// OK</span>
+                }
+            }
+
+            <span class="string">&quot;NonMaskableInt&quot;</span> <span class="op">|</span> <span class="string">&quot;HardFault&quot;</span> <span class="op">=&gt;</span> {
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">parse</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
+                    <span class="ident">name</span>.<span class="ident">span</span>(),
+                    <span class="string">&quot;only exceptions with configurable priority can be used as hardware tasks&quot;</span>,
+                ));
+            }
+
+            <span class="kw">_</span> <span class="op">=&gt;</span> {}
+        }
     }
 
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">device</span>) <span class="op">=</span> <span class="ident">device</span> {

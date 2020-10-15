@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/git/checkouts/rtic-syntax-f90a7db46f83a69f/6d18b1d/src/ast.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ast.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rtic_syntax/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/git/checkouts/rtic-syntax-f90a7db46f83a69f/1560966/src/ast.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ast.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rtic_syntax/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -326,32 +326,6 @@
 <span id="325">325</span>
 <span id="326">326</span>
 <span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Abstract Syntax Tree</span>
 
@@ -464,12 +438,6 @@
     <span class="doccomment">/// Resources that can be accessed from this context</span>
     <span class="kw">pub</span> <span class="ident">resources</span>: <span class="ident">Resources</span>,
 
-    <span class="doccomment">/// Software tasks that can be spawned from this context</span>
-    <span class="kw">pub</span> <span class="ident">spawn</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
-
-    <span class="doccomment">/// Software tasks that can be scheduled from this context</span>
-    <span class="kw">pub</span> <span class="ident">schedule</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
-
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">_extensible</span>: (),
 }
 
@@ -502,12 +470,6 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IdleArgs</span> {
     <span class="doccomment">/// Resources that can be accessed from this context</span>
     <span class="kw">pub</span> <span class="ident">resources</span>: <span class="ident">Resources</span>,
-
-    <span class="doccomment">/// Software tasks that can be spawned from this context</span>
-    <span class="kw">pub</span> <span class="ident">spawn</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
-
-    <span class="doccomment">/// Software tasks that can be scheduled from this context</span>
-    <span class="kw">pub</span> <span class="ident">schedule</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">_extensible</span>: (),
 }
@@ -592,12 +554,6 @@
     <span class="doccomment">/// Resources that can be accessed from this context</span>
     <span class="kw">pub</span> <span class="ident">resources</span>: <span class="ident">Resources</span>,
 
-    <span class="doccomment">/// Software tasks that can be spawned from this context</span>
-    <span class="kw">pub</span> <span class="ident">spawn</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
-
-    <span class="doccomment">/// Software tasks that can be scheduled from this context</span>
-    <span class="kw">pub</span> <span class="ident">schedule</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
-
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">_extensible</span>: (),
 }
 
@@ -607,8 +563,6 @@
             <span class="ident">capacity</span>: <span class="number">1</span>,
             <span class="ident">priority</span>: <span class="number">1</span>,
             <span class="ident">resources</span>: <span class="ident">Resources</span>::<span class="ident">new</span>(),
-            <span class="ident">spawn</span>: <span class="ident">Set</span>::<span class="ident">new</span>(),
-            <span class="ident">schedule</span>: <span class="ident">Set</span>::<span class="ident">new</span>(),
             <span class="ident">_extensible</span>: (),
         }
     }
@@ -645,12 +599,6 @@
 
     <span class="doccomment">/// Resources that can be accessed from this context</span>
     <span class="kw">pub</span> <span class="ident">resources</span>: <span class="ident">Resources</span>,
-
-    <span class="doccomment">/// Software tasks that can be spawned from this context</span>
-    <span class="kw">pub</span> <span class="ident">spawn</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
-
-    <span class="doccomment">/// Software tasks that can be scheduled from this context</span>
-    <span class="kw">pub</span> <span class="ident">schedule</span>: <span class="ident">Set</span><span class="op">&lt;</span><span class="ident">Ident</span><span class="op">&gt;</span>,
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">_extensible</span>: (),
 }

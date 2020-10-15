@@ -200,7 +200,7 @@ use rtic::cyccnt::{Instant, U32Ext as _};
 // NOTE: does NOT work on QEMU!
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
-    #[init(schedule = [foo, bar])]
+    #[init()]
     fn init(mut cx: init::Context) -&gt; init::LateResources {
         // Initialize (enable) the monotonic timer (CYCCNT)
         cx.core.DCB.enable_trace();
@@ -215,10 +215,10 @@ mod app {
         hprintln!(&quot;init @ {:?}&quot;, now).unwrap();
 
         // Schedule `foo` to run 8e6 cycles (clock cycles) in the future
-        cx.schedule.foo(now + 8_000_000.cycles()).unwrap();
+        foo::schedule(now + 8_000_000.cycles()).unwrap();
 
         // Schedule `bar` to run 4e6 cycles in the future
-        cx.schedule.bar(now + 4_000_000.cycles()).unwrap();
+        bar::schedule(now + 4_000_000.cycles()).unwrap();
 
         init::LateResources {}
     }
@@ -271,21 +271,21 @@ const PERIOD: u32 = 8_000_000;
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
 
-    #[init(schedule = [foo])]
+    #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         // omitted: initialization of `CYCCNT`
 
-        cx.schedule.foo(cx.start + PERIOD.cycles()).unwrap();
+        foo::schedule(cx.start + PERIOD.cycles()).unwrap();
 
         init::LateResources {}
     }
 
-    #[task(schedule = [foo])]
+    #[task]
     fn foo(cx: foo::Context) {
         let now = Instant::now();
         hprintln!(&quot;foo(scheduled = {:?}, now = {:?})&quot;, cx.scheduled, now).unwrap();
 
-        cx.schedule.foo(cx.scheduled + PERIOD.cycles()).unwrap();
+        foo::schedule(cx.scheduled + PERIOD.cycles()).unwrap();
     }
 
     // RTIC requires that unused interrupts are declared in an extern block when
@@ -338,19 +338,19 @@ use panic_semihosting as _;
 // NOTE: does NOT properly work on QEMU
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
-    #[init(spawn = [foo])]
+    #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         // omitted: initialization of `CYCCNT`
 
         hprintln!(&quot;init(baseline = {:?})&quot;, cx.start).unwrap();
 
         // `foo` inherits the baseline of `init`: `Instant(0)`
-        cx.spawn.foo().unwrap();
+        foo::spawn().unwrap();
 
         init::LateResources {}
     }
 
-    #[task(schedule = [foo])]
+    #[task]
     fn foo(cx: foo::Context) {
         static mut ONCE: bool = true;
 
@@ -365,12 +365,12 @@ mod app {
         }
     }
 
-    #[task(binds = UART0, spawn = [foo])]
+    #[task(binds = UART0)]
     fn uart0(cx: uart0::Context) {
         hprintln!(&quot;UART0(baseline = {:?})&quot;, cx.start).unwrap();
 
         // `foo` inherits the baseline of `UART0`: its `start` time
-        cx.spawn.foo().unwrap();
+        foo::spawn().unwrap();
     }
 
     // RTIC requires that unused interrupts are declared in an extern block when

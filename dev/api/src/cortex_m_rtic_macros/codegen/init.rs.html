@@ -124,6 +124,12 @@
 <span id="123">123</span>
 <span id="124">124</span>
 <span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">format_ident</span>, <span class="ident">quote</span>};
@@ -243,7 +249,13 @@
             <span class="macro">quote</span><span class="macro">!</span>(<span class="kw">let</span> <span class="ident">late</span> <span class="op">=</span> <span class="kw">crate</span>::#<span class="ident">name</span>(#(#<span class="ident">locals_new</span>,)<span class="op">*</span> #<span class="ident">name</span>::<span class="ident">Context</span>::<span class="ident">new</span>(<span class="ident">core</span>.<span class="ident">into</span>()));),
         );
 
-        <span class="ident">root_init</span>.<span class="ident">push</span>(<span class="ident">module</span>::<span class="ident">codegen</span>(<span class="ident">Context</span>::<span class="ident">Init</span>, <span class="ident">needs_lt</span>, <span class="ident">app</span>, <span class="ident">extra</span>));
+        <span class="ident">root_init</span>.<span class="ident">push</span>(<span class="ident">module</span>::<span class="ident">codegen</span>(
+            <span class="ident">Context</span>::<span class="ident">Init</span>,
+            <span class="ident">needs_lt</span>,
+            <span class="ident">app</span>,
+            <span class="ident">analysis</span>,
+            <span class="ident">extra</span>,
+        ));
 
         (<span class="ident">mod_app</span>, <span class="ident">root_init</span>, <span class="ident">user_init</span>, <span class="ident">user_init_imports</span>, <span class="ident">call_init</span>)
     } <span class="kw">else</span> {

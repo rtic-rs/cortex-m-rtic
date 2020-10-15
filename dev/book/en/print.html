@@ -950,27 +950,27 @@ use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
-    #[init(spawn = [foo])]
-    fn init(c: init::Context) -&gt; init::LateResources {
-        c.spawn.foo().unwrap();
+    #[init]
+    fn init(_: init::Context) -&gt; init::LateResources {
+        foo::spawn().unwrap();
 
         init::LateResources {}
     }
 
-    #[task(spawn = [bar, baz])]
-    fn foo(c: foo::Context) {
+    #[task]
+    fn foo(_: foo::Context) {
         hprintln!(&quot;foo - start&quot;).unwrap();
 
         // spawns `bar` onto the task scheduler
         // `foo` and `bar` have the same priority so `bar` will not run until
         // after `foo` terminates
-        c.spawn.bar().unwrap();
+        bar::spawn().unwrap();
 
         hprintln!(&quot;foo - middle&quot;).unwrap();
 
         // spawns `baz` onto the task scheduler
         // `baz` has higher priority than `foo` so it immediately preempts `foo`
-        c.spawn.baz().unwrap();
+        baz::spawn().unwrap();
 
         hprintln!(&quot;foo - end&quot;).unwrap();
     }
@@ -1024,39 +1024,39 @@ use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
-    #[init(spawn = [foo])]
-    fn init(c: init::Context) -&gt; init::LateResources {
-        c.spawn.foo(/* no message */).unwrap();
+    #[init]
+    fn init(_: init::Context) -&gt; init::LateResources {
+        foo::spawn(/* no message */).unwrap();
 
         init::LateResources {}
     }
 
-    #[task(spawn = [bar])]
-    fn foo(c: foo::Context) {
+    #[task]
+    fn foo(_: foo::Context) {
         static mut COUNT: u32 = 0;
 
         hprintln!(&quot;foo&quot;).unwrap();
 
-        c.spawn.bar(*COUNT).unwrap();
+        bar::spawn(*COUNT).unwrap();
         *COUNT += 1;
     }
 
-    #[task(spawn = [baz])]
-    fn bar(c: bar::Context, x: u32) {
+    #[task]
+    fn bar(_: bar::Context, x: u32) {
         hprintln!(&quot;bar({})&quot;, x).unwrap();
 
-        c.spawn.baz(x + 1, x + 2).unwrap();
+        baz::spawn(x + 1, x + 2).unwrap();
     }
 
-    #[task(spawn = [foo])]
-    fn baz(c: baz::Context, x: u32, y: u32) {
+    #[task]
+    fn baz(_: baz::Context, x: u32, y: u32) {
         hprintln!(&quot;baz({}, {})&quot;, x, y).unwrap();
 
         if x + y &gt; 4 {
             debug::exit(debug::EXIT_SUCCESS);
         }
 
-        c.spawn.foo().unwrap();
+        foo::spawn().unwrap();
     }
 
     // RTIC requires that unused interrupts are declared in an extern block when
@@ -1110,14 +1110,14 @@ mod app {
         init::LateResources {}
     }
 
-    #[task(binds = UART0, spawn = [foo, bar])]
-    fn uart0(c: uart0::Context) {
-        c.spawn.foo(0).unwrap();
-        c.spawn.foo(1).unwrap();
-        c.spawn.foo(2).unwrap();
-        c.spawn.foo(3).unwrap();
+    #[task(binds = UART0)]
+    fn uart0(_: uart0::Context) {
+        foo::spawn(0).unwrap();
+        foo::spawn(1).unwrap();
+        foo::spawn(2).unwrap();
+        foo::spawn(3).unwrap();
 
-        c.spawn.bar().unwrap();
+        bar::spawn().unwrap();
     }
 
     #[task(capacity = 4)]
@@ -1258,7 +1258,7 @@ use rtic::cyccnt::{Instant, U32Ext as _};
 // NOTE: does NOT work on QEMU!
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
-    #[init(schedule = [foo, bar])]
+    #[init()]
     fn init(mut cx: init::Context) -&gt; init::LateResources {
         // Initialize (enable) the monotonic timer (CYCCNT)
         cx.core.DCB.enable_trace();
@@ -1273,10 +1273,10 @@ mod app {
         hprintln!(&quot;init @ {:?}&quot;, now).unwrap();
 
         // Schedule `foo` to run 8e6 cycles (clock cycles) in the future
-        cx.schedule.foo(now + 8_000_000.cycles()).unwrap();
+        foo::schedule(now + 8_000_000.cycles()).unwrap();
 
         // Schedule `bar` to run 4e6 cycles in the future
-        cx.schedule.bar(now + 4_000_000.cycles()).unwrap();
+        bar::schedule(now + 4_000_000.cycles()).unwrap();
 
         init::LateResources {}
     }
@@ -1335,21 +1335,21 @@ const PERIOD: u32 = 8_000_000;
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
 
-    #[init(schedule = [foo])]
+    #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         // omitted: initialization of `CYCCNT`
 
-        cx.schedule.foo(cx.start + PERIOD.cycles()).unwrap();
+        foo::schedule(cx.start + PERIOD.cycles()).unwrap();
 
         init::LateResources {}
     }
 
-    #[task(schedule = [foo])]
+    #[task]
     fn foo(cx: foo::Context) {
         let now = Instant::now();
         hprintln!(&quot;foo(scheduled = {:?}, now = {:?})&quot;, cx.scheduled, now).unwrap();
 
-        cx.schedule.foo(cx.scheduled + PERIOD.cycles()).unwrap();
+        foo::schedule(cx.scheduled + PERIOD.cycles()).unwrap();
     }
 
     // RTIC requires that unused interrupts are declared in an extern block when
@@ -1402,19 +1402,19 @@ use panic_semihosting as _;
 // NOTE: does NOT properly work on QEMU
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
-    #[init(spawn = [foo])]
+    #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         // omitted: initialization of `CYCCNT`
 
         hprintln!(&quot;init(baseline = {:?})&quot;, cx.start).unwrap();
 
         // `foo` inherits the baseline of `init`: `Instant(0)`
-        cx.spawn.foo().unwrap();
+        foo::spawn().unwrap();
 
         init::LateResources {}
     }
 
-    #[task(schedule = [foo])]
+    #[task]
     fn foo(cx: foo::Context) {
         static mut ONCE: bool = true;
 
@@ -1429,12 +1429,12 @@ mod app {
         }
     }
 
-    #[task(binds = UART0, spawn = [foo])]
+    #[task(binds = UART0)]
     fn uart0(cx: uart0::Context) {
         hprintln!(&quot;UART0(baseline = {:?})&quot;, cx.start).unwrap();
 
         // `foo` inherits the baseline of `UART0`: its `start` time
-        cx.spawn.foo().unwrap();
+        foo::spawn().unwrap();
     }
 
     // RTIC requires that unused interrupts are declared in an extern block when
@@ -1483,44 +1483,35 @@ mod app {
         shared: u32,
     }
 
-    #[init(schedule = [foo], spawn = [foo])]
+    #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         let _: cyccnt::Instant = cx.start;
         let _: rtic::Peripherals = cx.core;
         let _: lm3s6965::Peripherals = cx.device;
-        let _: init::Schedule = cx.schedule;
-        let _: init::Spawn = cx.spawn;
 
         debug::exit(debug::EXIT_SUCCESS);
 
         init::LateResources {}
     }
 
-    #[idle(schedule = [foo], spawn = [foo])]
-    fn idle(cx: idle::Context) -&gt; ! {
-        let _: idle::Schedule = cx.schedule;
-        let _: idle::Spawn = cx.spawn;
-
+    #[idle]
+    fn idle(_: idle::Context) -&gt; ! {
         loop {
             cortex_m::asm::nop();
         }
     }
 
-    #[task(binds = UART0, resources = [shared], schedule = [foo], spawn = [foo])]
+    #[task(binds = UART0, resources = [shared])]
     fn uart0(cx: uart0::Context) {
         let _: cyccnt::Instant = cx.start;
         let _: resources::shared = cx.resources.shared;
-        let _: uart0::Schedule = cx.schedule;
-        let _: uart0::Spawn = cx.spawn;
     }
 
-    #[task(priority = 2, resources = [shared], schedule = [foo], spawn = [foo])]
+    #[task(priority = 2, resources = [shared])]
     fn foo(cx: foo::Context) {
         let _: cyccnt::Instant = cx.scheduled;
         let _: &amp;mut u32 = cx.resources.shared;
         let _: foo::Resources = cx.resources;
-        let _: foo::Schedule = cx.schedule;
-        let _: foo::Spawn = cx.spawn;
     }
 
     // RTIC requires that unused interrupts are declared in an extern block when
@@ -1548,74 +1539,7 @@ shared resources.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>//! `examples/not-send.rs`
-
-#![deny(unsafe_code)]
-#![deny(warnings)]
-#![no_main]
-#![no_std]
-
-use core::marker::PhantomData;
-
-use cortex_m_semihosting::debug;
-use panic_halt as _;
-use rtic::app;
-
-pub struct NotSend {
-    _0: PhantomData&lt;*const ()&gt;,
-}
-
-#[app(device = lm3s6965)]
-mod app {
-    use super::NotSend;
-
-    #[resources]
-    struct Resources {
-        #[init(None)]
-        shared: Option&lt;NotSend&gt;,
-    }
-
-    #[init(spawn = [baz, quux])]
-    fn init(c: init::Context) -&gt; init::LateResources {
-        c.spawn.baz().unwrap();
-        c.spawn.quux().unwrap();
-
-        init::LateResources {}
-    }
-
-    #[task(spawn = [bar])]
-    fn foo(c: foo::Context) {
-        // scenario 1: message passed to task that runs at the same priority
-        c.spawn.bar(NotSend { _0: PhantomData }).ok();
-    }
-
-    #[task]
-    fn bar(_: bar::Context, _x: NotSend) {
-        // scenario 1
-    }
-
-    #[task(priority = 2, resources = [shared])]
-    fn baz(c: baz::Context) {
-        // scenario 2: resource shared between tasks that run at the same priority
-        *c.resources.shared = Some(NotSend { _0: PhantomData });
-    }
-
-    #[task(priority = 2, resources = [shared])]
-    fn quux(c: quux::Context) {
-        // scenario 2
-        let _not_send = c.resources.shared.take().unwrap();
-
-        debug::exit(debug::EXIT_SUCCESS);
-    }
-
-    // RTIC requires that unused interrupts are declared in an extern block when
-    // using software tasks; these free interrupts will be used to dispatch the
-    // software tasks.
-    extern &quot;C&quot; {
-        fn SSI0();
-        fn QEI0();
-    }
-}
+</span>{{#include ../../../../examples/not-send.rs}}
 <span class="boring">}
 </span></code></pre></pre>
 <p>It's important to note that late initialization of resources is effectively a
@@ -1937,10 +1861,10 @@ mod app {
         count: u32,
     }
 
-    #[init(spawn = [foo])]
-    fn init(cx: init::Context) -&gt; init::LateResources {
-        cx.spawn.foo().unwrap();
-        cx.spawn.foo().unwrap();
+    #[init]
+    fn init(_: init::Context) -&gt; init::LateResources {
+        foo::spawn().unwrap();
+        foo::spawn().unwrap();
 
         init::LateResources {}
     }
@@ -1954,13 +1878,13 @@ mod app {
         }
     }
 
-    #[task(capacity = 2, resources = [count], spawn = [log])]
+    #[task(capacity = 2, resources = [count])]
     fn foo(_cx: foo::Context) {
         #[cfg(debug_assertions)]
         {
             *_cx.resources.count += 1;
 
-            _cx.spawn.log(*_cx.resources.count).unwrap();
+            log::spawn(*_cx.resources.count).unwrap();
         }
 
         // this wouldn't compile in `release` mode
@@ -2027,9 +1951,9 @@ use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
-    #[init(spawn = [bar])]
-    fn init(c: init::Context) -&gt; init::LateResources {
-        c.spawn.bar().unwrap();
+    #[init]
+    fn init(_: init::Context) -&gt; init::LateResources {
+        foo::spawn().unwrap();
 
         init::LateResources {}
     }
@@ -2045,9 +1969,9 @@ mod app {
     // run this task from RAM
     #[inline(never)]
     #[link_section = &quot;.data.bar&quot;]
-    #[task(priority = 2, spawn = [foo])]
-    fn bar(c: bar::Context) {
-        c.spawn.foo().unwrap();
+    #[task(priority = 2)]
+    fn bar(_: bar::Context) {
+        foo::spawn().unwrap();
     }
 
     extern &quot;C&quot; {
@@ -2124,16 +2048,16 @@ mod app {
         init::LateResources {}
     }
 
-    #[task(binds = I2C0, priority = 2, spawn = [foo, bar])]
-    fn i2c0(c: i2c0::Context) {
+    #[task(binds = I2C0, priority = 2)]
+    fn i2c0(_: i2c0::Context) {
         // claim a memory block, leave it uninitialized and ..
         let x = P::alloc().unwrap().freeze();
 
         // .. send it to the `foo` task
-        c.spawn.foo(x).ok().unwrap();
+        foo::spawn(x).ok().unwrap();
 
         // send another block to the task `bar`
-        c.spawn.bar(P::alloc().unwrap().freeze()).ok().unwrap();
+        bar::spawn(P::alloc().unwrap().freeze()).ok().unwrap();
     }
 
     #[task]

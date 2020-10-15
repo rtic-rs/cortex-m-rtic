@@ -184,20 +184,6 @@
 <span id="183">183</span>
 <span id="184">184</span>
 <span id="185">185</span>
-<span id="186">186</span>
-<span id="187">187</span>
-<span id="188">188</span>
-<span id="189">189</span>
-<span id="190">190</span>
-<span id="191">191</span>
-<span id="192">192</span>
-<span id="193">193</span>
-<span id="194">194</span>
-<span id="195">195</span>
-<span id="196">196</span>
-<span id="197">197</span>
-<span id="198">198</span>
-<span id="199">199</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -216,11 +202,7 @@
 <span class="kw">mod</span> <span class="ident">pre_init</span>;
 <span class="kw">mod</span> <span class="ident">resources</span>;
 <span class="kw">mod</span> <span class="ident">resources_struct</span>;
-<span class="kw">mod</span> <span class="ident">schedule</span>;
-<span class="kw">mod</span> <span class="ident">schedule_body</span>;
 <span class="kw">mod</span> <span class="ident">software_tasks</span>;
-<span class="kw">mod</span> <span class="ident">spawn</span>;
-<span class="kw">mod</span> <span class="ident">spawn_body</span>;
 <span class="kw">mod</span> <span class="ident">timer_queue</span>;
 <span class="kw">mod</span> <span class="ident">util</span>;
 
@@ -316,15 +298,9 @@
     ) <span class="op">=</span> <span class="ident">software_tasks</span>::<span class="ident">codegen</span>(<span class="ident">app</span>, <span class="ident">analysis</span>, <span class="ident">extra</span>);
 
     <span class="kw">let</span> <span class="ident">mod_app_dispatchers</span> <span class="op">=</span> <span class="ident">dispatchers</span>::<span class="ident">codegen</span>(<span class="ident">app</span>, <span class="ident">analysis</span>, <span class="ident">extra</span>);
-
-    <span class="kw">let</span> <span class="ident">mod_app_spawn</span> <span class="op">=</span> <span class="ident">spawn</span>::<span class="ident">codegen</span>(<span class="ident">app</span>, <span class="ident">analysis</span>, <span class="ident">extra</span>);
-
     <span class="kw">let</span> <span class="ident">mod_app_timer_queue</span> <span class="op">=</span> <span class="ident">timer_queue</span>::<span class="ident">codegen</span>(<span class="ident">app</span>, <span class="ident">analysis</span>, <span class="ident">extra</span>);
-
-    <span class="kw">let</span> <span class="ident">mod_app_schedule</span> <span class="op">=</span> <span class="ident">schedule</span>::<span class="ident">codegen</span>(<span class="ident">app</span>, <span class="ident">extra</span>);
-
-    <span class="kw">let</span> <span class="ident">user_imports</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">user_imports</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">user_code</span> <span class="op">=</span> <span class="ident">app</span>.<span class="ident">user_code</span>.<span class="ident">clone</span>();
+    <span class="kw">let</span> <span class="ident">user_imports</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">user_imports</span>;
+    <span class="kw">let</span> <span class="ident">user_code</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">user_code</span>;
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">name</span>;
     <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">device</span>;
 
@@ -388,11 +364,7 @@
 
             #(#<span class="ident">mod_app_dispatchers</span>)<span class="op">*</span>
 
-            #(#<span class="ident">mod_app_spawn</span>)<span class="op">*</span>
-
             #(#<span class="ident">mod_app_timer_queue</span>)<span class="op">*</span>
-
-            #(#<span class="ident">mod_app_schedule</span>)<span class="op">*</span>
 
             #(#<span class="ident">mains</span>)<span class="op">*</span>
         }

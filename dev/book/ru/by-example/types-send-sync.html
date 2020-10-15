@@ -191,44 +191,35 @@ mod app {
         shared: u32,
     }
 
-    #[init(schedule = [foo], spawn = [foo])]
+    #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         let _: cyccnt::Instant = cx.start;
         let _: rtic::Peripherals = cx.core;
         let _: lm3s6965::Peripherals = cx.device;
-        let _: init::Schedule = cx.schedule;
-        let _: init::Spawn = cx.spawn;
 
         debug::exit(debug::EXIT_SUCCESS);
 
         init::LateResources {}
     }
 
-    #[idle(schedule = [foo], spawn = [foo])]
-    fn idle(cx: idle::Context) -&gt; ! {
-        let _: idle::Schedule = cx.schedule;
-        let _: idle::Spawn = cx.spawn;
-
+    #[idle]
+    fn idle(_: idle::Context) -&gt; ! {
         loop {
             cortex_m::asm::nop();
         }
     }
 
-    #[task(binds = UART0, resources = [shared], schedule = [foo], spawn = [foo])]
+    #[task(binds = UART0, resources = [shared])]
     fn uart0(cx: uart0::Context) {
         let _: cyccnt::Instant = cx.start;
         let _: resources::shared = cx.resources.shared;
-        let _: uart0::Schedule = cx.schedule;
-        let _: uart0::Spawn = cx.spawn;
     }
 
-    #[task(priority = 2, resources = [shared], schedule = [foo], spawn = [foo])]
+    #[task(priority = 2, resources = [shared])]
     fn foo(cx: foo::Context) {
         let _: cyccnt::Instant = cx.scheduled;
         let _: &amp;mut u32 = cx.resources.shared;
         let _: foo::Resources = cx.resources;
-        let _: foo::Schedule = cx.schedule;
-        let _: foo::Spawn = cx.spawn;
     }
 
     // RTIC requires that unused interrupts are declared in an extern block when
@@ -255,74 +246,7 @@ mod app {
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>//! `examples/not-send.rs`
-
-#![deny(unsafe_code)]
-#![deny(warnings)]
-#![no_main]
-#![no_std]
-
-use core::marker::PhantomData;
-
-use cortex_m_semihosting::debug;
-use panic_halt as _;
-use rtic::app;
-
-pub struct NotSend {
-    _0: PhantomData&lt;*const ()&gt;,
-}
-
-#[app(device = lm3s6965)]
-mod app {
-    use super::NotSend;
-
-    #[resources]
-    struct Resources {
-        #[init(None)]
-        shared: Option&lt;NotSend&gt;,
-    }
-
-    #[init(spawn = [baz, quux])]
-    fn init(c: init::Context) -&gt; init::LateResources {
-        c.spawn.baz().unwrap();
-        c.spawn.quux().unwrap();
-
-        init::LateResources {}
-    }
-
-    #[task(spawn = [bar])]
-    fn foo(c: foo::Context) {
-        // scenario 1: message passed to task that runs at the same priority
-        c.spawn.bar(NotSend { _0: PhantomData }).ok();
-    }
-
-    #[task]
-    fn bar(_: bar::Context, _x: NotSend) {
-        // scenario 1
-    }
-
-    #[task(priority = 2, resources = [shared])]
-    fn baz(c: baz::Context) {
-        // scenario 2: resource shared between tasks that run at the same priority
-        *c.resources.shared = Some(NotSend { _0: PhantomData });
-    }
-
-    #[task(priority = 2, resources = [shared])]
-    fn quux(c: quux::Context) {
-        // scenario 2
-        let _not_send = c.resources.shared.take().unwrap();
-
-        debug::exit(debug::EXIT_SUCCESS);
-    }
-
-    // RTIC requires that unused interrupts are declared in an extern block when
-    // using software tasks; these free interrupts will be used to dispatch the
-    // software tasks.
-    extern &quot;C&quot; {
-        fn SSI0();
-        fn QEI0();
-    }
-}
+</span>{{#include ../../../../examples/not-send.rs}}
 <span class="boring">}
 </span></code></pre></pre>
 <h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
