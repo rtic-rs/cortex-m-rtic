@@ -146,6 +146,15 @@
 <span id="145">145</span>
 <span id="146">146</span>
 <span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::{
     <span class="ident">cmp</span>::{<span class="self">self</span>, <span class="ident">Ordering</span>},
@@ -173,18 +182,26 @@
     <span class="ident">N</span>: <span class="ident">ArrayLength</span><span class="op">&lt;</span><span class="ident">NotReady</span><span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">T</span><span class="op">&gt;&gt;</span>,
     <span class="ident">T</span>: <span class="ident">Copy</span>,
 {
+    <span class="doccomment">/// # Safety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Writing to memory with a transmute in order to enable</span>
+    <span class="doccomment">/// interrupts of the SysTick timer</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Enqueue a task without checking if it is full</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">enqueue_unchecked</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">nr</span>: <span class="ident">NotReady</span><span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">T</span><span class="op">&gt;</span>) {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">is_empty</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="kw">if</span> <span class="self">self</span>
+        <span class="comment">// Check if the top contains a non-empty element and if that element is</span>
+        <span class="comment">// greater than nr</span>
+        <span class="kw">let</span> <span class="ident">if_heap_max_greater_than_nr</span> <span class="op">=</span> <span class="self">self</span>
             .<span class="number">0</span>
             .<span class="ident">peek</span>()
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">head</span><span class="op">|</span> {
                 <span class="ident">is_empty</span> <span class="op">=</span> <span class="bool-val">false</span>;
                 <span class="ident">nr</span>.<span class="ident">instant</span> <span class="op">&lt;</span> <span class="ident">head</span>.<span class="ident">instant</span>
             })
-            .<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>)
-        {
+            .<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>);
+        <span class="kw">if</span> <span class="ident">if_heap_max_greater_than_nr</span> {
             <span class="kw">if</span> <span class="ident">is_empty</span> {
                 <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">SYST</span><span class="op">&gt;</span>(()).<span class="ident">enable_interrupt</span>();
             }
@@ -196,6 +213,7 @@
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push_unchecked</span>(<span class="ident">nr</span>);
     }
 
+    <span class="doccomment">/// Dequeue a task from the TimerQueue</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dequeue</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">u8</span>)<span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {

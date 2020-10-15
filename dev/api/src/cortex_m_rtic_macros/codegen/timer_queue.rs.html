@@ -138,7 +138,7 @@
                 })
                 .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
 
-            <span class="kw">let</span> <span class="ident">doc</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Tasks that can be scheduled&quot;</span>);
+            <span class="kw">let</span> <span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Tasks that can be scheduled&quot;</span>.<span class="ident">to_string</span>();
             <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> #<span class="ident">doc</span>]</span>
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
@@ -153,7 +153,7 @@
 
         <span class="comment">// Static variable and resource proxy</span>
         {
-            <span class="kw">let</span> <span class="ident">doc</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Timer queue&quot;</span>);
+            <span class="kw">let</span> <span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;Timer queue&quot;</span>.<span class="ident">to_string</span>();
             <span class="kw">let</span> <span class="ident">cap</span> <span class="op">=</span> <span class="ident">app</span>
                 .<span class="ident">software_tasks</span>
                 .<span class="ident">iter</span>()
