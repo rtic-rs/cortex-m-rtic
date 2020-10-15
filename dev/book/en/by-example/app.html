@@ -389,9 +389,13 @@ we start introducing features unique to RTIC.</p>
 <p>The static priority of each handler can be declared in the <code>task</code> attribute
 using the <code>priority</code> argument. Tasks can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
 crate. When the <code>priority</code> argument is omitted, the priority is assumed to be
-<code>1</code>. The <code>idle</code> task has a non-configurable static priority of <code>0</code>, the lowest
-priority.</p>
-<p>When several tasks are ready to be executed the one with <em>highest</em> static
+<code>1</code>. The <code>idle</code> task has a non-configurable static priority of <code>0</code>, the lowest priority.</p>
+<blockquote>
+<p>A higher number means a higher priority in RTIC, which is the opposite from what
+Cortex-M does in the NVIC peripheral.<br />
+Explicitly, this means that number <code>10</code> has a <strong>higher</strong> priority than number <code>9</code>.</p>
+</blockquote>
+<p>When several tasks are ready to be executed the one with highest static
 priority will be executed first. Task prioritization can be observed in the
 following scenario: an interrupt signal arrives during the execution of a low
 priority task; the signal puts the higher priority task in the pending state.
