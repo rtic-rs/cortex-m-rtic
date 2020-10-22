@@ -143,7 +143,7 @@
                 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> #<span class="ident">doc</span>]</span>
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
                 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-                <span class="kw">pub</span> <span class="kw">enum</span> #<span class="ident">t</span> {
+                <span class="kw">enum</span> #<span class="ident">t</span> {
                     #(#<span class="ident">variants</span>,)<span class="op">*</span>
                 }
             ));
@@ -164,7 +164,7 @@
 
             <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> #<span class="ident">doc</span>]</span>
-                <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> #<span class="ident">tq</span>: #<span class="ident">tq_ty</span> <span class="op">=</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">TimerQueue</span>(
+                <span class="kw">static</span> <span class="kw-2">mut</span> #<span class="ident">tq</span>: #<span class="ident">tq_ty</span> <span class="op">=</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">TimerQueue</span>(
                     <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">BinaryHeap</span>(
                         <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">iBinaryHeap</span>::<span class="ident">new</span>()
                     )

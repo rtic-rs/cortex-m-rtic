@@ -28,7 +28,9 @@
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
+        
         <link rel="stylesheet" href="css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -130,9 +132,11 @@
                     <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -314,11 +318,12 @@ RTIC работать на стабильной сборке, мы исполь�
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965, peripherals = true)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
     #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         static mut X: u32 = 0;
@@ -377,11 +382,12 @@ init```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
         hprintln!(&quot;init&quot;).unwrap();
@@ -453,12 +459,13 @@ idle```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+    use lm3s6965::Interrupt;
+
     #[resources]
     struct Resources {
         // A resource
@@ -546,12 +553,13 @@ UART1: shared = 2
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+    use lm3s6965::Interrupt;
+
     #[resources]
     struct Resources {
         #[init(0)]
@@ -642,21 +650,18 @@ E```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use heapless::{
-    consts::*,
-    i,
-    spsc::{Consumer, Producer, Queue},
-};
-use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
     use heapless::{
         consts::*,
-        spsc::{Consumer, Producer},
+        i,
+        spsc::{Consumer, Producer, Queue},
     };
+    use lm3s6965::Interrupt;
+
     // Late resources
     #[resources]
     struct Resources {
@@ -717,20 +722,18 @@ received message: 42```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use heapless::{
-    consts::*,
-    i,
-    spsc::{Consumer, Producer, Queue},
-};
-use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
 
-    use crate::U4;
-    use crate::{Consumer, Producer};
+    use cortex_m_semihosting::{debug, hprintln};
+    use heapless::{
+        consts::*,
+        i,
+        spsc::{Consumer, Producer, Queue},
+    };
+    use lm3s6965::Interrupt;
 
     // Late resources
     #[resources]
@@ -798,11 +801,12 @@ RTIC также поддерживает <em>программные</em> зад�
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
         foo::spawn().unwrap();
@@ -873,11 +877,12 @@ bar```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
         foo::spawn(/* no message */).unwrap();
@@ -949,12 +954,13 @@ baz(2, 3)```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+    use lm3s6965::Interrupt;
+
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);
@@ -1032,14 +1038,15 @@ bar```
 #![no_main]
 #![no_std]
 
-use cortex_m::peripheral::DWT;
-use cortex_m_semihosting::hprintln;
 use panic_halt as _;
-use rtic::cyccnt::{Instant, U32Ext as _};
 
 // NOTE: does NOT work on QEMU!
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
+    use cortex_m::peripheral::DWT;
+    use cortex_m_semihosting::hprintln;
+    use rtic::cyccnt::{Instant, U32Ext as _};
+
     #[init()]
     fn init(mut cx: init::Context) -&gt; init::LateResources {
         // Initialize (enable) the monotonic timer (CYCCNT)
@@ -1101,15 +1108,15 @@ foo  @ Instant(8000173)
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::hprintln;
 use panic_semihosting as _;
-use rtic::cyccnt::{Instant, U32Ext};
-
-const PERIOD: u32 = 8_000_000;
 
 // NOTE: does NOT work on QEMU!
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
+    use cortex_m_semihosting::hprintln;
+    use rtic::cyccnt::{Instant, U32Ext};
+
+    const PERIOD: u32 = 8_000_000;
 
     #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
@@ -1171,13 +1178,14 @@ foo(scheduled = Instant(24000000), now = Instant(24000196))
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 // NOTE: does NOT properly work on QEMU
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+    use lm3s6965::Interrupt;
+
     #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         // omitted: initialization of `CYCCNT`
@@ -1268,12 +1276,13 @@ foo(1)```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::debug;
 use panic_semihosting as _;
-use rtic::cyccnt;
 
 #[rtic::app(device = lm3s6965, peripherals = true, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
+    use cortex_m_semihosting::debug;
+    use rtic::cyccnt;
+
     #[resources]
     struct Resources {
         #[init(0)]
@@ -1359,8 +1368,6 @@ mod app {
 #![no_std]
 
 use core::marker::PhantomData;
-
-use cortex_m_semihosting::debug;
 use panic_halt as _;
 
 pub struct NotSync {
@@ -1371,6 +1378,7 @@ pub struct NotSync {
 mod app {
     use super::NotSync;
     use core::marker::PhantomData;
+    use cortex_m_semihosting::debug;
 
     #[resources]
     struct Resources {
@@ -1470,13 +1478,16 @@ init```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use lm3s6965::Interrupt;
+use cortex_m_semihosting::hprintln;
 use panic_semihosting as _;
-use rtic::{Exclusive, Mutex};
+use rtic::Mutex;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+    use lm3s6965::Interrupt;
+    use rtic::Exclusive;
+
     #[resources]
     struct Resources {
         #[init(0)]
@@ -1498,7 +1509,7 @@ mod app {
         hprintln!(&quot;UART0(STATE = {})&quot;, *STATE).unwrap();
 
         // second argument has type `resources::shared`
-        advance(STATE, c.resources.shared);
+        super::advance(STATE, c.resources.shared);
 
         rtic::pend(Interrupt::UART1);
 
@@ -1515,7 +1526,7 @@ mod app {
         *c.resources.shared += 0;
 
         // second argument has type `Exclusive&lt;u32&gt;`
-        advance(STATE, Exclusive(c.resources.shared));
+        super::advance(STATE, Exclusive(c.resources.shared));
     }
 }
 
@@ -1575,11 +1586,12 @@ RTIC v0.4.x была возможность взаимодействия с др
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
         foo::spawn().unwrap();
@@ -1646,13 +1658,14 @@ $ cargo nm --example ramfunc --release | grep ' bar::'
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 // `examples/interrupt.rs` rewritten to use `binds`
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+    use lm3s6965::Interrupt;
+
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
         rtic::pend(Interrupt::UART0);

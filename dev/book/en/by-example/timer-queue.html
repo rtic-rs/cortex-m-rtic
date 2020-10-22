@@ -26,7 +26,9 @@
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
@@ -128,9 +130,11 @@
                     <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                         <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
@@ -211,14 +215,15 @@ counter functionality has not been implemented in <code>qemu-system-arm</code>.<
 #![no_main]
 #![no_std]
 
-use cortex_m::peripheral::DWT;
-use cortex_m_semihosting::hprintln;
 use panic_halt as _;
-use rtic::cyccnt::{Instant, U32Ext as _};
 
 // NOTE: does NOT work on QEMU!
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
+    use cortex_m::peripheral::DWT;
+    use cortex_m_semihosting::hprintln;
+    use rtic::cyccnt::{Instant, U32Ext as _};
+
     #[init()]
     fn init(mut cx: init::Context) -&gt; init::LateResources {
         // Initialize (enable) the monotonic timer (CYCCNT)
@@ -286,15 +291,15 @@ used to implement periodic tasks as shown in the example below.</p>
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::hprintln;
 use panic_semihosting as _;
-use rtic::cyccnt::{Instant, U32Ext};
-
-const PERIOD: u32 = 8_000_000;
 
 // NOTE: does NOT work on QEMU!
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
+    use cortex_m_semihosting::hprintln;
+    use rtic::cyccnt::{Instant, U32Ext};
+
+    const PERIOD: u32 = 8_000_000;
 
     #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
@@ -356,13 +361,14 @@ from it will use <code>Instant::now()</code> as their baseline time.</p>
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
-use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 // NOTE: does NOT properly work on QEMU
 #[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+    use lm3s6965::Interrupt;
+
     #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         // omitted: initialization of `CYCCNT`

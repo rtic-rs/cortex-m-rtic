@@ -26,7 +26,9 @@
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
@@ -128,9 +130,11 @@
                     <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -212,11 +216,12 @@ RTIC работать на стабильной сборке, мы исполь�
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965, peripherals = true)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
     #[init]
     fn init(cx: init::Context) -&gt; init::LateResources {
         static mut X: u32 = 0;
@@ -275,11 +280,12 @@ init```
 #![no_main]
 #![no_std]
 
-use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
 #[rtic::app(device = lm3s6965)]
 mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
         hprintln!(&quot;init&quot;).unwrap();
