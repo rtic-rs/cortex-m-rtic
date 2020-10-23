@@ -108,6 +108,14 @@
 <span id="107">107</span>
 <span id="108">108</span>
 <span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -160,7 +168,8 @@
             ));
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Ownership</span>::<span class="ident">Contended</span> { <span class="ident">ceiling</span> }) <span class="op">=</span> <span class="ident">analysis</span>.<span class="ident">ownerships</span>.<span class="ident">get</span>(<span class="ident">name</span>) {
+        <span class="kw">let</span> <span class="ident">r_prop</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">res</span>.<span class="ident">properties</span>;
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">r_prop</span>.<span class="ident">task_local</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">r_prop</span>.<span class="ident">lock_free</span> {
             <span class="ident">mod_resources</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
                 #(#<span class="ident">cfgs</span>)<span class="op">*</span>
@@ -194,13 +203,20 @@
                 )
             };
 
+            <span class="kw">let</span> <span class="ident">ceiling</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">analysis</span>.<span class="ident">ownerships</span>.<span class="ident">get</span>(<span class="ident">name</span>) {
+                <span class="prelude-val">Some</span>(<span class="ident">Ownership</span>::<span class="ident">Owned</span> { <span class="ident">priority</span> }) <span class="op">=&gt;</span> <span class="kw-2">*</span><span class="ident">priority</span>,
+                <span class="prelude-val">Some</span>(<span class="ident">Ownership</span>::<span class="ident">CoOwned</span> { <span class="ident">priority</span> }) <span class="op">=&gt;</span> <span class="kw-2">*</span><span class="ident">priority</span>,
+                <span class="prelude-val">Some</span>(<span class="ident">Ownership</span>::<span class="ident">Contended</span> { <span class="ident">ceiling</span> }) <span class="op">=&gt;</span> <span class="kw-2">*</span><span class="ident">ceiling</span>,
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="number">0</span>,
+            };
+
             <span class="ident">mod_app</span>.<span class="ident">push</span>(<span class="ident">util</span>::<span class="ident">impl_mutex</span>(
                 <span class="ident">extra</span>,
                 <span class="ident">cfgs</span>,
                 <span class="bool-val">true</span>,
                 <span class="ident">name</span>,
                 <span class="macro">quote</span><span class="macro">!</span>(#<span class="ident">ty</span>),
-                <span class="kw-2">*</span><span class="ident">ceiling</span>,
+                <span class="ident">ceiling</span>,
                 <span class="ident">ptr</span>,
             ));
         }

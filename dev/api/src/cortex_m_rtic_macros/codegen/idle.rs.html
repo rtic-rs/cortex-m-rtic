@@ -94,7 +94,6 @@
 <span id="93">93</span>
 <span id="94">94</span>
 <span id="95">95</span>
-<span id="96">96</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -135,8 +134,7 @@
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">idle</span>.<span class="ident">name</span>;
 
         <span class="kw">if</span> <span class="op">!</span><span class="ident">idle</span>.<span class="ident">args</span>.<span class="ident">resources</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">let</span> (<span class="ident">item</span>, <span class="ident">constructor</span>) <span class="op">=</span>
-                <span class="ident">resources_struct</span>::<span class="ident">codegen</span>(<span class="ident">Context</span>::<span class="ident">Idle</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">needs_lt</span>, <span class="ident">app</span>, <span class="ident">analysis</span>);
+            <span class="kw">let</span> (<span class="ident">item</span>, <span class="ident">constructor</span>) <span class="op">=</span> <span class="ident">resources_struct</span>::<span class="ident">codegen</span>(<span class="ident">Context</span>::<span class="ident">Idle</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">needs_lt</span>, <span class="ident">app</span>);
 
             <span class="ident">root_idle</span>.<span class="ident">push</span>(<span class="ident">item</span>);
             <span class="ident">mod_app</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">constructor</span>);

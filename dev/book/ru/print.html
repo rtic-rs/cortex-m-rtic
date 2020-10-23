@@ -496,19 +496,24 @@ mod app {
 
     // `shared` can be accessed from this context
     #[task(binds = UART0, resources = [shared])]
-    fn uart0(cx: uart0::Context) {
-        let shared: &amp;mut u32 = cx.resources.shared;
-        *shared += 1;
+    fn uart0(mut cx: uart0::Context) {
+        let shared = cx.resources.shared.lock(|shared| {
+            *shared += 1;
+            *shared
+        });
 
         hprintln!(&quot;UART0: shared = {}&quot;, shared).unwrap();
     }
 
     // `shared` can be accessed from this context
     #[task(binds = UART1, resources = [shared])]
-    fn uart1(cx: uart1::Context) {
-        *cx.resources.shared += 1;
+    fn uart1(mut cx: uart1::Context) {
+        let shared = cx.resources.shared.lock(|shared| {
+            *shared += 1;
+            *shared
+        });
 
-        hprintln!(&quot;UART1: shared = {}&quot;, cx.resources.shared).unwrap();
+        hprintln!(&quot;UART1: shared = {}&quot;, shared).unwrap();
     }
 }
 <span class="boring">}
@@ -600,11 +605,15 @@ mod app {
     }
 
     #[task(binds = GPIOB, priority = 2, resources = [shared])]
-    fn gpiob(c: gpiob::Context) {
-        // the higher priority task does *not* need a critical section
-        *c.resources.shared += 1;
+    fn gpiob(mut c: gpiob::Context) {
+        // the higher priority task does still need a critical section
+        let shared = c.resources.shared.lock(|shared| {
+            *shared += 1;
 
-        hprintln!(&quot;D - shared = {}&quot;, *c.resources.shared).unwrap();
+            *shared
+        });
+
+        hprintln!(&quot;D - shared = {}&quot;, shared).unwrap();
     }
 
     #[task(binds = GPIOC, priority = 3)]
@@ -680,9 +689,9 @@ mod app {
     }
 
     #[idle(resources = [c])]
-    fn idle(c: idle::Context) -&gt; ! {
+    fn idle(mut c: idle::Context) -&gt; ! {
         loop {
-            if let Some(byte) = c.resources.c.dequeue() {
+            if let Some(byte) = c.resources.c.lock(|c| c.dequeue()) {
                 hprintln!(&quot;received message: {}&quot;, byte).unwrap();
 
                 debug::exit(debug::EXIT_SUCCESS);
@@ -693,8 +702,8 @@ mod app {
     }
 
     #[task(binds = UART0, resources = [p])]
-    fn uart0(c: uart0::Context) {
-        c.resources.p.enqueue(42).unwrap();
+    fn uart0(mut c: uart0::Context) {
+        c.resources.p.lock(|p| p.enqueue(42).unwrap());
     }
 }
 </code></pre>
@@ -753,9 +762,9 @@ mod app {
     }
 
     #[idle(resources = [c])]
-    fn idle(c: idle::Context) -&gt; ! {
+    fn idle(mut c: idle::Context) -&gt; ! {
         loop {
-            if let Some(byte) = c.resources.c.dequeue() {
+            if let Some(byte) = c.resources.c.lock(|c| c.dequeue()) {
                 hprintln!(&quot;received message: {}&quot;, byte).unwrap();
 
                 debug::exit(debug::EXIT_SUCCESS);
@@ -766,10 +775,10 @@ mod app {
     }
 
     #[task(binds = UART0, resources = [p])]
-    fn uart0(c: uart0::Context) {
+    fn uart0(mut c: uart0::Context) {
         static mut KALLE: u32 = 0;
         *KALLE += 1;
-        c.resources.p.enqueue(42).unwrap();
+        c.resources.p.lock(|p| p.enqueue(42).unwrap());
     }
 }
 </code></pre>
@@ -1316,7 +1325,7 @@ mod app {
     #[task(priority = 2, resources = [shared])]
     fn foo(cx: foo::Context) {
         let _: cyccnt::Instant = cx.scheduled;
-        let _: &amp;mut u32 = cx.resources.shared;
+        let _: resources::shared = cx.resources.shared;
         let _: foo::Resources = cx.resources;
     }
 
@@ -1486,7 +1495,6 @@ use rtic::Mutex;
 mod app {
     use cortex_m_semihosting::{debug, hprintln};
     use lm3s6965::Interrupt;
-    use rtic::Exclusive;
 
     #[resources]
     struct Resources {
@@ -1522,11 +1530,8 @@ mod app {
 
         hprintln!(&quot;UART1(STATE = {})&quot;, *STATE).unwrap();
 
-        // just to show that `shared` can be accessed directly
-        *c.resources.shared += 0;
-
-        // second argument has type `Exclusive&lt;u32&gt;`
-        super::advance(STATE, Exclusive(c.resources.shared));
+        // second argument has type `resources::shared`
+        super::advance(STATE, c.resources.shared);
     }
 }
 

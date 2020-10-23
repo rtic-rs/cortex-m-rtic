@@ -663,19 +663,24 @@ mod app {
 
     // `shared` can be accessed from this context
     #[task(binds = UART0, resources = [shared])]
-    fn uart0(cx: uart0::Context) {
-        let shared: &amp;mut u32 = cx.resources.shared;
-        *shared += 1;
+    fn uart0(mut cx: uart0::Context) {
+        let shared = cx.resources.shared.lock(|shared| {
+            *shared += 1;
+            *shared
+        });
 
         hprintln!(&quot;UART0: shared = {}&quot;, shared).unwrap();
     }
 
     // `shared` can be accessed from this context
     #[task(binds = UART1, resources = [shared])]
-    fn uart1(cx: uart1::Context) {
-        *cx.resources.shared += 1;
+    fn uart1(mut cx: uart1::Context) {
+        let shared = cx.resources.shared.lock(|shared| {
+            *shared += 1;
+            *shared
+        });
 
-        hprintln!(&quot;UART1: shared = {}&quot;, cx.resources.shared).unwrap();
+        hprintln!(&quot;UART1: shared = {}&quot;, shared).unwrap();
     }
 }
 <span class="boring">}
@@ -764,11 +769,15 @@ mod app {
     }
 
     #[task(binds = GPIOB, priority = 2, resources = [shared])]
-    fn gpiob(c: gpiob::Context) {
-        // the higher priority task does *not* need a critical section
-        *c.resources.shared += 1;
+    fn gpiob(mut c: gpiob::Context) {
+        // the higher priority task does still need a critical section
+        let shared = c.resources.shared.lock(|shared| {
+            *shared += 1;
 
-        hprintln!(&quot;D - shared = {}&quot;, *c.resources.shared).unwrap();
+            *shared
+        });
+
+        hprintln!(&quot;D - shared = {}&quot;, shared).unwrap();
     }
 
     #[task(binds = GPIOC, priority = 3)]
@@ -837,9 +846,9 @@ mod app {
     }
 
     #[idle(resources = [c])]
-    fn idle(c: idle::Context) -&gt; ! {
+    fn idle(mut c: idle::Context) -&gt; ! {
         loop {
-            if let Some(byte) = c.resources.c.dequeue() {
+            if let Some(byte) = c.resources.c.lock(|c| c.dequeue()) {
                 hprintln!(&quot;received message: {}&quot;, byte).unwrap();
 
                 debug::exit(debug::EXIT_SUCCESS);
@@ -850,8 +859,8 @@ mod app {
     }
 
     #[task(binds = UART0, resources = [p])]
-    fn uart0(c: uart0::Context) {
-        c.resources.p.enqueue(42).unwrap();
+    fn uart0(mut c: uart0::Context) {
+        c.resources.p.lock(|p| p.enqueue(42).unwrap());
     }
 }
 <span class="boring">}
@@ -1524,7 +1533,7 @@ mod app {
     #[task(priority = 2, resources = [shared])]
     fn foo(cx: foo::Context) {
         let _: cyccnt::Instant = cx.scheduled;
-        let _: &amp;mut u32 = cx.resources.shared;
+        let _: resources::shared = cx.resources.shared;
         let _: foo::Resources = cx.resources;
     }
 
@@ -1568,51 +1577,7 @@ the <code>Send</code> trait.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>//! `examples/shared-with-init.rs`
-
-#![deny(unsafe_code)]
-#![deny(warnings)]
-#![no_main]
-#![no_std]
-
-use panic_halt as _;
-use rtic::app;
-
-pub struct MustBeSend;
-
-#[app(device = lm3s6965)]
-mod app {
-    use super::MustBeSend;
-    use cortex_m_semihosting::debug;
-    use lm3s6965::Interrupt;
-
-    #[resources]
-    struct Resources {
-        #[init(None)]
-        shared: Option&lt;MustBeSend&gt;,
-    }
-
-    #[init(resources = [shared])]
-    fn init(c: init::Context) -&gt; init::LateResources {
-        // this `message` will be sent to task `UART0`
-        let message = MustBeSend;
-        *c.resources.shared = Some(message);
-
-        rtic::pend(Interrupt::UART0);
-
-        init::LateResources {}
-    }
-
-    #[task(binds = UART0, resources = [shared])]
-    fn uart0(c: uart0::Context) {
-        if let Some(message) = c.resources.shared.take() {
-            // `message` has been received
-            drop(message);
-
-            debug::exit(debug::EXIT_SUCCESS);
-        }
-    }
-}
+</span>{{#include ../../../../examples/shared-with-init.rs}}
 <span class="boring">}
 </span></code></pre></pre>
 <h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
@@ -1778,7 +1743,6 @@ use rtic::Mutex;
 mod app {
     use cortex_m_semihosting::{debug, hprintln};
     use lm3s6965::Interrupt;
-    use rtic::Exclusive;
 
     #[resources]
     struct Resources {
@@ -1814,11 +1778,8 @@ mod app {
 
         hprintln!(&quot;UART1(STATE = {})&quot;, *STATE).unwrap();
 
-        // just to show that `shared` can be accessed directly
-        *c.resources.shared += 0;
-
-        // second argument has type `Exclusive&lt;u32&gt;`
-        super::advance(STATE, Exclusive(c.resources.shared));
+        // second argument has type `resources::shared`
+        super::advance(STATE, c.resources.shared);
     }
 }
 
@@ -1896,12 +1857,12 @@ mod app {
     }
 
     #[task(capacity = 2, resources = [count])]
-    fn foo(_cx: foo::Context) {
+    fn foo(mut _cx: foo::Context) {
         #[cfg(debug_assertions)]
         {
-            *_cx.resources.count += 1;
+            _cx.resources.count.lock(|count| *count += 1);
 
-            log::spawn(*_cx.resources.count).unwrap();
+            log::spawn(_cx.resources.count.lock(|count| *count)).unwrap();
         }
 
         // this wouldn't compile in `release` mode
@@ -2187,7 +2148,7 @@ mod app {
     }
 
     // Direct destructure
-    #[task(binds = UART0, resources = [a, b, c])]
+    #[task(binds = UART0, resources = [&amp;a, &amp;b, &amp;c])]
     fn uart0(cx: uart0::Context) {
         let a = cx.resources.a;
         let b = cx.resources.b;
@@ -2197,7 +2158,7 @@ mod app {
     }
 
     // De-structure-ing syntax
-    #[task(binds = UART1, resources = [a, b, c])]
+    #[task(binds = UART1, resources = [&amp;a, &amp;b, &amp;c])]
     fn uart1(cx: uart1::Context) {
         let uart1::Resources { a, b, c } = cx.resources;
 
