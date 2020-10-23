@@ -218,7 +218,7 @@ counter functionality has not been implemented in <code>qemu-system-arm</code>.<
 use panic_halt as _;
 
 // NOTE: does NOT work on QEMU!
-#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT, dispatchers = [SSI0])]
 mod app {
     use cortex_m::peripheral::DWT;
     use cortex_m_semihosting::hprintln;
@@ -256,13 +256,6 @@ mod app {
     fn bar(_: bar::Context) {
         hprintln!(&quot;bar  @ {:?}&quot;, Instant::now()).unwrap();
     }
-
-    // RTIC requires that unused interrupts are declared in an extern block when
-    // using software tasks; these free interrupts will be used to dispatch the
-    // software tasks.
-    extern &quot;C&quot; {
-        fn SSI0();
-    }
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -294,7 +287,7 @@ used to implement periodic tasks as shown in the example below.</p>
 use panic_semihosting as _;
 
 // NOTE: does NOT work on QEMU!
-#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT, dispatchers = [SSI0])]
 mod app {
     use cortex_m_semihosting::hprintln;
     use rtic::cyccnt::{Instant, U32Ext};
@@ -316,13 +309,6 @@ mod app {
         hprintln!(&quot;foo(scheduled = {:?}, now = {:?})&quot;, cx.scheduled, now).unwrap();
 
         foo::schedule(cx.scheduled + PERIOD.cycles()).unwrap();
-    }
-
-    // RTIC requires that unused interrupts are declared in an extern block when
-    // using software tasks; these free interrupts will be used to dispatch the
-    // software tasks.
-    extern &quot;C&quot; {
-        fn SSI0();
     }
 }
 <span class="boring">}
@@ -364,7 +350,7 @@ from it will use <code>Instant::now()</code> as their baseline time.</p>
 use panic_semihosting as _;
 
 // NOTE: does NOT properly work on QEMU
-#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT, dispatchers = [SSI0])]
 mod app {
     use cortex_m_semihosting::{debug, hprintln};
     use lm3s6965::Interrupt;
@@ -402,13 +388,6 @@ mod app {
 
         // `foo` inherits the baseline of `UART0`: its `start` time
         foo::spawn().unwrap();
-    }
-
-    // RTIC requires that unused interrupts are declared in an extern block when
-    // using software tasks; these free interrupts will be used to dispatch the
-    // software tasks.
-    extern &quot;C&quot; {
-        fn SSI0();
     }
 }
 <span class="boring">}

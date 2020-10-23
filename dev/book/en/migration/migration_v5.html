@@ -171,6 +171,36 @@
 <p>This section describes how to upgrade from v0.5.x to v0.6.0 of the RTIC framework.</p>
 <h2><a class="header" href="#cargotoml---version-bump" id="cargotoml---version-bump"><code>Cargo.toml</code> - version bump</a></h2>
 <p>Change the version of <code>cortex-m-rtic</code> to <code>&quot;0.6.0&quot;</code>.</p>
+<h2><a class="header" href="#move-dispatchers-from-extern-c-to-app-arguments" id="move-dispatchers-from-extern-c-to-app-arguments">Move Dispatchers from <code>extern &quot;C&quot;</code> to app arguments.</a></h2>
+<p>Change</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */)]
+const APP: () = {
+    [code here]
+
+    // RTIC requires that unused interrupts are declared in an extern block when
+    // using software tasks; these free interrupts will be used to dispatch the
+    // software tasks.
+    extern &quot;C&quot; {
+        fn SSI0();
+        fn QEI0();
+    }
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>into</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[rtic::app(/* .. */, dispatchers = [SSI0, QEI0])]
+mod app {
+  [code here]
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This works also for ram functions, see examples/ramfunc.rs</p>
 <h2><a class="header" href="#module-instead-of-const" id="module-instead-of-const">Module instead of Const</a></h2>
 <p>With the support of attributes on modules the <code>const APP</code> workaround is not needed.</p>
 <p>Change</p>

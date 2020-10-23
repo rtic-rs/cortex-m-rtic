@@ -304,6 +304,10 @@
 <span id="303">303</span>
 <span id="304">304</span>
 <span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -330,7 +334,7 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
     <span class="kw">match</span> <span class="ident">ctxt</span> {
         <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=&gt;</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">monotonic</span> {
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                     <span class="doccomment">/// System start time = `Instant(0 /* cycles */)`</span>
                     <span class="kw">pub</span> <span class="ident">start</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>
@@ -350,7 +354,7 @@
             }
 
             <span class="kw">if</span> <span class="ident">extra</span>.<span class="ident">peripherals</span> {
-                <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">device</span>;
+                <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">device</span>;
 
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                     <span class="doccomment">/// Device peripherals</span>
@@ -374,7 +378,7 @@
         <span class="ident">Context</span>::<span class="ident">Idle</span> <span class="op">=&gt;</span> {}
 
         <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(..) <span class="op">=&gt;</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">monotonic</span> {
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                     <span class="doccomment">/// Time at which this handler started executing</span>
                     <span class="kw">pub</span> <span class="ident">start</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>
@@ -387,7 +391,7 @@
         }
 
         <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(..) <span class="op">=&gt;</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">monotonic</span> {
                 <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
                     <span class="doccomment">/// The time at which this task was scheduled to run</span>
                     <span class="kw">pub</span> <span class="ident">scheduled</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>
@@ -469,7 +473,7 @@
     };
 
     <span class="kw">let</span> <span class="ident">instant</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">needs_instant</span> {
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>();
+        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>.<span class="ident">clone</span>().<span class="ident">expect</span>(<span class="string">&quot;RTIC-ICE: UNREACHABLE&quot;</span>);
 
         <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(, <span class="ident">instant</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>))
     } <span class="kw">else</span> {
@@ -512,9 +516,13 @@
         <span class="kw">let</span> <span class="ident">app_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">name</span>;
         <span class="kw">let</span> <span class="ident">app_path</span> <span class="op">=</span> <span class="macro">quote</span><span class="macro">!</span> {<span class="kw">crate</span>::#<span class="ident">app_name</span>};
 
-        <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">device</span>;
+        <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">device</span>;
         <span class="kw">let</span> <span class="ident">enum_</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">interrupt_ident</span>();
-        <span class="kw">let</span> <span class="ident">interrupt</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">analysis</span>.<span class="ident">interrupts</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">priority</span>);
+        <span class="kw">let</span> <span class="ident">interrupt</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">analysis</span>
+            .<span class="ident">interrupts</span>
+            .<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">priority</span>)
+            .<span class="ident">expect</span>(<span class="string">&quot;RTIC-ICE: interrupt identifer not found&quot;</span>)
+            .<span class="number">0</span>;
 
         <span class="comment">// Spawn caller</span>
         <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
@@ -547,7 +555,7 @@
         }));
 
         <span class="comment">// Schedule caller</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">monotonic</span> {
             <span class="kw">let</span> <span class="ident">instants</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">instants_ident</span>(<span class="ident">name</span>);
 
             <span class="kw">let</span> <span class="ident">tq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">tq_ident</span>();

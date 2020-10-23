@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/git/checkouts/rtic-syntax-f90a7db46f83a69f/9e3309b/src/ast.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ast.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rtic_syntax/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/git/checkouts/rtic-syntax-f90a7db46f83a69f/2887e24/src/ast.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ast.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rtic_syntax/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -319,13 +319,6 @@
 <span id="318">318</span>
 <span id="319">319</span>
 <span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Abstract Syntax Tree</span>
 
@@ -368,33 +361,35 @@
     <span class="doccomment">/// Software tasks: `#[task]`</span>
     <span class="kw">pub</span> <span class="ident">software_tasks</span>: <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">SoftwareTask</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// Interrupts used to dispatch software tasks</span>
-    <span class="kw">pub</span> <span class="ident">extern_interrupts</span>: <span class="ident">ExternInterrupts</span>,
-
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">_extensible</span>: (),
 }
 
 <span class="doccomment">/// Interrupts used to dispatch software tasks</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ExternInterrupts</span> <span class="op">=</span> <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">ExternInterrupt</span><span class="op">&gt;</span>;
 
+<span class="doccomment">/// Interrupt that could be used to dispatch software tasks</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExternInterrupt</span> {
+    <span class="doccomment">/// Attributes that will apply to this interrupt handler</span>
+    <span class="kw">pub</span> <span class="ident">attrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>,
+
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">_extensible</span>: (),
+}
+
 <span class="doccomment">/// The arguments of the `#[app]` attribute</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AppArgs</span> {
-    <span class="doccomment">/// Custom arguments</span>
-    <span class="kw">pub</span> <span class="ident">custom</span>: <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">CustomArg</span><span class="op">&gt;</span>,
-}
+    <span class="doccomment">/// Device</span>
+    <span class="kw">pub</span> <span class="ident">device</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
 
-<span class="doccomment">/// A custom argument</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CustomArg</span> {
-    <span class="doccomment">/// A boolean: `true` or `false`</span>
-    <span class="ident">Bool</span>(<span class="ident">bool</span>),
+    <span class="doccomment">/// Monotonic</span>
+    <span class="kw">pub</span> <span class="ident">monotonic</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// An unsuffixed, unsigned integer</span>
-    <span class="ident">UInt</span>(<span class="ident">String</span>),
+    <span class="doccomment">/// Peripherals</span>
+    <span class="kw">pub</span> <span class="ident">peripherals</span>: <span class="ident">bool</span>,
 
-    <span class="doccomment">/// An item path</span>
-    <span class="ident">Path</span>(<span class="ident">Path</span>),
+    <span class="doccomment">/// Interrupts used to dispatch software tasks</span>
+    <span class="kw">pub</span> <span class="ident">extern_interrupts</span>: <span class="ident">ExternInterrupts</span>,
 }
 
 <span class="doccomment">/// `init` function</span>
@@ -599,15 +594,6 @@
 
     <span class="doccomment">/// Resources that can be accessed from this context</span>
     <span class="kw">pub</span> <span class="ident">resources</span>: <span class="ident">Resources</span>,
-
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">_extensible</span>: (),
-}
-
-<span class="doccomment">/// Interrupt that could be used to dispatch software tasks</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExternInterrupt</span> {
-    <span class="doccomment">/// Attributes that will apply to this interrupt handler</span>
-    <span class="kw">pub</span> <span class="ident">attrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>,
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">_extensible</span>: (),
 }
