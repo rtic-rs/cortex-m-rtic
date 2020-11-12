@@ -169,14 +169,8 @@
                     <main>
                         <h1><a class="header" href="#tips--tricks" id="tips--tricks">Tips &amp; tricks</a></h1>
 <h2><a class="header" href="#generics" id="generics">Generics</a></h2>
-<p>Resources may appear in contexts as resource proxies or as unique references
-(<code>&amp;mut-</code>) depending on the priority of the task. Because the same resource may
-appear as <em>different</em> types in different contexts one cannot refactor a common
-operation that uses resources into a plain function; however, such refactor is
-possible using <em>generics</em>.</p>
-<p>All resource proxies implement the <code>rtic::Mutex</code> trait. On the other hand,
-unique references (<code>&amp;mut-</code>) do <em>not</em> implement this trait (due to limitations in
-the trait system) but one can wrap these references in the <a href="../../../api/rtic/struct.Exclusive.html"><code>rtic::Exclusive</code></a>
+<p>All resource proxies implement the <code>rtic::Mutex</code> trait.
+If a resource does not implement this, one can wrap it in the <a href="../../../api/rtic/struct.Exclusive.html"><code>rtic::Exclusive</code></a>
 newtype which does implement the <code>Mutex</code> trait. With the help of this newtype
 one can write a generic function that operates on generic resources and call it
 from different tasks to perform some operation on the same set of resources.
@@ -261,13 +255,12 @@ shared: 1 -&gt; 2
 UART1(STATE = 1)
 shared: 2 -&gt; 4
 </code></pre>
-<p>Using generics also lets you change the static priorities of tasks during
-development without having to rewrite a bunch code every time.</p>
 <h2><a class="header" href="#conditional-compilation" id="conditional-compilation">Conditional compilation</a></h2>
 <p>You can use conditional compilation (<code>#[cfg]</code>) on resources (the fields of
-<code>struct Resources</code>) and tasks (the <code>fn</code> items). The effect of using <code>#[cfg]</code>
-attributes is that the resource / task will <em>not</em> be available through the
-corresponding <code>Context</code> <code>struct</code> if the condition doesn't hold.</p>
+<code>#[resources] struct Resources</code>) and tasks (the <code>fn</code> items).
+The effect of using <code>#[cfg]</code> attributes is that the resource / task
+will <em>not</em> be available through the corresponding <code>Context</code> <code>struct</code>
+if the condition doesn't hold.</p>
 <p>The example below logs a message whenever the <code>foo</code> task is spawned, but only if
 the program has been compiled using the <code>dev</code> profile.</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -518,7 +511,7 @@ options:</p>
 file contains the expansion of the <code>#[rtic::app]</code> item (not your whole program!)
 of the <em>last built</em> (via <code>cargo build</code> or <code>cargo check</code>) RTIC application. The
 expanded code is not pretty printed by default so you'll want to run <code>rustfmt</code>
-over it before you read it.</p>
+on it before you read it.</p>
 <pre><code class="language-console">$ cargo build --example foo
 
 $ rustfmt target/rtic-expansion.rs
