@@ -901,6 +901,16 @@ mod app {
 UART1(key = 0xdeadbeef)
 UART0(key = 0xdeadbeef)
 </code></pre>
+<h2><a class="header" href="#lock-free-resource-access-of-mutable-resources" id="lock-free-resource-access-of-mutable-resources">Lock-free resource access of mutable resources</a></h2>
+<p>There exists two other options dealing with resources</p>
+<ul>
+<li><code>#[lock_free]</code>: there might be several tasks with the same priority
+accessing the resource without critical section. Since tasks with the
+same priority never can preempt another task on the same priority
+this is safe.</li>
+<li><code>#[task_local]</code>: there must be only one task using this resource,
+similar to a <code>static mut</code> task local resource, but (optionally) set-up by init.</li>
+</ul>
 <h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
 <p>In addition to hardware tasks, which are invoked by the hardware in response to
 hardware events, RTIC also supports <em>software</em> tasks which can be spawned by the
@@ -1560,9 +1570,45 @@ $ rm memory.x build.rs
 <li>Write your RTIC application.</li>
 </ol>
 <p>Here I'll use the <code>init</code> example from the <code>cortex-m-rtic</code> crate.</p>
-<pre><code class="language-console">$ curl \
-    -L https://github.com/rtic-rs/cortex-m-rtic/raw/v0.5.3/examples/init.rs \
-    &gt; src/main.rs
+<p>The examples are found in the <code>examples</code> folder, and the contents
+of <code>init.rs</code> is shown here:</p>
+<pre><code class="language-console">//! examples/init.rs
+
+#![deny(unsafe_code)]
+#![deny(warnings)]
+#![no_main]
+#![no_std]
+
+use panic_semihosting as _;
+
+#[rtic::app(device = lm3s6965, peripherals = true)]
+mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
+    #[init]
+    fn init(cx: init::Context) -&gt; init::LateResources {
+        static mut X: u32 = 0;
+
+        // Cortex-M peripherals
+        let _core: cortex_m::Peripherals = cx.core;
+
+        // Device specific peripherals
+        let _device: lm3s6965::Peripherals = cx.device;
+
+        // Safe access to local `static mut` variable
+        let _x: &amp;'static mut u32 = X;
+
+        // Access to the critical section token,
+        // to indicate that this is a critical seciton
+        let _cs_token: bare_metal::CriticalSection = cx.cs;
+
+        hprintln!(&quot;init&quot;).unwrap();
+
+        debug::exit(debug::EXIT_SUCCESS);
+
+        init::LateResources {}
+    }
+}
 </code></pre>
 <p>The <code>init</code> example uses the <code>lm3s6965</code> device. Remember to adjust the <code>device</code>
 argument in the app macro attribute to match the path of your PAC crate, if

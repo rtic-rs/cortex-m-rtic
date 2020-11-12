@@ -202,9 +202,45 @@ $ rm memory.x build.rs
 <li>Write your RTIC application.</li>
 </ol>
 <p>Here I'll use the <code>init</code> example from the <code>cortex-m-rtic</code> crate.</p>
-<pre><code class="language-console">$ curl \
-    -L https://github.com/rtic-rs/cortex-m-rtic/raw/v0.5.3/examples/init.rs \
-    &gt; src/main.rs
+<p>The examples are found in the <code>examples</code> folder, and the contents
+of <code>init.rs</code> is shown here:</p>
+<pre><code class="language-console">//! examples/init.rs
+
+#![deny(unsafe_code)]
+#![deny(warnings)]
+#![no_main]
+#![no_std]
+
+use panic_semihosting as _;
+
+#[rtic::app(device = lm3s6965, peripherals = true)]
+mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+
+    #[init]
+    fn init(cx: init::Context) -&gt; init::LateResources {
+        static mut X: u32 = 0;
+
+        // Cortex-M peripherals
+        let _core: cortex_m::Peripherals = cx.core;
+
+        // Device specific peripherals
+        let _device: lm3s6965::Peripherals = cx.device;
+
+        // Safe access to local `static mut` variable
+        let _x: &amp;'static mut u32 = X;
+
+        // Access to the critical section token,
+        // to indicate that this is a critical seciton
+        let _cs_token: bare_metal::CriticalSection = cx.cs;
+
+        hprintln!(&quot;init&quot;).unwrap();
+
+        debug::exit(debug::EXIT_SUCCESS);
+
+        init::LateResources {}
+    }
+}
 </code></pre>
 <p>The <code>init</code> example uses the <code>lm3s6965</code> device. Remember to adjust the <code>device</code>
 argument in the app macro attribute to match the path of your PAC crate, if

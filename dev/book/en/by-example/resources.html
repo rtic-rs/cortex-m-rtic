@@ -473,6 +473,16 @@ mod app {
 UART1(key = 0xdeadbeef)
 UART0(key = 0xdeadbeef)
 </code></pre>
+<h2><a class="header" href="#lock-free-resource-access-of-mutable-resources" id="lock-free-resource-access-of-mutable-resources">Lock-free resource access of mutable resources</a></h2>
+<p>There exists two other options dealing with resources</p>
+<ul>
+<li><code>#[lock_free]</code>: there might be several tasks with the same priority
+accessing the resource without critical section. Since tasks with the
+same priority never can preempt another task on the same priority
+this is safe.</li>
+<li><code>#[task_local]</code>: there must be only one task using this resource,
+similar to a <code>static mut</code> task local resource, but (optionally) set-up by init.</li>
+</ul>
 
                     </main>
 
