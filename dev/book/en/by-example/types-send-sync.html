@@ -240,32 +240,8 @@ tasks that run at <em>different</em> priorities. This occurs in a few places: in
 message passing, in shared resources and in the initialization of late
 resources.</p>
 <p>The <code>app</code> attribute will enforce that <code>Send</code> is implemented where required so
-you don't need to worry much about it. It's more important to know where you do
-<em>not</em> need the <code>Send</code> trait: on types that are transferred between tasks that
-run at the <em>same</em> priority. This occurs in two places: in message passing and in
-shared resources.</p>
-<p>The example below shows where a type that doesn't implement <code>Send</code> can be used.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>{{#include ../../../../examples/not-send.rs}}
-<span class="boring">}
-</span></code></pre></pre>
-<p>It's important to note that late initialization of resources is effectively a
-send operation where the initial value is sent from the background context,
-which has the lowest priority of <code>0</code>, to a task, which will run at a priority
-greater than or equal to <code>1</code>. Thus all late resources need to implement the
-<code>Send</code> trait, except for those exclusively accessed by <code>idle</code>, which runs at a
-priority of <code>0</code>.</p>
-<p>Sharing a resource with <code>init</code> can be used to implement late initialization, see
-example below. For that reason, resources shared with <code>init</code> must also implement
-the <code>Send</code> trait.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>{{#include ../../../../examples/shared-with-init.rs}}
-<span class="boring">}
-</span></code></pre></pre>
+you don't need to worry much about it. Currently all types that are passed need
+to be <code>Send</code> in RTIC, however this restriction might be relaxed in the future.</p>
 <h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
 <p>Similarly, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> is a marker trait for &quot;types for which it is safe to share
 references between threads&quot;, according to its definition in <code>core</code>. In the
