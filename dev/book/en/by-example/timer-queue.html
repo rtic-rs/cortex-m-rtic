@@ -189,9 +189,7 @@ operation must return an error, any error type.</p>
 on the built-in CYCle CouNTer (CYCCNT). Note that this is a 32-bit timer clocked
 at the frequency of the CPU and as such it is not suitable for tracking time
 spans in the order of seconds.</p>
-<p>To be able to schedule a software task from a context the name of the task must
-first appear in the <code>schedule</code> argument of the context attribute. When
-scheduling a task the (user-defined) <code>Instant</code> at which the task should be
+<p>When scheduling a task the (user-defined) <code>Instant</code> at which the task should be
 executed must be passed as the first argument of the <code>schedule</code> invocation.</p>
 <p>Additionally, the chosen <code>monotonic</code> timer must be configured and initialized
 during the <code>#[init]</code> phase. Note that this is <em>also</em> the case if you choose to
