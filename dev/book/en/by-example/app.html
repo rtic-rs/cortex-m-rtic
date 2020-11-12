@@ -203,11 +203,10 @@ to Cortex-M where the <code>bare_metal::CriticalSection</code> token is availabl
 And optionally, device specific peripherals through the <code>core</code> and <code>device</code> fields
 of <code>init::Context</code>.</p>
 <p><code>static mut</code> variables declared at the beginning of <code>init</code> will be transformed
-into <code>&amp;'static mut</code> references that are safe to access.</p>
+into <code>&amp;'static mut</code> references that are safe to access. Notice, this feature may be deprecated in next release, see <code>task_local</code> resources.</p>
 <p>The example below shows the types of the <code>core</code>, <code>device</code> and <code>cs</code> fields, and
 showcases safe access to a <code>static mut</code> variable. The <code>device</code> field is only
-available when the <code>peripherals</code> argument is set to <code>true</code> (it defaults to
-<code>false</code>).</p>
+available when the <code>peripherals</code> argument is set to <code>true</code> (default). In the rare case you want to implement an ultra-slim application you can explicitly set <code>peripherals</code> to <code>false</code>.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -265,10 +264,10 @@ so it must run forever.</p>
 <p>When no <code>idle</code> function is declared, the runtime sets the <a href="https://developer.arm.com/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a> bit and
 then sends the microcontroller to sleep after running <code>init</code>.</p>
 <p>Like in <code>init</code>, <code>static mut</code> variables will be transformed into <code>&amp;'static mut</code>
-references that are safe to access.</p>
+references that are safe to access. Notice, this feature may be deprecated in the next release, see <code>task_local</code> resources.</p>
 <p>The example below shows that <code>idle</code> runs after <code>init</code>.</p>
-<p><strong>Note:</strong> The <code>loop {}</code> in idle cannot be empty as this will crash the microcontroller due to a bug
-in LLVM which miss-optimizes empty loops to a <code>UDF</code> instruction in release mode.</p>
+<p><strong>Note:</strong> The <code>loop {}</code> in idle cannot be empty as this will crash the microcontroller due to
+LLVM compiling empty loops to an <code>UDF</code> instruction in release mode. To avoid UB, the loop needs to imply a &quot;side-effect&quot; by inserting an assembly instruction (e.g., <code>WFI</code>) or a <code>continue</code>.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -464,9 +463,9 @@ GPIOA - start
 GPIOA - end
 </code></pre>
 <p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
-is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of
-task, <code>gpiob</code> is prioritized over <code>gpioa</code> due to its higher priority. <code>gpioa</code>
-is resumed only after <code>gpiob</code> terminates.</p>
+is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> returns, the execution of
+task <code>gpiob</code> is prioritized over <code>gpioa</code> due to its higher priority. <code>gpioa</code>
+is resumed only after <code>gpiob</code> returns.</p>
 <p>One more note about priorities: choosing a priority higher than what the device
 supports (that is <code>1 &lt;&lt; NVIC_PRIO_BITS</code>) will result in a compile error. Due to
 limitations in the language, the error message is currently far from helpful: it
