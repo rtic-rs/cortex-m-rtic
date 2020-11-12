@@ -495,6 +495,7 @@ mod app {
     }
 
     // `shared` can be accessed from this context
+    // defaults to priority 1
     #[task(binds = UART0, resources = [shared])]
     fn uart0(mut cx: uart0::Context) {
         let shared = cx.resources.shared.lock(|shared| {
@@ -506,7 +507,8 @@ mod app {
     }
 
     // `shared` can be accessed from this context
-    #[task(binds = UART1, resources = [shared])]
+    // explicitly set to priority 2
+    #[task(binds = UART1, resources = [shared], priority = 2)]
     fn uart1(mut cx: uart1::Context) {
         let shared = cx.resources.shared.lock(|shared| {
             *shared += 1;
@@ -519,8 +521,8 @@ mod app {
 <span class="boring">}
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example resource
-UART0: shared = 1
-UART1: shared = 2
+UART1: shared = 1
+UART0: shared = 2
 </code></pre>
 <h2><a class="header" href="#Приоритеты" id="Приоритеты">Приоритеты</a></h2>
 <p>Приоритет каждого прерывания можно определить в атрибутах <code>interrupt</code> и <code>exception</code>.

@@ -185,8 +185,7 @@ intends to access in its corresponding metadata attribute using the <code>resour
 argument. This argument takes a list of resource names as its value. The listed
 resources are made available to the context under the <code>resources</code> field of the
 <code>Context</code> structure.</p>
-<p>The example application shown below contains two interrupt handlers that share
-access to a resource named <code>shared</code>.</p>
+<p>The example application shown below contains two interrupt handlers that share access to a resource named <code>shared</code>.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -233,6 +232,7 @@ mod app {
     }
 
     // `shared` can be accessed from this context
+    // defaults to priority 1
     #[task(binds = UART0, resources = [shared])]
     fn uart0(mut cx: uart0::Context) {
         let shared = cx.resources.shared.lock(|shared| {
@@ -244,7 +244,8 @@ mod app {
     }
 
     // `shared` can be accessed from this context
-    #[task(binds = UART1, resources = [shared])]
+    // explicitly set to priority 2
+    #[task(binds = UART1, resources = [shared], priority = 2)]
     fn uart1(mut cx: uart1::Context) {
         let shared = cx.resources.shared.lock(|shared| {
             *shared += 1;
@@ -257,31 +258,17 @@ mod app {
 <span class="boring">}
 </span></code></pre></pre>
 <pre><code class="language-console">$ cargo run --example resource
-UART0: shared = 1
-UART1: shared = 2
+UART1: shared = 1
+UART0: shared = 2
 </code></pre>
-<p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
-so results in a compile error.</p>
+<p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do so results in a compile error.</p>
 <h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
-<p>In the presence of preemption critical sections are required to mutate shared
-data in a data race free manner. As the framework has complete knowledge over
-the priorities of tasks and which tasks can access which resources it enforces
-that critical sections are used where required for memory safety.</p>
-<p>Where a critical section is required the framework hands out a resource proxy
-instead of a reference. This resource proxy is a structure that implements the
-<a href="../../../api/rtic/trait.Mutex.html"><code>Mutex</code></a> trait. The only method on this trait, <a href="../../../api/rtic/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure
-argument in a critical section.</p>
-<p>The critical section created by the <code>lock</code> API is based on dynamic priorities:
-it temporarily raises the dynamic priority of the context to a <em>ceiling</em>
-priority that prevents other tasks from preempting the critical section. This
-synchronization protocol is known as the <a href="https://en.wikipedia.org/wiki/Priority_ceiling_protocol">Immediate Ceiling Priority Protocol
-(ICPP)</a>.</p>
-<p>In the example below we have three interrupt handlers with priorities ranging
-from one to three. The two handlers with the lower priorities contend for the
-<code>shared</code> resource. The lowest priority handler needs to <code>lock</code> the
-<code>shared</code> resource to access its data, whereas the mid priority handler can
-directly access its data. The highest priority handler, which cannot access
-the <code>shared</code> resource, is free to preempt the critical section created by the
+<p>Critical sections are required to access shared mutable data in a data race-free manner.</p>
+<p>The <code>resources</code> field of the passed <code>Context</code> implements the <a href="../../../api/rtic/trait.Mutex.html"><code>Mutex</code></a> trait for each shared resource accessible to the task.</p>
+<p>The only method on this trait, <a href="../../../api/rtic/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure argument in a critical section.</p>
+<p>The critical section created by the <code>lock</code> API is based on dynamic priorities: it temporarily raises the dynamic priority of the context to a <em>ceiling</em> priority that prevents other tasks from preempting the critical section. This synchronization protocol is known as the <a href="https://en.wikipedia.org/wiki/Priority_ceiling_protocol">Immediate Ceiling Priority Protocol
+(ICPP)</a>, and complies with <a href="https://en.wikipedia.org/wiki/Stack_Resource_Policy">Stack Resource Policy(SRP)</a> based scheduling of RTIC.</p>
+<p>In the example below we have three interrupt handlers with priorities ranging from one to three. The two handlers with the lower priorities contend for the <code>shared</code> resource and need to lock the resource for accessing the data. The highest priority handler, which do nat access the <code>shared</code> resource, is free to preempt the critical section created by the
 lowest priority handler.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -366,17 +353,9 @@ D - shared = 2
 E
 </code></pre>
 <h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
-<p>Late resources are resources that are not given an initial value at compile time
-using the <code>#[init]</code> attribute but instead are initialized at runtime using the
-<code>init::LateResources</code> values returned by the <code>init</code> function.</p>
-<p>Late resources are useful for <em>moving</em> (as in transferring the ownership of)
-peripherals initialized in <code>init</code> into interrupt handlers.</p>
-<p>The example below uses late resources to establish a lockless, one-way channel
-between the <code>UART0</code> interrupt handler and the <code>idle</code> task. A single producer
-single consumer <a href="../../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into
-consumer and producer end points in <code>init</code> and then each end point is stored
-in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns
-the consumer resource.</p>
+<p>Late resources are resources that are not given an initial value at compile time using the <code>#[init]</code> attribute but instead are initialized at runtime using the <code>init::LateResources</code> values returned by the <code>init</code> function.</p>
+<p>Late resources are useful e.g., to <em>move</em> (as in transferring the ownership of) peripherals initialized in <code>init</code> into tasks.</p>
+<p>The example below uses late resources to establish a lockless, one-way channel between the <code>UART0</code> interrupt handler and the <code>idle</code> task. A single producer single consumer <a href="../../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into consumer and producer end points in <code>init</code> and then each end point is stored in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns the consumer resource.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -440,24 +419,11 @@ mod app {
 received message: 42
 </code></pre>
 <h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
-<p>By default the framework assumes that all tasks require exclusive access
-(<code>&amp;mut-</code>) to resources but it is possible to specify that a task only requires
-shared access (<code>&amp;-</code>) to a resource using the <code>&amp;resource_name</code> syntax in the
-<code>resources</code> list.</p>
-<p>The advantage of specifying shared access (<code>&amp;-</code>) to a resource is that no locks
-are required to access the resource even if the resource is contended by several
-tasks running at different priorities. The downside is that the task only gets a
-shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform
-on it, but where a shared reference is enough this approach reduces the number
-of required locks. In addition to simple immutable data, this shared access can
-be useful where the resource type safely implements interior mutability, with
+<p>By default the framework assumes that all tasks require exclusive access (<code>&amp;mut-</code>) to resources but it is possible to specify that a task only requires shared access (<code>&amp;-</code>) to a resource using the <code>&amp;resource_name</code> syntax in the <code>resources</code> list.</p>
+<p>The advantage of specifying shared access (<code>&amp;-</code>) to a resource is that no locks are required to access the resource even if the resource is contended by several tasks running at different priorities. The downside is that the task only gets a shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform on it, but where a shared reference is enough this approach reduces the number of required locks. In addition to simple immutable data, this shared access can be useful where the resource type safely implements interior mutability, with
 appropriate locking or atomic operations of its own.</p>
-<p>Note that in this release of RTIC it is not possible to request both exclusive
-access (<code>&amp;mut-</code>) and shared access (<code>&amp;-</code>) to the <em>same</em> resource from different
-tasks. Attempting to do so will result in a compile error.</p>
-<p>In the example below a key (e.g. a cryptographic key) is loaded (or created) at
-runtime and then used from two tasks that run at different priorities without
-any kind of lock.</p>
+<p>Note that in this release of RTIC it is not possible to request both exclusive access (<code>&amp;mut-</code>) and shared access (<code>&amp;-</code>) to the <em>same</em> resource from different tasks. Attempting to do so will result in a compile error.</p>
+<p>In the example below a key (e.g. a cryptographic key) is loaded (or created) at runtime and then used from two tasks that run at different priorities without any kind of lock.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
