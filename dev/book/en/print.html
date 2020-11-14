@@ -781,6 +781,91 @@ C
 D - shared = 2
 E
 </code></pre>
+<h2><a class="header" href="#multi-lock" id="multi-lock">Multi-lock</a></h2>
+<p>As an extension to <code>lock</code>, and to reduce rightward drift, locks can be taken as tuples. The following examples shows this in use:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! examples/mutlilock.rs
+//!
+//! The multi-lock feature example.
+
+#![deny(unsafe_code)]
+#![deny(warnings)]
+#![no_main]
+#![no_std]
+
+use panic_semihosting as _;
+
+#[rtic::app(device = lm3s6965)]
+mod app {
+    use cortex_m_semihosting::{debug, hprintln};
+    use lm3s6965::Interrupt;
+
+    #[resources]
+    struct Resources {
+        #[init(0)]
+        shared1: u32,
+        #[init(0)]
+        shared2: u32,
+        #[init(0)]
+        shared3: u32,
+    }
+
+    #[init]
+    fn init(_: init::Context) -&gt; init::LateResources {
+        rtic::pend(Interrupt::GPIOA);
+
+        init::LateResources {}
+    }
+
+    // when omitted priority is assumed to be `1`
+    #[task(binds = GPIOA, resources = [shared1, shared2, shared3])]
+    fn locks(c: locks::Context) {
+        let mut s1 = c.resources.shared1;
+        let mut s2 = c.resources.shared2;
+        let mut s3 = c.resources.shared3;
+
+        hprintln!(&quot;Multiple single locks&quot;).unwrap();
+        s1.lock(|s1| {
+            s2.lock(|s2| {
+                s3.lock(|s3| {
+                    *s1 += 1;
+                    *s2 += 1;
+                    *s3 += 1;
+
+                    hprintln!(
+                        &quot;Multiple single locks, s1: {}, s2: {}, s3: {}&quot;,
+                        *s1,
+                        *s2,
+                        *s3
+                    )
+                    .unwrap();
+                })
+            })
+        });
+
+        hprintln!(&quot;Multilock!&quot;).unwrap();
+
+        (s1, s2, s3).lock(|s1, s2, s3| {
+            *s1 += 1;
+            *s2 += 1;
+            *s3 += 1;
+
+            hprintln!(
+                &quot;Multiple single locks, s1: {}, s2: {}, s3: {}&quot;,
+                *s1,
+                *s2,
+                *s3
+            )
+            .unwrap();
+        });
+
+        debug::exit(debug::EXIT_SUCCESS);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
 <p>Late resources are resources that are not given an initial value at compile time using the <code>#[init]</code> attribute but instead are initialized at runtime using the <code>init::LateResources</code> values returned by the <code>init</code> function.</p>
 <p>Late resources are useful e.g., to <em>move</em> (as in transferring the ownership of) peripherals initialized in <code>init</code> into tasks.</p>

@@ -210,7 +210,7 @@
 };
 <span class="kw">use</span> <span class="ident">cortex_m_rt</span> <span class="kw">as</span> <span class="kw">_</span>; <span class="comment">// vector table</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_rtic_macros</span>::<span class="ident">app</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rtic_core</span>::{<span class="ident">Exclusive</span>, <span class="ident">Mutex</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rtic_core</span>::{<span class="ident">prelude</span> <span class="kw">as</span> <span class="ident">mutex_prelude</span>, <span class="ident">Exclusive</span>, <span class="ident">Mutex</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv7m</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">cyccnt</span>;

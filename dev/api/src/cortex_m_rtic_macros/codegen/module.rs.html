@@ -308,6 +308,8 @@
 <span id="307">307</span>
 <span id="308">308</span>
 <span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -530,6 +532,7 @@
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn</span>(#(#<span class="ident">args</span>,)<span class="kw-2">*</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), #<span class="ident">ty</span><span class="op">&gt;</span> {
             <span class="comment">// #let_instant // do we need it?</span>
             <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">Mutex</span> <span class="kw">as</span> <span class="kw">_</span>;
+            <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">mutex_prelude</span>::<span class="kw-2">*</span>;
 
             <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> #<span class="ident">tupled</span>;
 
@@ -569,6 +572,7 @@
             ) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), #<span class="ident">ty</span><span class="op">&gt;</span> {
                 <span class="kw">unsafe</span> {
                     <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">Mutex</span> <span class="kw">as</span> <span class="kw">_</span>;
+                    <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">mutex_prelude</span>::<span class="kw-2">*</span>;
 
                     <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> #<span class="ident">tupled</span>;
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">interrupt</span>::<span class="ident">free</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> #<span class="ident">app_path</span>::#<span class="ident">fq</span>.<span class="ident">dequeue</span>()) {
