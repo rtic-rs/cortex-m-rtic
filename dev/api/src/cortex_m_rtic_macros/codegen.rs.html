@@ -150,6 +150,9 @@
 <span id="149">149</span>
 <span id="150">150</span>
 <span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -210,19 +213,22 @@
 
     <span class="kw">let</span> <span class="ident">main</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">suffixed</span>(<span class="string">&quot;main&quot;</span>);
     <span class="ident">mains</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-        <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-        <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> #<span class="ident">main</span>() <span class="op">-&gt;</span> <span class="op">!</span> {
-            <span class="kw">let</span> <span class="ident">_TODO</span>: () <span class="op">=</span> ();
+        <span class="kw">mod</span> <span class="ident">rtic_ext</span> {
+            <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+            <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
+            <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> #<span class="ident">main</span>() <span class="op">-&gt;</span> <span class="op">!</span> {
+                <span class="kw">let</span> <span class="ident">_TODO</span>: () <span class="op">=</span> ();
 
-            #(#<span class="ident">assertion_stmts</span>)<span class="op">*</span>
+                #(#<span class="ident">assertion_stmts</span>)<span class="op">*</span>
 
-            #(#<span class="ident">pre_init_stmts</span>)<span class="op">*</span>
+                #(#<span class="ident">pre_init_stmts</span>)<span class="op">*</span>
 
-            #<span class="ident">call_init</span>
+                #<span class="ident">call_init</span>
 
-            #(#<span class="ident">post_init_stmts</span>)<span class="op">*</span>
+                #(#<span class="ident">post_init_stmts</span>)<span class="op">*</span>
 
-            #<span class="ident">call_idle</span>
+                #<span class="ident">call_idle</span>
+            }
         }
     ));
 
