@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["init_data","Initializes the `.data` section"],["run_init_array",""],["zero_bss","Zeroes the `.bss` section"]],"macro":[["init_array",""],["pre_init_array",""]]});
