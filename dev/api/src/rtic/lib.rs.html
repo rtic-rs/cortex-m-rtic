@@ -206,7 +206,7 @@
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ops</span>::<span class="ident">Sub</span>;
 
 <span class="kw">use</span> <span class="ident">cortex_m</span>::{
-    <span class="ident">interrupt</span>::<span class="ident">Nr</span>,
+    <span class="ident">interrupt</span>::<span class="ident">InterruptNumber</span>,
     <span class="ident">peripheral</span>::{<span class="ident">CBP</span>, <span class="ident">CPUID</span>, <span class="ident">DCB</span>, <span class="ident">DWT</span>, <span class="ident">FPB</span>, <span class="ident">FPU</span>, <span class="ident">ITM</span>, <span class="ident">MPU</span>, <span class="ident">NVIC</span>, <span class="ident">SCB</span>, <span class="ident">TPIU</span>},
 };
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_rtic_macros</span>::<span class="ident">app</span>;
@@ -326,7 +326,7 @@
 <span class="doccomment">/// [`NVIC::pend`](../cortex_m/peripheral/struct.NVIC.html#method.pend)</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pend</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>)
 <span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Nr</span>,
+    <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
 {
     <span class="ident">NVIC</span>::<span class="ident">pend</span>(<span class="ident">interrupt</span>)
 }

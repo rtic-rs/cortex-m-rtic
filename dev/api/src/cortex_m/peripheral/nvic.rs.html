@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.4/src/peripheral/nvic.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>nvic.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings"></script><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.7.0/src/peripheral/nvic.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>nvic.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings"></script><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png">
 <link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../cortex_m/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
@@ -266,45 +266,6 @@
 <span id="263">263</span>
 <span id="264">264</span>
 <span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
-<span id="286">286</span>
-<span id="287">287</span>
-<span id="288">288</span>
-<span id="289">289</span>
-<span id="290">290</span>
-<span id="291">291</span>
-<span id="292">292</span>
-<span id="293">293</span>
-<span id="294">294</span>
-<span id="295">295</span>
-<span id="296">296</span>
-<span id="297">297</span>
-<span id="298">298</span>
-<span id="299">299</span>
-<span id="300">300</span>
-<span id="301">301</span>
-<span id="302">302</span>
-<span id="303">303</span>
-<span id="304">304</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Nested Vector Interrupt Controller</span>
 
@@ -312,7 +273,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
 <span class="kw">use</span> <span class="ident">volatile_register</span>::{<span class="ident">RO</span>, <span class="ident">WO</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">interrupt</span>::<span class="ident">Nr</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">interrupt</span>::<span class="ident">InterruptNumber</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">peripheral</span>::<span class="ident">NVIC</span>;
 
 <span class="doccomment">/// Register block</span>
@@ -346,7 +307,6 @@
 
     <span class="ident">_reserved5</span>: [<span class="ident">u32</span>; <span class="number">48</span>],
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
     <span class="doccomment">/// Interrupt Priority</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// On ARMv7-M, 124 word-sized registers are available. Each of those</span>
@@ -358,9 +318,9 @@
     <span class="doccomment">/// On ARMv6-M, the registers must only be accessed along word boundaries,</span>
     <span class="doccomment">/// so convenient byte-sized representation wouldn&#39;t work on that</span>
     <span class="doccomment">/// architecture.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
     <span class="kw">pub</span> <span class="ident">ipr</span>: [<span class="ident">RW</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>; <span class="number">496</span>],
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv6m</span>)]</span>
     <span class="doccomment">/// Interrupt Priority</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// On ARMv7-M, 124 word-sized registers are available. Each of those</span>
@@ -372,54 +332,47 @@
     <span class="doccomment">/// On ARMv6-M, the registers must only be accessed along word boundaries,</span>
     <span class="doccomment">/// so convenient byte-sized representation wouldn&#39;t work on that</span>
     <span class="doccomment">/// architecture.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv6m</span>)]</span>
     <span class="kw">pub</span> <span class="ident">ipr</span>: [<span class="ident">RW</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>; <span class="number">8</span>],
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
     <span class="ident">_reserved6</span>: [<span class="ident">u32</span>; <span class="number">580</span>],
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
     <span class="doccomment">/// Software Trigger Interrupt</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
     <span class="kw">pub</span> <span class="ident">stir</span>: <span class="ident">WO</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">NVIC</span> {
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
     <span class="doccomment">/// Request an IRQ in software</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Writing a value to the INTID field is the same as manually pending an interrupt by setting</span>
     <span class="doccomment">/// the corresponding interrupt bit in an Interrupt Set Pending Register. This is similar to</span>
-    <span class="doccomment">/// `set_pending`.</span>
+    <span class="doccomment">/// [`NVIC::pend`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method is not available on ARMv6-M chips.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`NVIC::pend`]: #method.pend</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">request</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">interrupt</span>: <span class="ident">I</span>)
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
 
         <span class="kw">unsafe</span> {
             <span class="self">self</span>.<span class="ident">stir</span>.<span class="ident">write</span>(<span class="ident">u32</span>::<span class="ident">from</span>(<span class="ident">nr</span>));
         }
     }
 
-    <span class="doccomment">/// Clears `interrupt`&#39;s pending state</span>
-    <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.5.8&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;Use `NVIC::unpend`&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear_pending</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">interrupt</span>: <span class="ident">I</span>)
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
-    {
-        <span class="self">Self</span>::<span class="ident">unpend</span>(<span class="ident">interrupt</span>)
-    }
-
     <span class="doccomment">/// Disables `interrupt`</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mask</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>)
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
         <span class="comment">// NOTE(unsafe) this is a write to a stateless register</span>
         <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">icer</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">nr</span> <span class="op">/</span> <span class="number">32</span>)].<span class="ident">write</span>(<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">nr</span> <span class="op">%</span> <span class="number">32</span>)) }
     }
@@ -430,32 +383,11 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unmask</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>)
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
         <span class="comment">// NOTE(ptr) this is a write to a stateless register</span>
         (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">iser</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">nr</span> <span class="op">/</span> <span class="number">32</span>)].<span class="ident">write</span>(<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">nr</span> <span class="op">%</span> <span class="number">32</span>))
-    }
-
-    <span class="doccomment">/// Disables `interrupt`</span>
-    <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.6.1&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;Use `NVIC::mask`&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">interrupt</span>: <span class="ident">I</span>)
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
-    {
-        <span class="self">Self</span>::<span class="ident">mask</span>(<span class="ident">interrupt</span>)
-    }
-
-    <span class="doccomment">/// **WARNING** This method is a soundness hole in the API; it should actually be an `unsafe`</span>
-    <span class="doccomment">/// function. Use `NVIC::unmask` which has the right unsafety.</span>
-    <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.6.1&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;Use `NVIC::unmask`&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">interrupt</span>: <span class="ident">I</span>)
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
-    {
-        <span class="kw">unsafe</span> { <span class="self">Self</span>::<span class="ident">unmask</span>(<span class="ident">interrupt</span>) }
     }
 
     <span class="doccomment">/// Returns the NVIC priority of `interrupt`</span>
@@ -466,11 +398,11 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_priority</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
         {
-            <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+            <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
             <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
             <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">ipr</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">nr</span>)].<span class="ident">read</span>() }
         }
@@ -478,8 +410,8 @@
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv6m</span>)]</span>
         {
             <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
-            <span class="kw">let</span> <span class="ident">ipr_n</span> <span class="op">=</span> <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">ipr</span>[<span class="self">Self</span>::<span class="ident">ipr_index</span>(<span class="kw-2">&amp;</span><span class="ident">interrupt</span>)].<span class="ident">read</span>() };
-            <span class="kw">let</span> <span class="ident">prio</span> <span class="op">=</span> (<span class="ident">ipr_n</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">ipr_shift</span>(<span class="kw-2">&amp;</span><span class="ident">interrupt</span>)) <span class="op">&amp;</span> <span class="number">0x0000_00ff</span>;
+            <span class="kw">let</span> <span class="ident">ipr_n</span> <span class="op">=</span> <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">ipr</span>[<span class="self">Self</span>::<span class="ident">ipr_index</span>(<span class="ident">interrupt</span>)].<span class="ident">read</span>() };
+            <span class="kw">let</span> <span class="ident">prio</span> <span class="op">=</span> (<span class="ident">ipr_n</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">ipr_shift</span>(<span class="ident">interrupt</span>)) <span class="op">&amp;</span> <span class="number">0x0000_00ff</span>;
             <span class="ident">prio</span> <span class="kw">as</span> <span class="ident">u8</span>
         }
     }
@@ -489,9 +421,9 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_active</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
         <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">nr</span> <span class="op">%</span> <span class="number">32</span>);
 
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
@@ -502,9 +434,9 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_enabled</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
         <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">nr</span> <span class="op">%</span> <span class="number">32</span>);
 
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
@@ -515,9 +447,9 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_pending</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
         <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">nr</span> <span class="op">%</span> <span class="number">32</span>);
 
         <span class="comment">// NOTE(unsafe) atomic read with no side effects</span>
@@ -528,22 +460,12 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pend</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>)
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
 
         <span class="comment">// NOTE(unsafe) atomic stateless write; ICPR doesn&#39;t store any state</span>
         <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">ispr</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">nr</span> <span class="op">/</span> <span class="number">32</span>)].<span class="ident">write</span>(<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">nr</span> <span class="op">%</span> <span class="number">32</span>)) }
-    }
-
-    <span class="doccomment">/// Forces `interrupt` into pending state</span>
-    <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.5.8&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;Use `NVIC::pend`&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_pending</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">interrupt</span>: <span class="ident">I</span>)
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
-    {
-        <span class="self">Self</span>::<span class="ident">pend</span>(<span class="ident">interrupt</span>)
     }
 
     <span class="doccomment">/// Sets the &quot;priority&quot; of `interrupt` to `prio`</span>
@@ -561,19 +483,19 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">set_priority</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">interrupt</span>: <span class="ident">I</span>, <span class="ident">prio</span>: <span class="ident">u8</span>)
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
         {
-            <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+            <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
             <span class="self">self</span>.<span class="ident">ipr</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">nr</span>)].<span class="ident">write</span>(<span class="ident">prio</span>)
         }
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv6m</span>)]</span>
         {
-            <span class="self">self</span>.<span class="ident">ipr</span>[<span class="self">Self</span>::<span class="ident">ipr_index</span>(<span class="kw-2">&amp;</span><span class="ident">interrupt</span>)].<span class="ident">modify</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">0x0000_00ff</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="self">Self</span>::<span class="ident">ipr_shift</span>(<span class="kw-2">&amp;</span><span class="ident">interrupt</span>);
-                <span class="kw">let</span> <span class="ident">prio</span> <span class="op">=</span> <span class="ident">u32</span>::<span class="ident">from</span>(<span class="ident">prio</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="self">Self</span>::<span class="ident">ipr_shift</span>(<span class="kw-2">&amp;</span><span class="ident">interrupt</span>);
+            <span class="self">self</span>.<span class="ident">ipr</span>[<span class="self">Self</span>::<span class="ident">ipr_index</span>(<span class="ident">interrupt</span>)].<span class="ident">modify</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> {
+                <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">0x0000_00ff</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="self">Self</span>::<span class="ident">ipr_shift</span>(<span class="ident">interrupt</span>);
+                <span class="kw">let</span> <span class="ident">prio</span> <span class="op">=</span> <span class="ident">u32</span>::<span class="ident">from</span>(<span class="ident">prio</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="self">Self</span>::<span class="ident">ipr_shift</span>(<span class="ident">interrupt</span>);
 
                 (<span class="ident">value</span> <span class="op">&amp;</span> <span class="op">!</span><span class="ident">mask</span>) <span class="op">|</span> <span class="ident">prio</span>
             })
@@ -584,9 +506,9 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unpend</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>)
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">nr</span>();
+        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">interrupt</span>.<span class="ident">number</span>();
 
         <span class="comment">// NOTE(unsafe) atomic stateless write; ICPR doesn&#39;t store any state</span>
         <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>()).<span class="ident">icpr</span>[<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">nr</span> <span class="op">/</span> <span class="number">32</span>)].<span class="ident">write</span>(<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">nr</span> <span class="op">%</span> <span class="number">32</span>)) }
@@ -594,20 +516,20 @@
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv6m</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">ipr_index</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="kw-2">&amp;</span><span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>
+    <span class="kw">fn</span> <span class="ident">ipr_index</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        <span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">interrupt</span>.<span class="ident">nr</span>()) <span class="op">/</span> <span class="number">4</span>
+        <span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">interrupt</span>.<span class="ident">number</span>()) <span class="op">/</span> <span class="number">4</span>
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv6m</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">ipr_shift</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="kw-2">&amp;</span><span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>
+    <span class="kw">fn</span> <span class="ident">ipr_shift</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">interrupt</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Nr</span>,
+        <span class="ident">I</span>: <span class="ident">InterruptNumber</span>,
     {
-        (<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">interrupt</span>.<span class="ident">nr</span>()) <span class="op">%</span> <span class="number">4</span>) <span class="op">*</span> <span class="number">8</span>
+        (<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">interrupt</span>.<span class="ident">number</span>()) <span class="op">%</span> <span class="number">4</span>) <span class="op">*</span> <span class="number">8</span>
     }
 }
 </pre></div>

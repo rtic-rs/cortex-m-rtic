@@ -1,5 +1,4 @@
 (function() {var implementors = {};
-implementors["aligned"] = [{"text":"impl&lt;A, T&gt; Default for Aligned&lt;A, T&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;A: Alignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;T: Default,&nbsp;</span>","synthetic":false,"types":[]}];
 implementors["byteorder"] = [{"text":"impl Default for BigEndian","synthetic":false,"types":[]},{"text":"impl Default for LittleEndian","synthetic":false,"types":[]}];
 implementors["generic_array"] = [{"text":"impl&lt;T:&nbsp;Default, N&gt; Default for GenericArray&lt;T, N&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;N: ArrayLength&lt;T&gt;,&nbsp;</span>","synthetic":false,"types":[]}];
 implementors["hash32"] = [{"text":"impl Default for Hasher","synthetic":false,"types":[]},{"text":"impl Default for Hasher","synthetic":false,"types":[]},{"text":"impl&lt;H&gt; Default for BuildHasherDefault&lt;H&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;H: Default + Hasher,&nbsp;</span>","synthetic":false,"types":[]}];
