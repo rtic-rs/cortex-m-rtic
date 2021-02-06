@@ -1,6 +1,8 @@
 (function() {var implementors = {};
 implementors["byteorder"] = [{"text":"impl StructuralEq for BigEndian","synthetic":false,"types":[]},{"text":"impl StructuralEq for LittleEndian","synthetic":false,"types":[]}];
-implementors["cortex_m"] = [{"text":"impl StructuralEq for CsselrCacheType","synthetic":false,"types":[]},{"text":"impl StructuralEq for Exception","synthetic":false,"types":[]},{"text":"impl StructuralEq for VectActive","synthetic":false,"types":[]},{"text":"impl StructuralEq for SystemHandler","synthetic":false,"types":[]},{"text":"impl StructuralEq for SystClkSource","synthetic":false,"types":[]},{"text":"impl StructuralEq for Npriv","synthetic":false,"types":[]},{"text":"impl StructuralEq for Spsel","synthetic":false,"types":[]},{"text":"impl StructuralEq for Fpca","synthetic":false,"types":[]},{"text":"impl StructuralEq for Faultmask","synthetic":false,"types":[]},{"text":"impl StructuralEq for Primask","synthetic":false,"types":[]}];
+implementors["cortex_m"] = [{"text":"impl StructuralEq for SystemHandler","synthetic":false,"types":[]}];
+implementors["embedded_hal"] = [{"text":"impl StructuralEq for Polarity","synthetic":false,"types":[]},{"text":"impl StructuralEq for Phase","synthetic":false,"types":[]},{"text":"impl StructuralEq for Mode","synthetic":false,"types":[]}];
+implementors["nb"] = [{"text":"impl&lt;E&gt; StructuralEq for Error&lt;E&gt;","synthetic":false,"types":[]}];
 implementors["proc_macro2"] = [{"text":"impl StructuralEq for Delimiter","synthetic":false,"types":[]},{"text":"impl StructuralEq for Spacing","synthetic":false,"types":[]}];
 implementors["rand"] = [{"text":"impl StructuralEq for TimerError","synthetic":false,"types":[]}];
 implementors["rand_core"] = [{"text":"impl StructuralEq for ErrorKind","synthetic":false,"types":[]}];

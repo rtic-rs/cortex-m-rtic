@@ -6,4 +6,5 @@ implementors["rand"] = [{"text":"impl Display for TimerError","synthetic":false,
 implementors["rand_core"] = [{"text":"impl Display for Error","synthetic":false,"types":[]}];
 implementors["rtfm"] = [{"text":"impl&lt;'a, T&gt; Display for Exclusive&lt;'a, T&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: Display,&nbsp;</span>","synthetic":false,"types":[]}];
 implementors["syn"] = [{"text":"impl Display for Lifetime","synthetic":false,"types":[]},{"text":"impl Display for LitInt","synthetic":false,"types":[]},{"text":"impl Display for LitFloat","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; Display for ParseBuffer&lt;'a&gt;","synthetic":false,"types":[]},{"text":"impl Display for Error","synthetic":false,"types":[]}];
+implementors["void"] = [{"text":"impl Display for Void","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

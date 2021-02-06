@@ -1,6 +1,8 @@
 (function() {var implementors = {};
 implementors["byteorder"] = [{"text":"impl StructuralPartialEq for BigEndian","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for LittleEndian","synthetic":false,"types":[]}];
-implementors["cortex_m"] = [{"text":"impl StructuralPartialEq for CsselrCacheType","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Exception","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for VectActive","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for SystemHandler","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for SystClkSource","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Npriv","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Spsel","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Fpca","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Faultmask","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Primask","synthetic":false,"types":[]}];
+implementors["cortex_m"] = [{"text":"impl StructuralPartialEq for SystemHandler","synthetic":false,"types":[]}];
+implementors["embedded_hal"] = [{"text":"impl StructuralPartialEq for Polarity","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Phase","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Mode","synthetic":false,"types":[]}];
+implementors["nb"] = [{"text":"impl&lt;E&gt; StructuralPartialEq for Error&lt;E&gt;","synthetic":false,"types":[]}];
 implementors["proc_macro2"] = [{"text":"impl StructuralPartialEq for Delimiter","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Spacing","synthetic":false,"types":[]}];
 implementors["rand"] = [{"text":"impl StructuralPartialEq for TimerError","synthetic":false,"types":[]}];
 implementors["rand_core"] = [{"text":"impl StructuralPartialEq for ErrorKind","synthetic":false,"types":[]}];

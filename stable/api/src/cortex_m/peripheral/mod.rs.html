@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.4/src/peripheral/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings"></script><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings"></script><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png">
 <link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../cortex_m/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
@@ -314,214 +314,6 @@
 <span id="311">311</span>
 <span id="312">312</span>
 <span id="313">313</span>
-<span id="314">314</span>
-<span id="315">315</span>
-<span id="316">316</span>
-<span id="317">317</span>
-<span id="318">318</span>
-<span id="319">319</span>
-<span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
-<span id="354">354</span>
-<span id="355">355</span>
-<span id="356">356</span>
-<span id="357">357</span>
-<span id="358">358</span>
-<span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-<span id="368">368</span>
-<span id="369">369</span>
-<span id="370">370</span>
-<span id="371">371</span>
-<span id="372">372</span>
-<span id="373">373</span>
-<span id="374">374</span>
-<span id="375">375</span>
-<span id="376">376</span>
-<span id="377">377</span>
-<span id="378">378</span>
-<span id="379">379</span>
-<span id="380">380</span>
-<span id="381">381</span>
-<span id="382">382</span>
-<span id="383">383</span>
-<span id="384">384</span>
-<span id="385">385</span>
-<span id="386">386</span>
-<span id="387">387</span>
-<span id="388">388</span>
-<span id="389">389</span>
-<span id="390">390</span>
-<span id="391">391</span>
-<span id="392">392</span>
-<span id="393">393</span>
-<span id="394">394</span>
-<span id="395">395</span>
-<span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
-<span id="401">401</span>
-<span id="402">402</span>
-<span id="403">403</span>
-<span id="404">404</span>
-<span id="405">405</span>
-<span id="406">406</span>
-<span id="407">407</span>
-<span id="408">408</span>
-<span id="409">409</span>
-<span id="410">410</span>
-<span id="411">411</span>
-<span id="412">412</span>
-<span id="413">413</span>
-<span id="414">414</span>
-<span id="415">415</span>
-<span id="416">416</span>
-<span id="417">417</span>
-<span id="418">418</span>
-<span id="419">419</span>
-<span id="420">420</span>
-<span id="421">421</span>
-<span id="422">422</span>
-<span id="423">423</span>
-<span id="424">424</span>
-<span id="425">425</span>
-<span id="426">426</span>
-<span id="427">427</span>
-<span id="428">428</span>
-<span id="429">429</span>
-<span id="430">430</span>
-<span id="431">431</span>
-<span id="432">432</span>
-<span id="433">433</span>
-<span id="434">434</span>
-<span id="435">435</span>
-<span id="436">436</span>
-<span id="437">437</span>
-<span id="438">438</span>
-<span id="439">439</span>
-<span id="440">440</span>
-<span id="441">441</span>
-<span id="442">442</span>
-<span id="443">443</span>
-<span id="444">444</span>
-<span id="445">445</span>
-<span id="446">446</span>
-<span id="447">447</span>
-<span id="448">448</span>
-<span id="449">449</span>
-<span id="450">450</span>
-<span id="451">451</span>
-<span id="452">452</span>
-<span id="453">453</span>
-<span id="454">454</span>
-<span id="455">455</span>
-<span id="456">456</span>
-<span id="457">457</span>
-<span id="458">458</span>
-<span id="459">459</span>
-<span id="460">460</span>
-<span id="461">461</span>
-<span id="462">462</span>
-<span id="463">463</span>
-<span id="464">464</span>
-<span id="465">465</span>
-<span id="466">466</span>
-<span id="467">467</span>
-<span id="468">468</span>
-<span id="469">469</span>
-<span id="470">470</span>
-<span id="471">471</span>
-<span id="472">472</span>
-<span id="473">473</span>
-<span id="474">474</span>
-<span id="475">475</span>
-<span id="476">476</span>
-<span id="477">477</span>
-<span id="478">478</span>
-<span id="479">479</span>
-<span id="480">480</span>
-<span id="481">481</span>
-<span id="482">482</span>
-<span id="483">483</span>
-<span id="484">484</span>
-<span id="485">485</span>
-<span id="486">486</span>
-<span id="487">487</span>
-<span id="488">488</span>
-<span id="489">489</span>
-<span id="490">490</span>
-<span id="491">491</span>
-<span id="492">492</span>
-<span id="493">493</span>
-<span id="494">494</span>
-<span id="495">495</span>
-<span id="496">496</span>
-<span id="497">497</span>
-<span id="498">498</span>
-<span id="499">499</span>
-<span id="500">500</span>
-<span id="501">501</span>
-<span id="502">502</span>
-<span id="503">503</span>
-<span id="504">504</span>
-<span id="505">505</span>
-<span id="506">506</span>
-<span id="507">507</span>
-<span id="508">508</span>
-<span id="509">509</span>
-<span id="510">510</span>
-<span id="511">511</span>
-<span id="512">512</span>
-<span id="513">513</span>
-<span id="514">514</span>
-<span id="515">515</span>
-<span id="516">516</span>
-<span id="517">517</span>
-<span id="518">518</span>
-<span id="519">519</span>
-<span id="520">520</span>
-<span id="521">521</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">needless_doctest_main</span>)]</span>
 <span class="doccomment">//! Core peripherals</span>
@@ -603,22 +395,20 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">cbp</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">cpuid</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">dcb</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">dwt</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">fpb</span>;
-<span class="comment">// NOTE(target_arch) is for documentation purposes</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">has_fpu</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">fpu</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m_base</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">itm</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">mpu</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">nvic</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">scb</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">syst</span>;
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>), <span class="ident">not</span>(<span class="ident">armv8m_base</span>)))]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_0_7</span>::<span class="ident">peripheral</span>::<span class="ident">itm</span>;
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_0_7</span>::<span class="ident">peripheral</span>::{<span class="ident">cpuid</span>, <span class="ident">dcb</span>, <span class="ident">dwt</span>, <span class="ident">syst</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">tpiu</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_0_7</span>::<span class="ident">peripheral</span>::{<span class="ident">fpb</span>, <span class="ident">tpiu</span>};
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">has_fpu</span>, <span class="ident">target_arch</span><span class="op">=</span><span class="string">&quot;x86_64&quot;</span>))]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_0_7</span>::<span class="ident">peripheral</span>::<span class="ident">fpu</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span>;
@@ -665,70 +455,31 @@
     <span class="kw">pub</span> <span class="ident">TPIU</span>: <span class="ident">TPIU</span>,
 }
 
-<span class="comment">// NOTE `no_mangle` is used here to prevent linking different minor versions of this crate as that</span>
-<span class="comment">// would let you `take` the core peripherals more than once (one per minor version)</span>
-<span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-<span class="kw">static</span> <span class="ident">CORE_PERIPHERALS</span>: () <span class="op">=</span> ();
-
-<span class="doccomment">/// Set to `true` when `take` or `steal` was called to make `Peripherals` a singleton.</span>
-<span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">TAKEN</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">false</span>;
+<span class="comment">// NOTE: CORE_PERIPHERALS removed because this crate deliberately allows linking to other cortex-m</span>
+<span class="comment">// versions by proxying calls to take() and steal() through cortex-m 0.7.</span>
+<span class="comment">// Since TAKEN is no longer no_mangle nor public we can&#39;t set it ourselves.</span>
 
 <span class="kw">impl</span> <span class="ident">Peripherals</span> {
     <span class="doccomment">/// Returns all the core peripherals *once*</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">take</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="ident">interrupt</span>::<span class="ident">free</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="kw">unsafe</span> { <span class="ident">TAKEN</span> } {
-                <span class="prelude-val">None</span>
-            } <span class="kw">else</span> {
-                <span class="prelude-val">Some</span>(<span class="kw">unsafe</span> { <span class="ident">Peripherals</span>::<span class="ident">steal</span>() })
-            }
+        <span class="ident">interrupt</span>::<span class="ident">free</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">cortex_m_0_7</span>::<span class="ident">peripheral</span>::<span class="ident">Peripherals</span>::<span class="ident">take</span>() {
+            <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="prelude-val">Some</span>(<span class="kw">unsafe</span> { <span class="ident">Peripherals</span>::<span class="ident">steal</span>() }) },
+            <span class="prelude-val">None</span>    <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
         })
     }
 
     <span class="doccomment">/// Unchecked version of `Peripherals::take`</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">steal</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">TAKEN</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="comment">// Ensure peripherals are marked as taken.</span>
+        <span class="ident">cortex_m_0_7</span>::<span class="ident">peripheral</span>::<span class="ident">Peripherals</span>::<span class="ident">steal</span>();
 
-        <span class="ident">Peripherals</span> {
-            <span class="ident">CBP</span>: <span class="ident">CBP</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">CPUID</span>: <span class="ident">CPUID</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">DCB</span>: <span class="ident">DCB</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">DWT</span>: <span class="ident">DWT</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">FPB</span>: <span class="ident">FPB</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">FPU</span>: <span class="ident">FPU</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">ITM</span>: <span class="ident">ITM</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">MPU</span>: <span class="ident">MPU</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">NVIC</span>: <span class="ident">NVIC</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">SCB</span>: <span class="ident">SCB</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">SYST</span>: <span class="ident">SYST</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-            <span class="ident">TPIU</span>: <span class="ident">TPIU</span> {
-                <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
-            },
-        }
+        <span class="comment">// We can&#39;t create the imported types like CPUID because</span>
+        <span class="comment">// their _marker field is private, but we can create an</span>
+        <span class="comment">// entire Peripherals out of thin air because all the</span>
+        <span class="comment">// types are zero-sized.</span>
+        <span class="ident">core</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(())
     }
 }
 
@@ -765,138 +516,21 @@
     }
 }
 
-<span class="doccomment">/// CPUID</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CPUID</span> {
-    <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
-}
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_0_7</span>::<span class="ident">peripheral</span>::{<span class="ident">CPUID</span>, <span class="ident">DCB</span>, <span class="ident">DWT</span>, <span class="ident">FPB</span>, <span class="ident">FPU</span>, <span class="ident">SYST</span>, <span class="ident">TPIU</span>};
 
-<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">CPUID</span> {}
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv8m_base</span>))]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cortex_m_0_7</span>::<span class="ident">peripheral</span>::<span class="ident">ITM</span>;
 
-<span class="kw">impl</span> <span class="ident">CPUID</span> {
-    <span class="doccomment">/// Returns a pointer to the register block</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="self">self</span>::<span class="ident">cpuid</span>::<span class="ident">RegisterBlock</span> {
-        <span class="number">0xE000_ED00</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">CPUID</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">cpuid</span>::<span class="ident">RegisterBlock</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>() }
-    }
-}
-
-<span class="doccomment">/// Debug Control Block</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DCB</span> {
-    <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
-}
-
-<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">DCB</span> {}
-
-<span class="kw">impl</span> <span class="ident">DCB</span> {
-    <span class="doccomment">/// Returns a pointer to the register block</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">dcb</span>::<span class="ident">RegisterBlock</span> {
-        <span class="number">0xE000_EDF0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">DCB</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">dcb</span>::<span class="ident">RegisterBlock</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">DCB</span>::<span class="ident">ptr</span>() }
-    }
-}
-
-<span class="doccomment">/// Data Watchpoint and Trace unit</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DWT</span> {
-    <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
-}
-
-<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">DWT</span> {}
-
-<span class="kw">impl</span> <span class="ident">DWT</span> {
-    <span class="doccomment">/// Returns a pointer to the register block</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">dwt</span>::<span class="ident">RegisterBlock</span> {
-        <span class="number">0xE000_1000</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">DWT</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">dwt</span>::<span class="ident">RegisterBlock</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>() }
-    }
-}
-
-<span class="doccomment">/// Flash Patch and Breakpoint unit</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FPB</span> {
-    <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
-}
-
-<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">FPB</span> {}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
-<span class="kw">impl</span> <span class="ident">FPB</span> {
-    <span class="doccomment">/// Returns a pointer to the register block</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">fpb</span>::<span class="ident">RegisterBlock</span> {
-        <span class="number">0xE000_2000</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
-    }
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
-<span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">FPB</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">fpb</span>::<span class="ident">RegisterBlock</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>() }
-    }
-}
-
-<span class="doccomment">/// Floating Point Unit</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FPU</span> {
-    <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
-}
-
-<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">FPU</span> {}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">has_fpu</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>))]</span>
-<span class="kw">impl</span> <span class="ident">FPU</span> {
-    <span class="doccomment">/// Returns a pointer to the register block</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">fpu</span>::<span class="ident">RegisterBlock</span> {
-        <span class="number">0xE000_EF30</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
-    }
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">has_fpu</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>))]</span>
-<span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">FPU</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">fpu</span>::<span class="ident">RegisterBlock</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>() }
-    }
-}
-
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m_base</span>)]</span>
 <span class="doccomment">/// Instrumentation Trace Macrocell</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ITM</span> {
     <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
 }
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m_base</span>)]</span>
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">ITM</span> {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m_base</span>)]</span>
 <span class="kw">impl</span> <span class="ident">ITM</span> {
     <span class="doccomment">/// Returns a pointer to the register block</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
@@ -905,7 +539,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m_base</span>)]</span>
 <span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">ITM</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">itm</span>::<span class="ident">RegisterBlock</span>;
 
@@ -915,7 +549,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">armv8m_base</span>)]</span>
 <span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">ITM</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Target</span> {
@@ -988,56 +622,6 @@
 
 <span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">SCB</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">scb</span>::<span class="ident">RegisterBlock</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>() }
-    }
-}
-
-<span class="doccomment">/// SysTick: System Timer</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SYST</span> {
-    <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
-}
-
-<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">SYST</span> {}
-
-<span class="kw">impl</span> <span class="ident">SYST</span> {
-    <span class="doccomment">/// Returns a pointer to the register block</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">syst</span>::<span class="ident">RegisterBlock</span> {
-        <span class="number">0xE000_E010</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">SYST</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">syst</span>::<span class="ident">RegisterBlock</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">Self</span>::<span class="ident">ptr</span>() }
-    }
-}
-
-<span class="doccomment">/// Trace Port Interface Unit</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TPIU</span> {
-    <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
-}
-
-<span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">TPIU</span> {}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
-<span class="kw">impl</span> <span class="ident">TPIU</span> {
-    <span class="doccomment">/// Returns a pointer to the register block</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">tpiu</span>::<span class="ident">RegisterBlock</span> {
-        <span class="number">0xE004_0000</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
-    }
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">armv6m</span>))]</span>
-<span class="kw">impl</span> <span class="ident">ops</span>::<span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">TPIU</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">tpiu</span>::<span class="ident">RegisterBlock</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
