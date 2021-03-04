@@ -167,12 +167,12 @@
                     <main>
                         <h1 align="center">Real Time For the Masses</h1>
 <p align="center">A concurrency framework for building real time systems</p>
-<h1><a class="header" href="#preface" id="preface">Preface</a></h1>
+<h1 id="preface"><a class="header" href="#preface">Preface</a></h1>
 <p>This book contains user level documentation for the Real Time For the Masses
 (RTFM) framework. The API reference can be found
 <a href="../../api/rtfm/index.html">here</a>.</p>
 <p>There is a translation of this book in <a href="../ru/index.html">Russian</a>.</p>
-<h2><a class="header" href="#features" id="features">Features</a></h2>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
 <ul>
 <li>
 <p><strong>Tasks</strong> as the unit of concurrency <sup class="footnote-reference"><a href="#1">1</a></sup>. Tasks can be <em>event triggered</em>
@@ -220,7 +220,7 @@ and scheduling analysis techniques. (Though we haven't yet developed Rust
 friendly tooling for that.)</p>
 </li>
 </ul>
-<h2><a class="header" href="#requirements" id="requirements">Requirements</a></h2>
+<h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
 <ul>
 <li>
 <p>Rust 1.36.0+</p>
@@ -229,11 +229,11 @@ friendly tooling for that.)</p>
 <p>Applications must be written using the 2018 edition.</p>
 </li>
 </ul>
-<h2><a class="header" href="#acknowledgments" id="acknowledgments">Acknowledgments</a></h2>
+<h2 id="acknowledgments"><a class="header" href="#acknowledgments">Acknowledgments</a></h2>
 <p>This crate is based on <a href="http://www.rtfm-lang.org/">the RTFM language</a> created by the Embedded
 Systems group at <a href="https://www.ltu.se/?l=en">Luleå University of Technology</a>, led by <a href="https://www.ltu.se/staff/p/pln-1.11258?l=en">Prof. Per
 Lindgren</a>.</p>
-<h2><a class="header" href="#references" id="references">References</a></h2>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>Eriksson, J., Häggström, F., Aittamaa, S., Kruglyak, A., &amp; Lindgren, P.
 (2013, June). Real-time for the masses, step 1: Programming API and static
@@ -245,7 +245,7 @@ priority SRP kernel primitives. In Industrial Embedded Systems (SIES), 2013
 L. M. (2016). Abstract timers and their implementation onto the arm cortex-m
 family of mcus. ACM SIGBED Review, 13(1), 48-53.</p>
 </div>
-<h2><a class="header" href="#license" id="license">License</a></h2>
+<h2 id="license"><a class="header" href="#license">License</a></h2>
 <p>All source code (including code snippets) is licensed under either of</p>
 <ul>
 <li>Apache License, Version 2.0 (<a href="LICENSE-APACHE">LICENSE-APACHE</a> or
@@ -257,11 +257,11 @@ family of mcus. ACM SIGBED Review, 13(1), 48-53.</p>
 <p>The written prose contained within the book is licensed under the terms of the
 Creative Commons CC-BY-SA v4.0 license (<a href="LICENSE-CC-BY-SA">LICENSE-CC-BY-SA</a> or
 <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">https://creativecommons.org/licenses/by-sa/4.0/legalcode</a>).</p>
-<h3><a class="header" href="#contribution" id="contribution">Contribution</a></h3>
+<h3 id="contribution"><a class="header" href="#contribution">Contribution</a></h3>
 <p>Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 licensed as above, without any additional terms or conditions.</p>
-<h1><a class="header" href="#rtfm-by-example" id="rtfm-by-example">RTFM by example</a></h1>
+<h1 id="rtfm-by-example"><a class="header" href="#rtfm-by-example">RTFM by example</a></h1>
 <p>This part of the book introduces the Real Time For the Masses (RTFM) framework
 to new users by walking them through examples of increasing complexity.</p>
 <p>All examples in this part of the book can be found in the GitHub <a href="https://github.com/japaric/cortex-m-rtfm">repository</a> of
@@ -270,7 +270,7 @@ is required to follow along.</p>
 <p>To run the examples on your laptop / PC you'll need the <code>qemu-system-arm</code>
 program. Check <a href="https://rust-embedded.github.io/book/intro/install.html">the embedded Rust book</a> for instructions on how to set up an
 embedded development environment that includes QEMU.</p>
-<h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
+<h1 id="the-app-attribute"><a class="header" href="#the-app-attribute">The <code>app</code> attribute</a></h1>
 <p>This is the smallest possible RTFM application:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -308,7 +308,7 @@ RTFM work on stable we use the <code>const</code> item instead. When more parts 
 1.2 are stabilized we'll move from a <code>const</code> item to a <code>mod</code> item and
 eventually to a crate level attribute (<code>#![app]</code>).</p>
 </blockquote>
-<h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
+<h2 id="init"><a class="header" href="#init"><code>init</code></a></h2>
 <p>Within the pseudo-module the <code>app</code> attribute expects to find an initialization
 function marked with the <code>init</code> attribute. This function must have signature
 <code>[unsafe] fn()</code>.</p>
@@ -365,7 +365,7 @@ process.</p>
 <pre><code class="language-console">$ cargo run --example init
 init
 </code></pre>
-<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
+<h2 id="idle"><a class="header" href="#idle"><code>idle</code></a></h2>
 <p>A function marked with the <code>idle</code> attribute can optionally appear in the
 pseudo-module. This function is used as the special <em>idle task</em> and must have
 signature <code>[unsafe] fn() - &gt; !</code>.</p>
@@ -419,7 +419,7 @@ const APP: () = {
 init
 idle
 </code></pre>
-<h2><a class="header" href="#interrupt--exception" id="interrupt--exception"><code>interrupt</code> / <code>exception</code></a></h2>
+<h2 id="interrupt--exception"><a class="header" href="#interrupt--exception"><code>interrupt</code> / <code>exception</code></a></h2>
 <p>Just like you would do with the <code>cortex-m-rt</code> crate you can use the <code>interrupt</code>
 and <code>exception</code> attributes within the <code>app</code> pseudo-module to declare interrupt
 and exception handlers. In RTFM, we refer to interrupt and exception handlers as
@@ -490,7 +490,7 @@ UART0 called 2 times
 <p>So far all the RTFM applications we have seen look no different that the
 applications one can write using only the <code>cortex-m-rt</code> crate. In the next
 section we start introducing features unique to RTFM.</p>
-<h2><a class="header" href="#resources" id="resources">Resources</a></h2>
+<h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <p>One of the limitations of the attributes provided by the <code>cortex-m-rt</code> crate is
 that sharing data (or peripherals) between interrupts, or between an interrupt
 and the <code>entry</code> function, requires a <code>cortex_m::interrupt::Mutex</code>, which
@@ -565,7 +565,7 @@ const APP: () = {
 UART0: SHARED = 1
 UART1: SHARED = 2
 </code></pre>
-<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
+<h2 id="priorities"><a class="header" href="#priorities">Priorities</a></h2>
 <p>The priority of each handler can be declared in the <code>interrupt</code> and <code>exception</code>
 attributes. It's not possible to set the priority in any other way because the
 runtime takes ownership of the <code>NVIC</code> peripheral; it's also not possible to
@@ -668,7 +668,7 @@ limitations in the language the error is currently far from helpful: it will say
 something along the lines of &quot;evaluation of constant value failed&quot; and the span
 of the error will <em>not</em> point out to the problematic interrupt value -- we are
 sorry about this!</p>
-<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<h2 id="late-resources"><a class="header" href="#late-resources">Late resources</a></h2>
 <p>Unlike normal <code>static</code> variables, which need to be assigned an initial value
 when declared, resources can be initialized at runtime. We refer to these
 runtime initialized resources as <em>late resources</em>. Late resources are useful for
@@ -745,7 +745,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
 </code></pre>
-<h2><a class="header" href="#static-resources" id="static-resources"><code>static</code> resources</a></h2>
+<h2 id="static-resources"><a class="header" href="#static-resources"><code>static</code> resources</a></h2>
 <p><code>static</code> variables can also be used as resources. Tasks can only get <code>&amp;</code>
 (shared) references to these resources but locks are never required to access
 their data. You can think of <code>static</code> resources as plain <code>static</code> variables that
@@ -800,7 +800,7 @@ const APP: () = {
 UART1(KEY = 0xdeadbeef)
 UART0(KEY = 0xdeadbeef)
 </code></pre>
-<h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
+<h1 id="software-tasks"><a class="header" href="#software-tasks">Software tasks</a></h1>
 <p>RTFM treats interrupt and exception handlers as <em>hardware</em> tasks. Hardware tasks
 are invoked by the hardware in response to events, like pressing a button. RTFM
 also supports <em>software</em> tasks which can be spawned by the software from any
@@ -876,7 +876,7 @@ foo
 baz
 bar
 </code></pre>
-<h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
+<h2 id="message-passing"><a class="header" href="#message-passing">Message passing</a></h2>
 <p>The other advantage of software tasks is that messages can be passed to these
 tasks when spawning them. The type of the message payload must be specified in
 the signature of the task handler.</p>
@@ -945,7 +945,7 @@ foo
 bar(1)
 baz(2, 3)
 </code></pre>
-<h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
+<h2 id="capacity"><a class="header" href="#capacity">Capacity</a></h2>
 <p>Task dispatchers do <em>not</em> use any dynamic memory allocation. The memory required
 to store messages is statically reserved. The framework will reserve enough
 space for every context to be able to spawn each task at most once. This is a
@@ -1013,7 +1013,7 @@ foo(2)
 foo(3)
 bar
 </code></pre>
-<h1><a class="header" href="#timer-queue" id="timer-queue">Timer queue</a></h1>
+<h1 id="timer-queue"><a class="header" href="#timer-queue">Timer queue</a></h1>
 <p>When the <code>timer-queue</code> feature is enabled the RTFM framework includes a <em>global
 timer queue</em> that applications can use to <em>schedule</em> software tasks to run at
 some time in the future.</p>
@@ -1098,7 +1098,7 @@ const APP: () = {
 bar  @ Instant(4000236)
 foo  @ Instant(8000173)
 </code></pre>
-<h2><a class="header" href="#periodic-tasks" id="periodic-tasks">Periodic tasks</a></h2>
+<h2 id="periodic-tasks"><a class="header" href="#periodic-tasks">Periodic tasks</a></h2>
 <p>Software tasks have access to the <code>Instant</code> at which they were scheduled to run
 through the <code>scheduled</code> variable. This information and the <code>schedule</code> API can be
 used to implement periodic tasks as shown in the example below.</p>
@@ -1148,7 +1148,7 @@ jitter even though <code>schedule.foo</code> was invoked at the <em>end</em> of 
 foo(scheduled = Instant(16000000), now = Instant(16000196))
 foo(scheduled = Instant(24000000), now = Instant(24000196))
 </code></pre>
-<h2><a class="header" href="#baseline" id="baseline">Baseline</a></h2>
+<h2 id="baseline"><a class="header" href="#baseline">Baseline</a></h2>
 <p>For the tasks scheduled from <code>init</code> we have exact information about their
 <code>scheduled</code> time. For hardware tasks there's no <code>scheduled</code> time because these
 tasks are asynchronous in nature. For hardware tasks the runtime provides a
@@ -1226,7 +1226,7 @@ foo(baseline = Instant(0))
 UART0(baseline = Instant(904))
 foo(baseline = Instant(904))
 </code></pre>
-<h2><a class="header" href="#caveats" id="caveats">Caveats</a></h2>
+<h2 id="caveats"><a class="header" href="#caveats">Caveats</a></h2>
 <p>The <code>Instant</code> and <code>Duration</code> APIs are meant to be exclusively used with the
 <code>schedule</code> API to schedule tasks <em>with a precision of a single core clock
 cycle</em>. These APIs are <em>not</em>, for example, meant to be used to time external
@@ -1249,7 +1249,7 @@ will effectively overflow it so it's not possible to schedule a task more than
 catch this kind of user error but it's not possible to prevent it with 100%
 success rate because one can always write <code>(instant + duration) + duration</code> and
 bypass the runtime checks.</p>
-<h1><a class="header" href="#singletons" id="singletons">Singletons</a></h1>
+<h1 id="singletons"><a class="header" href="#singletons">Singletons</a></h1>
 <p>The <code>app</code> attribute is aware of <a href="by-example/../../api/owned_singleton/index.html"><code>owned-singleton</code></a> crate and its <a href="by-example/../../api/owned_singleton_macros/attr.Singleton.html"><code>Singleton</code></a>
 attribute. When this attribute is applied to one of the resources the runtime
 will perform the <code>unsafe</code> initialization of the singleton for you, ensuring that
@@ -1329,7 +1329,7 @@ const APP: () = {
 bar(2)
 foo(1)
 </code></pre>
-<h1><a class="header" href="#types-send-and-sync" id="types-send-and-sync">Types, Send and Sync</a></h1>
+<h1 id="types-send-and-sync"><a class="header" href="#types-send-and-sync">Types, Send and Sync</a></h1>
 <p>The <code>app</code> attribute injects a context, a collection of variables, into every
 function. All these variables have predictable, non-anonymous types so you can
 write plain functions that take them as arguments.</p>
@@ -1399,7 +1399,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#send" id="send"><code>Send</code></a></h2>
+<h2 id="send"><a class="header" href="#send"><code>Send</code></a></h2>
 <p><a href="https://doc.rust-lang.org/core/marker/trait.Send.html"><code>Send</code></a> is a marker trait for &quot;types that can be transferred across thread
 boundaries&quot;, according to its definition in <code>core</code>. In the context of RTFM the
 <code>Send</code> trait is only required where it's possible to transfer a value between
@@ -1525,7 +1525,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
+<h2 id="sync"><a class="header" href="#sync"><code>Sync</code></a></h2>
 <p>Similarly, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> is a marker trait for &quot;types for which it is safe to share
 references between threads&quot;, according to its definition in <code>core</code>. In the
 context of RTFM the <code>Sync</code> trait is only required where it's possible for two,
@@ -1581,7 +1581,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#starting-a-new-project" id="starting-a-new-project">Starting a new project</a></h1>
+<h1 id="starting-a-new-project"><a class="header" href="#starting-a-new-project">Starting a new project</a></h1>
 <p>Now that you have learned about the main features of the RTFM framework you can
 try it out on your hardware by following these instructions.</p>
 <ol>
@@ -1631,8 +1631,8 @@ $ rm memory.x build.rs
 $ cargo run
 init
 </code></pre>
-<h1><a class="header" href="#tips--tricks" id="tips--tricks">Tips &amp; tricks</a></h1>
-<h2><a class="header" href="#generics" id="generics">Generics</a></h2>
+<h1 id="tips--tricks"><a class="header" href="#tips--tricks">Tips &amp; tricks</a></h1>
+<h2 id="generics"><a class="header" href="#generics">Generics</a></h2>
 <p>Resources shared between two or more tasks implement the <code>Mutex</code> trait in <em>all</em>
 contexts, even on those where a critical section is not required to access the
 data. This lets you easily write generic code that operates on resources and can
@@ -1716,7 +1716,7 @@ SHARED: 2 -&gt; 4
 rewrite code. If you consistently use <code>lock</code>s to access the data behind shared
 resources then your code will continue to compile when you change the priority
 of tasks.</p>
-<h2><a class="header" href="#conditional-compilation" id="conditional-compilation">Conditional compilation</a></h2>
+<h2 id="conditional-compilation"><a class="header" href="#conditional-compilation">Conditional compilation</a></h2>
 <p>You can use conditional compilation (<code>#[cfg]</code>) on resources (<code>static [mut]</code>
 items) and tasks (<code>fn</code> items). The effect of using <code>#[cfg]</code> attributes is that
 the resource / task will <em>not</em> be injected into the prelude of tasks that use
@@ -1782,7 +1782,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
+<h2 id="running-tasks-from-ram"><a class="header" href="#running-tasks-from-ram">Running tasks from RAM</a></h2>
 <p>The main goal of moving the specification of RTFM applications to attributes in
 RTFM v0.4.x was to allow inter-operation with other attributes. For example, the
 <code>link_section</code> attribute can be applied to tasks to place them in RAM; this can
@@ -1862,7 +1862,7 @@ foo
 200000dc B bar::INPUTS::mi89534s44r1mnj1
 20000000 T bar::ns9009yhw2dc2y25
 </code></pre>
-<h2><a class="header" href="#binds" id="binds"><code>binds</code></a></h2>
+<h2 id="binds"><a class="header" href="#binds"><code>binds</code></a></h2>
 <p><strong>NOTE</strong>: Requires RTFM ~0.4.2</p>
 <p>You can give hardware tasks more task-like names using the <code>binds</code> argument: you
 name the function as you wish and specify the name of the interrupt / exception
@@ -1927,7 +1927,7 @@ foo called 1 time
 idle
 foo called 2 times
 </code></pre>
-<h2><a class="header" href="#indirection-for-faster-message-passing" id="indirection-for-faster-message-passing">Indirection for faster message passing</a></h2>
+<h2 id="indirection-for-faster-message-passing"><a class="header" href="#indirection-for-faster-message-passing">Indirection for faster message passing</a></h2>
 <p>Message passing always involves copying the payload from the sender into a
 static variable and then from the static variable into the receiver. Thus
 sending a large buffer, like a <code>[u8; 128]</code>, as a message involves two expensive
@@ -2014,16 +2014,16 @@ const APP: () = {
 bar(0x2000008c)
 foo(0x20000110)
 </code></pre>
-<h1><a class="header" href="#under-the-hood" id="under-the-hood">Under the hood</a></h1>
+<h1 id="under-the-hood"><a class="header" href="#under-the-hood">Under the hood</a></h1>
 <p>This section describes the internals of the RTFM framework at a <em>high level</em>.
 Low level details like the parsing and code generation done by the procedural
 macro (<code>#[app]</code>) will not be explained here. The focus will be the analysis of
 the user specification and the data structures used by the runtime.</p>
-<h1><a class="header" href="#ceiling-analysis" id="ceiling-analysis">Ceiling analysis</a></h1>
+<h1 id="ceiling-analysis"><a class="header" href="#ceiling-analysis">Ceiling analysis</a></h1>
 <p><strong>TODO</strong></p>
-<h1><a class="header" href="#task-dispatcher" id="task-dispatcher">Task dispatcher</a></h1>
+<h1 id="task-dispatcher"><a class="header" href="#task-dispatcher">Task dispatcher</a></h1>
 <p><strong>TODO</strong></p>
-<h1><a class="header" href="#timer-queue-1" id="timer-queue-1">Timer queue</a></h1>
+<h1 id="timer-queue-1"><a class="header" href="#timer-queue-1">Timer queue</a></h1>
 <p><strong>TODO</strong></p>
 
                     </main>

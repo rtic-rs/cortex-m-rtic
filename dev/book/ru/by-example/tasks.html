@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#Программные-задачи" id="Программные-задачи">Программные задачи</a></h1>
+                        <h1 id="Программные-задачи"><a class="header" href="#Программные-задачи">Программные задачи</a></h1>
 <p>RTIC обрабатывает прерывания и исключения как <em>аппаратные</em> задачи. Аппаратные
 задачи могут вызываться устройством в ответ на события, такие как нажатие кнопки.
 RTIC также поддерживает <em>программные</em> задачи, порождаемые программой из любого
@@ -195,10 +195,10 @@ mod app {
     use cortex_m_semihosting::{debug, hprintln};
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         foo::spawn().unwrap();
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[task]
@@ -263,10 +263,10 @@ mod app {
     use cortex_m_semihosting::{debug, hprintln};
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         foo::spawn(/* no message */).unwrap();
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[task]
@@ -334,10 +334,10 @@ mod app {
     use lm3s6965::Interrupt;
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::UART0);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[task(binds = UART0)]

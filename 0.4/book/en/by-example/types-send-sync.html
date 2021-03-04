@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#types-send-and-sync" id="types-send-and-sync">Types, Send and Sync</a></h1>
+                        <h1 id="types-send-and-sync"><a class="header" href="#types-send-and-sync">Types, Send and Sync</a></h1>
 <p>The <code>app</code> attribute injects a context, a collection of variables, into every
 function. All these variables have predictable, non-anonymous types so you can
 write plain functions that take them as arguments.</p>
@@ -233,7 +233,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#send" id="send"><code>Send</code></a></h2>
+<h2 id="send"><a class="header" href="#send"><code>Send</code></a></h2>
 <p><a href="https://doc.rust-lang.org/core/marker/trait.Send.html"><code>Send</code></a> is a marker trait for &quot;types that can be transferred across thread
 boundaries&quot;, according to its definition in <code>core</code>. In the context of RTFM the
 <code>Send</code> trait is only required where it's possible to transfer a value between
@@ -359,7 +359,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
+<h2 id="sync"><a class="header" href="#sync"><code>Sync</code></a></h2>
 <p>Similarly, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> is a marker trait for &quot;types for which it is safe to share
 references between threads&quot;, according to its definition in <code>core</code>. In the
 context of RTFM the <code>Sync</code> trait is only required where it's possible for two,

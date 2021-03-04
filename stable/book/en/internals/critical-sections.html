@@ -167,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#critical-sections" id="critical-sections">Critical sections</a></h1>
+                        <h1 id="critical-sections"><a class="header" href="#critical-sections">Critical sections</a></h1>
 <p>When a resource (static variable) is shared between two, or more, tasks that run
 at different priorities some form of mutual exclusion is required to mutate the
 memory in a data race free manner. In RTIC we use priority-based critical
@@ -180,7 +180,7 @@ may request the resource are <em>not allowed to start</em>.</p>
 resource? The <a href="ceilings.html">ceiling analysis</a> is in charge of
 answering that question and will be discussed in the next section. This section
 will focus on the implementation of the critical section.</p>
-<h2><a class="header" href="#resource-proxy" id="resource-proxy">Resource proxy</a></h2>
+<h2 id="resource-proxy"><a class="header" href="#resource-proxy">Resource proxy</a></h2>
 <p>For simplicity, let's look at a resource shared by two tasks that run at
 different priorities. Clearly one of the task can preempt the other; to prevent
 a data race the <em>lower priority</em> task must use a critical section when it needs
@@ -295,7 +295,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
+<h2 id="lock"><a class="header" href="#lock"><code>lock</code></a></h2>
 <p>Let's now zoom into the critical section itself. In this example, we have to
 raise the dynamic priority to at least <code>2</code> to prevent a data race. On the
 Cortex-M architecture the dynamic priority can be changed by writing to the
@@ -372,7 +372,7 @@ fn foo(c: foo::Context) {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#nesting" id="nesting">Nesting</a></h2>
+<h2 id="nesting"><a class="header" href="#nesting">Nesting</a></h2>
 <p>Nesting calls to <code>lock</code> on the <em>same</em> resource must be rejected by the compiler
 for memory safety but nesting <code>lock</code> calls on <em>different</em> resources is a valid
 operation. In that case we want to make sure that nesting critical sections
@@ -581,7 +581,7 @@ this:</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#the-basepri-invariant" id="the-basepri-invariant">The BASEPRI invariant</a></h2>
+<h2 id="the-basepri-invariant"><a class="header" href="#the-basepri-invariant">The BASEPRI invariant</a></h2>
 <p>An invariant that the RTIC framework has to preserve is that the value of the
 BASEPRI at the start of an <em>interrupt</em> handler must be the same value it has
 when the interrupt handler returns. BASEPRI may change during the execution of

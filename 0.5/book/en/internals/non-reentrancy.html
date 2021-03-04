@@ -167,11 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#non-reentrancy" id="non-reentrancy">Non-reentrancy</a></h1>
+                        <h1 id="non-reentrancy"><a class="header" href="#non-reentrancy">Non-reentrancy</a></h1>
 <p>In RTIC, tasks handlers are <em>not</em> reentrant. Reentering a task handler can break
 Rust aliasing rules and lead to <em>undefined behavior</em>. A task handler can be
 reentered in one of two ways: in software or by hardware.</p>
-<h2><a class="header" href="#in-software" id="in-software">In software</a></h2>
+<h2 id="in-software"><a class="header" href="#in-software">In software</a></h2>
 <p>To reenter a task handler in software its underlying interrupt handler must be
 invoked using FFI (see example below). FFI requires <code>unsafe</code> code so end users
 are discouraged from directly invoking an interrupt handler.</p>
@@ -239,7 +239,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#by-hardware" id="by-hardware">By hardware</a></h2>
+<h2 id="by-hardware"><a class="header" href="#by-hardware">By hardware</a></h2>
 <p>A task handler can also be reentered without software intervention. This can
 occur if the same handler is assigned to two or more interrupts in the vector
 table but there's no syntax for this kind of configuration in the RTIC

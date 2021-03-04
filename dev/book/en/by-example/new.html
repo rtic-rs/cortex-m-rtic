@@ -167,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#starting-a-new-project" id="starting-a-new-project">Starting a new project</a></h1>
+                        <h1 id="starting-a-new-project"><a class="header" href="#starting-a-new-project">Starting a new project</a></h1>
 <p>Now that you have learned about the main features of the RTIC framework you can
 try it out on your hardware by following these instructions.</p>
 <ol>
@@ -218,7 +218,7 @@ mod app {
     use cortex_m_semihosting::{debug, hprintln};
 
     #[init]
-    fn init(cx: init::Context) -&gt; init::LateResources {
+    fn init(cx: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         static mut X: u32 = 0;
 
         // Cortex-M peripherals
@@ -238,7 +238,7 @@ mod app {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 }
 </code></pre>

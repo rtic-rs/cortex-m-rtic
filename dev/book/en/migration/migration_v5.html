@@ -167,11 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#migrating-from-v05x-to-v060" id="migrating-from-v05x-to-v060">Migrating from v0.5.x to v0.6.0</a></h1>
+                        <h1 id="migrating-from-v05x-to-v060"><a class="header" href="#migrating-from-v05x-to-v060">Migrating from v0.5.x to v0.6.0</a></h1>
 <p>This section describes how to upgrade from v0.5.x to v0.6.0 of the RTIC framework.</p>
-<h2><a class="header" href="#cargotoml---version-bump" id="cargotoml---version-bump"><code>Cargo.toml</code> - version bump</a></h2>
+<h2 id="cargotoml---version-bump"><a class="header" href="#cargotoml---version-bump"><code>Cargo.toml</code> - version bump</a></h2>
 <p>Change the version of <code>cortex-m-rtic</code> to <code>&quot;0.6.0&quot;</code>.</p>
-<h2><a class="header" href="#mod-instead-of-const" id="mod-instead-of-const"><code>mod</code> instead of <code>const</code></a></h2>
+<h2 id="mod-instead-of-const"><a class="header" href="#mod-instead-of-const"><code>mod</code> instead of <code>const</code></a></h2>
 <p>With the support of attributes on modules the <code>const APP</code> workaround is not needed.</p>
 <p>Change</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -196,7 +196,7 @@ mod app {
 <p>Now that a regular Rust module is used it means it is possible to have custom
 user code within that module.
 Additionally, it means that <code>use</code>-statements for resources etc may be required.</p>
-<h2><a class="header" href="#move-dispatchers-from-extern-c-to-app-arguments" id="move-dispatchers-from-extern-c-to-app-arguments">Move Dispatchers from <code>extern &quot;C&quot;</code> to app arguments.</a></h2>
+<h2 id="move-dispatchers-from-extern-c-to-app-arguments"><a class="header" href="#move-dispatchers-from-extern-c-to-app-arguments">Move Dispatchers from <code>extern &quot;C&quot;</code> to app arguments.</a></h2>
 <p>Change</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -226,7 +226,7 @@ mod app {
 <span class="boring">}
 </span></code></pre></pre>
 <p>This works also for ram functions, see examples/ramfunc.rs</p>
-<h2><a class="header" href="#init-always-returns-late-resources" id="init-always-returns-late-resources">Init always returns late resources</a></h2>
+<h2 id="init-always-returns-late-resources"><a class="header" href="#init-always-returns-late-resources">Init always returns late resources</a></h2>
 <p>In order to make the API more symmetric the #[init]-task always returns a late resource.</p>
 <p>From this:</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -260,7 +260,7 @@ mod app {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#resources-struct---resources" id="resources-struct---resources">Resources struct - <code>#[resources]</code></a></h2>
+<h2 id="resources-struct---resources"><a class="header" href="#resources-struct---resources">Resources struct - <code>#[resources]</code></a></h2>
 <p>Previously the RTIC resources had to be in in a struct named exactly &quot;Resources&quot;:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -292,7 +292,7 @@ struct Whateveryouwant {
 <span class="boring">}
 </span></code></pre></pre>
 <p>would work equally well.</p>
-<h2><a class="header" href="#spawnschedule-from-anywhere" id="spawnschedule-from-anywhere">Spawn/schedule from anywhere</a></h2>
+<h2 id="spawnschedule-from-anywhere"><a class="header" href="#spawnschedule-from-anywhere">Spawn/schedule from anywhere</a></h2>
 <p>With the new &quot;spawn/schedule from anywhere&quot;, old code such as:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -324,7 +324,7 @@ fn bar(_c: bar::Context) {
 <span class="boring">}
 </span></code></pre></pre>
 <p>Note that the attributes <code>spawn</code> and <code>schedule</code> are no longer needed.</p>
-<h2><a class="header" href="#symmetric-locks" id="symmetric-locks">Symmetric locks</a></h2>
+<h2 id="symmetric-locks"><a class="header" href="#symmetric-locks">Symmetric locks</a></h2>
 <p>Now RTIC utilizes symmetric locks, this means that the <code>lock</code> method need to be used for all resource access. In old code one could do the following as the high priority task has exclusive access to the resource:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -357,8 +357,8 @@ fn bar(cx: bar::Context) {
 </span></code></pre></pre>
 <p>Note that the performance does not change thanks to LLVM's optimizations which optimizes away unnecessary locks.</p>
 <hr />
-<h2><a class="header" href="#additions" id="additions">Additions</a></h2>
-<h3><a class="header" href="#extern-tasks" id="extern-tasks">Extern tasks</a></h3>
+<h2 id="additions"><a class="header" href="#additions">Additions</a></h2>
+<h3 id="extern-tasks"><a class="header" href="#extern-tasks">Extern tasks</a></h3>
 <p>Both software and hardware tasks can now be defined external to the <code>mod app</code>. Previously this was possible only by implementing a trampoline calling out the task implementation.</p>
 <p>See examples <code>examples/extern_binds.rs</code> and <code>examples/extern_spawn.rs</code>.</p>
 

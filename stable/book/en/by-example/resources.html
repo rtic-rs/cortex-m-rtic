@@ -167,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#resources" id="resources">Resources</a></h2>
+                        <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <p>The framework provides an abstraction to share data between any of the contexts
 we saw in the previous section (task handlers, <code>init</code> and <code>idle</code>): resources.</p>
 <p>Resources are data visible only to functions declared within the <code>#[app]</code>
@@ -250,7 +250,7 @@ UART1: shared = 2
 </code></pre>
 <p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
 so results in a compile error.</p>
-<h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
+<h2 id="lock"><a class="header" href="#lock"><code>lock</code></a></h2>
 <p>In the presence of preemption critical sections are required to mutate shared
 data in a data race free manner. As the framework has complete knowledge over
 the priorities of tasks and which tasks can access which resources it enforces
@@ -345,7 +345,7 @@ C
 D - shared = 2
 E
 </code></pre>
-<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<h2 id="late-resources"><a class="header" href="#late-resources">Late resources</a></h2>
 <p>Late resources are resources that are not given an initial value at compile time
 using the <code>#[init]</code> attribute but instead are initialized at runtime using the
 <code>init::LateResources</code> values returned by the <code>init</code> function.</p>
@@ -417,7 +417,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
 </code></pre>
-<h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
+<h2 id="only-shared-access"><a class="header" href="#only-shared-access">Only shared access</a></h2>
 <p>By default the framework assumes that all tasks require exclusive access
 (<code>&amp;mut-</code>) to resources but it is possible to specify that a task only requires
 shared access (<code>&amp;-</code>) to a resource using the <code>&amp;resource_name</code> syntax in the

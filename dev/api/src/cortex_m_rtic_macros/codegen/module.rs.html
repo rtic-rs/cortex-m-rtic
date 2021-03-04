@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `macros/src/codegen/module.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>module.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings"></script><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../cortex_m_rtic_macros/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../cortex_m_rtic_macros/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
                 <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -312,6 +312,59 @@
 <span id="309">309</span>
 <span id="310">310</span>
 <span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
@@ -333,29 +386,16 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">task_cfgs</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
 
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">ctxt</span>.<span class="ident">ident</span>(<span class="ident">app</span>);
+    <span class="kw">let</span> <span class="ident">app_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">name</span>;
+    <span class="kw">let</span> <span class="ident">app_path</span> <span class="op">=</span> <span class="macro">quote</span><span class="macro">!</span> {<span class="kw">crate</span>::#<span class="ident">app_name</span>};
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">needs_instant</span> <span class="op">=</span> <span class="bool-val">false</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
     <span class="kw">match</span> <span class="ident">ctxt</span> {
         <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">monotonic</span> {
-                <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-                    <span class="doccomment">/// System start time = `Instant(0 /* cycles */)`</span>
-                    <span class="kw">pub</span> <span class="ident">start</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>
-                ));
-
-                <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">start</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">zero</span>()));
-
-                <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-                    <span class="doccomment">/// Core (Cortex-M) peripherals minus the SysTick</span>
-                    <span class="kw">pub</span> <span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">Peripherals</span>
-                ));
-            } <span class="kw">else</span> {
-                <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-                    <span class="doccomment">/// Core (Cortex-M) peripherals</span>
-                    <span class="kw">pub</span> <span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span>
-                ));
-            }
+            <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
+                <span class="doccomment">/// Core (Cortex-M) peripherals</span>
+                <span class="kw">pub</span> <span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span>
+            ));
 
             <span class="kw">if</span> <span class="ident">extra</span>.<span class="ident">peripherals</span> {
                 <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">device</span>;
@@ -381,31 +421,9 @@
 
         <span class="ident">Context</span>::<span class="ident">Idle</span> <span class="op">=</span><span class="op">&gt;</span> {}
 
-        <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(..) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">monotonic</span> {
-                <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-                    <span class="doccomment">/// Time at which this handler started executing</span>
-                    <span class="kw">pub</span> <span class="ident">start</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>
-                ));
+        <span class="ident">Context</span>::<span class="ident">HardwareTask</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {}
 
-                <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">start</span>: <span class="ident">instant</span>));
-
-                <span class="ident">needs_instant</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            }
-        }
-
-        <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(..) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">monotonic</span> {
-                <span class="ident">fields</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-                    <span class="doccomment">/// The time at which this task was scheduled to run</span>
-                    <span class="kw">pub</span> <span class="ident">scheduled</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>
-                ));
-
-                <span class="ident">values</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">scheduled</span>: <span class="ident">instant</span>));
-
-                <span class="ident">needs_instant</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            }
-        }
+        <span class="ident">Context</span>::<span class="ident">SoftwareTask</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {}
     }
 
     <span class="kw">if</span> <span class="ident">ctxt</span>.<span class="ident">has_locals</span>(<span class="ident">app</span>) {
@@ -418,6 +436,7 @@
 
     <span class="kw">if</span> <span class="ident">ctxt</span>.<span class="ident">has_resources</span>(<span class="ident">app</span>) {
         <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">resources_ident</span>(<span class="ident">ctxt</span>, <span class="ident">app</span>);
+        <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">mark_internal_ident</span>(<span class="kw-2">&amp;</span><span class="ident">ident</span>);
         <span class="kw">let</span> <span class="ident">lt</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">resources_tick</span> {
             <span class="ident">lt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="lifetime">&#39;a</span>));
             <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="lifetime">&#39;a</span>))
@@ -444,12 +463,45 @@
     }
 
     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Context</span>::<span class="ident">Init</span> <span class="op">=</span> <span class="ident">ctxt</span> {
-        <span class="kw">let</span> <span class="ident">init</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">inits</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">late_resources</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">late_resources_ident</span>(<span class="kw-2">&amp;</span><span class="ident">init</span>.<span class="ident">name</span>);
+        <span class="kw">let</span> <span class="ident">late_fields</span> <span class="op">=</span> <span class="ident">analysis</span>
+            .<span class="ident">late_resources</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">resources</span><span class="op">|</span> {
+                <span class="ident">resources</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">name</span><span class="op">|</span> {
+                    <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">late_resources</span>[<span class="ident">name</span>].<span class="ident">ty</span>;
+                    <span class="kw">let</span> <span class="ident">cfgs</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">late_resources</span>[<span class="ident">name</span>].<span class="ident">cfgs</span>;
+
+                    <span class="macro">quote</span><span class="macro">!</span>(
+                        #(#<span class="ident">cfgs</span>)<span class="op">*</span>
+                        <span class="kw">pub</span> #<span class="ident">name</span>: #<span class="ident">ty</span>
+                    )
+                })
+            })
+            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
 
         <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-            <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
-            <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::#<span class="ident">late_resources</span> <span class="kw">as</span> <span class="ident">LateResources</span>;
+            <span class="doccomment">/// Resources initialized at runtime</span>
+            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
+            <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LateResources</span> {
+                #(#<span class="ident">late_fields</span>),<span class="op">*</span>
+            }
+        ));
+
+        <span class="kw">let</span> <span class="ident">monotonic_types</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">app</span>
+            .<span class="ident">monotonics</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">monotonic</span>)<span class="op">|</span> {
+                <span class="kw">let</span> <span class="ident">mono</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">monotonic</span>.<span class="ident">ty</span>;
+                <span class="macro">quote</span><span class="macro">!</span> {#<span class="ident">mono</span>}
+            })
+            .<span class="ident">collect</span>();
+
+        <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
+            <span class="doccomment">/// Monotonics used by the system</span>
+            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
+            <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Monotonics</span>(
+                #(<span class="kw">pub</span> #<span class="ident">monotonic_types</span>),<span class="op">*</span>
+            );
         ));
     }
 
@@ -461,11 +513,7 @@
     };
 
     <span class="kw">let</span> <span class="ident">core</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ctxt</span>.<span class="ident">is_init</span>() {
-        <span class="kw">if</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>.<span class="ident">is_some</span>() {
-            <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">Peripherals</span>,))
-        } <span class="kw">else</span> {
-            <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span>,))
-        }
+        <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>: <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Peripherals</span>,))
     } <span class="kw">else</span> {
         <span class="prelude-val">None</span>
     };
@@ -476,14 +524,6 @@
         <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="ident">priority</span>: <span class="kw-2">&amp;</span>#<span class="ident">lt</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">Priority</span>))
     };
 
-    <span class="kw">let</span> <span class="ident">instant</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">needs_instant</span> {
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">extra</span>.<span class="ident">monotonic</span>.<span class="ident">clone</span>().<span class="ident">expect</span>(<span class="string">&quot;RTIC-ICE: UNREACHABLE&quot;</span>);
-
-        <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(, <span class="ident">instant</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>))
-    } <span class="kw">else</span> {
-        <span class="prelude-val">None</span>
-    };
-
     <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
         <span class="doccomment">/// Execution context</span>
         <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Context</span><span class="op">&lt;</span>#<span class="ident">lt</span><span class="op">&gt;</span> {
@@ -492,7 +532,7 @@
 
         <span class="kw">impl</span><span class="op">&lt;</span>#<span class="ident">lt</span><span class="op">&gt;</span> <span class="ident">Context</span><span class="op">&lt;</span>#<span class="ident">lt</span><span class="op">&gt;</span> {
             <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(#<span class="ident">core</span> #<span class="ident">priority</span> #<span class="ident">instant</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+            <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(#<span class="ident">core</span> #<span class="ident">priority</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
                 <span class="ident">Context</span> {
                     #(#<span class="ident">values</span>,)<span class="op">*</span>
                 }
@@ -510,15 +550,15 @@
         <span class="kw">let</span> <span class="ident">cfgs</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">spawnee</span>.<span class="ident">cfgs</span>;
         <span class="comment">// Store a copy of the task cfgs</span>
         <span class="ident">task_cfgs</span> <span class="op">=</span> <span class="ident">cfgs</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> (<span class="ident">args</span>, <span class="ident">tupled</span>, <span class="ident">_untupled</span>, <span class="ident">ty</span>) <span class="op">=</span> <span class="ident">util</span>::<span class="ident">regroup_inputs</span>(<span class="kw-2">&amp;</span><span class="ident">spawnee</span>.<span class="ident">inputs</span>);
+        <span class="kw">let</span> (<span class="ident">args</span>, <span class="ident">tupled</span>, <span class="ident">untupled</span>, <span class="ident">ty</span>) <span class="op">=</span> <span class="ident">util</span>::<span class="ident">regroup_inputs</span>(<span class="kw-2">&amp;</span><span class="ident">spawnee</span>.<span class="ident">inputs</span>);
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">args</span>;
         <span class="kw">let</span> <span class="ident">tupled</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">tupled</span>;
         <span class="kw">let</span> <span class="ident">fq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">fq_ident</span>(<span class="ident">name</span>);
+        <span class="kw">let</span> <span class="ident">fq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">mark_internal_ident</span>(<span class="kw-2">&amp;</span><span class="ident">fq</span>);
         <span class="kw">let</span> <span class="ident">rq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">rq_ident</span>(<span class="ident">priority</span>);
+        <span class="kw">let</span> <span class="ident">rq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">mark_internal_ident</span>(<span class="kw-2">&amp;</span><span class="ident">rq</span>);
         <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">inputs_ident</span>(<span class="ident">name</span>);
-
-        <span class="kw">let</span> <span class="ident">app_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">name</span>;
-        <span class="kw">let</span> <span class="ident">app_path</span> <span class="op">=</span> <span class="macro">quote</span><span class="macro">!</span> {<span class="kw">crate</span>::#<span class="ident">app_name</span>};
+        <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">mark_internal_ident</span>(<span class="kw-2">&amp;</span><span class="ident">inputs</span>);
 
         <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">device</span>;
         <span class="kw">let</span> <span class="ident">enum_</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">interrupt_ident</span>();
@@ -531,11 +571,8 @@
         <span class="comment">// Spawn caller</span>
         <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
         #(#<span class="ident">cfgs</span>)<span class="op">*</span>
+        <span class="doccomment">/// Spawns the task directly</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn</span>(#(#<span class="ident">args</span>,)<span class="kw-2">*</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), #<span class="ident">ty</span><span class="op">&gt;</span> {
-            <span class="comment">// #let_instant // do we need it?</span>
-            <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">Mutex</span> <span class="kw">as</span> <span class="kw">_</span>;
-            <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">mutex_prelude</span>::<span class="kw-2">*</span>;
-
             <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> #<span class="ident">tupled</span>;
 
             <span class="kw">unsafe</span> {
@@ -560,45 +597,114 @@
         }));
 
         <span class="comment">// Schedule caller</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">extra</span>.<span class="ident">monotonic</span> {
-            <span class="kw">let</span> <span class="ident">instants</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">instants_ident</span>(<span class="ident">name</span>);
+        <span class="kw">for</span> (<span class="kw">_</span>, <span class="ident">monotonic</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">monotonics</span> {
+            <span class="kw">let</span> <span class="ident">instants</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">monotonic_instants_ident</span>(<span class="ident">name</span>, <span class="kw-2">&amp;</span><span class="ident">monotonic</span>.<span class="ident">ident</span>);
+            <span class="kw">let</span> <span class="ident">instants</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">mark_internal_ident</span>(<span class="kw-2">&amp;</span><span class="ident">instants</span>);
+            <span class="kw">let</span> <span class="ident">monotonic_name</span> <span class="op">=</span> <span class="ident">monotonic</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>();
 
-            <span class="kw">let</span> <span class="ident">tq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">tq_ident</span>();
+            <span class="kw">let</span> <span class="ident">tq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">tq_ident</span>(<span class="kw-2">&amp;</span><span class="ident">monotonic</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>());
+            <span class="kw">let</span> <span class="ident">tq</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">mark_internal_ident</span>(<span class="kw-2">&amp;</span><span class="ident">tq</span>);
             <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">schedule_t_ident</span>();
+            <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">monotonic</span>.<span class="ident">ident</span>;
+            <span class="kw">let</span> <span class="ident">mono_type</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">monotonic</span>.<span class="ident">ty</span>;
+            <span class="kw">let</span> <span class="ident">m_ident</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">monotonic_ident</span>(<span class="kw-2">&amp;</span><span class="ident">monotonic_name</span>);
+            <span class="kw">let</span> <span class="ident">m_ident</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">mark_internal_ident</span>(<span class="kw-2">&amp;</span><span class="ident">m_ident</span>);
+            <span class="kw">let</span> <span class="ident">m_isr</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">monotonic</span>.<span class="ident">args</span>.<span class="ident">binds</span>;
+            <span class="kw">let</span> <span class="ident">enum_</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">interrupt_ident</span>();
+
+            <span class="kw">if</span> <span class="ident">monotonic</span>.<span class="ident">args</span>.<span class="ident">default</span> {
+                <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="kw">use</span> #<span class="ident">m</span>::<span class="ident">spawn_after</span>;));
+                <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="kw">use</span> #<span class="ident">m</span>::<span class="ident">spawn_at</span>;));
+            }
+
+            <span class="kw">let</span> (<span class="ident">enable_interrupt</span>, <span class="ident">pend</span>) <span class="op">=</span> <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">m_isr</span>.<span class="ident">to_string</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;SysTick&quot;</span> {
+                (
+                    <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">core</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">cortex_m</span>::<span class="ident">peripheral</span>::<span class="ident">SYST</span><span class="op">&gt;</span>(())
+                        .<span class="ident">enable_interrupt</span>()),
+                    <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">cortex_m</span>::<span class="ident">peripheral</span>::<span class="ident">SCB</span>::<span class="ident">set_pendst</span>()),
+                )
+            } <span class="kw">else</span> {
+                <span class="kw">let</span> <span class="ident">rt_err</span> <span class="op">=</span> <span class="ident">util</span>::<span class="ident">rt_err_ident</span>();
+                (
+                    <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">NVIC</span>::<span class="ident">unmask</span>(#<span class="ident">app_path</span>::#<span class="ident">rt_err</span>::#<span class="ident">enum_</span>::#<span class="ident">m_isr</span>)),
+                    <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">rtic</span>::<span class="ident">pend</span>(#<span class="ident">app_path</span>::#<span class="ident">rt_err</span>::#<span class="ident">enum_</span>::#<span class="ident">m_isr</span>)),
+                )
+            };
+
+            <span class="kw">let</span> <span class="ident">user_imports</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">app</span>.<span class="ident">user_imports</span>;
 
             <span class="ident">items</span>.<span class="ident">push</span>(<span class="macro">quote</span><span class="macro">!</span>(
-            #(#<span class="ident">cfgs</span>)<span class="op">*</span>
-            <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule</span>(
-                <span class="ident">instant</span>: <span class="op">&lt;</span>#<span class="ident">m</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">Monotonic</span><span class="op">&gt;</span>::<span class="ident">Instant</span>
-                #(,#<span class="ident">args</span>)<span class="op">*</span>
-            ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), #<span class="ident">ty</span><span class="op">&gt;</span> {
-                <span class="kw">unsafe</span> {
-                    <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">Mutex</span> <span class="kw">as</span> <span class="kw">_</span>;
-                    <span class="kw">use</span> <span class="ident">rtic</span>::<span class="ident">mutex_prelude</span>::<span class="kw-2">*</span>;
+            <span class="doccomment">/// Holds methods related to this monotonic</span>
+            <span class="kw">pub</span> <span class="kw">mod</span> #<span class="ident">m</span> {
+                #(
+                    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
+                    #<span class="ident">user_imports</span>
+                )<span class="op">*</span>
 
-                    <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> #<span class="ident">tupled</span>;
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">interrupt</span>::<span class="ident">free</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> #<span class="ident">app_path</span>::#<span class="ident">fq</span>.<span class="ident">dequeue</span>()) {
-                        #<span class="ident">app_path</span>::#<span class="ident">inputs</span>
-                            .<span class="ident">get_unchecked_mut</span>(<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">index</span>))
-                            .<span class="ident">as_mut_ptr</span>()
-                            .<span class="ident">write</span>(<span class="ident">input</span>);
+                #(#<span class="ident">cfgs</span>)<span class="op">*</span>
+                <span class="doccomment">/// Spawns the task after a set duration relative to the current time</span>
+                <span class="doccomment">///</span>
+                <span class="doccomment">/// This will use the time `Instant::new(0)` as baseline if called in `#[init]`,</span>
+                <span class="doccomment">/// so if you use a non-resetable timer use `spawn_at` when in `#[init]`</span>
+                <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_after</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(
+                    <span class="ident">duration</span>: <span class="ident">D</span>
+                    #(,#<span class="ident">args</span>)<span class="op">*</span>
+                ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), #<span class="ident">ty</span><span class="op">&gt;</span>
+                    <span class="kw">where</span> <span class="ident">D</span>: <span class="ident">rtic</span>::<span class="ident">time</span>::<span class="ident">duration</span>::<span class="ident">Duration</span> <span class="op">+</span> <span class="ident">rtic</span>::<span class="ident">time</span>::<span class="ident">fixed_point</span>::<span class="ident">FixedPoint</span>,
+                        <span class="ident">D</span>::<span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="op">&lt;</span>#<span class="ident">app_path</span>::#<span class="ident">mono_type</span> <span class="kw">as</span> <span class="ident">rtic</span>::<span class="ident">time</span>::<span class="ident">Clock</span><span class="op">&gt;</span>::<span class="ident">T</span><span class="op">&gt;</span>,
+                {
 
-                        #<span class="ident">app_path</span>::#<span class="ident">instants</span>
-                            .<span class="ident">get_unchecked_mut</span>(<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">index</span>))
-                            .<span class="ident">as_mut_ptr</span>()
-                            .<span class="ident">write</span>(<span class="ident">instant</span>);
-
-                        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">NotReady</span> {
-                            <span class="ident">instant</span>,
-                            <span class="ident">index</span>,
-                            <span class="ident">task</span>: #<span class="ident">app_path</span>::#<span class="ident">t</span>::#<span class="ident">name</span>,
-                        };
-
-                        <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">interrupt</span>::<span class="ident">free</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> #<span class="ident">app_path</span>::#<span class="ident">tq</span>.<span class="ident">enqueue_unchecked</span>(<span class="ident">nr</span>));
-
-                        <span class="prelude-val">Ok</span>(())
+                    <span class="kw">let</span> <span class="ident">instant</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">interrupt</span>::<span class="ident">free</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="kw">unsafe</span> { #<span class="ident">app_path</span>::#<span class="ident">m_ident</span>.<span class="ident">is_none</span>() }) {
+                        <span class="ident">rtic</span>::<span class="ident">time</span>::<span class="ident">Instant</span>::<span class="ident">new</span>(<span class="number">0</span>)
                     } <span class="kw">else</span> {
-                        <span class="prelude-val">Err</span>(<span class="ident">input</span>)
+                        #<span class="ident">app_path</span>::#<span class="ident">m</span>::<span class="ident">now</span>()
+                    };
+
+                    <span class="ident">spawn_at</span>(<span class="ident">instant</span> <span class="op">+</span> <span class="ident">duration</span> #(,#<span class="ident">untupled</span>)<span class="kw-2">*</span>)
+                }
+
+                #(#<span class="ident">cfgs</span>)<span class="op">*</span>
+                <span class="doccomment">/// Spawns the task at a fixed time instant</span>
+                <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn_at</span>(
+                    <span class="ident">instant</span>: <span class="ident">rtic</span>::<span class="ident">time</span>::<span class="ident">Instant</span><span class="op">&lt;</span>#<span class="ident">app_path</span>::#<span class="ident">mono_type</span><span class="op">&gt;</span>
+                    #(,#<span class="ident">args</span>)<span class="op">*</span>
+                ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), #<span class="ident">ty</span><span class="op">&gt;</span> {
+                    <span class="kw">unsafe</span> {
+                        <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> #<span class="ident">tupled</span>;
+                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">interrupt</span>::<span class="ident">free</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> #<span class="ident">app_path</span>::#<span class="ident">fq</span>.<span class="ident">dequeue</span>()) {
+                            #<span class="ident">app_path</span>::#<span class="ident">inputs</span>
+                                .<span class="ident">get_unchecked_mut</span>(<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">index</span>))
+                                .<span class="ident">as_mut_ptr</span>()
+                                .<span class="ident">write</span>(<span class="ident">input</span>);
+
+                            #<span class="ident">app_path</span>::#<span class="ident">instants</span>
+                                .<span class="ident">get_unchecked_mut</span>(<span class="ident">usize</span>::<span class="ident">from</span>(<span class="ident">index</span>))
+                                .<span class="ident">as_mut_ptr</span>()
+                                .<span class="ident">write</span>(<span class="ident">instant</span>);
+
+                            <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">NotReady</span> {
+                                <span class="ident">instant</span>,
+                                <span class="ident">index</span>,
+                                <span class="ident">task</span>: #<span class="ident">app_path</span>::#<span class="ident">t</span>::#<span class="ident">name</span>,
+                            };
+
+                            <span class="ident">rtic</span>::<span class="ident">export</span>::<span class="ident">interrupt</span>::<span class="ident">free</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span>
+                                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">mono</span>) <span class="op">=</span> #<span class="ident">app_path</span>::#<span class="ident">m_ident</span>.<span class="ident">as_mut</span>() {
+                                    #<span class="ident">app_path</span>::#<span class="ident">tq</span>.<span class="ident">enqueue_unchecked</span>(
+                                        <span class="ident">nr</span>,
+                                        <span class="op">|</span><span class="op">|</span> #<span class="ident">enable_interrupt</span>,
+                                        <span class="op">|</span><span class="op">|</span> #<span class="ident">pend</span>,
+                                        <span class="ident">mono</span>)
+                                } <span class="kw">else</span> {
+                                    <span class="comment">// We can only use the timer queue if `init` has returned, and it</span>
+                                    <span class="comment">// writes the `Some(monotonic)` we are accessing here.</span>
+                                    <span class="ident">core</span>::<span class="ident">hint</span>::<span class="ident">unreachable_unchecked</span>()
+                                });
+
+                            <span class="prelude-val">Ok</span>(())
+                        } <span class="kw">else</span> {
+                            <span class="prelude-val">Err</span>(<span class="ident">input</span>)
+                        }
                     }
                 }
             }));

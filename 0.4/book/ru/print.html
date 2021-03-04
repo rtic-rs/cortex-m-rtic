@@ -167,10 +167,10 @@
                     <main>
                         <h1 align="center">Real Time For the Masses</h1>
 <p align="center">Конкурентный фреймворк для создания систем реального времени</p>
-<h1><a class="header" href="#Введение" id="Введение">Введение</a></h1>
+<h1 id="Введение"><a class="header" href="#Введение">Введение</a></h1>
 <p>Эта книга содержит документацию уровня пользователя фреймворком Real Time For the Masses
 (RTFM). Описание API можно найти <a href="../api/rtfm/index.html">здесь</a>.</p>
-<h2><a class="header" href="#Возможности" id="Возможности">Возможности</a></h2>
+<h2 id="Возможности"><a class="header" href="#Возможности">Возможности</a></h2>
 <ul>
 <li>
 <p><strong>Задачи</strong> - единица конкуренции <sup class="footnote-reference"><a href="#1">1</a></sup>. Задачи могут <em>запускаться по событию</em>
@@ -216,7 +216,7 @@
 разработали для дружественных инструментов для этого).</p>
 </li>
 </ul>
-<h2><a class="header" href="#Требования" id="Требования">Требования</a></h2>
+<h2 id="Требования"><a class="header" href="#Требования">Требования</a></h2>
 <ul>
 <li>
 <p>Rust 1.36.0+</p>
@@ -225,11 +225,11 @@
 <p>Программы нужно писать используя 2018 edition.</p>
 </li>
 </ul>
-<h2><a class="header" href="#Благодарности" id="Благодарности">Благодарности</a></h2>
+<h2 id="Благодарности"><a class="header" href="#Благодарности">Благодарности</a></h2>
 <p>Эта библиотека основана на <a href="http://www.rtfm-lang.org/">языке RTFM</a>, созданном Embedded
 Systems group в <a href="https://www.ltu.se/?l=en">Техническом Университете Luleå</a>, под рук.
 <a href="https://www.ltu.se/staff/p/pln-1.11258?l=en">Prof. Per Lindgren</a>.</p>
-<h2><a class="header" href="#Ссылки" id="Ссылки">Ссылки</a></h2>
+<h2 id="Ссылки"><a class="header" href="#Ссылки">Ссылки</a></h2>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>Eriksson, J., Häggström, F., Aittamaa, S., Kruglyak, A., &amp; Lindgren, P.
 (2013, June). Real-time for the masses, step 1: Programming API and static
@@ -241,7 +241,7 @@ priority SRP kernel primitives. In Industrial Embedded Systems (SIES), 2013
 L. M. (2016). Abstract timers and their implementation onto the arm cortex-m
 family of mcus. ACM SIGBED Review, 13(1), 48-53.</p>
 </div>
-<h2><a class="header" href="#Лицензия" id="Лицензия">Лицензия</a></h2>
+<h2 id="Лицензия"><a class="header" href="#Лицензия">Лицензия</a></h2>
 <p>Все исходные тексты (включая примеры кода) лицензированы либо под:</p>
 <ul>
 <li>Apache License, Version 2.0 (<a href="LICENSE-APACHE">LICENSE-APACHE</a> или
@@ -253,10 +253,10 @@ family of mcus. ACM SIGBED Review, 13(1), 48-53.</p>
 <p>Текст книги лицензирован по условиям лицензий
 Creative Commons CC-BY-SA v4.0 (<a href="LICENSE-CC-BY-SA">LICENSE-CC-BY-SA</a> или
 <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">https://creativecommons.org/licenses/by-sa/4.0/legalcode</a>).</p>
-<h3><a class="header" href="#contribution" id="contribution">Contribution</a></h3>
+<h3 id="contribution"><a class="header" href="#contribution">Contribution</a></h3>
 <p>Если вы явно не заявляете иначе, любой взнос, преднамеренно представленный
 для включения в эту работу, как определено в лицензии Apache-2.0, лицензируется, как указано выше, без каких-либо дополнительных условий.</p>
-<h1><a class="header" href="#rtfm-в-примерах" id="rtfm-в-примерах">RTFM в примерах</a></h1>
+<h1 id="rtfm-в-примерах"><a class="header" href="#rtfm-в-примерах">RTFM в примерах</a></h1>
 <p>Эта часть книги представляет фреймворк Real Time For the Masses (RTFM)
 новым пользователям через примеры с растущей сложностью.</p>
 <p>Все примеры в этой книге можно найти в <a href="https://github.com/japaric/cortex-m-rtfm">репозитории</a> проекта на GitHub,
@@ -265,7 +265,7 @@ Creative Commons CC-BY-SA v4.0 (<a href="LICENSE-CC-BY-SA">LICENSE-CC-BY-SA</a> 
 <p>Чтобы запустить примеры на Вашем ноутбуке / ПК, Вам нужна программа
 <code>qemu-system-arm</code>. Инструкции по настройке окружения для разработки
 встраиваемых устройств, в том числе QEMU, Вы можете найти в <a href="https://rust-embedded.github.io/book/intro/install.html">the embedded Rust book</a>.</p>
-<h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
+<h1 id="the-app-attribute"><a class="header" href="#the-app-attribute">The <code>app</code> attribute</a></h1>
 <p>Это наименьшая возможная программа на RTFM:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -302,7 +302,7 @@ const APP: () = {
 RTFM работать на стабильной сборке, мы используем вместо него слово <code>const</code>.
 Когда большая часть макросов 1.2 стабилизируются, мы прейдем от <code>const</code> к <code>mod</code> и в конце концов в атрибуту уровне приложения (<code>#![app]</code>).</p>
 </blockquote>
-<h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
+<h2 id="init"><a class="header" href="#init"><code>init</code></a></h2>
 <p>Внутри псевдо-модуля атрибут <code>app</code> ожидает найти функцию инициализации, обозначенную
 атрибутом <code>init</code>. Эта функция должна иметь сигнатуру <code>[unsafe] fn()</code>.</p>
 <p>Эта функция инициализации будет первой частью запускаемого приложения.
@@ -486,7 +486,7 @@ UART0 called 2 times```
 можно написать, используя только библиотеку `cortex-m-rt`. В следующем разделе
 мы начнем знакомиться с функционалом, присущим только RTFM.
 </code></pre>
-<h2><a class="header" href="#Ресурсы" id="Ресурсы">Ресурсы</a></h2>
+<h2 id="Ресурсы"><a class="header" href="#Ресурсы">Ресурсы</a></h2>
 <p>Одно из ограничений атрибутов, предоставляемых библиотекой <code>cortex-m-rt</code> является
 то, что совместное использование данных (или периферии) между прерываниями,
 или прерыванием и функцией <code>init</code>, требуют <code>cortex_m::interrupt::Mutex</code>, который
@@ -561,7 +561,7 @@ const APP: () = {
 UART0: SHARED = 1
 UART1: SHARED = 2
 </code></pre>
-<h2><a class="header" href="#Приоритеты" id="Приоритеты">Приоритеты</a></h2>
+<h2 id="Приоритеты"><a class="header" href="#Приоритеты">Приоритеты</a></h2>
 <p>Приоритет каждого прерывания можно определить в атрибутах <code>interrupt</code> и <code>exception</code>.
 Невозможно установить приоритет любым другим способом, потому что рантайм
 забирает владение прерыванием <code>NVIC</code>; также невозможно изменить приоритет
@@ -796,7 +796,7 @@ const APP: () = {
 UART1(KEY = 0xdeadbeef)
 UART0(KEY = 0xdeadbeef)```
 </code></pre>
-<h1><a class="header" href="#Программные-задачи" id="Программные-задачи">Программные задачи</a></h1>
+<h1 id="Программные-задачи"><a class="header" href="#Программные-задачи">Программные задачи</a></h1>
 <p>RTFM обрабатывает прерывания и исключения как <em>аппаратные</em> задачи. Аппаратные
 задачи могут вызываться устройством в ответ на события, такие как нажатие кнопки.
 RTFM также поддерживает <em>программные</em> задачи, порождаемые программой из любого
@@ -1009,7 +1009,7 @@ foo(2)
 foo(3)
 bar```
 </code></pre>
-<h1><a class="header" href="#Очередь-таймера" id="Очередь-таймера">Очередь таймера</a></h1>
+<h1 id="Очередь-таймера"><a class="header" href="#Очередь-таймера">Очередь таймера</a></h1>
 <p>Когда включена опция <code>timer-queue</code>, фреймворк RTFM включает
 <em>глобальную очередь таймера</em>, которую приложения могут использовать, чтобы
 <em>планировать</em> программные задачи на запуск через некоторое время в будущем.</p>
@@ -1084,7 +1084,7 @@ const APP: () = {
 bar  @ Instant(4000236)
 foo  @ Instant(8000173)
 </code></pre>
-<h2><a class="header" href="#Периодические-задачи" id="Периодические-задачи">Периодические задачи</a></h2>
+<h2 id="Периодические-задачи"><a class="header" href="#Периодические-задачи">Периодические задачи</a></h2>
 <p>Программные задачи имеют доступ к <code>Instant</code> в момент, когда были запланированы
 на запуск через переменную <code>scheduled</code>. Эта информация и API <code>schedule</code> могут
 быть использованы для реализации периодических задач, как показано в примере ниже.</p>
@@ -1134,7 +1134,7 @@ const APP: () = {
 foo(scheduled = Instant(16000000), now = Instant(16000196))
 foo(scheduled = Instant(24000000), now = Instant(24000196))
 </code></pre>
-<h2><a class="header" href="#Базовое-время" id="Базовое-время">Базовое время</a></h2>
+<h2 id="Базовое-время"><a class="header" href="#Базовое-время">Базовое время</a></h2>
 <p>Для задач, планируемых из <code>init</code> мы имеем точную информацию о их планируемом
 (<code>scheduled</code>) времени. Для аппаратных задач нет <code>scheduled</code> времени, потому
 что эти задачи асинхронны по природе. Для аппаратных задач рантайм предоставляет
@@ -1213,7 +1213,7 @@ foo(baseline = Instant(0))
 UART0(baseline = Instant(904))
 foo(baseline = Instant(904))
 </code></pre>
-<h1><a class="header" href="#Одиночки" id="Одиночки">Одиночки</a></h1>
+<h1 id="Одиночки"><a class="header" href="#Одиночки">Одиночки</a></h1>
 <p>Атрибут <code>app</code> знает о библиотеке <a href="by-example/../../api/owned_singleton/index.html"><code>owned-singleton</code></a> и её атрибуте <a href="by-example/../../api/owned_singleton_macros/attr.Singleton.html"><code>Singleton</code></a>.
 Когда этот атрибут применяется к одному из ресурсов, рантайм производит для Вас
 <code>unsafe</code> инициализацию одиночки, проверяя, что только один экземпляр одиночки
@@ -1293,7 +1293,7 @@ const APP: () = {
 bar(2)
 foo(1)```
 </code></pre>
-<h1><a class="header" href="#Типы-send-и-sync" id="Типы-send-и-sync">Типы, Send и Sync</a></h1>
+<h1 id="Типы-send-и-sync"><a class="header" href="#Типы-send-и-sync">Типы, Send и Sync</a></h1>
 <p>Атрибут <code>app</code> вводит контекст, коллекцию переменных в каждую из функций.
 Все эти переменные имеют предсказуемые, неанонимные типы, поэтому Вы можете
 писать простые функции, получающие их как аргументы.</p>
@@ -1363,7 +1363,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#send" id="send"><code>Send</code></a></h2>
+<h2 id="send"><a class="header" href="#send"><code>Send</code></a></h2>
 <p><a href="https://doc.rust-lang.org/core/marker/trait.Send.html"><code>Send</code></a> - маркерный типаж (trait) для &quot;типов, которые можно передавать через границы
 потоков&quot;, как это определено в <code>core</code>. В контексте RTFM типаж <code>Send</code> необходим
 только там, где возможна передача значения между задачами, запускаемыми на
@@ -1438,7 +1438,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
+<h2 id="sync"><a class="header" href="#sync"><code>Sync</code></a></h2>
 <p>Похожая ситуация, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> -  маркерный типаж для &quot;типов, на которых можно
 ссылаться в разных потоках&quot;, как это определено в <code>core</code>. В контексте RTFM
 типаж <code>Sync</code> необходим только там, где возможны две или более задачи,
@@ -1494,7 +1494,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#Создание-нового-проекта" id="Создание-нового-проекта">Создание нового проекта</a></h1>
+<h1 id="Создание-нового-проекта"><a class="header" href="#Создание-нового-проекта">Создание нового проекта</a></h1>
 <p>Теперь, когда Вы изучили основные возможности фреймворка RTFM, Вы можете
 попробовать его использовать на Вашем оборудовании следуя этим инструкциям.</p>
 <ol>
@@ -1544,8 +1544,8 @@ $ rm memory.x build.rs
 $ cargo run
 init```
 </code></pre>
-<h1><a class="header" href="#Советы-и-хитрости" id="Советы-и-хитрости">Советы и хитрости</a></h1>
-<h2><a class="header" href="#Обобщенное-программирование-generics" id="Обобщенное-программирование-generics">Обобщенное программирование (Generics)</a></h2>
+<h1 id="Советы-и-хитрости"><a class="header" href="#Советы-и-хитрости">Советы и хитрости</a></h1>
+<h2 id="Обобщенное-программирование-generics"><a class="header" href="#Обобщенное-программирование-generics">Обобщенное программирование (Generics)</a></h2>
 <p>Ресурсы, совместно используемые двумя или более задачами, реализуют трейт <code>Mutex</code>
 во <em>всех</em> контекстах, даже в тех, где для доступа к данным не требуются
 критические секции. Это позволяет легко писать обобщенный код оперирующий
@@ -1781,17 +1781,17 @@ init
 foo called 1 time
 idle
 foo called 2 times```</code></pre>
-<h1><a class="header" href="#Под-капотом" id="Под-капотом">Под капотом</a></h1>
+<h1 id="Под-капотом"><a class="header" href="#Под-капотом">Под капотом</a></h1>
 <p>В этом разделе описывабтся внутренности фркймворка на <em>высоком уровне</em>.
 Низкоуровневые тонкости, такие как парсинг и кодогенерация производимые
 процедурным макросом (<code>#[app]</code>) здесь объясняться не будут. Мы сосредоточимся
 на анализе пользовательской спецификации и структурах данных, используемых
 рантаймом.</p>
-<h1><a class="header" href="#ceiling-analysis" id="ceiling-analysis">Ceiling analysis</a></h1>
+<h1 id="ceiling-analysis"><a class="header" href="#ceiling-analysis">Ceiling analysis</a></h1>
 <p><strong>TODO</strong></p>
-<h1><a class="header" href="#task-dispatcher" id="task-dispatcher">Task dispatcher</a></h1>
+<h1 id="task-dispatcher"><a class="header" href="#task-dispatcher">Task dispatcher</a></h1>
 <p><strong>TODO</strong></p>
-<h1><a class="header" href="#timer-queue" id="timer-queue">Timer queue</a></h1>
+<h1 id="timer-queue"><a class="header" href="#timer-queue">Timer queue</a></h1>
 <p><strong>TODO</strong></p>
 
                     </main>

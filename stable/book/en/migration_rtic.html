@@ -167,12 +167,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#migrating-from-rtfm-to-rtic" id="migrating-from-rtfm-to-rtic">Migrating from RTFM to RTIC</a></h1>
+                        <h1 id="migrating-from-rtfm-to-rtic"><a class="header" href="#migrating-from-rtfm-to-rtic">Migrating from RTFM to RTIC</a></h1>
 <p>This section covers how to upgrade an application written against RTFM v0.5.x to
 the same version of RTIC. This applies since the renaming of the framework as per <a href="https://github.com/rtic-rs/rfcs/pull/33">RFC #33</a>.</p>
 <p><strong>Note:</strong> There are no code differences between RTFM v0.5.3 and RTIC v0.5.3, it is purely a name
 change.</p>
-<h2><a class="header" href="#cargotoml" id="cargotoml"><code>Cargo.toml</code></a></h2>
+<h2 id="cargotoml"><a class="header" href="#cargotoml"><code>Cargo.toml</code></a></h2>
 <p>First, the <code>cortex-m-rtfm</code> dependency needs to be updated to
 <code>cortex-m-rtic</code>.</p>
 <pre><code class="language-toml">[dependencies]
@@ -182,7 +182,7 @@ cortex-m-rtfm = &quot;0.5.3&quot;
 # into this
 cortex-m-rtic = &quot;0.5.3&quot;
 </code></pre>
-<h2><a class="header" href="#code-changes" id="code-changes">Code changes</a></h2>
+<h2 id="code-changes"><a class="header" href="#code-changes">Code changes</a></h2>
 <p>The only code change that needs to be made is that any reference to <code>rtfm</code> before now need to point
 to <code>rtic</code> as follows:</p>
 <pre><pre class="playground"><code class="language-rust">

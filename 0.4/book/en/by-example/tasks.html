@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
+                        <h1 id="software-tasks"><a class="header" href="#software-tasks">Software tasks</a></h1>
 <p>RTFM treats interrupt and exception handlers as <em>hardware</em> tasks. Hardware tasks
 are invoked by the hardware in response to events, like pressing a button. RTFM
 also supports <em>software</em> tasks which can be spawned by the software from any
@@ -239,7 +239,7 @@ foo
 baz
 bar
 </code></pre>
-<h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
+<h2 id="message-passing"><a class="header" href="#message-passing">Message passing</a></h2>
 <p>The other advantage of software tasks is that messages can be passed to these
 tasks when spawning them. The type of the message payload must be specified in
 the signature of the task handler.</p>
@@ -308,7 +308,7 @@ foo
 bar(1)
 baz(2, 3)
 </code></pre>
-<h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
+<h2 id="capacity"><a class="header" href="#capacity">Capacity</a></h2>
 <p>Task dispatchers do <em>not</em> use any dynamic memory allocation. The memory required
 to store messages is statically reserved. The framework will reserve enough
 space for every context to be able to spawn each task at most once. This is a

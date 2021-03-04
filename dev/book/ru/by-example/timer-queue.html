@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#Очередь-таймера" id="Очередь-таймера">Очередь таймера</a></h1>
+                        <h1 id="Очередь-таймера"><a class="header" href="#Очередь-таймера">Очередь таймера</a></h1>
 <p>Когда включена опция <code>timer-queue</code>, фреймворк RTIC включает
 <em>глобальную очередь таймера</em>, которую приложения могут использовать, чтобы
 <em>планировать</em> программные задачи на запуск через некоторое время в будущем.</p>
@@ -196,46 +196,48 @@
 #![no_main]
 #![no_std]
 
-use panic_halt as _;
+use panic_semihosting as _;
 
 // NOTE: does NOT work on QEMU!
-#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT, dispatchers = [SSI0])]
+#[rtic::app(device = lm3s6965, dispatchers = [SSI0])]
 mod app {
-    use cortex_m::peripheral::DWT;
     use cortex_m_semihosting::hprintln;
-    use rtic::cyccnt::{Instant, U32Ext as _};
+    use dwt_systick_monotonic::{
+        consts::{U0, U8},
+        DwtSystick,
+    };
+    use rtic::time::duration::Seconds;
+
+    #[monotonic(binds = SysTick, default = true)]
+    type MyMono = DwtSystick&lt;U8, U0, U0&gt;; // 8 MHz
 
     #[init()]
-    fn init(mut cx: init::Context) -&gt; init::LateResources {
-        // Initialize (enable) the monotonic timer (CYCCNT)
-        cx.core.DCB.enable_trace();
-        // required on Cortex-M7 devices that software lock the DWT (e.g. STM32F7)
-        DWT::unlock();
-        cx.core.DWT.enable_cycle_counter();
+    fn init(cx: init::Context) -&gt; (init::LateResources, init::Monotonics) {
+        let mut dcb = cx.core.DCB;
+        let dwt = cx.core.DWT;
+        let systick = cx.core.SYST;
 
-        // semantically, the monotonic timer is frozen at time &quot;zero&quot; during `init`
-        // NOTE do *not* call `Instant::now` in this context; it will return a nonsense value
-        let now = cx.start; // the start time of the system
+        let mono = DwtSystick::new(&amp;mut dcb, dwt, systick, 8_000_000);
 
-        hprintln!(&quot;init @ {:?}&quot;, now).unwrap();
+        hprintln!(&quot;init&quot;).unwrap();
 
-        // Schedule `foo` to run 8e6 cycles (clock cycles) in the future
-        foo::schedule(now + 8_000_000.cycles()).unwrap();
+        // Schedule `foo` to run 1 second in the future
+        foo::spawn_after(Seconds(1_u32)).unwrap();
 
-        // Schedule `bar` to run 4e6 cycles in the future
-        bar::schedule(now + 4_000_000.cycles()).unwrap();
+        // Schedule `bar` to run 2 seconds in the future
+        bar::spawn_after(Seconds(2_u32)).unwrap();
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics(mono))
     }
 
     #[task]
     fn foo(_: foo::Context) {
-        hprintln!(&quot;foo  @ {:?}&quot;, Instant::now()).unwrap();
+        hprintln!(&quot;foo&quot;).unwrap();
     }
 
     #[task]
     fn bar(_: bar::Context) {
-        hprintln!(&quot;bar  @ {:?}&quot;, Instant::now()).unwrap();
+        hprintln!(&quot;bar&quot;).unwrap();
     }
 }
 <span class="boring">}
@@ -245,7 +247,7 @@ mod app {
 bar  @ Instant(4000236)
 foo  @ Instant(8000173)
 </code></pre>
-<h2><a class="header" href="#Периодические-задачи" id="Периодические-задачи">Периодические задачи</a></h2>
+<h2 id="Периодические-задачи"><a class="header" href="#Периодические-задачи">Периодические задачи</a></h2>
 <p>Программные задачи имеют доступ к <code>Instant</code> в момент, когда были запланированы
 на запуск через переменную <code>scheduled</code>. Эта информация и API <code>schedule</code> могут
 быть использованы для реализации периодических задач, как показано в примере ниже.</p>
@@ -262,28 +264,34 @@ foo  @ Instant(8000173)
 use panic_semihosting as _;
 
 // NOTE: does NOT work on QEMU!
-#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT, dispatchers = [SSI0])]
+#[rtic::app(device = lm3s6965, dispatchers = [SSI0])]
 mod app {
-    use cortex_m_semihosting::hprintln;
-    use rtic::cyccnt::{Instant, U32Ext};
+    use dwt_systick_monotonic::{
+        consts::{U0, U8},
+        DwtSystick,
+    };
+    use rtic::time::duration::Seconds;
 
-    const PERIOD: u32 = 8_000_000;
+    #[monotonic(binds = SysTick, default = true)]
+    type MyMono = DwtSystick&lt;U8, U0, U0&gt;; // 8 MHz
 
     #[init]
-    fn init(cx: init::Context) -&gt; init::LateResources {
-        // omitted: initialization of `CYCCNT`
+    fn init(cx: init::Context) -&gt; (init::LateResources, init::Monotonics) {
+        let mut dcb = cx.core.DCB;
+        let dwt = cx.core.DWT;
+        let systick = cx.core.SYST;
 
-        foo::schedule(cx.start + PERIOD.cycles()).unwrap();
+        let mono = DwtSystick::new(&amp;mut dcb, dwt, systick, 8_000_000);
 
-        init::LateResources {}
+        foo::spawn_after(Seconds(1_u32)).unwrap();
+
+        (init::LateResources {}, init::Monotonics(mono))
     }
 
     #[task]
-    fn foo(cx: foo::Context) {
-        let now = Instant::now();
-        hprintln!(&quot;foo(scheduled = {:?}, now = {:?})&quot;, cx.scheduled, now).unwrap();
-
-        foo::schedule(cx.scheduled + PERIOD.cycles()).unwrap();
+    fn foo(_cx: foo::Context) {
+        // Periodic
+        foo::spawn_after(Seconds(1_u32)).unwrap();
     }
 }
 <span class="boring">}
@@ -295,7 +303,7 @@ mod app {
 foo(scheduled = Instant(16000000), now = Instant(16000196))
 foo(scheduled = Instant(24000000), now = Instant(24000196))
 </code></pre>
-<h2><a class="header" href="#Базовое-время" id="Базовое-время">Базовое время</a></h2>
+<h2 id="Базовое-время"><a class="header" href="#Базовое-время">Базовое время</a></h2>
 <p>Для задач, планируемых из <code>init</code> мы имеем точную информацию о их планируемом
 (<code>scheduled</code>) времени. Для аппаратных задач нет <code>scheduled</code> времени, потому
 что эти задачи асинхронны по природе. Для аппаратных задач рантайм предоставляет
@@ -315,56 +323,7 @@ foo(scheduled = Instant(24000000), now = Instant(24000196))
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>//! examples/baseline.rs
-
-#![deny(unsafe_code)]
-#![deny(warnings)]
-#![no_main]
-#![no_std]
-
-use panic_semihosting as _;
-
-// NOTE: does NOT properly work on QEMU
-#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT, dispatchers = [SSI0])]
-mod app {
-    use cortex_m_semihosting::{debug, hprintln};
-    use lm3s6965::Interrupt;
-
-    #[init]
-    fn init(cx: init::Context) -&gt; init::LateResources {
-        // omitted: initialization of `CYCCNT`
-
-        hprintln!(&quot;init(baseline = {:?})&quot;, cx.start).unwrap();
-
-        // `foo` inherits the baseline of `init`: `Instant(0)`
-        foo::spawn().unwrap();
-
-        init::LateResources {}
-    }
-
-    #[task]
-    fn foo(cx: foo::Context) {
-        static mut ONCE: bool = true;
-
-        hprintln!(&quot;foo(baseline = {:?})&quot;, cx.scheduled).unwrap();
-
-        if *ONCE {
-            *ONCE = false;
-
-            rtic::pend(Interrupt::UART0);
-        } else {
-            debug::exit(debug::EXIT_SUCCESS);
-        }
-    }
-
-    #[task(binds = UART0)]
-    fn uart0(cx: uart0::Context) {
-        hprintln!(&quot;UART0(baseline = {:?})&quot;, cx.start).unwrap();
-
-        // `foo` inherits the baseline of `UART0`: its `start` time
-        foo::spawn().unwrap();
-    }
-}
+</span>{{#include ../../../../examples/baseline.rs}}
 <span class="boring">}
 </span></code></pre></pre>
 <p>Запуск программы на реальном оборудовании произведет следующий вывод в консоли:</p>

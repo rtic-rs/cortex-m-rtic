@@ -173,21 +173,21 @@
 <div style="font-size: 6em; font-weight: bolder;" align="center">RTIC</div>
 <h1 align="center">Real-Time Interrupt-driven Concurrency</h1>
 <p align="center">A concurrency framework for building real-time systems</p>
-<h1><a class="header" href="#preface" id="preface">Preface</a></h1>
+<h1 id="preface"><a class="header" href="#preface">Preface</a></h1>
 <p>This book contains user level documentation for the Real-Time Interrupt-driven Concurrency
 (RTIC) framework. The API reference can be found <a href="../../api/">here</a>.</p>
 <p>Formerly known as Real-Time For the Masses.</p>
 <p>There is a translation of this book in <a href="../ru/index.html">Russian</a>.</p>
 <p>This is the documentation of v0.5.x of RTIC; for the documentation of</p>
 <ul>
-<li>development version go <a href="/dev">here</a>.</li>
-<li>v0.4.x go <a href="/0.4">here</a>.</li>
+<li>development version go <a href="/dev/">here</a>.</li>
+<li>v0.4.x go <a href="/0.4/">here</a>.</li>
 </ul>
 <p><img src="https://img.shields.io/crates/v/cortex-m-rtic" alt="crates.io" />
 <img src="https://docs.rs/cortex-m-rtic/badge.svg" alt="docs.rs" />
 <img src="https://img.shields.io/badge/web-rtic.rs-red.svg?style=flat&amp;label=book&amp;colorB=d33847" alt="book" />
 <img src="https://img.shields.io/badge/rustc-1.36+-lightgray.svg" alt="rustc" /></p>
-<h2><a class="header" href="#features" id="features">Features</a></h2>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
 <ul>
 <li>
 <p><strong>Tasks</strong> as the unit of concurrency <sup class="footnote-reference"><a href="#1">1</a></sup>. Tasks can be <em>event triggered</em>
@@ -233,17 +233,17 @@ and scheduling analysis techniques. (Though we haven't yet developed Rust
 friendly tooling for that.)</p>
 </li>
 </ul>
-<h2><a class="header" href="#a-hrefhttpsrticrsuser-documentationa" id="a-hrefhttpsrticrsuser-documentationa"><a href="https://rtic.rs">User documentation</a></a></h2>
-<h2><a class="header" href="#a-hrefhttpsrticrs05apiapi-referencea" id="a-hrefhttpsrticrs05apiapi-referencea"><a href="https://rtic.rs/0.5/api/">API reference</a></a></h2>
-<h2><a class="header" href="#chat" id="chat">Chat</a></h2>
+<h2 id="a-hrefhttpsrticrsuser-documentationa"><a class="header" href="#a-hrefhttpsrticrsuser-documentationa"><a href="https://rtic.rs">User documentation</a></a></h2>
+<h2 id="a-hrefhttpsrticrs05apiapi-referencea"><a class="header" href="#a-hrefhttpsrticrs05apiapi-referencea"><a href="https://rtic.rs/0.5/api/">API reference</a></a></h2>
+<h2 id="chat"><a class="header" href="#chat">Chat</a></h2>
 <p>Join us and talk about RTIC in the <a href="https://matrix.to/#/#rtic:matrix.org">Matrix room</a>.</p>
-<h2><a class="header" href="#contributing" id="contributing">Contributing</a></h2>
+<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
 <p>New features and big changes should go through the RFC process in the <a href="https://github.com/rtic-rs/rfcs">dedicated RFC repository</a>.</p>
-<h2><a class="header" href="#acknowledgments" id="acknowledgments">Acknowledgments</a></h2>
+<h2 id="acknowledgments"><a class="header" href="#acknowledgments">Acknowledgments</a></h2>
 <p>This crate is based on <a href="http://www.rtfm-lang.org/">the Real-Time For the Masses language</a> created by the Embedded
 Systems group at <a href="https://www.ltu.se/?l=en">Luleå University of Technology</a>, led by <a href="https://www.ltu.se/staff/p/pln-1.11258?l=en">Prof. Per
 Lindgren</a>.</p>
-<h2><a class="header" href="#references" id="references">References</a></h2>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>Eriksson, J., Häggström, F., Aittamaa, S., Kruglyak, A., &amp; Lindgren, P.
 (2013, June). Real-time for the masses, step 1: Programming API and static
@@ -255,7 +255,7 @@ priority SRP kernel primitives. In Industrial Embedded Systems (SIES), 2013
 L. M. (2016). Abstract timers and their implementation onto the arm cortex-m
 family of mcus. ACM SIGBED Review, 13(1), 48-53.</p>
 </div>
-<h2><a class="header" href="#license" id="license">License</a></h2>
+<h2 id="license"><a class="header" href="#license">License</a></h2>
 <p>All source code (including code snippets) is licensed under either of</p>
 <ul>
 <li>Apache License, Version 2.0 (<a href="LICENSE-APACHE">LICENSE-APACHE</a> or
@@ -267,11 +267,11 @@ family of mcus. ACM SIGBED Review, 13(1), 48-53.</p>
 <p>The written prose contained within the book is licensed under the terms of the
 Creative Commons CC-BY-SA v4.0 license (<a href="LICENSE-CC-BY-SA">LICENSE-CC-BY-SA</a> or
 <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">https://creativecommons.org/licenses/by-sa/4.0/legalcode</a>).</p>
-<h3><a class="header" href="#contribution" id="contribution">Contribution</a></h3>
+<h3 id="contribution"><a class="header" href="#contribution">Contribution</a></h3>
 <p>Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 licensed as above, without any additional terms or conditions.</p>
-<h1><a class="header" href="#rtic-by-example" id="rtic-by-example">RTIC by example</a></h1>
+<h1 id="rtic-by-example"><a class="header" href="#rtic-by-example">RTIC by example</a></h1>
 <p>This part of the book introduces the Real-Time Interrupt-driven Concurrency (RTIC) framework
 to new users by walking them through examples of increasing complexity.</p>
 <p>All examples in this part of the book can be found in the GitHub <a href="https://github.com/rtic-rs/cortex-m-rtic">repository</a> of
@@ -280,7 +280,7 @@ is required to follow along.</p>
 <p>To run the examples on your laptop / PC you'll need the <code>qemu-system-arm</code>
 program. Check <a href="https://rust-embedded.github.io/book/intro/install.html">the embedded Rust book</a> for instructions on how to set up an
 embedded development environment that includes QEMU.</p>
-<h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
+<h1 id="the-app-attribute"><a class="header" href="#the-app-attribute">The <code>app</code> attribute</a></h1>
 <p>This is the smallest possible RTIC application:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -311,7 +311,7 @@ RTIC work on stable we use the <code>const</code> item instead. When more parts 
 1.2 are stabilized we'll move from a <code>const</code> item to a <code>mod</code> item and
 eventually to a crate level attribute (<code>#![app]</code>).</p>
 </blockquote>
-<h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
+<h2 id="init"><a class="header" href="#init"><code>init</code></a></h2>
 <p>Within the pseudo-module the <code>app</code> attribute expects to find an initialization
 function marked with the <code>init</code> attribute. This function must have signature
 <code>fn(init::Context) [-&gt; init::LateResources]</code> (the return type is not always
@@ -366,7 +366,7 @@ process.</p>
 <pre><code class="language-console">$ cargo run --example init
 init
 </code></pre>
-<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
+<h2 id="idle"><a class="header" href="#idle"><code>idle</code></a></h2>
 <p>A function marked with the <code>idle</code> attribute can optionally appear in the
 pseudo-module. This function is used as the special <em>idle task</em> and must have
 signature <code>fn(idle::Context) - &gt; !</code>.</p>
@@ -418,7 +418,7 @@ const APP: () = {
 init
 idle
 </code></pre>
-<h2><a class="header" href="#hardware-tasks" id="hardware-tasks">Hardware tasks</a></h2>
+<h2 id="hardware-tasks"><a class="header" href="#hardware-tasks">Hardware tasks</a></h2>
 <p>To declare interrupt handlers the framework provides a <code>#[task]</code> attribute that
 can be attached to functions. This attribute takes a <code>binds</code> argument whose
 value is the name of the interrupt to which the handler will be bound to; the
@@ -491,7 +491,7 @@ UART0 called 2 times
 <p>So far all the RTIC applications we have seen look no different than the
 applications one can write using only the <code>cortex-m-rt</code> crate. From this point
 we start introducing features unique to RTIC.</p>
-<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
+<h2 id="priorities"><a class="header" href="#priorities">Priorities</a></h2>
 <p>The static priority of each handler can be declared in the <code>task</code> attribute
 using the <code>priority</code> argument. Tasks can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
 crate. When the <code>priority</code> argument is omitted, the priority is assumed to be
@@ -565,7 +565,7 @@ limitations in the language, the error message is currently far from helpful: it
 will say something along the lines of &quot;evaluation of constant value failed&quot; and
 the span of the error will <em>not</em> point out to the problematic interrupt value --
 we are sorry about this!</p>
-<h2><a class="header" href="#resources" id="resources">Resources</a></h2>
+<h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <p>The framework provides an abstraction to share data between any of the contexts
 we saw in the previous section (task handlers, <code>init</code> and <code>idle</code>): resources.</p>
 <p>Resources are data visible only to functions declared within the <code>#[app]</code>
@@ -648,7 +648,7 @@ UART1: shared = 2
 </code></pre>
 <p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
 so results in a compile error.</p>
-<h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
+<h2 id="lock"><a class="header" href="#lock"><code>lock</code></a></h2>
 <p>In the presence of preemption critical sections are required to mutate shared
 data in a data race free manner. As the framework has complete knowledge over
 the priorities of tasks and which tasks can access which resources it enforces
@@ -743,7 +743,7 @@ C
 D - shared = 2
 E
 </code></pre>
-<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<h2 id="late-resources"><a class="header" href="#late-resources">Late resources</a></h2>
 <p>Late resources are resources that are not given an initial value at compile time
 using the <code>#[init]</code> attribute but instead are initialized at runtime using the
 <code>init::LateResources</code> values returned by the <code>init</code> function.</p>
@@ -815,7 +815,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
 </code></pre>
-<h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
+<h2 id="only-shared-access"><a class="header" href="#only-shared-access">Only shared access</a></h2>
 <p>By default the framework assumes that all tasks require exclusive access
 (<code>&amp;mut-</code>) to resources but it is possible to specify that a task only requires
 shared access (<code>&amp;-</code>) to a resource using the <code>&amp;resource_name</code> syntax in the
@@ -879,7 +879,7 @@ const APP: () = {
 UART1(key = 0xdeadbeef)
 UART0(key = 0xdeadbeef)
 </code></pre>
-<h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
+<h1 id="software-tasks"><a class="header" href="#software-tasks">Software tasks</a></h1>
 <p>In addition to hardware tasks, which are invoked by the hardware in response to
 hardware events, RTIC also supports <em>software</em> tasks which can be spawned by the
 application from any execution context.</p>
@@ -962,7 +962,7 @@ baz
 foo - end
 bar
 </code></pre>
-<h2><a class="header" href="#message-passing" id="message-passing">Message passing</a></h2>
+<h2 id="message-passing"><a class="header" href="#message-passing">Message passing</a></h2>
 <p>The other advantage of software tasks is that messages can be passed to these
 tasks when spawning them. The type of the message payload must be specified in
 the signature of the task handler.</p>
@@ -1032,7 +1032,7 @@ foo
 bar(1)
 baz(2, 3)
 </code></pre>
-<h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
+<h2 id="capacity"><a class="header" href="#capacity">Capacity</a></h2>
 <p>RTIC does <em>not</em> perform any form of heap-based memory allocation. The memory
 required to store messages is statically reserved. By default the framework
 minimizes the memory footprint of the application so each task has a message
@@ -1102,7 +1102,7 @@ foo(2)
 foo(3)
 bar
 </code></pre>
-<h2><a class="header" href="#error-handling" id="error-handling">Error handling</a></h2>
+<h2 id="error-handling"><a class="header" href="#error-handling">Error handling</a></h2>
 <p>The <code>spawn</code> API returns the <code>Err</code> variant when there's no space to send the
 message. In most scenarios spawning errors are handled in one of two ways:</p>
 <ul>
@@ -1156,7 +1156,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#timer-queue" id="timer-queue">Timer queue</a></h1>
+<h1 id="timer-queue"><a class="header" href="#timer-queue">Timer queue</a></h1>
 <p>In contrast with the <code>spawn</code> API, which immediately spawns a software task onto
 the scheduler, the <code>schedule</code> API can be used to schedule a task to run some
 time in the future.</p>
@@ -1206,7 +1206,7 @@ counter functionality has not been implemented in <code>qemu-system-arm</code>.<
 
 use cortex_m::peripheral::DWT;
 use cortex_m_semihosting::hprintln;
-use panic_halt as _;
+use panic_semihosting as _;
 use rtic::cyccnt::{Instant, U32Ext as _};
 
 // NOTE: does NOT work on QEMU!
@@ -1263,7 +1263,7 @@ interrupt handler and the system timer peripheral (<code>SYST</code>) so neither
 used by the application. This is accomplished by changing the type of
 <code>init::Context.core</code> from <code>cortex_m::Peripherals</code> to <code>rtic::Peripherals</code>. The
 latter structure contains all the fields of the former minus the <code>SYST</code> one.</p>
-<h2><a class="header" href="#periodic-tasks" id="periodic-tasks">Periodic tasks</a></h2>
+<h2 id="periodic-tasks"><a class="header" href="#periodic-tasks">Periodic tasks</a></h2>
 <p>Software tasks have access to the <code>Instant</code> at which they were scheduled to run
 through the <code>scheduled</code> variable. This information and the <code>schedule</code> API can be
 used to implement periodic tasks as shown in the example below.</p>
@@ -1317,7 +1317,7 @@ jitter even though <code>schedule.foo</code> was invoked at the <em>end</em> of 
 foo(scheduled = Instant(16000000), now = Instant(16000196))
 foo(scheduled = Instant(24000000), now = Instant(24000196))
 </code></pre>
-<h2><a class="header" href="#baseline" id="baseline">Baseline</a></h2>
+<h2 id="baseline"><a class="header" href="#baseline">Baseline</a></h2>
 <p>For the tasks scheduled from <code>init</code> we have exact information about their
 <code>scheduled</code> time. For hardware tasks there's no <code>scheduled</code> time because these
 tasks are asynchronous in nature. For hardware tasks the runtime provides a
@@ -1399,7 +1399,7 @@ foo(baseline = Instant(0))
 UART0(baseline = Instant(904))
 foo(baseline = Instant(904))
 </code></pre>
-<h1><a class="header" href="#types-send-and-sync" id="types-send-and-sync">Types, Send and Sync</a></h1>
+<h1 id="types-send-and-sync"><a class="header" href="#types-send-and-sync">Types, Send and Sync</a></h1>
 <p>Every function within the <code>APP</code> pseudo-module has a <code>Context</code> structure as its
 first parameter. All the fields of these structures have predictable,
 non-anonymous types so you can write plain functions that take them as arguments.</p>
@@ -1474,7 +1474,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#send" id="send"><code>Send</code></a></h2>
+<h2 id="send"><a class="header" href="#send"><code>Send</code></a></h2>
 <p><a href="https://doc.rust-lang.org/core/marker/trait.Send.html"><code>Send</code></a> is a marker trait for &quot;types that can be transferred across thread
 boundaries&quot;, according to its definition in <code>core</code>. In the context of RTIC the
 <code>Send</code> trait is only required where it's possible to transfer a value between
@@ -1500,7 +1500,7 @@ shared resources.</p>
 use core::marker::PhantomData;
 
 use cortex_m_semihosting::debug;
-use panic_halt as _;
+use panic_semihosting as _;
 use rtic::app;
 
 pub struct NotSend {
@@ -1576,7 +1576,7 @@ the <code>Send</code> trait.</p>
 
 use cortex_m_semihosting::debug;
 use lm3s6965::Interrupt;
-use panic_halt as _;
+use panic_semihosting as _;
 use rtic::app;
 
 pub struct MustBeSend;
@@ -1609,7 +1609,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
+<h2 id="sync"><a class="header" href="#sync"><code>Sync</code></a></h2>
 <p>Similarly, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> is a marker trait for &quot;types for which it is safe to share
 references between threads&quot;, according to its definition in <code>core</code>. In the
 context of RTIC the <code>Sync</code> trait is only required where it's possible for two,
@@ -1632,7 +1632,7 @@ it's important to know where the <code>Sync</code> bound is not required: shared
 use core::marker::PhantomData;
 
 use cortex_m_semihosting::debug;
-use panic_halt as _;
+use panic_semihosting as _;
 
 pub struct NotSync {
     _0: PhantomData&lt;*const ()&gt;,
@@ -1669,7 +1669,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#starting-a-new-project" id="starting-a-new-project">Starting a new project</a></h1>
+<h1 id="starting-a-new-project"><a class="header" href="#starting-a-new-project">Starting a new project</a></h1>
 <p>Now that you have learned about the main features of the RTIC framework you can
 try it out on your hardware by following these instructions.</p>
 <ol>
@@ -1718,8 +1718,8 @@ $ rm memory.x build.rs
 $ cargo run
 init
 </code></pre>
-<h1><a class="header" href="#tips--tricks" id="tips--tricks">Tips &amp; tricks</a></h1>
-<h2><a class="header" href="#generics" id="generics">Generics</a></h2>
+<h1 id="tips--tricks"><a class="header" href="#tips--tricks">Tips &amp; tricks</a></h1>
+<h2 id="generics"><a class="header" href="#generics">Generics</a></h2>
 <p>Resources may appear in contexts as resource proxies or as unique references
 (<code>&amp;mut-</code>) depending on the priority of the task. Because the same resource may
 appear as <em>different</em> types in different contexts one cannot refactor a common
@@ -1812,7 +1812,7 @@ shared: 2 -&gt; 4
 </code></pre>
 <p>Using generics also lets you change the static priorities of tasks during
 development without having to rewrite a bunch code every time.</p>
-<h2><a class="header" href="#conditional-compilation" id="conditional-compilation">Conditional compilation</a></h2>
+<h2 id="conditional-compilation"><a class="header" href="#conditional-compilation">Conditional compilation</a></h2>
 <p>You can use conditional compilation (<code>#[cfg]</code>) on resources (the fields of
 <code>struct Resources</code>) and tasks (the <code>fn</code> items). The effect of using <code>#[cfg]</code>
 attributes is that the resource / task will <em>not</em> be available through the
@@ -1897,7 +1897,7 @@ $ cargo run --example cfg
 foo has been called 1 time
 foo has been called 2 times
 </code></pre>
-<h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
+<h2 id="running-tasks-from-ram"><a class="header" href="#running-tasks-from-ram">Running tasks from RAM</a></h2>
 <p>The main goal of moving the specification of RTIC applications to attributes in
 RTIC v0.4.0 was to allow inter-operation with other attributes. For example, the
 <code>link_section</code> attribute can be applied to tasks to place them in RAM; this can
@@ -1971,7 +1971,7 @@ foo
 <pre><code class="language-console">$ cargo nm --example ramfunc --release | grep ' bar::'
 20000000 t ramfunc::bar::h9d6714fe5a3b0c89
 </code></pre>
-<h2><a class="header" href="#indirection-for-faster-message-passing" id="indirection-for-faster-message-passing">Indirection for faster message passing</a></h2>
+<h2 id="indirection-for-faster-message-passing"><a class="header" href="#indirection-for-faster-message-passing">Indirection for faster message passing</a></h2>
 <p>Message passing always involves copying the payload from the sender into a
 static variable and then from the static variable into the receiver. Thus
 sending a large buffer, like a <code>[u8; 128]</code>, as a message involves two expensive
@@ -2060,7 +2060,7 @@ const APP: () = {
 bar(0x2000008c)
 foo(0x20000110)
 </code></pre>
-<h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
+<h2 id="inspecting-the-expanded-code"><a class="header" href="#inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
 <p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some
 reason you need to inspect the code generated by this macro you have two
 options:</p>
@@ -2097,7 +2097,7 @@ crate and print the output to the console.</p>
 <pre><code class="language-console">$ # produces the same output as before
 $ cargo expand --example smallest | tail
 </code></pre>
-<h2><a class="header" href="#resource-de-structure-ing" id="resource-de-structure-ing">Resource de-structure-ing</a></h2>
+<h2 id="resource-de-structure-ing"><a class="header" href="#resource-de-structure-ing">Resource de-structure-ing</a></h2>
 <p>When having a task taking multiple resources it can help in readability to split
 up the resource struct. Here are two examples on how this can be done:</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -2152,10 +2152,10 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#migrating-from-v04x-to-v050" id="migrating-from-v04x-to-v050">Migrating from v0.4.x to v0.5.0</a></h1>
+<h1 id="migrating-from-v04x-to-v050"><a class="header" href="#migrating-from-v04x-to-v050">Migrating from v0.4.x to v0.5.0</a></h1>
 <p>This section covers how to upgrade an application written against RTIC v0.4.x to
 the version v0.5.0 of the framework.</p>
-<h2><a class="header" href="#cargotoml" id="cargotoml"><code>Cargo.toml</code></a></h2>
+<h2 id="cargotoml"><a class="header" href="#cargotoml"><code>Cargo.toml</code></a></h2>
 <p>First, the version of the <code>cortex-m-rtic</code> dependency needs to be updated to
 <code>&quot;0.5.0&quot;</code>. The <code>timer-queue</code> feature needs to be removed.</p>
 <pre><code class="language-toml">[dependencies.cortex-m-rtic]
@@ -2169,7 +2169,7 @@ version = &quot;0.5.0&quot;
 features = [&quot;timer-queue&quot;]
 #           ^^^^^^^^^^^^^
 </code></pre>
-<h2><a class="header" href="#context-argument" id="context-argument"><code>Context</code> argument</a></h2>
+<h2 id="context-argument"><a class="header" href="#context-argument"><code>Context</code> argument</a></h2>
 <p>All functions inside the <code>#[rtic::app]</code> item need to take as first argument a
 <code>Context</code> structure. This <code>Context</code> type will contain the variables that were
 magically injected into the scope of the function by version v0.4.x of the
@@ -2221,7 +2221,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#resources-1" id="resources-1">Resources</a></h2>
+<h2 id="resources-1"><a class="header" href="#resources-1">Resources</a></h2>
 <p>The syntax used to declare resources has been changed from <code>static mut</code>
 variables to a <code>struct Resources</code>.</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -2245,7 +2245,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#device-peripherals" id="device-peripherals">Device peripherals</a></h2>
+<h2 id="device-peripherals"><a class="header" href="#device-peripherals">Device peripherals</a></h2>
 <p>If your application was accessing the device peripherals in <code>#[init]</code> through
 the <code>device</code> variable then you'll need to add <code>peripherals = true</code> to the
 <code>#[rtic::app]</code> attribute to continue to access the device peripherals through
@@ -2283,7 +2283,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#interrupt-and-exception" id="interrupt-and-exception"><code>#[interrupt]</code> and <code>#[exception]</code></a></h2>
+<h2 id="interrupt-and-exception"><a class="header" href="#interrupt-and-exception"><code>#[interrupt]</code> and <code>#[exception]</code></a></h2>
 <p>The <code>#[interrupt]</code> and <code>#[exception]</code> attributes have been removed. To declare
 hardware tasks in v0.5.x use the <code>#[task]</code> attribute with the <code>binds</code> argument.</p>
 <p>Change this:</p>
@@ -2329,7 +2329,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#schedule" id="schedule"><code>schedule</code></a></h2>
+<h2 id="schedule"><a class="header" href="#schedule"><code>schedule</code></a></h2>
 <p>The <code>timer-queue</code> feature has been removed. To use the <code>schedule</code> API one must
 first define the monotonic timer the runtime will use using the <code>monotonic</code>
 argument of the <code>#[rtic::app]</code> attribute. To continue using the cycle counter
@@ -2378,12 +2378,12 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#migrating-from-rtfm-to-rtic" id="migrating-from-rtfm-to-rtic">Migrating from RTFM to RTIC</a></h1>
+<h1 id="migrating-from-rtfm-to-rtic"><a class="header" href="#migrating-from-rtfm-to-rtic">Migrating from RTFM to RTIC</a></h1>
 <p>This section covers how to upgrade an application written against RTFM v0.5.x to
 the same version of RTIC. This applies since the renaming of the framework as per <a href="https://github.com/rtic-rs/rfcs/pull/33">RFC #33</a>.</p>
 <p><strong>Note:</strong> There are no code differences between RTFM v0.5.3 and RTIC v0.5.3, it is purely a name
 change.</p>
-<h2><a class="header" href="#cargotoml-1" id="cargotoml-1"><code>Cargo.toml</code></a></h2>
+<h2 id="cargotoml-1"><a class="header" href="#cargotoml-1"><code>Cargo.toml</code></a></h2>
 <p>First, the <code>cortex-m-rtfm</code> dependency needs to be updated to
 <code>cortex-m-rtic</code>.</p>
 <pre><code class="language-toml">[dependencies]
@@ -2393,7 +2393,7 @@ cortex-m-rtfm = &quot;0.5.3&quot;
 # into this
 cortex-m-rtic = &quot;0.5.3&quot;
 </code></pre>
-<h2><a class="header" href="#code-changes" id="code-changes">Code changes</a></h2>
+<h2 id="code-changes"><a class="header" href="#code-changes">Code changes</a></h2>
 <p>The only code change that needs to be made is that any reference to <code>rtfm</code> before now need to point
 to <code>rtic</code> as follows:</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -2420,14 +2420,14 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#under-the-hood" id="under-the-hood">Under the hood</a></h1>
+<h1 id="under-the-hood"><a class="header" href="#under-the-hood">Under the hood</a></h1>
 <p>This section describes the internals of the RTIC framework at a <em>high level</em>.
 Low level details like the parsing and code generation done by the procedural
 macro (<code>#[app]</code>) will not be explained here. The focus will be the analysis of
 the user specification and the data structures used by the runtime.</p>
 <p>We highly suggest that you read the embedonomicon section on <a href="https://github.com/rust-embedded/embedonomicon/pull/48">concurrency</a>
 before you dive into this material.</p>
-<h1><a class="header" href="#interrupt-configuration" id="interrupt-configuration">Interrupt configuration</a></h1>
+<h1 id="interrupt-configuration"><a class="header" href="#interrupt-configuration">Interrupt configuration</a></h1>
 <p>Interrupts are core to the operation of RTIC applications. Correctly setting
 interrupt priorities and ensuring they remain fixed at runtime is a requisite
 for the memory safety of the application.</p>
@@ -2496,11 +2496,11 @@ unsafe fn main() -&gt; ! {
     idle(/* .. */)
 }
 </code></pre></pre>
-<h1><a class="header" href="#non-reentrancy" id="non-reentrancy">Non-reentrancy</a></h1>
+<h1 id="non-reentrancy"><a class="header" href="#non-reentrancy">Non-reentrancy</a></h1>
 <p>In RTIC, tasks handlers are <em>not</em> reentrant. Reentering a task handler can break
 Rust aliasing rules and lead to <em>undefined behavior</em>. A task handler can be
 reentered in one of two ways: in software or by hardware.</p>
-<h2><a class="header" href="#in-software" id="in-software">In software</a></h2>
+<h2 id="in-software"><a class="header" href="#in-software">In software</a></h2>
 <p>To reenter a task handler in software its underlying interrupt handler must be
 invoked using FFI (see example below). FFI requires <code>unsafe</code> code so end users
 are discouraged from directly invoking an interrupt handler.</p>
@@ -2568,12 +2568,12 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#by-hardware" id="by-hardware">By hardware</a></h2>
+<h2 id="by-hardware"><a class="header" href="#by-hardware">By hardware</a></h2>
 <p>A task handler can also be reentered without software intervention. This can
 occur if the same handler is assigned to two or more interrupts in the vector
 table but there's no syntax for this kind of configuration in the RTIC
 framework.</p>
-<h1><a class="header" href="#access-control" id="access-control">Access control</a></h1>
+<h1 id="access-control"><a class="header" href="#access-control">Access control</a></h1>
 <p>One of the core foundations of RTIC is access control. Controlling which parts
 of the program can access which static variables is instrumental to enforcing
 memory safety.</p>
@@ -2725,7 +2725,7 @@ const APP: () = {
     }
 };
 </code></pre></pre>
-<h1><a class="header" href="#late-resources-1" id="late-resources-1">Late resources</a></h1>
+<h1 id="late-resources-1"><a class="header" href="#late-resources-1">Late resources</a></h1>
 <p>Some resources are initialized at runtime after the <code>init</code> function returns.
 It's important that these resources (static variables) are fully initialized
 before tasks are allowed to run, that is they must be initialized while
@@ -2836,7 +2836,7 @@ would be a data race between that write and whatever operation <code>foo</code> 
 (<code>atomic::fence</code>) instead of a compiler fence to fully flush the write operation
 before interrupts are re-enabled. The ARM Cortex-M architecture doesn't need a
 memory barrier in single-core context.</p>
-<h1><a class="header" href="#critical-sections" id="critical-sections">Critical sections</a></h1>
+<h1 id="critical-sections"><a class="header" href="#critical-sections">Critical sections</a></h1>
 <p>When a resource (static variable) is shared between two, or more, tasks that run
 at different priorities some form of mutual exclusion is required to mutate the
 memory in a data race free manner. In RTIC we use priority-based critical
@@ -2849,7 +2849,7 @@ may request the resource are <em>not allowed to start</em>.</p>
 resource? The <a href="internals/ceilings.html">ceiling analysis</a> is in charge of
 answering that question and will be discussed in the next section. This section
 will focus on the implementation of the critical section.</p>
-<h2><a class="header" href="#resource-proxy" id="resource-proxy">Resource proxy</a></h2>
+<h2 id="resource-proxy"><a class="header" href="#resource-proxy">Resource proxy</a></h2>
 <p>For simplicity, let's look at a resource shared by two tasks that run at
 different priorities. Clearly one of the task can preempt the other; to prevent
 a data race the <em>lower priority</em> task must use a critical section when it needs
@@ -2964,7 +2964,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#lock-1" id="lock-1"><code>lock</code></a></h2>
+<h2 id="lock-1"><a class="header" href="#lock-1"><code>lock</code></a></h2>
 <p>Let's now zoom into the critical section itself. In this example, we have to
 raise the dynamic priority to at least <code>2</code> to prevent a data race. On the
 Cortex-M architecture the dynamic priority can be changed by writing to the
@@ -3041,7 +3041,7 @@ fn foo(c: foo::Context) {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#nesting" id="nesting">Nesting</a></h2>
+<h2 id="nesting"><a class="header" href="#nesting">Nesting</a></h2>
 <p>Nesting calls to <code>lock</code> on the <em>same</em> resource must be rejected by the compiler
 for memory safety but nesting <code>lock</code> calls on <em>different</em> resources is a valid
 operation. In that case we want to make sure that nesting critical sections
@@ -3250,7 +3250,7 @@ this:</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#the-basepri-invariant" id="the-basepri-invariant">The BASEPRI invariant</a></h2>
+<h2 id="the-basepri-invariant"><a class="header" href="#the-basepri-invariant">The BASEPRI invariant</a></h2>
 <p>An invariant that the RTIC framework has to preserve is that the value of the
 BASEPRI at the start of an <em>interrupt</em> handler must be the same value it has
 when the interrupt handler returns. BASEPRI may change during the execution of
@@ -3354,7 +3354,7 @@ the system will never again run at a dynamic priority lower than <code>2</code>.
 doesn't compromise the memory safety of the program but affects task scheduling:
 in this particular case tasks with a priority of <code>1</code> will never get a chance to
 run.</p>
-<h1><a class="header" href="#ceiling-analysis" id="ceiling-analysis">Ceiling analysis</a></h1>
+<h1 id="ceiling-analysis"><a class="header" href="#ceiling-analysis">Ceiling analysis</a></h1>
 <p>A resource <em>priority ceiling</em>, or just <em>ceiling</em>, is the dynamic priority that
 any task must have to safely access the resource memory. Ceiling analysis is
 relatively simple but critical to the memory safety of RTIC applications.</p>
@@ -3435,7 +3435,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#software-tasks-1" id="software-tasks-1">Software tasks</a></h1>
+<h1 id="software-tasks-1"><a class="header" href="#software-tasks-1">Software tasks</a></h1>
 <p>RTIC supports software tasks and hardware tasks. Each hardware task is bound to
 a different interrupt handler. On the other hand, several software tasks may be
 dispatched by the same interrupt handler -- this is done to minimize the number
@@ -3453,7 +3453,7 @@ task.</p>
 <p>The ready queue is a SPSC (Single Producer Single Consumer) lock-free queue. The
 task dispatcher owns the consumer endpoint of the queue; the producer endpoint
 is treated as a resource contended by the tasks that can <code>spawn</code> other tasks.</p>
-<h2><a class="header" href="#the-task-dispatcher" id="the-task-dispatcher">The task dispatcher</a></h2>
+<h2 id="the-task-dispatcher"><a class="header" href="#the-task-dispatcher">The task dispatcher</a></h2>
 <p>Let's first take a look the code generated by the framework to dispatch tasks.
 Consider this example:</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -3546,7 +3546,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#spawning-a-task" id="spawning-a-task">Spawning a task</a></h2>
+<h2 id="spawning-a-task"><a class="header" href="#spawning-a-task">Spawning a task</a></h2>
 <p>The <code>spawn</code> API is exposed to the user as the methods of a <code>Spawn</code> struct.
 There's one <code>Spawn</code> struct per task.</p>
 <p>The <code>Spawn</code> code generated by the framework for the previous example looks like
@@ -3632,7 +3632,7 @@ const APP: () = {
 <p>Using <code>bar_FQ</code> to limit the number of <code>bar</code> tasks that can be spawned may seem
 like an artificial limitation but it will make more sense when we talk about
 task capacities.</p>
-<h2><a class="header" href="#messages" id="messages">Messages</a></h2>
+<h2 id="messages"><a class="header" href="#messages">Messages</a></h2>
 <p>We have omitted how message passing actually works so let's revisit the <code>spawn</code>
 implementation but this time for task <code>baz</code> which receives a <code>u64</code> message.</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -3744,7 +3744,7 @@ instead of using the usual <em>free list</em> (linked list) to track empty slots
 in the <code>INPUTS</code> buffer we use a SPSC queue; this lets us reduce the number of
 critical sections. In fact, thanks to this choice the task dispatching code is
 lock-free.</p>
-<h2><a class="header" href="#queue-capacity" id="queue-capacity">Queue capacity</a></h2>
+<h2 id="queue-capacity"><a class="header" href="#queue-capacity">Queue capacity</a></h2>
 <p>The RTIC framework uses several queues like ready queues and free queues. When
 the free queue is empty trying to <code>spawn</code> a task results in an error; this
 condition is checked at runtime. Not all the operations performed by the
@@ -3772,7 +3772,7 @@ messages to this task, but if we did that it would have not be possible to pick
 a capacity for <code>RQ1</code> that lets us omit the &quot;is it full?&quot; check when spawning a
 <code>baz</code> task. In the section about the <a href="internals/timer-queue.html">timer queue</a> we'll see
 how the free queue is used by tasks that have no inputs.</p>
-<h2><a class="header" href="#ceiling-analysis-1" id="ceiling-analysis-1">Ceiling analysis</a></h2>
+<h2 id="ceiling-analysis-1"><a class="header" href="#ceiling-analysis-1">Ceiling analysis</a></h2>
 <p>The queues internally used by the <code>spawn</code> API are treated like normal resources
 and included in the ceiling analysis. It's important to note that these are SPSC
 queues and that only one of the endpoints is behind a resource; the other
@@ -3825,7 +3825,7 @@ const APP: () = {
 producer endpoint of <code>RQ1</code>; this leads to a priority ceiling of <code>3</code></p>
 </li>
 </ul>
-<h1><a class="header" href="#timer-queue-1" id="timer-queue-1">Timer queue</a></h1>
+<h1 id="timer-queue-1"><a class="header" href="#timer-queue-1">Timer queue</a></h1>
 <p>The timer queue functionality lets the user schedule tasks to run at some time
 in the future. Unsurprisingly, this feature is also implemented using a queue:
 a priority queue where the scheduled tasks are kept sorted by earliest scheduled
@@ -3853,7 +3853,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#schedule-1" id="schedule-1"><code>schedule</code></a></h2>
+<h2 id="schedule-1"><a class="header" href="#schedule-1"><code>schedule</code></a></h2>
 <p>Let's first look at the <code>schedule</code> API.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -3937,7 +3937,7 @@ stores the <code>Instant</code> at which the task was scheduled to run in a sepa
 <p><code>TimerQueue::enqueue_unchecked</code> does a bit more work that just adding the entry
 into a min-heap: it also pends the system timer interrupt (<code>SysTick</code>) if the new
 entry ended up first in the queue.</p>
-<h2><a class="header" href="#the-system-timer" id="the-system-timer">The system timer</a></h2>
+<h2 id="the-system-timer"><a class="header" href="#the-system-timer">The system timer</a></h2>
 <p>The system timer interrupt (<code>SysTick</code>) takes cares of two things: moving tasks
 that have become ready from the timer queue into the right ready queue and
 setting up a timeout interrupt to fire when the scheduled time of the next task
@@ -3979,7 +3979,7 @@ way it will run at the right priority.</p>
 <code>None</code>. This ties in with <code>TimerQueue::enqueue_unchecked</code>, which pends this
 handler; basically, <code>enqueue_unchecked</code> delegates the task of setting up a new
 timeout interrupt to the <code>SysTick</code> handler.</p>
-<h2><a class="header" href="#resolution-and-range-of-cyccntinstant-and-cyccntduration" id="resolution-and-range-of-cyccntinstant-and-cyccntduration">Resolution and range of <code>cyccnt::Instant</code> and <code>cyccnt::Duration</code></a></h2>
+<h2 id="resolution-and-range-of-cyccntinstant-and-cyccntduration"><a class="header" href="#resolution-and-range-of-cyccntinstant-and-cyccntduration">Resolution and range of <code>cyccnt::Instant</code> and <code>cyccnt::Duration</code></a></h2>
 <p>RTIC provides a <code>Monotonic</code> implementation based on the <code>DWT</code>'s (Data Watchpoint
 and Trace) cycle counter. <code>Instant::now</code> returns a snapshot of this timer; these
 DWT snapshots (<code>Instant</code>s) are used to sort entries in the timer queue. The
@@ -4004,12 +4004,12 @@ of the <code>SysTick</code> counter.</p>
 <p>In conclusion, both <code>Instant</code> and <code>Duration</code> have a resolution of 1 core clock
 cycle and <code>Duration</code> effectively has a (half-open) range of <code>0..(1 &lt;&lt; 31)</code> (end
 not included) core clock cycles.</p>
-<h2><a class="header" href="#queue-capacity-1" id="queue-capacity-1">Queue capacity</a></h2>
+<h2 id="queue-capacity-1"><a class="header" href="#queue-capacity-1">Queue capacity</a></h2>
 <p>The capacity of the timer queue is chosen to be the sum of the capacities of all
 <code>schedule</code>-able tasks. Like in the case of the ready queues, this means that
 once we have claimed a free slot in the <code>INPUTS</code> buffer we are guaranteed to be
 able to insert the task in the timer queue; this lets us omit runtime checks.</p>
-<h2><a class="header" href="#system-timer-priority" id="system-timer-priority">System timer priority</a></h2>
+<h2 id="system-timer-priority"><a class="header" href="#system-timer-priority">System timer priority</a></h2>
 <p>The priority of the system timer can't set by the user; it is chosen by the
 framework. To ensure that lower priority tasks don't prevent higher priority
 tasks from running we choose the priority of the system timer to be the maximum
@@ -4022,7 +4022,7 @@ it would run to completion (due to it being higher priority than the system
 timer) delaying the execution of the higher priority (<code>3</code>) task. To prevent
 scenarios like these the system timer must match the highest priority of the
 <code>schedule</code>-able tasks; in this example that would be <code>3</code>.</p>
-<h2><a class="header" href="#ceiling-analysis-2" id="ceiling-analysis-2">Ceiling analysis</a></h2>
+<h2 id="ceiling-analysis-2"><a class="header" href="#ceiling-analysis-2">Ceiling analysis</a></h2>
 <p>The timer queue is a resource shared between all the tasks that can <code>schedule</code> a
 task and the <code>SysTick</code> handler. Also the <code>schedule</code> API contends with the
 <code>spawn</code> API over the free queues. All this must be considered in the ceiling
@@ -4078,7 +4078,7 @@ the ready queue <code>RQ3</code>, which holds <code>foo</code> entries; thus the
 entries; thus the priority ceiling of <code>RQ1</code> is effectively <code>3</code>.</p>
 </li>
 </ul>
-<h2><a class="header" href="#changes-in-the-spawn-implementation" id="changes-in-the-spawn-implementation">Changes in the <code>spawn</code> implementation</a></h2>
+<h2 id="changes-in-the-spawn-implementation"><a class="header" href="#changes-in-the-spawn-implementation">Changes in the <code>spawn</code> implementation</a></h2>
 <p>When the <code>schedule</code> API is used the <code>spawn</code> implementation changes a bit to
 track the baseline of tasks. As you saw in the <code>schedule</code> implementation there's
 an <code>INSTANTS</code> buffers used to store the time at which a task was scheduled to
@@ -4185,11 +4185,11 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#homogeneous-multi-core-support" id="homogeneous-multi-core-support">Homogeneous multi-core support</a></h1>
+<h1 id="homogeneous-multi-core-support"><a class="header" href="#homogeneous-multi-core-support">Homogeneous multi-core support</a></h1>
 <p>This section covers the <em>experimental</em> homogeneous multi-core support provided
 by RTIC behind the <code>homogeneous</code> Cargo feature.</p>
 <p><strong>Content coming soon</strong></p>
-<h1><a class="header" href="#heterogeneous-multi-core-support" id="heterogeneous-multi-core-support">Heterogeneous multi-core support</a></h1>
+<h1 id="heterogeneous-multi-core-support"><a class="header" href="#heterogeneous-multi-core-support">Heterogeneous multi-core support</a></h1>
 <p>This section covers the <em>experimental</em> heterogeneous multi-core support provided
 by RTIC behind the <code>heterogeneous</code> Cargo feature.</p>
 <p><strong>Content coming soon</strong></p>

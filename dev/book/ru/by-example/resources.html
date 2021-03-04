@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#Ресурсы" id="Ресурсы">Ресурсы</a></h2>
+                        <h2 id="Ресурсы"><a class="header" href="#Ресурсы">Ресурсы</a></h2>
 <p>Одно из ограничений атрибутов, предоставляемых библиотекой <code>cortex-m-rt</code> является
 то, что совместное использование данных (или периферии) между прерываниями,
 или прерыванием и функцией <code>init</code>, требуют <code>cortex_m::interrupt::Mutex</code>, который
@@ -204,11 +204,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     // `shared` cannot be accessed from this context
@@ -254,7 +254,7 @@ mod app {
 UART1: shared = 1
 UART0: shared = 2
 </code></pre>
-<h2><a class="header" href="#Приоритеты" id="Приоритеты">Приоритеты</a></h2>
+<h2 id="Приоритеты"><a class="header" href="#Приоритеты">Приоритеты</a></h2>
 <p>Приоритет каждого прерывания можно определить в атрибутах <code>interrupt</code> и <code>exception</code>.
 Невозможно установить приоритет любым другим способом, потому что рантайм
 забирает владение прерыванием <code>NVIC</code>; также невозможно изменить приоритет
@@ -304,10 +304,10 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::GPIOA);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     // when omitted priority is assumed to be `1`
@@ -411,13 +411,13 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         static mut Q: Queue&lt;u32, U4&gt; = Queue(i::Queue::new());
 
         let (p, c) = Q.split();
 
         // Initialization of late resources
-        init::LateResources { p, c }
+        (init::LateResources { p, c }, init::Monotonics())
     }
 
     #[idle(resources = [c])]
@@ -484,13 +484,13 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         static mut Q: Queue&lt;u32, U4&gt; = Queue(i::Queue::new());
 
         let (p, c) = Q.split();
 
         // Initialization of late resources
-        init::LateResources { p, c }
+        (init::LateResources { p, c }, init::Monotonics())
     }
 
     #[idle(resources = [c])]

@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
+                        <h1 id="the-app-attribute"><a class="header" href="#the-app-attribute">The <code>app</code> attribute</a></h1>
 <p>Это наименьшая возможная программа на RTIC:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -193,7 +193,7 @@ const APP: () = {};
 RTIC работать на стабильной сборке, мы используем вместо него слово <code>const</code>.
 Когда большая часть макросов 1.2 стабилизируются, мы прейдем от <code>const</code> к <code>mod</code> и в конце концов в атрибуту уровне приложения (<code>#![app]</code>).</p>
 </blockquote>
-<h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
+<h2 id="init"><a class="header" href="#init"><code>init</code></a></h2>
 <p>Внутри псевдо-модуля атрибут <code>app</code> ожидает найти функцию инициализации, обозначенную
 атрибутом <code>init</code>. Эта функция должна иметь сигнатуру <code>[unsafe] fn()</code>.</p>
 <p>Эта функция инициализации будет первой частью запускаемого приложения.

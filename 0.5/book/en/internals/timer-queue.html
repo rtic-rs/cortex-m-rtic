@@ -167,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#timer-queue" id="timer-queue">Timer queue</a></h1>
+                        <h1 id="timer-queue"><a class="header" href="#timer-queue">Timer queue</a></h1>
 <p>The timer queue functionality lets the user schedule tasks to run at some time
 in the future. Unsurprisingly, this feature is also implemented using a queue:
 a priority queue where the scheduled tasks are kept sorted by earliest scheduled
@@ -195,7 +195,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#schedule" id="schedule"><code>schedule</code></a></h2>
+<h2 id="schedule"><a class="header" href="#schedule"><code>schedule</code></a></h2>
 <p>Let's first look at the <code>schedule</code> API.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -279,7 +279,7 @@ stores the <code>Instant</code> at which the task was scheduled to run in a sepa
 <p><code>TimerQueue::enqueue_unchecked</code> does a bit more work that just adding the entry
 into a min-heap: it also pends the system timer interrupt (<code>SysTick</code>) if the new
 entry ended up first in the queue.</p>
-<h2><a class="header" href="#the-system-timer" id="the-system-timer">The system timer</a></h2>
+<h2 id="the-system-timer"><a class="header" href="#the-system-timer">The system timer</a></h2>
 <p>The system timer interrupt (<code>SysTick</code>) takes cares of two things: moving tasks
 that have become ready from the timer queue into the right ready queue and
 setting up a timeout interrupt to fire when the scheduled time of the next task
@@ -321,7 +321,7 @@ way it will run at the right priority.</p>
 <code>None</code>. This ties in with <code>TimerQueue::enqueue_unchecked</code>, which pends this
 handler; basically, <code>enqueue_unchecked</code> delegates the task of setting up a new
 timeout interrupt to the <code>SysTick</code> handler.</p>
-<h2><a class="header" href="#resolution-and-range-of-cyccntinstant-and-cyccntduration" id="resolution-and-range-of-cyccntinstant-and-cyccntduration">Resolution and range of <code>cyccnt::Instant</code> and <code>cyccnt::Duration</code></a></h2>
+<h2 id="resolution-and-range-of-cyccntinstant-and-cyccntduration"><a class="header" href="#resolution-and-range-of-cyccntinstant-and-cyccntduration">Resolution and range of <code>cyccnt::Instant</code> and <code>cyccnt::Duration</code></a></h2>
 <p>RTIC provides a <code>Monotonic</code> implementation based on the <code>DWT</code>'s (Data Watchpoint
 and Trace) cycle counter. <code>Instant::now</code> returns a snapshot of this timer; these
 DWT snapshots (<code>Instant</code>s) are used to sort entries in the timer queue. The
@@ -346,12 +346,12 @@ of the <code>SysTick</code> counter.</p>
 <p>In conclusion, both <code>Instant</code> and <code>Duration</code> have a resolution of 1 core clock
 cycle and <code>Duration</code> effectively has a (half-open) range of <code>0..(1 &lt;&lt; 31)</code> (end
 not included) core clock cycles.</p>
-<h2><a class="header" href="#queue-capacity" id="queue-capacity">Queue capacity</a></h2>
+<h2 id="queue-capacity"><a class="header" href="#queue-capacity">Queue capacity</a></h2>
 <p>The capacity of the timer queue is chosen to be the sum of the capacities of all
 <code>schedule</code>-able tasks. Like in the case of the ready queues, this means that
 once we have claimed a free slot in the <code>INPUTS</code> buffer we are guaranteed to be
 able to insert the task in the timer queue; this lets us omit runtime checks.</p>
-<h2><a class="header" href="#system-timer-priority" id="system-timer-priority">System timer priority</a></h2>
+<h2 id="system-timer-priority"><a class="header" href="#system-timer-priority">System timer priority</a></h2>
 <p>The priority of the system timer can't set by the user; it is chosen by the
 framework. To ensure that lower priority tasks don't prevent higher priority
 tasks from running we choose the priority of the system timer to be the maximum
@@ -364,7 +364,7 @@ it would run to completion (due to it being higher priority than the system
 timer) delaying the execution of the higher priority (<code>3</code>) task. To prevent
 scenarios like these the system timer must match the highest priority of the
 <code>schedule</code>-able tasks; in this example that would be <code>3</code>.</p>
-<h2><a class="header" href="#ceiling-analysis" id="ceiling-analysis">Ceiling analysis</a></h2>
+<h2 id="ceiling-analysis"><a class="header" href="#ceiling-analysis">Ceiling analysis</a></h2>
 <p>The timer queue is a resource shared between all the tasks that can <code>schedule</code> a
 task and the <code>SysTick</code> handler. Also the <code>schedule</code> API contends with the
 <code>spawn</code> API over the free queues. All this must be considered in the ceiling
@@ -420,7 +420,7 @@ the ready queue <code>RQ3</code>, which holds <code>foo</code> entries; thus the
 entries; thus the priority ceiling of <code>RQ1</code> is effectively <code>3</code>.</p>
 </li>
 </ul>
-<h2><a class="header" href="#changes-in-the-spawn-implementation" id="changes-in-the-spawn-implementation">Changes in the <code>spawn</code> implementation</a></h2>
+<h2 id="changes-in-the-spawn-implementation"><a class="header" href="#changes-in-the-spawn-implementation">Changes in the <code>spawn</code> implementation</a></h2>
 <p>When the <code>schedule</code> API is used the <code>spawn</code> implementation changes a bit to
 track the baseline of tasks. As you saw in the <code>schedule</code> implementation there's
 an <code>INSTANTS</code> buffers used to store the time at which a task was scheduled to

@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#Типы-send-и-sync" id="Типы-send-и-sync">Типы, Send и Sync</a></h1>
+                        <h1 id="Типы-send-и-sync"><a class="header" href="#Типы-send-и-sync">Типы, Send и Sync</a></h1>
 <p>Атрибут <code>app</code> вводит контекст, коллекцию переменных в каждую из функций.
 Все эти переменные имеют предсказуемые, неанонимные типы, поэтому Вы можете
 писать простые функции, получающие их как аргументы.</p>
@@ -185,10 +185,16 @@
 
 use panic_semihosting as _;
 
-#[rtic::app(device = lm3s6965, peripherals = true, monotonic = rtic::cyccnt::CYCCNT, dispatchers = [SSI0])]
+#[rtic::app(device = lm3s6965, peripherals = true, dispatchers = [SSI0])]
 mod app {
     use cortex_m_semihosting::debug;
-    use rtic::cyccnt;
+    use dwt_systick_monotonic::{
+        consts::{U0, U8},
+        DwtSystick,
+    };
+
+    #[monotonic(binds = SysTick, default = true)]
+    type MyMono = DwtSystick&lt;U8, U0, U0&gt;; // 8 MHz
 
     #[resources]
     struct Resources {
@@ -197,14 +203,19 @@ mod app {
     }
 
     #[init]
-    fn init(cx: init::Context) -&gt; init::LateResources {
-        let _: cyccnt::Instant = cx.start;
-        let _: rtic::Peripherals = cx.core;
+    fn init(cx: init::Context) -&gt; (init::LateResources, init::Monotonics) {
+        let _: cortex_m::Peripherals = cx.core;
         let _: lm3s6965::Peripherals = cx.device;
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        init::LateResources {}
+        let mut dcb = cx.core.DCB;
+        let dwt = cx.core.DWT;
+        let systick = cx.core.SYST;
+
+        let mono = DwtSystick::new(&amp;mut dcb, dwt, systick, 8_000_000);
+
+        (init::LateResources {}, init::Monotonics(mono))
     }
 
     #[idle]
@@ -216,20 +227,18 @@ mod app {
 
     #[task(binds = UART0, resources = [shared])]
     fn uart0(cx: uart0::Context) {
-        let _: cyccnt::Instant = cx.start;
         let _: resources::shared = cx.resources.shared;
     }
 
     #[task(priority = 2, resources = [shared])]
     fn foo(cx: foo::Context) {
-        let _: cyccnt::Instant = cx.scheduled;
         let _: resources::shared = cx.resources.shared;
         let _: foo::Resources = cx.resources;
     }
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#send" id="send"><code>Send</code></a></h2>
+<h2 id="send"><a class="header" href="#send"><code>Send</code></a></h2>
 <p><a href="https://doc.rust-lang.org/core/marker/trait.Send.html"><code>Send</code></a> - маркерный типаж (trait) для &quot;типов, которые можно передавать через границы
 потоков&quot;, как это определено в <code>core</code>. В контексте RTIC типаж <code>Send</code> необходим
 только там, где возможна передача значения между задачами, запускаемыми на
@@ -247,7 +256,7 @@ mod app {
 </span>{{#include ../../../../examples/not-send.rs}}
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
+<h2 id="sync"><a class="header" href="#sync"><code>Sync</code></a></h2>
 <p>Похожая ситуация, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> -  маркерный типаж для &quot;типов, на которых можно
 ссылаться в разных потоках&quot;, как это определено в <code>core</code>. В контексте RTIC
 типаж <code>Sync</code> необходим только там, где возможны две или более задачи,
@@ -268,7 +277,7 @@ mod app {
 #![no_std]
 
 use core::marker::PhantomData;
-use panic_halt as _;
+use panic_semihosting as _;
 
 pub struct NotSync {
     _0: PhantomData&lt;*const ()&gt;,
@@ -287,10 +296,10 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         debug::exit(debug::EXIT_SUCCESS);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[task(resources = [&amp;shared])]

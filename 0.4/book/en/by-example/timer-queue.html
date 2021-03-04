@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#timer-queue" id="timer-queue">Timer queue</a></h1>
+                        <h1 id="timer-queue"><a class="header" href="#timer-queue">Timer queue</a></h1>
 <p>When the <code>timer-queue</code> feature is enabled the RTFM framework includes a <em>global
 timer queue</em> that applications can use to <em>schedule</em> software tasks to run at
 some time in the future.</p>
@@ -248,7 +248,7 @@ const APP: () = {
 bar  @ Instant(4000236)
 foo  @ Instant(8000173)
 </code></pre>
-<h2><a class="header" href="#periodic-tasks" id="periodic-tasks">Periodic tasks</a></h2>
+<h2 id="periodic-tasks"><a class="header" href="#periodic-tasks">Periodic tasks</a></h2>
 <p>Software tasks have access to the <code>Instant</code> at which they were scheduled to run
 through the <code>scheduled</code> variable. This information and the <code>schedule</code> API can be
 used to implement periodic tasks as shown in the example below.</p>
@@ -298,7 +298,7 @@ jitter even though <code>schedule.foo</code> was invoked at the <em>end</em> of 
 foo(scheduled = Instant(16000000), now = Instant(16000196))
 foo(scheduled = Instant(24000000), now = Instant(24000196))
 </code></pre>
-<h2><a class="header" href="#baseline" id="baseline">Baseline</a></h2>
+<h2 id="baseline"><a class="header" href="#baseline">Baseline</a></h2>
 <p>For the tasks scheduled from <code>init</code> we have exact information about their
 <code>scheduled</code> time. For hardware tasks there's no <code>scheduled</code> time because these
 tasks are asynchronous in nature. For hardware tasks the runtime provides a
@@ -376,7 +376,7 @@ foo(baseline = Instant(0))
 UART0(baseline = Instant(904))
 foo(baseline = Instant(904))
 </code></pre>
-<h2><a class="header" href="#caveats" id="caveats">Caveats</a></h2>
+<h2 id="caveats"><a class="header" href="#caveats">Caveats</a></h2>
 <p>The <code>Instant</code> and <code>Duration</code> APIs are meant to be exclusively used with the
 <code>schedule</code> API to schedule tasks <em>with a precision of a single core clock
 cycle</em>. These APIs are <em>not</em>, for example, meant to be used to time external

@@ -167,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#resources" id="resources">Resources</a></h1>
+                        <h1 id="resources"><a class="header" href="#resources">Resources</a></h1>
 <p>The framework provides an abstraction to share data between any of the contexts
 we saw in the previous section (task handlers, <code>init</code> and <code>idle</code>): resources.</p>
 <p>Resources are data visible only to functions declared within the <code>#[app]</code>
@@ -211,11 +211,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     // `shared` cannot be accessed from this context
@@ -262,7 +262,7 @@ UART1: shared = 1
 UART0: shared = 2
 </code></pre>
 <p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do so results in a compile error.</p>
-<h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
+<h2 id="lock"><a class="header" href="#lock"><code>lock</code></a></h2>
 <p>Critical sections are required to access shared mutable data in a data race-free manner.</p>
 <p>The <code>resources</code> field of the passed <code>Context</code> implements the <a href="../../../api/rtic/trait.Mutex.html"><code>Mutex</code></a> trait for each shared resource accessible to the task.</p>
 <p>The only method on this trait, <a href="../../../api/rtic/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure argument in a critical section.</p>
@@ -294,10 +294,10 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::GPIOA);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     // when omitted priority is assumed to be `1`
@@ -352,7 +352,7 @@ C
 D - shared = 2
 E
 </code></pre>
-<h2><a class="header" href="#multi-lock" id="multi-lock">Multi-lock</a></h2>
+<h2 id="multi-lock"><a class="header" href="#multi-lock">Multi-lock</a></h2>
 <p>As an extension to <code>lock</code>, and to reduce rightward drift, locks can be taken as tuples. The following examples shows this in use:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -384,10 +384,10 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::GPIOA);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     // when omitted priority is assumed to be `1`
@@ -437,7 +437,7 @@ mod app {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<h2 id="late-resources"><a class="header" href="#late-resources">Late resources</a></h2>
 <p>Late resources are resources that are not given an initial value at compile time using the <code>#[init]</code> attribute but instead are initialized at runtime using the <code>init::LateResources</code> values returned by the <code>init</code> function.</p>
 <p>Late resources are useful e.g., to <em>move</em> (as in transferring the ownership of) peripherals initialized in <code>init</code> into tasks.</p>
 <p>The example below uses late resources to establish a lockless, one-way channel between the <code>UART0</code> interrupt handler and the <code>idle</code> task. A single producer single consumer <a href="../../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into consumer and producer end points in <code>init</code> and then each end point is stored in a different resource; <code>UART0</code> owns the producer resource and <code>idle</code> owns the consumer resource.</p>
@@ -471,13 +471,13 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         static mut Q: Queue&lt;u32, U4&gt; = Queue(i::Queue::new());
 
         let (p, c) = Q.split();
 
         // Initialization of late resources
-        init::LateResources { p, c }
+        (init::LateResources { p, c }, init::Monotonics())
     }
 
     #[idle(resources = [c])]
@@ -503,7 +503,7 @@ mod app {
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
 </code></pre>
-<h2><a class="header" href="#only-shared-access" id="only-shared-access">Only shared access</a></h2>
+<h2 id="only-shared-access"><a class="header" href="#only-shared-access">Only shared access</a></h2>
 <p>By default the framework assumes that all tasks require exclusive access (<code>&amp;mut-</code>) to resources but it is possible to specify that a task only requires shared access (<code>&amp;-</code>) to a resource using the <code>&amp;resource_name</code> syntax in the <code>resources</code> list.</p>
 <p>The advantage of specifying shared access (<code>&amp;-</code>) to a resource is that no locks are required to access the resource even if the resource is contended by several tasks running at different priorities. The downside is that the task only gets a shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform on it, but where a shared reference is enough this approach reduces the number of required locks. In addition to simple immutable data, this shared access can be useful where the resource type safely implements interior mutability, with
 appropriate locking or atomic operations of its own.</p>
@@ -532,11 +532,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
 
-        init::LateResources { key: 0xdeadbeef }
+        (init::LateResources { key: 0xdeadbeef }, init::Monotonics())
     }
 
     #[task(binds = UART0, resources = [&amp;key])]
@@ -558,7 +558,7 @@ mod app {
 UART1(key = 0xdeadbeef)
 UART0(key = 0xdeadbeef)
 </code></pre>
-<h2><a class="header" href="#lock-free-resource-access-of-mutable-resources" id="lock-free-resource-access-of-mutable-resources">Lock-free resource access of mutable resources</a></h2>
+<h2 id="lock-free-resource-access-of-mutable-resources"><a class="header" href="#lock-free-resource-access-of-mutable-resources">Lock-free resource access of mutable resources</a></h2>
 <p>There exists two other options dealing with resources</p>
 <ul>
 <li><code>#[lock_free]</code>: there might be several tasks with the same priority

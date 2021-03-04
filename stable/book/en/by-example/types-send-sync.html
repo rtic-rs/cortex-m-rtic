@@ -167,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#types-send-and-sync" id="types-send-and-sync">Types, Send and Sync</a></h1>
+                        <h1 id="types-send-and-sync"><a class="header" href="#types-send-and-sync">Types, Send and Sync</a></h1>
 <p>Every function within the <code>APP</code> pseudo-module has a <code>Context</code> structure as its
 first parameter. All the fields of these structures have predictable,
 non-anonymous types so you can write plain functions that take them as arguments.</p>
@@ -242,7 +242,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#send" id="send"><code>Send</code></a></h2>
+<h2 id="send"><a class="header" href="#send"><code>Send</code></a></h2>
 <p><a href="https://doc.rust-lang.org/core/marker/trait.Send.html"><code>Send</code></a> is a marker trait for &quot;types that can be transferred across thread
 boundaries&quot;, according to its definition in <code>core</code>. In the context of RTIC the
 <code>Send</code> trait is only required where it's possible to transfer a value between
@@ -268,7 +268,7 @@ shared resources.</p>
 use core::marker::PhantomData;
 
 use cortex_m_semihosting::debug;
-use panic_halt as _;
+use panic_semihosting as _;
 use rtic::app;
 
 pub struct NotSend {
@@ -344,7 +344,7 @@ the <code>Send</code> trait.</p>
 
 use cortex_m_semihosting::debug;
 use lm3s6965::Interrupt;
-use panic_halt as _;
+use panic_semihosting as _;
 use rtic::app;
 
 pub struct MustBeSend;
@@ -377,7 +377,7 @@ const APP: () = {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
+<h2 id="sync"><a class="header" href="#sync"><code>Sync</code></a></h2>
 <p>Similarly, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> is a marker trait for &quot;types for which it is safe to share
 references between threads&quot;, according to its definition in <code>core</code>. In the
 context of RTIC the <code>Sync</code> trait is only required where it's possible for two,
@@ -400,7 +400,7 @@ it's important to know where the <code>Sync</code> bound is not required: shared
 use core::marker::PhantomData;
 
 use cortex_m_semihosting::debug;
-use panic_halt as _;
+use panic_semihosting as _;
 
 pub struct NotSync {
     _0: PhantomData&lt;*const ()&gt;,

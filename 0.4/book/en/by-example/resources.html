@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#resources" id="resources">Resources</a></h2>
+                        <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <p>One of the limitations of the attributes provided by the <code>cortex-m-rt</code> crate is
 that sharing data (or peripherals) between interrupts, or between an interrupt
 and the <code>entry</code> function, requires a <code>cortex_m::interrupt::Mutex</code>, which
@@ -238,7 +238,7 @@ const APP: () = {
 UART0: SHARED = 1
 UART1: SHARED = 2
 </code></pre>
-<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
+<h2 id="priorities"><a class="header" href="#priorities">Priorities</a></h2>
 <p>The priority of each handler can be declared in the <code>interrupt</code> and <code>exception</code>
 attributes. It's not possible to set the priority in any other way because the
 runtime takes ownership of the <code>NVIC</code> peripheral; it's also not possible to
@@ -341,7 +341,7 @@ limitations in the language the error is currently far from helpful: it will say
 something along the lines of &quot;evaluation of constant value failed&quot; and the span
 of the error will <em>not</em> point out to the problematic interrupt value -- we are
 sorry about this!</p>
-<h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
+<h2 id="late-resources"><a class="header" href="#late-resources">Late resources</a></h2>
 <p>Unlike normal <code>static</code> variables, which need to be assigned an initial value
 when declared, resources can be initialized at runtime. We refer to these
 runtime initialized resources as <em>late resources</em>. Late resources are useful for
@@ -418,7 +418,7 @@ const APP: () = {
 <pre><code class="language-console">$ cargo run --example late
 received message: 42
 </code></pre>
-<h2><a class="header" href="#static-resources" id="static-resources"><code>static</code> resources</a></h2>
+<h2 id="static-resources"><a class="header" href="#static-resources"><code>static</code> resources</a></h2>
 <p><code>static</code> variables can also be used as resources. Tasks can only get <code>&amp;</code>
 (shared) references to these resources but locks are never required to access
 their data. You can think of <code>static</code> resources as plain <code>static</code> variables that

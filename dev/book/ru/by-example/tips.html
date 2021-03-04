@@ -163,8 +163,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#Советы-и-хитрости" id="Советы-и-хитрости">Советы и хитрости</a></h1>
-<h2><a class="header" href="#Обобщенное-программирование-generics" id="Обобщенное-программирование-generics">Обобщенное программирование (Generics)</a></h2>
+                        <h1 id="Советы-и-хитрости"><a class="header" href="#Советы-и-хитрости">Советы и хитрости</a></h1>
+<h2 id="Обобщенное-программирование-generics"><a class="header" href="#Обобщенное-программирование-generics">Обобщенное программирование (Generics)</a></h2>
 <p>Ресурсы, совместно используемые двумя или более задачами, реализуют трейт <code>Mutex</code>
 во <em>всех</em> контекстах, даже в тех, где для доступа к данным не требуются
 критические секции. Это позволяет легко писать обобщенный код оперирующий
@@ -195,11 +195,11 @@ mod app {
     }
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::UART0);
         rtic::pend(Interrupt::UART1);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -297,10 +297,10 @@ mod app {
     use cortex_m_semihosting::{debug, hprintln};
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         foo::spawn().unwrap();
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[inline(never)]
@@ -363,12 +363,12 @@ mod app {
     use lm3s6965::Interrupt;
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::UART0);
 
         hprintln!(&quot;init&quot;).unwrap();
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[idle]

@@ -163,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
+                        <h1 id="the-app-attribute"><a class="header" href="#the-app-attribute">The <code>app</code> attribute</a></h1>
 <p>This is the smallest possible RTFM application:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -201,7 +201,7 @@ RTFM work on stable we use the <code>const</code> item instead. When more parts 
 1.2 are stabilized we'll move from a <code>const</code> item to a <code>mod</code> item and
 eventually to a crate level attribute (<code>#![app]</code>).</p>
 </blockquote>
-<h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
+<h2 id="init"><a class="header" href="#init"><code>init</code></a></h2>
 <p>Within the pseudo-module the <code>app</code> attribute expects to find an initialization
 function marked with the <code>init</code> attribute. This function must have signature
 <code>[unsafe] fn()</code>.</p>
@@ -258,7 +258,7 @@ process.</p>
 <pre><code class="language-console">$ cargo run --example init
 init
 </code></pre>
-<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
+<h2 id="idle"><a class="header" href="#idle"><code>idle</code></a></h2>
 <p>A function marked with the <code>idle</code> attribute can optionally appear in the
 pseudo-module. This function is used as the special <em>idle task</em> and must have
 signature <code>[unsafe] fn() - &gt; !</code>.</p>
@@ -312,7 +312,7 @@ const APP: () = {
 init
 idle
 </code></pre>
-<h2><a class="header" href="#interrupt--exception" id="interrupt--exception"><code>interrupt</code> / <code>exception</code></a></h2>
+<h2 id="interrupt--exception"><a class="header" href="#interrupt--exception"><code>interrupt</code> / <code>exception</code></a></h2>
 <p>Just like you would do with the <code>cortex-m-rt</code> crate you can use the <code>interrupt</code>
 and <code>exception</code> attributes within the <code>app</code> pseudo-module to declare interrupt
 and exception handlers. In RTFM, we refer to interrupt and exception handlers as

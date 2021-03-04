@@ -167,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
+                        <h1 id="the-app-attribute"><a class="header" href="#the-app-attribute">The <code>app</code> attribute</a></h1>
 <p>This is the smallest possible RTIC application:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -192,7 +192,7 @@ newer. More details can be found in the <a href="./new.html">Starting a new proj
 section.</p>
 <p>The <code>app</code> attribute will expand into a suitable entry point so it's not required
 to use the <a href="../../../api/cortex_m_rt_macros/attr.entry.html"><code>cortex_m_rt::entry</code></a> attribute.</p>
-<h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
+<h2 id="init"><a class="header" href="#init"><code>init</code></a></h2>
 <p>Within the <code>app</code> module the attribute expects to find an initialization
 function marked with the <code>init</code> attribute. This function must have signature
 <code>fn(init::Context) [-&gt; init::LateResources]</code> (the return type is not always
@@ -224,7 +224,7 @@ mod app {
     use cortex_m_semihosting::{debug, hprintln};
 
     #[init]
-    fn init(cx: init::Context) -&gt; init::LateResources {
+    fn init(cx: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         static mut X: u32 = 0;
 
         // Cortex-M peripherals
@@ -244,7 +244,7 @@ mod app {
 
         debug::exit(debug::EXIT_SUCCESS);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 }
 <span class="boring">}
@@ -254,7 +254,7 @@ process.</p>
 <pre><code class="language-console">$ cargo run --example init
 init
 </code></pre>
-<h2><a class="header" href="#idle" id="idle"><code>idle</code></a></h2>
+<h2 id="idle"><a class="header" href="#idle"><code>idle</code></a></h2>
 <p>A function marked with the <code>idle</code> attribute can optionally appear in the
 module. This function is used as the special <em>idle task</em> and must have
 signature <code>fn(idle::Context) - &gt; !</code>.</p>
@@ -285,10 +285,10 @@ mod app {
     use cortex_m_semihosting::{debug, hprintln};
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         hprintln!(&quot;init&quot;).unwrap();
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[idle]
@@ -313,7 +313,7 @@ mod app {
 init
 idle
 </code></pre>
-<h2><a class="header" href="#hardware-tasks" id="hardware-tasks">Hardware tasks</a></h2>
+<h2 id="hardware-tasks"><a class="header" href="#hardware-tasks">Hardware tasks</a></h2>
 <p>To declare interrupt handlers the framework provides a <code>#[task]</code> attribute that
 can be attached to functions. This attribute takes a <code>binds</code> argument whose
 value is the name of the interrupt to which the handler will be bound to; the
@@ -340,14 +340,14 @@ mod app {
     use lm3s6965::Interrupt;
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         // Pends the UART0 interrupt but its handler won't run until *after*
         // `init` returns because interrupts are disabled
         rtic::pend(Interrupt::UART0); // equivalent to NVIC::pend
 
         hprintln!(&quot;init&quot;).unwrap();
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[idle]
@@ -391,7 +391,7 @@ UART0 called 2 times
 <p>So far all the RTIC applications we have seen look no different than the
 applications one can write using only the <code>cortex-m-rt</code> crate. From this point
 we start introducing features unique to RTIC.</p>
-<h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
+<h2 id="priorities"><a class="header" href="#priorities">Priorities</a></h2>
 <p>The static priority of each handler can be declared in the <code>task</code> attribute
 using the <code>priority</code> argument. Tasks can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
 crate. When the <code>priority</code> argument is omitted, the priority is assumed to be
@@ -427,10 +427,10 @@ mod app {
     use lm3s6965::Interrupt;
 
     #[init]
-    fn init(_: init::Context) -&gt; init::LateResources {
+    fn init(_: init::Context) -&gt; (init::LateResources, init::Monotonics) {
         rtic::pend(Interrupt::GPIOA);
 
-        init::LateResources {}
+        (init::LateResources {}, init::Monotonics())
     }
 
     #[task(binds = GPIOA, priority = 1)]
